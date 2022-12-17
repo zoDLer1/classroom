@@ -56,7 +56,7 @@ export default () => {
                     <input id="agree" type="checkbox" hidden/>
                     <label class="form__input-body form__containter" for="agree">Remember me</label>
                     <div class="">
-                        <Link name='asdsadasd' />
+                        <Link name='Recover password' />
                     </div>
                     
                 </div>
