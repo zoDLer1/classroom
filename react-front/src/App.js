@@ -1,9 +1,13 @@
-import Login from './pages/login'
-import Register from './pages/register'
+import Header from './components/header'
+import Routes from './routes'
 
 function App() {
   return (
-    < Register/>
+    <div className='page-root'>
+        <Header />
+        <Routes />
+    </div>
+    
   );
 }
 

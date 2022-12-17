@@ -4,13 +4,8 @@ import './css/main.css'
 
 export default () => {
     return (
-        <div className='page-root'>
-            <Header />
-            <div class="page__section login-form-section">
-                <LoginForm />
-            </div>
-            
+        <div class="page__section login-form-section">
+            <LoginForm />
         </div>
-
     )
 }
