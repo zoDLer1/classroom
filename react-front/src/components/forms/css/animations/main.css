@@ -1,0 +1,35 @@
+@keyframes input_border{
+    to{
+        width: 100%;
+    }
+}
+
+
+@keyframes input_icon{
+    
+    to{
+        fill: var(--primary-color);
+    }
+}
+@keyframes loader {
+
+    30%{
+        width: 30%;
+    }
+    40%{
+        width: 20%;
+    }
+    50%{
+        width: 10%;
+        left: 100%;
+        transform: translate(-100%);
+    }
+    60%{
+        width: 0%;
+        left: 100%;
+        transform: translate(-100%);
+    }
+
+    
+    
+}
