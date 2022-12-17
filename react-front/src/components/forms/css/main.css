@@ -1,6 +1,6 @@
 @import url('./animations/main.css');
 
-.login-form-section{
+.login-form-section, .register-form-section{
     height: 100%;
 }
 
@@ -12,20 +12,7 @@
     margin-bottom: 50px;
 }
 
-.container{
-    background-color: #fff;
-    border-radius: 55px;
-    box-shadow: 0 10px 70px 0 rgba(0, 0, 0, 0.20); 
-    /* 135 */
-}
-.container--grid-4{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 50px;
-}
-.container--margin100-125{
-    margin: 80px auto;
-}
+
 
 .form{
     display: flex;
