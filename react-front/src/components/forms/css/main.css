@@ -139,13 +139,16 @@ option{
 }
 
 
-.form__text{
+.form__input-icon, .form__text{
     color: var(--alt-color);
+}
+.form__input-icon{
+    font-size: 16px;
 }
 
 
-.form__input-body .form__input-icon:has(+ input:focus) path,
-.form__input-body .form__input-icon:has(+ select:focus) path{
+.form__input-body .form__input-icon:has(+ input:focus),
+.form__input-body .form__input-icon:has(+ select:focus){
     animation: input_icon 0.3s linear forwards;
 
     /* fill: var(--primary-color);  */
@@ -156,7 +159,9 @@ option{
 
     /* border-color: var(--primary-color); */
 }
-
+.form__confim_password{
+    gap: 40px;
+}
 
 .form__input-checkbox .form__input-body::before{
     content: '';
@@ -223,7 +228,7 @@ option{
     border-color: var(--error-color);
 }
 
-.form__input--error .form__input-body .form__input-icon path{
+.form__input--error .form__input-body .form__input-icon{
     fill: var(--error-color);
 }
 .form__page-link--choosen{

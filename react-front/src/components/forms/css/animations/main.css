@@ -8,7 +8,7 @@
 @keyframes input_icon{
     
     to{
-        fill: var(--primary-color);
+        color: var(--primary-color);
     }
 }
 @keyframes loader {
