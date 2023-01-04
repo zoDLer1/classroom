@@ -1,0 +1,24 @@
+.block{
+    width: 100%;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease-out;
+}
+
+.block:hover{
+    transform: scale(1.05);
+}
+
+.block label{
+    display: flex;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: #fff;
+    width: 100%;
+    border-radius: 55px;
+    padding: 18px 0;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25);
+}

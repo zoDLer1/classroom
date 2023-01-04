@@ -5,7 +5,7 @@ import Form_input from 'components/forms/forms-components/form-input'
 import Form_submit from 'components/forms/forms-components/form-submit'
 import Form_password from 'components/forms/forms-components/form-input/form-input-password'
 import TestInput from 'UI/Input'
-
+import TestSubmit from 'UI/Submit'
 
 export default () => {
     return (
@@ -27,6 +27,7 @@ export default () => {
                     <TestInput name="email" placeholder="Email" icon='fa-solid fa-envelope' />
                 </div>
                 <Form_submit text='login'/>
+                <TestSubmit text='login'/>
                 <div class="form__input-checkbox form__containter form__containter--between">
                     <input id="agree" type="checkbox" hidden/>
                     <label class="form__input-body form__containter" for="agree">Remember me</label>
