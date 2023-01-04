@@ -4,6 +4,8 @@ import Form_page_links from 'components/forms/forms-components/form-page-links'
 import Form_input from 'components/forms/forms-components/form-input'
 import Form_submit from 'components/forms/forms-components/form-submit'
 import Form_password from 'components/forms/forms-components/form-input/form-input-password'
+import TestInput from 'UI/Input'
+
 
 export default () => {
     return (
@@ -22,6 +24,7 @@ export default () => {
                 <div class="form__inputs form__column-container">
                     <Form_input name="email" placeholder="Email" icon='fa-solid fa-envelope' />
                     <Form_password  name="password" placeholder="Password"/>
+                    <TestInput name="email" placeholder="Email" icon='fa-solid fa-envelope' />
                 </div>
                 <Form_submit text='login'/>
                 <div class="form__input-checkbox form__containter form__containter--between">

@@ -1,0 +1,69 @@
+@keyframes input_border{
+    to{
+        width: 100%;
+    }
+}
+@keyframes input_icon{
+    
+    to{
+        color: var(--primary-color);
+    }
+}
+
+.block{
+    padding: 0 8px;
+    border-bottom: 2px solid var(--alt-color);
+    position: relative;
+    justify-content: space-between;
+}
+
+.block::after{
+    content: '';
+    left: 50%;
+    bottom: -3px;
+    height: 2px;
+    width: 0%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: var(--primary-color);
+}
+
+.body{
+    padding: 10px 2px;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.body input{
+    appearance: none;
+    outline: none;
+    border: none;
+    font-size: 19px;
+}
+
+.body input::placeholder{
+    color: var(--alt-color);
+    font-size: 19px;
+    text-justify: center;
+}
+
+.icon{
+    font-size: 16px;
+    color: var(--alt-color);
+}
+
+.form__input > .icon{
+    cursor: pointer;
+}
+
+.body .icon:has(+ input:focus),
+.body .icon:has(+ select:focus){
+    animation: input_icon 0.3s linear forwards;
+}
+
+.block:has(input:focus)::after,
+.block:has(select:focus)::after{
+    animation: input_border 0.3s ease-in-out forwards;
+}
