@@ -1,10 +1,6 @@
-/* BLOCK */
-.link{
+.block{
     color: var(--primary-color);
     border-bottom: 1px solid var(--alt-color);
     font-size: 16px;
     padding-bottom: 2px;
 }
-/* ELEMENTS */
-
-/* MODIFICATORS */

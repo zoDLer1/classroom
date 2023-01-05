@@ -1,4 +1,4 @@
-import css from "./css/style.module.css";
+import css from "./css/input.module.css";
 
 
 export default (props) =>{
