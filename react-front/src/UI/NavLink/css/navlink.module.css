@@ -1,0 +1,6 @@
+.block{
+    color: var(--faded-primary);
+}
+.choosen{
+    color: var(--primary-color);
+}

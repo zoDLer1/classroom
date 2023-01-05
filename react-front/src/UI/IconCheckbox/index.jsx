@@ -5,7 +5,7 @@ export default (props) => {
         <div className={css.block}>
             <input id={`${props.name}-icon`} type="checkbox" hidden/>
             <label for={`${props.name}-icon`} onClick={(evt) => props.func(evt)}>
-                <i className={`${css.icon} fa-regular fa-eye-slash`}></i>
+                <i className={`${css.icon} ${props.icon}`}></i>
             </label>
         </div>
     );

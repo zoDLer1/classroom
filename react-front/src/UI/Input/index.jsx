@@ -7,7 +7,7 @@ export default ({ads, icon, ...props}) =>{
       
             <div class={css.body}>
                 {icon && (
-                    <i className={[css.icon, icon].join(' ')}></i>
+                    <i className={`${css.icon} ${icon}`}></i>
                 )}
                 <input {...props} />
             </div>
