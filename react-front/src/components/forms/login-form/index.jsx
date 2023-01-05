@@ -1,27 +1,36 @@
 import 'components/forms/css/main.css'
-
 import Form_page_links from 'components/forms/forms-components/form-page-links'
 import Form_password from 'components/forms/forms-components/form-input/form-input-password'
 import Input from 'UI/Input'
 import Link from 'UI/Link'
 import Submit from 'UI/Submit'
 import Checkbox from 'UI/Checkbox'
+import IconCheckbox from 'UI/IconCheckbox'
+import { useState } from 'react'
+
+
 
 
 
 export default () => {
+    const [type, setType] = useState('password')
+
+    const toggleType = (evt) => {
+        setType(type === 'password' ? 'text': 'password')
+    }
+
     return (
         <form class="form container">
                 <Form_page_links login='form__page-link--choosen'/>
                 <div class="form__inputs form__column-container">
                     <Input name="email" placeholder="Email" icon='fa-solid fa-envelope' />
-                    <Form_password  name="password" placeholder="Password"/>
-               
+                    <Input name="password" type={type} placeholder="Password" icon='fa-solid fa-key' ads={[<IconCheckbox func={toggleType} />] } />
                 </div>
                 <Submit text='login'/>
                 <div class="form__containter form__containter--between">
                     <Checkbox text='Remember me' />
-                    <Link  to='/' text='Recover password' />
+                    <Link to='/' text='Recover password' />
+                    
                 </div>
                 <div class="form__signup form__containter form__containter--between">
                     <p class="form__signup-text form__text">Sign up with</p>
@@ -44,6 +53,7 @@ export default () => {
                         </a>
                     </div>
                 </div>
+                <IconCheckbox name="password_" />
         </form>
     )
 }

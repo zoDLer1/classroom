@@ -1,4 +1,10 @@
 export default (props) =>{
+    // if (props.isPassword){
+        
+    // }
+
+
+
     return (
         <div class="form__input form__containter form__containter--between">
             <div class="form__input-body form__containter">
