@@ -1,0 +1,28 @@
+.block{
+    justify-items: center;
+    flex-direction: column;
+    padding: 42px 80px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #fff;
+    border-radius: 55px;
+    box-shadow: 0 10px 70px 0 rgb(0 0 0 / 20%);
+}
+.inputs{ 
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.flex{
+    display: flex;
+    align-items: center;
+} 
+.links{
+    width: 100%;
+    gap: 35px;
+    justify-content: end;
+}
+.text{
+    font-size: 16px;
+    color: var(--alt-color);
+}

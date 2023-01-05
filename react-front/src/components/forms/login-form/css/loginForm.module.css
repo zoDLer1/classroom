@@ -1,30 +1,10 @@
-
-.block{
-    justify-items: center;
-    flex-direction: column;
-    padding: 42px 80px;
-    margin: 0 auto;
-    position: relative;
-    background-color: #fff;
-    border-radius: 55px;
-    box-shadow: 0 10px 70px 0 rgb(0 0 0 / 20%);
-}
-
 .inputs{ 
-    gap: 40px;
     margin: 40px 0;
-    display: flex;
-    flex-direction: column;
 }
 .ads{
     width: 100%;
     justify-content: space-between;
 }
-
-.flex{
-    display: flex;
-    align-items: center;
-} 
 
 .submit{
     margin-bottom: 40px;
@@ -33,10 +13,6 @@
 .messagers{
     gap: 10px;
 }
-.text{
-    font-size: 16px;
-    color: var(--alt-color);
-}
 .signup{
     width: 100%;
     margin-top: 30px;
@@ -44,8 +20,5 @@
     justify-content: space-between;
 }
 .links{
-    width: 100%;
-    gap: 35px;
-    justify-content: end;
     margin-bottom: 30px;
 }
