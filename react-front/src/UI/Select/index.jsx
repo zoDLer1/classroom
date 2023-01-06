@@ -28,9 +28,8 @@ export default (props) =>  {
             {open &&
             <div className={css.options} >
                 {props.options.map(item => 
-                <div onClick={() => select(item)} className={css.option}>
+                <div key={item.id} onClick={() => select(item)} className={css.option}>
                     <div className={css.optionContent}>{item.name}</div>
-                    
                 </div>)}
             </div>
             }

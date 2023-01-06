@@ -4,7 +4,7 @@ export default (props) => {
     return (
         <div className={css.block}>
             <input id="agree" type="checkbox" hidden/>
-            <label className={css.body} for="agree">{props.text} {props.postInfo}</label>
+            <label className={css.body} htmlFor="agree">{props.text} {props.postInfo}</label>
         </div>
     )
 }

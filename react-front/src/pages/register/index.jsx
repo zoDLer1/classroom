@@ -3,7 +3,7 @@ import './css/main.css'
 
 export default () => {
     return (
-        <div class="page__section register-form-section">
+        <div className="page__section register-form-section">
             <RegisterForm />
         </div>
     )
