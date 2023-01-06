@@ -1,5 +1,3 @@
-import 'components/forms/css/main.css'
-import 'components/container/css/main.css'
 import Input from 'UI/Input'
 import Link from 'UI/Link'
 import Submit from 'UI/Submit'

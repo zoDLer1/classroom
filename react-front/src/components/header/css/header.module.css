@@ -1,0 +1,14 @@
+.block{
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 70px;
+}
+.logo{
+    width: 50px;
+}
+.navigation{
+    display: flex;
+    justify-items: center;
+    gap: 40px;
+}
