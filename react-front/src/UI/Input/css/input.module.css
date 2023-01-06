@@ -45,6 +45,10 @@
     border: none;
     font-size: 19px;
 }
+.body input:disabled{
+    background-color: transparent;
+    color: #000;
+}
 
 .body input::placeholder{
     color: var(--alt-color);

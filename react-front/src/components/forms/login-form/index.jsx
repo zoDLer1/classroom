@@ -2,23 +2,19 @@ import Input from 'UI/Input'
 import Link from 'UI/Link'
 import Submit from 'UI/Submit'
 import Checkbox from 'UI/Checkbox'
-import IconCheckbox from 'UI/IconCheckbox'
 import NavLink from 'UI/NavLink'
+import PasswordInput from 'UI/PasswordInput'
 import Messager from 'UI/Messager'
 import css from './css/loginForm.module.css'
 import formCss from 'components/forms/css/form.module.css'
-import { useState } from 'react'
+
 
 
 
 
 
 export default () => {
-    const [type, setType] = useState('password')
 
-    const toggleType = (evt) => {
-        setType(type === 'password' ? 'text': 'password')
-    }
 
     return (
         <form className={[formCss.block, formCss.flex].join(' ')}>
@@ -28,7 +24,7 @@ export default () => {
             </div>
             <div className={[formCss.inputs, css.inputs].join(' ')}>
                 <Input name="email" placeholder="Email" icon='fa-solid fa-envelope' />
-                <Input name="password" type={type} placeholder="Password" icon='fa-solid fa-key' ads={[<IconCheckbox icon='fa-regular fa-eye-slash' name="password" func={toggleType} />] } />
+                <PasswordInput name="password" placeholder="Password" icon='fa-solid fa-key'/>
             </div>
             <div className={css.submit}>
                 <Submit text='login'/>
