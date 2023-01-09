@@ -1,10 +1,12 @@
 import RegisterForm from 'components/forms/register-form'
-import './css/main.css'
+import css  from './css/register.module.css'
+import PageSection from 'components/pageSection'
 
 export default () => {
     return (
-        <div className="page__section register-form-section">
-            <RegisterForm />
-        </div>
+        <PageSection className={css.section}>
+             <RegisterForm />
+        </PageSection>
+        
     )
 }

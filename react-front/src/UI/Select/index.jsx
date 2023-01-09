@@ -7,7 +7,7 @@ import { useState } from 'react'
 export default (props) =>  {
 
     const [open, setOpen] = useState(false)
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState(props.value)
     const [icon, setIcon] = useState('down')
 
     const toggle = () =>{
@@ -16,6 +16,9 @@ export default (props) =>  {
     }
     const select = (option) =>{
         setValue(option.name)
+        if (props.select){
+            props.select(option)
+        }
         toggle()
     } 
         

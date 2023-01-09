@@ -1,10 +1,14 @@
 import css from './css/checkbox.module.css'
+import _uniqueId from 'lodash/uniqueId';
+import { useState } from 'react';
 
-export default (props) => {
+
+export default ({text, children, name, type="checkbox", ...props}) => {
+    const [id] = useState(_uniqueId('prefix-'))
     return (
         <div className={css.block}>
-            <input id="agree" type="checkbox" hidden/>
-            <label className={css.body} htmlFor="agree">{props.text} {props.postInfo}</label>
+            <input {...props} name={name} id={id} type={type} hidden/>
+            <label className={css.body} htmlFor={id}>{text} {children}</label>
         </div>
     )
 }

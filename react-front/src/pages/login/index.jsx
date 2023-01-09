@@ -1,10 +1,11 @@
 import LoginForm from 'components/forms/login-form'
-import './css/main.css'
+import PageSection from 'components/pageSection'
+import css from './css/login.module.css'
 
 export default () => {
     return (
-        <div className="page__section login-form-section">
-            <LoginForm />
-        </div>
+        <PageSection className={css.section}>
+            <LoginForm/>
+        </PageSection>
     )
 }

@@ -28,7 +28,9 @@ export default () => {
                 <PasswordInput name="repeat_password" placeholder="Repeat password" icon='fa-solid fa-key' />
             </div>
             <div className={css.statements}>
-                <Checkbox text='I agree all statements in' postInfo={<Link to='/' text='Terms of servise' />} />
+                <Checkbox text='I agree all statements in'>
+                    <Link to='/' text='Terms of servise' />
+                </Checkbox>
             </div>
             <div className={css.submit}>
                 <Submit text='register' />
