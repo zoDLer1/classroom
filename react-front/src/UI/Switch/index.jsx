@@ -8,8 +8,8 @@ export default ({text, ...props}) =>  {
 
     return (
         <div className={css.block}>
-            <label className={css.elem} for={id}></label>
-            <label for={id} className={css.text}>{text}</label>
+            <label className={css.elem} htmlFor={id}></label>
+            <label htmlFor={id} className={css.text}>{text}</label>
             <input  {...props} id={id} hidden type="checkbox" />
         </div>
     )

@@ -10,6 +10,12 @@
         color: var(--primary-color);
     }
 }
+@keyframes input_error{
+    
+    to{
+        color: var(--error-color);
+    }
+}
 
 .block{
     padding: 0 8px;
@@ -30,6 +36,9 @@
     position: absolute;
     background-color: var(--primary-color);
 }
+.warning::after{
+    background-color: var(--error-color);
+}
 
 .body{
     padding: 10px 2px;
@@ -44,6 +53,8 @@
     outline: none;
     border: none;
     font-size: 19px;
+    width: 220px;
+
 }
 .body input:disabled{
     background-color: transparent;
@@ -70,7 +81,20 @@
     animation: input_icon 0.3s linear forwards;
 }
 
+.warning .body .icon:has(+ input:focus),
+.warning .body .icon:has(+ select:focus){
+    animation: input_error 0.3s linear forwards;
+}
+
+
 .block:has(input:focus)::after,
 .block:has(select:focus)::after{
     animation: input_border 0.3s ease-in-out forwards;
+}
+.ads{
+    width: 50px;
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    
 }

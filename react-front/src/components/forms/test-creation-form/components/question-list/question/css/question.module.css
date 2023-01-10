@@ -68,7 +68,7 @@
     color: var(--error-color);
 }
 .copy:hover {
-    color: greenyellow;
+    color: var(--success-color);
 }
 
 .seporator{
@@ -86,7 +86,8 @@
     opacity: 0;
     position: absolute;
     padding: 30px;
-    top: 20%;
+    top: 50%;  
+    transform: translate(0, -50%);
     right: -120px;
 }
 

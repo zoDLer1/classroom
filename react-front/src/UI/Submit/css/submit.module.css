@@ -4,6 +4,7 @@
     transition: transform 0.2s ease-out;
 }
 
+
 .block:hover{
     transform: scale(1.05);
 }

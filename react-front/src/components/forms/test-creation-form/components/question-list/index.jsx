@@ -4,33 +4,29 @@ import Question from './question'
 
 
 export default (props) =>  {
-
-    // const [questions, setQue] = useState(
-    //     [
-    //         {name: '', answer_type: {name: 'Text', id: 1}, answer: '', required: true, photos:[]},
-    //     ]
-    // )
-
     const setQuestion = (index, value) => {
         let newList = [...props.questions]
         newList[index] = value
         props.set(newList)
     }
 
-    const createQuestion = () => {
-        props.set([...props.questions, props.defaultValue])
+    const createQuestion = (index) => {
+        props.set([...[...props.questions].splice(0, index+1), props.defaultValue, ...[...props.questions].slice(index+1)])
+        
     }
     const deleteQuestion = (index) => {
         props.set(props.questions.filter((itm, ind) => ind !== index))
     }
-    const copyQuestion = (item) => {
-        props.set([...props.questions, item])
+    const copyQuestion = (index, item) => {
+        console.log(item)
+        props.set([...[...props.questions].splice(0, index), item, ...[...props.questions].slice(index)])
     }
+    
 
 
     return (
         <div className={css.block}>
-            {props.questions.map((item, index) => <Question key={index} numb={index} testType={props.testType} copy={copyQuestion} delete={deleteQuestion} set={setQuestion} data={item}/>)}
+            {props.questions.map((item, index) => <Question  key={index} numb={index} testType={props.testType} timeInfo={props.timeInfo} create={createQuestion} copy={copyQuestion} delete={deleteQuestion} set={setQuestion} data={item}/>)}
         </div>
     )
 }
