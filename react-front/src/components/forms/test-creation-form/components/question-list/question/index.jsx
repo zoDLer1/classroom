@@ -95,7 +95,7 @@ export default (props) => {
 
     return (
         <div className={css.block}>     
-            <div className={css.info}>
+            {/* <div className={css.info}>
                 <div>name: {props.data.name}</div>
                 <div>
                     answer_type: {JSON.stringify(props.data.answer_type)}
@@ -104,7 +104,7 @@ export default (props) => {
                 <div>imgs: {JSON.stringify(props.data.photos)}</div>
                 <div>required: {String(props.data.required)} </div>
                 <div>Time: {String(props.data.time)} </div>
-            </div>
+            </div> */}
 
           
 
@@ -157,9 +157,6 @@ export default (props) => {
                     <div>
                         <i className={`${css.item} ${css.fs28} fa-solid fa-file-video`}></i>
                     </div>
-                    {/* <div>
-                        <i className={`${css.item} ${css.fs24} fa-solid fa-clock`}></i>
-                    </div> */}
                 </div>
             </div>
         </div>

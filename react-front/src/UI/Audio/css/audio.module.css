@@ -1,0 +1,22 @@
+.block{
+    display: flex;
+    position: relative;
+
+}
+.player{
+    width: 90px;
+    height: 3px;
+    background-color: var(--alt-color);
+
+}
+.point{
+    
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: -6px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    right: 50%;
+    transform: translate(-50%, 0);
+}
