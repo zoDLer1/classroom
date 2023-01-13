@@ -36,9 +36,10 @@ export default (props) =>  {
                     <div className={css.action}>
                         <i className='fa-regular fa-file-lines'></i>
                     </div>
-                    <div onClick={(evt) => props.menuOpen(evt, props.data)} className={css.action}>
+                    <div onClick={(evt) => props.menuOpen(true, {x: evt.clientX, y: evt.clientY}, props.data)} className={css.action}>
                         <i className="fa-solid fa-ellipsis-vertical"></i>
                     </div>
+                    <i className={`${css.loader} fa-solid fa-spinner`}></i>
                 </footer>
             </div>
             

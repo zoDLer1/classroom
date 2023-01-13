@@ -1,3 +1,10 @@
+@keyframes rotation {
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+
 .block{
     width: 350px;
     height: 350px;
@@ -93,4 +100,12 @@
 }
 .action:hover i{
     color: var(--primary-color);
+}
+.loader{
+    color: var(--faded-primary);
+    font-size: 20px;
+    position: absolute;
+    left: 40px;
+    bottom: 18px;   
+    animation: infinite 1s rotation;
 }

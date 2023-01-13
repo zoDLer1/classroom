@@ -1,6 +1,7 @@
 import css from './css/select.module.css'
 import Input  from 'UI/Input'
 import IconCheckbox from 'UI/IconCheckbox'
+import Option from 'UI/Option'
 import { useState } from 'react'
 
 
@@ -31,13 +32,12 @@ export default (props) =>  {
             {open &&
             <div className={css.options} >
                 {props.options.map(item => 
-                <div key={item.id} onClick={() => select(item)} className={css.option}>
-                    <div className={css.optionContent}>{item.name}</div>
-                </div>)}
+                <Option key={item.id} data={item} onSelect={() => select(item)}/>
+                )}
             </div>
             }
         </div>
     )
 }
 
-// 
+// <Option key={item.id} data={item} onSelect={() => select(item)}/>

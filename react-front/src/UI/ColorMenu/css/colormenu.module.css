@@ -1,0 +1,22 @@
+.block{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: absolute;
+    list-style: none;
+    border-radius: 20px;
+    padding: 20px 30px;
+    gap: 5px;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0 10px 70px 0 rgb(0 0 0 / 20%);
+}
+
+.btns{
+    margin-top: 10px;
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: space-between;
+}
+.menu-btns * {
+    cursor: pointer;
+}

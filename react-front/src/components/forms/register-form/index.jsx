@@ -23,7 +23,7 @@ export default () => {
             <div className={[formCss.inputs, css.inputs].join(' ')}>
                 <Input name="username" placeholder="Username" icon='fa-regular fa-user' />
                 <Input name="email" placeholder="Email" icon='fa-solid fa-envelope' />
-                <Select options={roles} name='role' placeholder="Role" icon="fa-solid fa-graduation-cap" />
+                <Select value='' options={roles} name='role' placeholder="Role" icon="fa-solid fa-graduation-cap" />
                 <PasswordInput name="password" placeholder="Password" icon='fa-solid fa-key' />
                 <PasswordInput name="repeat_password" placeholder="Repeat password" icon='fa-solid fa-key' />
             </div>
