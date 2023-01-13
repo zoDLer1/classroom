@@ -19,8 +19,8 @@ export default () => {
     return (
         <form className={[formCss.block, formCss.flex].join(' ')}>
             <div className={[css.links, formCss.links, formCss.flex].join(' ')}>
-                <NavLink to='/register' text='Register' ></NavLink>
-                <NavLink to='/login' text='Sign in' isChoosen={true}></NavLink>
+                <NavLink to='/accounts/register' text='Register' ></NavLink>
+                <NavLink to='/accounts/login' text='Sign in' isChoosen={true}></NavLink>
             </div>
             <div className={[formCss.inputs, css.inputs].join(' ')}>
                 <Input name="email" placeholder="Email" icon='fa-solid fa-envelope' />

@@ -17,8 +17,8 @@ export default () => {
     return (
         <form action="" className={[formCss.block, formCss.flex].join(' ')}>
             <div className={[css.links, formCss.links, formCss.flex].join(' ')}>
-                <NavLink to='/register' isChoosen={true} text='Register' ></NavLink>
-                <NavLink to='/login' text='Sign in' ></NavLink>
+                <NavLink to='/accounts/register' isChoosen={true} text='Register' ></NavLink>
+                <NavLink to='/accounts/login' text='Sign in' ></NavLink>
             </div>
             <div className={[formCss.inputs, css.inputs].join(' ')}>
                 <Input name="username" placeholder="Username" icon='fa-regular fa-user' />
@@ -38,7 +38,7 @@ export default () => {
 
             <div className={[formCss.text, formCss.flex, css.login].join(' ')}>
                 Have already an account?
-                <Link to='/login' text='Login here' />
+                <Link to='/accounts/login' text='Login here' />
             </div>
         </form>
     )
