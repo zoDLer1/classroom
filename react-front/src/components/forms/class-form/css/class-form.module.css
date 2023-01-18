@@ -1,0 +1,74 @@
+.block{
+    width: 600px;
+}
+.header{
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 40px;
+}
+.label{
+    font-weight: 400;
+    font-size: 30px;
+    color: var(--primary-color);
+}
+.body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    
+
+}
+.invite{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.invite_actions{
+    display: flex;
+    gap: 10px;
+}
+.type{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+   
+}
+.type_label{
+    font-weight: 400;
+    color: var(--alt-color);
+    font-size: 24px;
+    text-transform: capitalize;
+}
+
+.tests{
+    width: 100%;
+}
+.view{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    user-select: none;
+    margin-bottom: 20px;
+}
+
+
+.list{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+.next, .back{
+    font-size: 34px;
+    color: var(--alt-color);
+    cursor: pointer;
+}
+.btns{
+    display: flex;
+    gap: 20px;
+}
+.next:hover, 
+.back:hover{
+    color: var(--primary-color);
+}

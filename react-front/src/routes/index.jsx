@@ -3,16 +3,21 @@ import Login from 'pages/login'
 import Register from 'pages/register'
 import CreateTest from 'pages/createTest'
 import Tests from 'pages/tests'
+import Test from 'pages/test';
 import Routing from './customRouting';
 import Route from './customRoute';
 import Group from './routesGroup';
 
+
+
 export default () => {
   return (
     <Routing>
-      <Route path='/classes/:id' element={<Class />} />
+      <Group path='/classes'>
+        <Route path='/:id' element={<Class />} />
+      </Group>
       <Group path='/tests'>
-        <Route path='/:id' element={<Tests />} />
+        <Route path='/:id' element={<Test />} />
         <Route path='' element={<Tests />} />
         <Route path='/create' element={<CreateTest />} />
       </Group>
@@ -20,6 +25,7 @@ export default () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
       </Group>
+      <Route path='*' element={<Class />} />
     </Routing>
   )
 }

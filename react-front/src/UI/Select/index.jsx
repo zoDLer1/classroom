@@ -8,7 +8,7 @@ import { useState } from 'react'
 export default (props) =>  {
 
     const [open, setOpen] = useState(false)
-    const [value, setValue] = useState(props.value)
+    // const [value, setValue] = useState(props.value)
     const [icon, setIcon] = useState('down')
 
     const toggle = () =>{
@@ -16,7 +16,7 @@ export default (props) =>  {
         setOpen(!open)
     }
     const select = (option) =>{
-        setValue(option.name)
+        // setValue(option.name)
         if (props.select){
             props.select(option)
         }
@@ -26,7 +26,7 @@ export default (props) =>  {
 
     return (
         <div className={css.block}>
-            <Input onClick={toggle} value={value} disabled name={props.name} placeholder={props.placeholder} icon={props.icon} ads={[<IconCheckbox name={props.name} icon={`fa-solid fa-angle-${icon}`} func={()=>''} />] } />
+            <Input onClick={toggle} value={props.value === undefined ? '' : props.value} disabled name={props.name} placeholder={props.placeholder} icon={props.icon} ads={[<IconCheckbox name={props.name} icon={`fa-solid fa-angle-${icon}`} func={()=>''} />] } />
 
 
             {open &&

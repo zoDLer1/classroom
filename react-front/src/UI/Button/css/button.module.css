@@ -7,9 +7,26 @@
     box-shadow: 0 0 8px 0.5px rgba(0, 0, 0, 0.15);
     border-radius: 55px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     transition: transform 0.2s ease-out;
+    position: relative;
     
+}
+.event{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #F0A720;
+    font-size: 24px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
 }
 .block:hover{
     transform: scale(1.1);
+}
+.icon{
+    font-size: 16px;
 }

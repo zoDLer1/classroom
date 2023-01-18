@@ -1,0 +1,27 @@
+
+.block{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background-color: var(--faded-primary);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+.icon{
+    color: #fff;
+    font-size: 14px;
+}
+.label{
+    color: #fff;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+.closed{
+    background-color: var(--error-color);
+}
+.opened{
+    background-color: var(--success-color);
+}
+.by_invitation{
+    background-color: var(--primary-color);
+}

@@ -56,6 +56,13 @@
     width: 220px;
 
 }
+
+.body input:-webkit-autofill,
+.body input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+
 .body input:disabled{
     background-color: transparent;
     color: #000;

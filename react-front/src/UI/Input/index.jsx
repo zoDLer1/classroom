@@ -1,7 +1,7 @@
 import css from "./css/input.module.css";
 import Warning from "UI/Warning";
 
-export default ({ads, warning, icon, onClick, ...props}) =>{
+export default ({ads, validation, warning, icon, onClick, ...props}) =>{
     return (
         <div onClick={onClick ? onClick: null} className={[css.block, warning ? css.warning: ''].join(' ')}>
             

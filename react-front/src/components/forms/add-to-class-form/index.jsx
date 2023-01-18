@@ -12,7 +12,7 @@ export default (props) =>  {
         { name: 'Claswesardfawserfawsfs 1', id: 1 }, 
         { name: 'Class 2', id: 2 }
     ])
-    const [class_, setClass] = useState(null)
+    const [class_, setClass] = useState({})
 
     const submit = (evt) =>{
         evt.preventDefault()
@@ -28,7 +28,7 @@ export default (props) =>  {
                 {class_ && <span className={css.class_}>{class_.name}</span> }
             </h2>
             <div className={[formCss.inputs, css.inputs].join(' ')}>
-                <Select select={(obj)=>{setClass(obj)}} value='' options={classes} name="class" placeholder="Class name" icon='fa-solid fa-users'></Select>
+                <Select select={(obj)=>{setClass(obj)}} value={class_.name} options={classes} name="class" placeholder="Class name" icon='fa-solid fa-users'></Select>
             </div>
             <div className={css.submit}>
                 <Submit text='create'/>

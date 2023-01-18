@@ -4,6 +4,12 @@ import { Link } from "react-router-dom"
 
 export default ({to, text, children, ...props}) => {
     return (
-        <Link {...props} className={css.block} to={to}>{children} {text}</Link>
+        <>
+            {to 
+                ? <Link {...props} className={css.block} to={to}>{children} {text}</Link>
+                : <p {...props} className={css.block} to={to}>{children} {text}</p>
+            } 
+        </>
+          
     )
 }

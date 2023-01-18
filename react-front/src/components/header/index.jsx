@@ -13,9 +13,9 @@ export default () => {
             <div className={css.logo}></div>
             <div className={css.navigation}>
                 <NavigationItem to='/' text ='About Us'/>
-                <NavigationItem to='/' text ='Tests'/>
                 <NavigationItem to='/' text ='Autors'/>
-                <NavigationItem to='/' text ='Contact'/>
+                <NavigationItem to='/tests' text ='Tests'/>
+                <NavigationItem to='/classes' text ='Classes'/>
 
                 {
                     isAuth 

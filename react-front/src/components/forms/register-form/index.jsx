@@ -7,9 +7,22 @@ import css from './css/registerForm.module.css'
 import formCss from 'components/forms/css/form.module.css'
 import PasswordInput from 'UI/PasswordInput'
 import Select from 'UI/Select'
+import { useState } from 'react'
 
 
 export default () => {
+
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        role: '',
+        password: '',
+        repeat_password: ''
+    })
+
+
+    
+
     const roles = [
         { name: 'Student', id: 1 }, 
         { name: 'Teacher', id: 2 }
@@ -21,11 +34,11 @@ export default () => {
                 <NavLink to='/accounts/login' text='Sign in' ></NavLink>
             </div>
             <div className={[formCss.inputs, css.inputs].join(' ')}>
-                <Input name="username" placeholder="Username" icon='fa-regular fa-user' />
-                <Input name="email" placeholder="Email" icon='fa-solid fa-envelope' />
-                <Select value='' options={roles} name='role' placeholder="Role" icon="fa-solid fa-graduation-cap" />
-                <PasswordInput name="password" placeholder="Password" icon='fa-solid fa-key' />
-                <PasswordInput name="repeat_password" placeholder="Repeat password" icon='fa-solid fa-key' />
+                <Input value={formData.username} onChange={(evt)=> setFormData({...formData, username: evt.target.value})} name="username" placeholder="Username" icon='fa-regular fa-user' />
+                <Input value={formData.email} onChange={(evt)=> setFormData({...formData, email: evt.target.value})} name="email" placeholder="Email" icon='fa-solid fa-envelope' />
+                <Select select={(role)=> setFormData({...formData, role: role})} value={formData.role.name} options={roles} name='role' placeholder="Role" icon="fa-solid fa-graduation-cap" />
+                <PasswordInput value={formData.password} onChange={(evt)=> setFormData({...formData, password: evt.target.value})} name="password" placeholder="Password" icon='fa-solid fa-key' />
+                <PasswordInput value={formData.repeat_password} onChange={(evt)=> setFormData({...formData, repeat_password: evt.target.value})} name="repeat_password" placeholder="Repeat password" icon='fa-solid fa-key' />
             </div>
             <div className={css.statements}>
                 <Checkbox text='I agree all statements in'>

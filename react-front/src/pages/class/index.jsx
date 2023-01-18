@@ -4,11 +4,12 @@ import PageSection from 'components/pageSection'
 
 
 export default (props) =>  {
-    console.log(props)
+
+
+
     return (
-        <PageSection>
-            {JSON.stringify(props)}
-            <ClassForm />
+        <PageSection className={css.section}>       
+            <ClassForm id={props.router.params.id}/>
         </PageSection>
     )
 }
