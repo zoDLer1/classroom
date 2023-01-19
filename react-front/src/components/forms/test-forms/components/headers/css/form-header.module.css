@@ -3,7 +3,11 @@
     border-radius: 55px;
     box-shadow: 0 10px 70px 0 rgb(0 0 0 / 20%);
     padding: 42px 80px;
+    width: 680px;
 
+}
+.label{
+    margin-bottom: 20px;
 }
 .create{
     display: grid;
@@ -11,16 +15,12 @@
     row-gap: 10px;
     grid-template-columns: repeat(2, 1fr);
 }
-.view{
-    
-}
-
-.view_block{
-
-}
-.label{
-
-}
-.decsription{
-    
+.footer{
+    margin-top: 25px;
+    border-top: 2px solid var(--alt-color);
+    display: flex;
+    padding: 10px 0;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
 }

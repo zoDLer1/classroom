@@ -5,12 +5,10 @@ import Link from 'UI/Link'
 
 export default (props) =>  {
 
-    
 
-
-    const setList = (ar) =>{
-        props.set(ar)
-    }
+    // const setList = (ar) =>{
+    //     props.set(ar)
+    // }
 
 
     const change = (index, key, value) => {
@@ -18,15 +16,15 @@ export default (props) =>  {
         let obj = {...newList[index]}
         obj[key] = value
         newList[index] = obj
-        setList(newList)
+        props.set(newList)
     }
 
     
     const addItem = () => {
-        setList([...props.value, {value:'', correct: false}])
+        props.set([...props.value, {value:'', correct: false}])
     }
     const removeItem = (index) => {
-        setList(props.value.filter((item, i) => i !== index))
+        props.set(props.value.filter((item, i) => i !== index))
     }
 
 

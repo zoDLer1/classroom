@@ -5,7 +5,6 @@ export default (props) =>  {
         <div className={[css.block, css.view].join(' ')}>
             <h2 className={css.label}>{props.name}</h2>
             <p className={css.description}>{props.description}</p>
-
         </div>
     )
 }

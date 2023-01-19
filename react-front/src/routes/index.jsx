@@ -7,7 +7,7 @@ import Test from 'pages/test';
 import Routing from './customRouting';
 import Route from './customRoute';
 import Group from './routesGroup';
-
+import TestPassing from 'pages/test-passing';
 
 
 export default () => {
@@ -18,6 +18,7 @@ export default () => {
       </Group>
       <Group path='/tests'>
         <Route path='/:id' element={<Test />} />
+        <Route path='/:id/passing' element={<TestPassing />} />
         <Route path='' element={<Tests />} />
         <Route path='/create' element={<CreateTest />} />
       </Group>

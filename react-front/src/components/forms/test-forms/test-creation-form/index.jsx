@@ -1,4 +1,4 @@
-import css from './css/test-creation-form.module.css'
+import css from '../css/test.module.css'
 import FormHeader from 'components/forms/test-forms/components/headers/create'
 import QuestionList from 'components/forms/test-forms/components/question-lists/create'
 import FromFooter from 'components/forms/test-forms/components/footers/create'

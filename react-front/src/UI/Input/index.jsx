@@ -2,7 +2,22 @@ import css from "./css/input.module.css";
 import Warning from "UI/Warning";
 
 export default ({ads, validation, warning, icon, onClick, ...props}) =>{
+    let errors = []
+    if (validation){
+        for(let item of validation){
+            if (!item){
+                errors.push(item)
+            }
+        }
+    }
+    
+    
+
+
+
     return (
+        
+    
         <div onClick={onClick ? onClick: null} className={[css.block, warning ? css.warning: ''].join(' ')}>
             
             <div className={css.body}>
@@ -12,7 +27,7 @@ export default ({ads, validation, warning, icon, onClick, ...props}) =>{
                 <input {...props} />
             </div>
             <div className={css.ads}>
-                {warning && <Warning text={warning}/>}
+                {/* {errors ? <Warning text={warning}/> :''} */}
                 {ads && ads}
                 
             </div>

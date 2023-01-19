@@ -1,6 +1,6 @@
 import css from './css/test.module.css'
 import PageSection from 'components/pageSection'
-import CardList from 'components/cardList'
+import CardList from 'components/testsList'
 import { useState } from 'react'
 import Popup from 'UI/Popup'
 import AddToClassForm from 'components/forms/add-to-class-form'
@@ -13,15 +13,6 @@ import HelpAction from 'components/help/helpAction'
 
 export default () =>  {
 
-    const [tests, setTests] =  useState([
-        {id: 1, name: 'Test 1', color: '#0388D4', loading: false, editMode: false,  events: [
-            {id: 213, name: 'Added new test', link: 'pass now', time: Date.now()}, 
-            {id: 231, name: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, quae! Minima, aliquam praesentium ut ex vel obcaecati modi minus, tempore accusantium in ipsam voluptas asperiores distinctio quo necessitatibus quisquam consectetur!', link: 'view', time: 0},
-            {id: 435, name: 'Test checked', link: 'check', time: 0}
-            
-        ]},
-        {id: 2, name: 'Test 2', color: '#F0A720', loading: false, editMode: false, events: []}
-    ])
     const [popup, setPopup] = useState({active:false, current: null})
     
     const switchPopup = (active, current) => {
@@ -34,11 +25,12 @@ export default () =>  {
     return (
         <>
             <PageSection className={css.section}>
-                <CardList switchPopup={switchPopup} set={setTests} cards={tests} />
+                <CardList switchPopup={switchPopup} />
             </PageSection>
             <Popup popup={popup}>
                 <AddToClassForm set={switchPopup} card={popup.current}/>
             </Popup>
+
             <Help active={help} set={setHelp}>
                 <HelpAction 
                     data={{

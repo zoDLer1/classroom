@@ -1,4 +1,4 @@
-import css from './css/view-test.module.css'
+import css from '../css/test.module.css'
 import ViewHeader from '../components/headers/view'
 import ViewQuestionList from '../components/question-lists/view'
 import ViewFooter from '../components/footers/view'

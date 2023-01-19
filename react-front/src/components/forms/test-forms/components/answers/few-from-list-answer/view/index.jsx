@@ -1,7 +1,6 @@
 import css from '../css/few-from-list-answer.module.css'
-import Input from 'UI/Input'
 import Checkbox from 'UI/Checkbox'
-import Link from 'UI/Link'
+
 
 export default (props) =>  {
 
@@ -15,9 +14,6 @@ export default (props) =>  {
                     
                 </div>
             )}
-
-           
-            
         </div>
         
         

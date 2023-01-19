@@ -1,3 +1,19 @@
+@keyframes time {
+    
+    50%{
+        background-color: var(--primary-color);
+    }
+    60%{
+        background-color: rgb(240, 167, 32);
+    }
+    100%{
+        width: 100%;
+        background-color: var(--error-color);
+    }
+    
+}
+
+
 .block{
     display: flex;
     flex-direction: column;
@@ -9,8 +25,24 @@
     background-color: #fff;
     border-radius: 55px;
     box-shadow: 0 10px 70px 0 rgb(0 0 0 / 20%);
+    overflow: hidden;
     
 }
+
+.time_line{
+    content: '';
+    width: 0;
+    height: 8px;
+    background-color: var(--primary-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation-iteration-count: 1;
+    animation-name: time;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
 .label{
     font-weight: 500;
 }

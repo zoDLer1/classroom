@@ -8,7 +8,7 @@ import Messager from 'UI/Messager'
 import css from './css/loginForm.module.css'
 import formCss from 'components/forms/css/form.module.css'
 import { useState } from 'react'
-
+import { IS_EMAIL, MAX_LENGTH } from 'validation'
 
 
 
@@ -16,7 +16,9 @@ import { useState } from 'react'
 
 export default () => {
 
-
+    const [formData, set] = useState({
+        email: {value: ''}
+    })
 
     return (
         <form className={[formCss.block, formCss.flex].join(' ')}>
@@ -25,7 +27,7 @@ export default () => {
                 <NavLink to='/accounts/login' text='Sign in' isChoosen={true}></NavLink>
             </div>
             <div className={[formCss.inputs, css.inputs].join(' ')}>
-                <Input  name="email" placeholder="Email" icon='fa-solid fa-envelope' />
+                <Input onChange={(evt)=>set({...formData, email: {...formData.email, value: evt.target.value}})} value={formData.email.value} name="email" placeholder="Email" icon='fa-solid fa-envelope' />
                 <PasswordInput name="password" placeholder="Password" icon='fa-solid fa-key'/>
             </div>
             <div className={css.submit}>

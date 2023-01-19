@@ -9,20 +9,14 @@ export default (props) =>  {
 
 
     const elems = {
-        1: { elem: <TextAnswer numb={props.numb} value={props.data.answer} />, DefaultValue: '' },
+        1: { 
+            elem: <TextAnswer numb={props.numb} value={props.data.answer} />
+        },
         2: {
-            elem: <OneFromListAnswer numb={props.numb} value={props.data.answer} />, DefaultValue: [
-                { value: '', correct: false },
-                { value: '', correct: true },
-                { value: '', correct: false }
-            ]
+            elem: <OneFromListAnswer numb={props.numb} value={props.data.answer} />
         },
         3: {
-            elem: <FewFromListAnswer numb={props.numb} value={props.data.answer} />, DefaultValue: [
-                { value: '', correct: true },
-                { value: '', correct: false },
-                { value: '', correct: false }
-            ]
+            elem: <FewFromListAnswer numb={props.numb} value={props.data.answer} />
         }
     }
 

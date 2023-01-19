@@ -5,26 +5,26 @@ import Input from 'UI/Input'
 
 export default (props) =>  {
 
-    const setList = (ar) => {
-        props.set(ar)
-    }
+    // const setList = (ar) => {
+    //     props.set(ar)
+    // }
     const check = (index) =>{
         let newList = [...props.value]
         let indx = props.value.findIndex(item => item.correct)
         newList[indx] = {...newList[indx], correct: false}
         newList[index] = {...newList[index], correct: true}
-        setList(newList)
+        props.set(newList)
     }
     const changeValue = (index, value) =>{
         let newList = [...props.value]
         newList[index] = {...newList[index], value: value}
-        setList(newList)
+        props.set(newList)
     }
     const addItem = () => {
-        setList([...props.value, {value:'', correct:false}])
+        props.set([...props.value, {value:'', correct:false}])
     }
     const removeItem = (index) => {
-        setList(props.value.filter((item, i) => i !== index))
+        props.set(props.value.filter((item, i) => i !== index))
     }
 
 
