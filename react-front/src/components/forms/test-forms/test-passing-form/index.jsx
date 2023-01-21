@@ -1,6 +1,6 @@
 import css from '../css/test.module.css'
 import QuestionList from '../components/question-lists/passing'
-import FormFooter from '../components/footers/view'
+import FormFooter from '../components/footers/passing'
 import FormHeader from '../components/headers/passing'
 import { useState } from 'react'
 
@@ -9,35 +9,45 @@ export default (props) =>  {
 
     
     const [passing, setPassing] = useState({
-        isPassing: false,
+        stage: 0,
         question: 0,
     })
-    const startPassing = () =>{
-        setPassing({...passing, isPassing: true})
-    }
 
+    const nextStage = () =>{
+        setPassing({...passing, stage: passing.stage+1})
+    }
     const nextQuestion = () =>{
         setPassing({...passing, question: passing.question+1})
     }
+
+
+    const next = () =>{
+        if (!(passing.question || passing.stage) || props.data.questions.length === passing.question+1){
+            nextStage()
+        }
+        else{
+            nextQuestion()
+        }
+    }
+
+    
 
     const setQuestions = (questions) => {
         props.set({...props.data, questions: questions})
     }
 
+
+    const stages = {
+        0: <FormHeader name={props.data.name} start={next} description={props.data.description} />,
+        1: <QuestionList next={next} set={setQuestions} question={passing.question} questions={props.data.questions} />,
+        2: <FormFooter />
+    }
+
     return (
         
         <form  className={[css.block, css.center].join(' ')}>
-            {/* {JSON.stringify(props.data.questions[0])} */}
-            
-            {!passing.isPassing 
-            ? <FormHeader name={props.data.name} start={startPassing} description={props.data.description} />
-            : <QuestionList next={nextQuestion} set={setQuestions} question={passing.question} questions={props.data.questions} />
-            }
-            {/* <FormHeader name={props.data.name} description={props.data.description} />
-            <QuestionList set={setQuestions}  questions={props.data.questions} /> */}
-            
-            
-            {/* <FormFooter />     */}
+            {stages[passing.stage]}
+            {/* <FormFooter /> */}
         </form>
     )
 }

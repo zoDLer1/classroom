@@ -24,7 +24,7 @@ export default () =>  {
                     "name": "One from list",
                     "id": 2
                 },
-                "time": 60,
+                "time": 10,
                 "answer": [
                     {
                         'id': 1,
@@ -48,22 +48,22 @@ export default () =>  {
                     "name": "Few from list",
                     "id": 3
                 },
-                "time": "",
+                "time": 10,
                 "answer": [
                     {
                         'id': 3,
                         "value": "Answer 1",
-                        'correct': false
+                        'correct': false,
                     },
                     {
                         'id': 4,
                         "value": "Answer 2",
-                        'correct': false
+                        'correct': false,
                     },
                     {
                         'id': 5,
                         "value": "Answer 3",
-                        'correct': false
+
                     }
                 ],
                 'answer_time': 0,
@@ -78,7 +78,7 @@ export default () =>  {
                     "id": 1
                 },
                 'answer_time': 0,
-                "time": "",
+                "time": 15,
                 "answer": "",
                 "required": false,
                 "photos": []

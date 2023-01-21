@@ -14,8 +14,7 @@ export default (props) =>  {
 
     return (
         <div className={css.block}>
-            <PassingQuestion next={props.next} set={setQuestion} data={props.questions[props.question]} />
-            {/* {props.questions.map((item) => <PassingQuestion set={setQuestion} key={item.id} data={item}/>)} */}
+            <PassingQuestion total={props.questions.length} current={props.question+1} next={props.next} set={setQuestion} data={props.questions[props.question]} />
         </div>
     )
 }

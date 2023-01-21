@@ -13,6 +13,7 @@ import TestPassing from 'pages/test-passing';
 export default () => {
   return (
     <Routing>
+      {/* <Route path='tests/:id/passing' element={<TestPassing />} /> */}
       <Group path='/classes'>
         <Route path='/:id' element={<Class />} />
       </Group>
