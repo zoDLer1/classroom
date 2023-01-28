@@ -8,6 +8,8 @@ import Routing from './customRouting';
 import Route from './customRoute';
 import Group from './routesGroup';
 import TestPassing from 'pages/test-passing';
+import Profile from 'pages/profile';
+
 
 
 export default () => {
@@ -24,6 +26,7 @@ export default () => {
         <Route path='/create' element={<CreateTest />} />
       </Group>
       <Group path='/accounts'>
+        <Route path='/profile' element={ <Profile />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
       </Group>

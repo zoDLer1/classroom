@@ -19,8 +19,8 @@ export default () => {
 
                 {
                     isAuth 
-                    ? <NavigationItem to='/profile' text = {user.username} icon='fa-solid fa-user'/> // !!!
-                    : <NavigationItem to='/login' text = 'Sign in' icon='fa-solid fa-arrow-right-to-bracket'/>
+                    ? <NavigationItem to='/accounts/profile' text = {user.username} icon='fa-solid fa-user'/> // !!!
+                    : <NavigationItem to='/accounts/login' text = 'Sign in' icon='fa-solid fa-arrow-right-to-bracket'/>
                 }
 
                

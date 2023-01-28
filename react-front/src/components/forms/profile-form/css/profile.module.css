@@ -1,0 +1,21 @@
+.avatar{
+    width: 190px;
+    clip-path: circle(90px at 50% 50%);
+}
+.name_inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.header{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.main_inputs{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 250px);
+    justify-content: space-between;
+
+}
