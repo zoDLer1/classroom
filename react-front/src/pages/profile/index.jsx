@@ -5,10 +5,15 @@ import { useState } from 'react'
 
 
 export default () =>  {
-    // useState
+    const [userData, setUserData] = useState({
+        firstname: 'Alex',
+        lastname: 'Faml',
+        role: 'Teacher',
+        email: 'alex1992@e.ti'
+    })
     return (
         <PageSection className={css.section}>
-            <ProfileForm />
+            <ProfileForm data={userData}/>
         </PageSection>
     )
 }

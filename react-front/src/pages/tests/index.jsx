@@ -1,34 +1,26 @@
-import css from './css/test.module.css'
-import PageSection from 'components/pageSection'
 import CardList from 'components/testsList'
 import { useState } from 'react'
 import Popup from 'UI/Popup'
 import AddToClassForm from 'components/forms/add-to-class-form'
 import Help from 'components/help'
-
 import HelpAction from 'components/help/helpAction'
+import { usePopup } from 'hooks/usePopup'
 
 
 
+function TestPage (){
 
-export default () =>  {
-
-    const [popup, setPopup] = useState({active:false, current: null})
+    const { setCurrent, current, ...hook } = usePopup()
     
-    const switchPopup = (active, current) => {
-        current = active ? current : null
-        setPopup({active, current})
-    }
-
     const [help, setHelp] = useState(false) 
 
     return (
         <>
-            <PageSection className={css.section}>
-                <CardList switchPopup={switchPopup} />
-            </PageSection>
-            <Popup popup={popup}>
-                <AddToClassForm set={switchPopup} card={popup.current}/>
+            <div>
+                <CardList popupOpen={hook.open} popupCurrent={setCurrent} />
+            </div>
+            <Popup {...hook}>
+                <AddToClassForm close={hook.close} current={current}/>
             </Popup>
 
             <Help active={help} set={setHelp}>
@@ -61,3 +53,4 @@ export default () =>  {
         
     )
 }
+export default TestPage

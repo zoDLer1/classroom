@@ -1,9 +1,10 @@
 import css from './css/navlink.module.css'
-import { Link } from "react-router-dom"
+import DefaultLink from 'UI/defaultLink'
 
 export default (props) =>  {
+    
     return (
-        <Link className={`${css.block} ${props.isChoosen ? css.choosen : ''}`} to={props.to}>{props.text}</Link>
+        <DefaultLink {...props} className={`${css.block} ${props.isChoosen ? css.choosen : ''}`} to={props.to}></DefaultLink>
     )
 }
 

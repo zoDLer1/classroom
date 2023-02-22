@@ -1,8 +1,38 @@
+.size_1 .icon{
+    font-size: 16px;
+}
+
+.size_1 .text{
+    font-size: 18px;
+}
+
+.size_1{
+    padding: 20px 30px;
+}
+
+
+
+
+.size_2 .icon{
+    font-size: 14px;
+}
+
+.size_2 .text{
+    font-size: 16px;
+}
+
+.size_2{
+    padding: 16px 25px;
+}
+
+
+
+
 .block{
     position: absolute;
     list-style: none;
     border-radius: 20px;
-    padding: 20px 30px;
+
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -19,12 +49,10 @@
 }
 .icon{
     color: var(--alt-color);
-    font-size: 16px;
     width: 20px;
 }
 .text{
     color: var(--alt-color);
-    font-size: 18px;
 }
 
 .item:hover .icon,

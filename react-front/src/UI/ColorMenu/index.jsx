@@ -2,23 +2,37 @@ import css from './css/colormenu.module.css'
 import Color from './Color'
 import Link from 'UI/Link'
 
-export default (props) =>  {
-    
-    
-
-
-    if (props.menu.active){
-        return (
-            <div style={{top: props.menu.coords.y, left: props.menu.coords.x}} className={css.block}>
-                {props.colors.map(item=> <Color onChange={(evt)=> props.setColor(evt.target.dataset.color)} checked={item === props.menu.current.color} color={item} name="color-radio"/>)}
-                <div className={css.btns}>
-                    <Link text='Apply' onClick={(evt) =>{evt.preventDefault(); props.apply()}} />
-                    <Link text='Close' onClick={(evt) =>{evt.preventDefault(); props.close()}} />
+function ColorMenu ({ condition, current, coords, items, onAplly, onReject }){
+    return (
+        <>
+            
+            {condition &&
+                <div style={{left: coords[0], top: coords[1]}} className={css.block} onClick={(evt)=> evt.stopPropagation()}>
+                    {items.map((item) => <Color onChange={() => item.action(current)} key={item.id} checked={item.value === current.color} value={item.value} name="color-radio"/>)}
+                    <div className={css.btns}>
+                        <Link 
+                            text='Apply' 
+                            onClick={
+                                (evt) =>{
+                                    evt.preventDefault()
+                                    onAplly(current)
+                                }
+                            }
+                        />
+                        <Link 
+                            text='Close' 
+                            onClick={
+                                (evt) => {
+                                    evt.preventDefault()
+                                    onReject(current)
+                                }
+                            }
+                        />
+                    </div>
                 </div>
-            </div>
-        )
-    }
-    else{
-        return
-    }
+            }
+        </>
+    )
 }
+
+export default ColorMenu

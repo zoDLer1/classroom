@@ -3,14 +3,14 @@ import Link from 'UI/Link'
 import Submit from 'UI/Submit'
 import Checkbox from 'UI/Checkbox'
 import NavLink from 'UI/NavLink'
-import css from './css/registerForm.module.css'
-import formCss from 'components/forms/css/form.module.css'
+import css from './registerForm.module.css'
+import formCss from '../forms.module.css'
 import PasswordInput from 'UI/PasswordInput'
 import Select from 'UI/Select'
 import { useState } from 'react'
 
 
-export default () => {
+function RegisterForm () {
 
     const [formData, setFormData] = useState({
         username: '',
@@ -21,14 +21,19 @@ export default () => {
     })
 
 
-    
+    const onSubmit = (evt) =>{
+        evt.preventDefault()
+        // send request
+    }
+
 
     const roles = [
         { name: 'Student', id: 1 }, 
         { name: 'Teacher', id: 2 }
     ]
+
     return (
-        <form action="" className={[formCss.block, formCss.flex].join(' ')}>
+        <form onSubmit={onSubmit} action="" className={[formCss.block, formCss.flex].join(' ')}>
             <div className={[css.links, formCss.links, formCss.flex].join(' ')}>
                 <NavLink to='/accounts/register' isChoosen={true} text='Register' ></NavLink>
                 <NavLink to='/accounts/login' text='Sign in' ></NavLink>
@@ -56,3 +61,4 @@ export default () => {
         </form>
     )
 }
+export default RegisterForm

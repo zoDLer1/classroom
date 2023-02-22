@@ -51,6 +51,7 @@ export default (props) =>  {
             <form  className={[formCss.block, css.block, formCss.flex].join(' ')}>
                 <div className={[formCss.flex, css.header].join(' ')}>
                     <h2 className={css.label}>{_class.name}</h2>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos commodi tenetur dolores autem culpa vitae, necessitatibus fuga quidem sunt expedita accusamus iusto perferendis magni, maxime quis unde vero, libero nisi!
                     <Link text='Settings' onClick={()=>setPopup({active: true})}/>
                 </div>
                 <div className={css.body}>

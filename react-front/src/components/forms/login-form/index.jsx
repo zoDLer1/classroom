@@ -5,19 +5,20 @@ import Checkbox from 'UI/Checkbox'
 import NavLink from 'UI/NavLink'
 import PasswordInput from 'UI/PasswordInput'
 import Messager from 'UI/Messager'
-import css from './css/loginForm.module.css'
-import formCss from 'components/forms/css/form.module.css'
+import css from './loginForm.module.css'
+import formCss from '../forms.module.css'
 import { useState } from 'react'
-import { IS_EMAIL, MAX_LENGTH } from 'validation'
 
 
 
 
 
-export default () => {
+
+function LoginForm () {
 
     const [formData, set] = useState({
-        email: {value: ''}
+        email: '',
+        password: '',
     })
 
     return (
@@ -48,3 +49,6 @@ export default () => {
         </form>
     )
 }
+
+
+export default LoginForm

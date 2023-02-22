@@ -1,5 +1,6 @@
 .block{
     color: var(--faded-primary);
+    cursor: pointer;
 }
 .choosen{
     color: var(--primary-color);

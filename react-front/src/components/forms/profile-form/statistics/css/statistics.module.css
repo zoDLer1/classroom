@@ -1,0 +1,36 @@
+.block{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.block > *{
+    padding: 0 0 40px 0;
+    border-bottom: 2px solid var(--alt-color); 
+}
+.block > *:last-child{
+    border: none;
+}
+.actions{
+    display: flex;
+}
+
+.metrics{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.metrics_list{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    
+}
+.diagrams{
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions{
+    display: flex;
+    justify-content: space-between;
+}

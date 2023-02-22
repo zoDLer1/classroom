@@ -1,29 +1,46 @@
 import css from './css/profile.module.css'
 import formCss from 'components/forms/css/form.module.css'
 import Input from 'UI/Input'
+import EditableInput from 'UI/EditableInput'
+import NavLink from 'UI/NavLink'
+import { useState } from 'react'
+import Statistics from './statistics'
+import Profile from './user-profile'
+import { useEffect } from 'react'
 
 
 
 
-export default () =>  {
+export default (props) =>  {
+    const [componentId, setId] =  useState(1)
+    const [user, setUser] = useState({
+        firstname: 'Валентин',
+        lastname: 'Купцов',
+        email: 'test@email.com',
+        avatar: 'https://thispersondoesnotexist.com/image'
+    })
+
+
+    
+
+
+
+
+    const components = [
+        <Statistics />,
+        <Profile data={user}/>
+    ]
+
+
+
     return (
-        <form className={[formCss.block, formCss.flex].join(' ')}>
-            <div className={css.header}>
-                <img src="https://cdn.promodj.com/afs/6affb743b0bce0ba29ac568bd270b27a12%3Aresize%3A1400x1400xxjpegxffffffxnoupscale%3Asame%3A480b7b.jpg" alt="..." className={css.avatar} />
-                <div className={css.name_inputs}>
-                    <Input placeholder='Firstname' icon='fa-regular fa-user'/>
-                    <Input placeholder='Lastname' icon='fa-regular fa-user'/>
-                </div>
-            </div>
-
-            <div className={css.main_inputs}>
-                <Input placeholder='Email' icon='fa-solid fa-envelope'/>
-                <Input placeholder='Firstname' icon='fa-regular fa-user'/>
-                <Input placeholder='Lastname' icon='fa-regular fa-user'/>
-                <Input placeholder='Firstname' icon='fa-regular fa-user'/>
-                <Input placeholder='Lastname' icon='fa-regular fa-user'/>
-
-            </div>
+        <form className={[css.block, formCss.block, formCss.flex].join(' ')}>
+            <div className={[css.links, formCss.links, formCss.flex].join(' ')}>
+                <NavLink onClick={() => setId(0)} text='Statistics' isChoosen={true}></NavLink>
+                <NavLink onClick={() => setId(1)} text='User settings' ></NavLink>
+            </div> 
+                     
+            {components[componentId]}
         </form>
     )
 }

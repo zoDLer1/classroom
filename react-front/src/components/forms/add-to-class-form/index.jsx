@@ -7,8 +7,8 @@ import { useState } from 'react'
 
 
 
-export default (props) =>  {
-    const [classes, setClasses] = useState([
+function AddToClassForm ({close, current }){
+    const [classes] = useState([
         { name: 'Claswesardfawserfawsfs 1', id: 1 }, 
         { name: 'Class 2', id: 2 }
     ])
@@ -16,13 +16,11 @@ export default (props) =>  {
 
     const submit = (evt) =>{
         evt.preventDefault()
-        console.log(props.card, class_)
-        props.set(false)
-        // request
+        close()
     }
 
     return (
-        <form onSubmit={submit} className={[formCss.block, formCss.flex].join(' ')}>
+        <form onClick={(evt) => evt.stopPropagation()} onSubmit={submit} className={[formCss.block, formCss.flex].join(' ')}>
             <h2 className={css.label}>
                 <span>Add test to class</span>  
                 {class_ && <span className={css.class_}>{class_.name}</span> }
@@ -36,3 +34,4 @@ export default (props) =>  {
         </form>
     )
 }
+export default AddToClassForm

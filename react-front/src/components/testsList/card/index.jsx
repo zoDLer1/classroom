@@ -1,43 +1,50 @@
 import css from './css/card.module.css'
 import Event from './event'
+import DefaultLink from 'UI/defaultLink'
 
-
-export default (props) =>  {
-
-    const setName = (evt) =>{
-        props.set(props.data.id, {...props.data, name: evt.target.value})
-    }
+function Card ({ menuOpen, update, value, state, nameEdit }) {
 
     
+    const setName = (name) =>{
+        update(value.id, {...value, name: name})
+    }
+    const apllyNameEdit = () =>{
+        nameEdit(value)
+    }
+    
+    
     return (
-        <div>
+        <>
             <div className={css.block}>
-                <header style={{backgroundColor: props.data.color}} className={css.header}>
-                    {props.data.editMode 
-                        ? <div className={css.edit_layer}>
+                <header style={{backgroundColor: value.color}} className={css.header}>
+                    {state.editMode 
+                        ? <div className={css.edit_layer} onClick={(evt)=>evt.stopPropagation()}>
                             <div className={css.input}>
-                                <input type="text" value={props.data.name} onChange={setName}/>
+                                <input type="text" value={value.name} onChange={(evt) => setName(evt.target.value)}/>
                             </div>
-                            <i onClick={()=> props.set(props.data.id, {...props.data, editMode: false})} className={`${css.apply} fa-solid fa-check`}></i>
+                            <i onClick={() => apllyNameEdit()} className={`${css.apply} fa-solid fa-check`}></i>
                         </div>
-                    :<>
-                        <h3 className={css.label}>{props.data.name}</h3>
-                        <i style={{WebkitTextStroke: `1px ${props.data.color}`}} className={`${css.icon} fa-regular fa-file-lines`}></i>
-                    </>}
+                        :<>
+                            <h3 className={css.label}>{value.name}</h3>
+                            <i style={{WebkitTextStroke: `1px ${value.color}`}} className={`${css.icon} fa-regular fa-file-lines`}></i>
+                        </>}
                 </header>
                 <div className={css.events}>
-                    {props.data.events.map(event => <Event key={event.id} data={event}/>)}
+                    {value.events.map(event => <Event key={event.id} data={event}/>)}
                 </div>
                 <footer className={css.footer}>
                     <div className={css.action}>
-                        <i className='fa-regular fa-file-lines'></i>
+                        <DefaultLink to={`/tests/${value.id}`}>
+                            <i className='fa-regular fa-file-lines'></i>
+                        </DefaultLink>
                     </div>
-                    <div onClick={(evt) => props.menuOpen(true, {x: evt.clientX, y: evt.clientY}, props.data)} className={css.action}>
+                    <div onClick={(evt) => menuOpen(evt)} className={css.action}>
                         <i className="fa-solid fa-ellipsis-vertical"></i>
                     </div>
-                    <i className={`${css.loader} fa-solid fa-spinner`}></i>
+                    {state.loading && <i className={`${css.loader} fa-solid fa-spinner`}></i>}
                 </footer>
             </div>
-        </div>
+        </>
     )
 }
+export default Card

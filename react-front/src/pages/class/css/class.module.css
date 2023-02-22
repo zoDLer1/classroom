@@ -1,3 +1,5 @@
 .section{
     flex: 1;
+    justify-content: center;
+    /* height: 100%; */
 }

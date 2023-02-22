@@ -6,6 +6,7 @@
     background-color: var(--faded-primary);
     padding: 5px 15px;
     border-radius: 20px;
+    justify-content: center;
 }
 .icon{
     color: #fff;

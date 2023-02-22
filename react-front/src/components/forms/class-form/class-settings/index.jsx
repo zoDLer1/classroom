@@ -26,6 +26,7 @@ export default (props) =>  {
         <form onSubmit={UpdateData} className={[formCss.block, css.block, formCss.flex].join(' ')}>
             <div className={[formCss.flex, css.body].join(' ')}>
                 <Input value={classData.name} onChange={(evt)=> setClassData({...classData, name: evt.target.value})} icon='fa-solid fa-pen' />
+                <Input value={classData.description} onChange={(evt)=> setClassData({...classData, description: evt.target.value})} icon='fa-solid fa-pen' />
                 <Select icon='fa-solid fa-list-ol' select={(obj) => setClassData({...classData, type: obj})} value={classData.type.name}  options={types} />
                 <div className={css.checkboxes}>
                     <Checkbox text='Allow viewing'/>

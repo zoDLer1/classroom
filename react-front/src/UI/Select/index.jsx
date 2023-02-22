@@ -5,7 +5,7 @@ import Option from 'UI/Option'
 import { useState } from 'react'
 
 
-export default (props) =>  {
+function Select (props){
 
     const [open, setOpen] = useState(false)
     // const [value, setValue] = useState(props.value)
@@ -26,13 +26,13 @@ export default (props) =>  {
 
     return (
         <div className={css.block}>
-            <Input onClick={toggle} value={props.value === undefined ? '' : props.value} disabled name={props.name} placeholder={props.placeholder} icon={props.icon} ads={[<IconCheckbox name={props.name} icon={`fa-solid fa-angle-${icon}`} func={()=>''} />] } />
+            <Input onClick={toggle} value={props.value === undefined ? '' : props.value} disabled name={props.name} placeholder={props.placeholder} icon={props.icon} ads={<IconCheckbox name={props.name} icon={`fa-solid fa-angle-${icon}`} func={()=>''} /> } />
 
 
             {open &&
             <div className={css.options} >
                 {props.options.map(item => 
-                <Option key={item.id} data={item} onSelect={() => select(item)}/>
+                    <Option key={item.id} data={item} onSelect={() => select(item)}/>
                 )}
             </div>
             }
@@ -40,4 +40,4 @@ export default (props) =>  {
     )
 }
 
-// <Option key={item.id} data={item} onSelect={() => select(item)}/>
+export default Select

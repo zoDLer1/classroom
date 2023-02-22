@@ -1,20 +1,21 @@
 import css from './css/popup.module.css'
 
 
-export default (props) =>  {
+function  Popup ({ condition, children, close }){
 
-    
-
-
-    if (props.popup.active){
-        return (
-            <div className={css.block}>
-                {props.children}
-            </div>
-        )
-    }
-    else{
-        return
-    }
-    
+    return (
+        <>
+            {condition && 
+                <div className={css.block} onClick={
+                        (evt) => {
+                            evt.stopPropagation()
+                            close()
+                        }
+                    }> 
+                    {children}
+                </div>
+            }
+        </>
+    )
 }
+export default Popup
