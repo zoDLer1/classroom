@@ -10,7 +10,6 @@ from .managers import UserManager
 class Role(models.Model):
     name = models.CharField(_("name"), max_length=100)
 
-
     def __str__(self):
         return self.name
 
@@ -19,7 +18,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_("first name"), max_length=100)
     last_name = models.CharField(_("last name"), max_length=100)
     role = models.ForeignKey('Role', on_delete=models.DO_NOTHING)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    avatar = models.ImageField(upload_to='media/avatars', null=True, blank=True)
     is_staff = models.BooleanField(_('staff'), default=False) 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
