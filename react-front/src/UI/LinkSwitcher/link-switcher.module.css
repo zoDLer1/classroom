@@ -1,0 +1,14 @@
+.block{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 35px;
+    justify-content: flex-end;
+}
+.link{
+    color: var(--faded-primary);
+    cursor: pointer;
+}
+.choosen{
+    color: var(--primary-color);
+}

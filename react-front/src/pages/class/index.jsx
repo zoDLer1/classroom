@@ -3,7 +3,7 @@ import css from './css/class.module.css'
 import PageSection from 'components/pageSection'
 import ClassForm from 'components/forms/new-class-form'
 import { useState } from 'react'
-import { IS_NOT_EMPTY, MAX_LENGTH, EMAIL_ADDRESS } from "../../hooks/useValidation";
+// import { IS_NOT_EMPTY, MAX_LENGTH, EMAIL_ADDRESS } from "../../hooks/useValidation";
 
 
 export default (props) =>  {
@@ -24,20 +24,20 @@ export default (props) =>  {
         ],
     })
 
-    const data = {
-        email: {
-            label: "Email",
-            type: "text",
-            autoComplete: "off",
-            validation: [IS_NOT_EMPTY("Укажите email"), MAX_LENGTH(50), EMAIL_ADDRESS()]
-        },
-        password: {
-            label: "Пароль",
-            type: "password",
-            autoComplete: "off",
-            validation: [IS_NOT_EMPTY("Укажите пароль")]
-        }
-    }
+    // const data = {
+    //     email: {
+    //         label: "Email",
+    //         type: "text",
+    //         autoComplete: "off",
+    //         validation: [IS_NOT_EMPTY("Укажите email"), MAX_LENGTH(50), EMAIL_ADDRESS()]
+    //     },
+    //     password: {
+    //         label: "Пароль",
+    //         type: "password",
+    //         autoComplete: "off",
+    //         validation: [IS_NOT_EMPTY("Укажите пароль")]
+    //     }
+    // }
 
     return (
         <PageSection className={css.section}>       

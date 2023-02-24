@@ -7,7 +7,7 @@ export function useLoading() {
 
     const stopLoading = () => setLoading(false)
 
-    return ( isLoading, startLoading, stopLoading )
+    return { isLoading, startLoading, stopLoading }
 
 }
 

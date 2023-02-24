@@ -28,12 +28,11 @@ export const useTimer = (to, onDone) => {
     const reset = () => {
         setTime(0);
         clearTimeout(timeout);
-        
       };
   
     useEffect(() => {
       runTimer();
     }, [time]);
   
-    return { time, reset };
+    return { time, reset, stop };
   };

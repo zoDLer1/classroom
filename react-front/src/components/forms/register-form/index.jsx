@@ -2,7 +2,7 @@ import Input from 'UI/Input'
 import Link from 'UI/Link'
 import Submit from 'UI/Submit'
 import Checkbox from 'UI/Checkbox'
-import NavLink from 'UI/NavLink'
+import LinkSwither from 'UI/LinkSwitcher'
 import css from './registerForm.module.css'
 import formCss from '../forms.module.css'
 import PasswordInput from 'UI/PasswordInput'
@@ -34,10 +34,7 @@ function RegisterForm () {
 
     return (
         <form onSubmit={onSubmit} action="" className={[formCss.block, formCss.flex].join(' ')}>
-            <div className={[css.links, formCss.links, formCss.flex].join(' ')}>
-                <NavLink to='/accounts/register' isChoosen={true} text='Register' ></NavLink>
-                <NavLink to='/accounts/login' text='Sign in' ></NavLink>
-            </div>
+            <LinkSwither links={[{ text: 'Register', to: '/accounts/register'}, {text: 'Sign in', to: '/accounts/login'}]} className={css.links} selected={0}/>
             <div className={[formCss.inputs, css.inputs].join(' ')}>
                 <Input value={formData.username} onChange={(evt)=> setFormData({...formData, username: evt.target.value})} name="username" placeholder="Username" icon='fa-regular fa-user' />
                 <Input value={formData.email} onChange={(evt)=> setFormData({...formData, email: evt.target.value})} name="email" placeholder="Email" icon='fa-solid fa-envelope' />

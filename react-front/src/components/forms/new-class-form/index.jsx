@@ -18,7 +18,7 @@ export default (props) => {
     const [popup, setPopup] = useState({active: false})
     const [menu, menuSwitch] = useMenu()
 
-    const { serverErrors, isSubmitted, updateFieldStatuses, onChange, onSubmit, hasError } = useForm(()=>'');
+    // const { serverErrors, isSubmitted, updateFieldStatuses, onChange, onSubmit, hasError } = useForm(()=>'');
 
 
     const alertHook = useAlert()
@@ -47,7 +47,7 @@ export default (props) => {
 
     return (
         <>
-        <iframe width="828" height="480" src="https://www.google.com"></iframe>
+        
             <div className={[css.block].join(' ')}>
                 <div className={[css.header].join(' ')}>
                     <div className={css.data}>

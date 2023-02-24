@@ -1,19 +1,7 @@
 import css from "./css/input.module.css";
-import Warning from "UI/Warning";
+
 
 function Input ({ads, validation, warning, icon, onClick, ...props}){
-    let errors = []
-    if (validation){
-        for(let item of validation){
-            if (!item){
-                errors.push(item)
-            }
-        }
-    }
-    
-    
-
-
 
     return (
         
@@ -25,9 +13,7 @@ function Input ({ads, validation, warning, icon, onClick, ...props}){
                 <input {...props} />
             </div>
             <div className={css.ads}>
-                {/* {errors ? <Warning text={warning}/> :''} */}
-                {ads && ads}
-                
+                {ads}
             </div>
             
         </div>

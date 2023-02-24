@@ -2,37 +2,50 @@ import Input from 'UI/Input'
 import Link from 'UI/Link'
 import Submit from 'UI/Submit'
 import Checkbox from 'UI/Checkbox'
-import NavLink from 'UI/NavLink'
 import PasswordInput from 'UI/PasswordInput'
 import Messager from 'UI/Messager'
 import css from './loginForm.module.css'
 import formCss from '../forms.module.css'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import AuthService from 'services/AuthService'
+import { useDispatch } from 'react-redux'
+import { useLoading } from 'hooks/useLoading'
+import LinkSwither from 'UI/LinkSwitcher'
 
 
+function LoginForm ({ onSubmited }) {
+    
+    // const access_token = useSelector(state => state.users.access)
+    const dispatch = useDispatch()
+    const auth = new AuthService(dispatch)
 
 
-
-
-function LoginForm () {
-
+    const { isLoading, startLoading, stopLoading } = useLoading()
+    
     const [formData, set] = useState({
-        email: '',
-        password: '',
+        email: {value:'123@123.213'},
+        password: {value:'123123'},
     })
+    const OnSubmit = async (evt) =>{
+        evt.preventDefault()
+        startLoading()
+        await auth.login(formData.email.value, formData.password.value)
+        stopLoading()
+        onSubmited()
 
+    } 
     return (
-        <form className={[formCss.block, formCss.flex].join(' ')}>
-            <div className={[css.links, formCss.links, formCss.flex].join(' ')}>
-                <NavLink to='/accounts/register' text='Register' ></NavLink>
-                <NavLink to='/accounts/login' text='Sign in' isChoosen={true}></NavLink>
-            </div>
+        <form onSubmit={OnSubmit} className={[formCss.block, formCss.flex].join(' ')}>
+
+            <LinkSwither links={[{ text: 'Register', to: '/accounts/register'}, {text: 'Sign in', to: '/accounts/login'}]} className={css.links} selected={1}/>
+
             <div className={[formCss.inputs, css.inputs].join(' ')}>
                 <Input onChange={(evt)=>set({...formData, email: {...formData.email, value: evt.target.value}})} value={formData.email.value} name="email" placeholder="Email" icon='fa-solid fa-envelope' />
-                <PasswordInput name="password" placeholder="Password" icon='fa-solid fa-key'/>
+                <PasswordInput onChange={(evt)=>set({...formData, password: {...formData.password, value: evt.target.value}})} value={formData.password.value} name="password" placeholder="Password" icon='fa-solid fa-key'/>
             </div>
             <div className={css.submit}>
-                <Submit text='login'/>
+                <Submit loading={isLoading} text='login'/>
             </div>
             <div className={[css.ads, formCss.flex].join(' ')}>
                 <Checkbox text='Remember me' />

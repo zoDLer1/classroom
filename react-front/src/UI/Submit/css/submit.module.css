@@ -1,7 +1,17 @@
+@keyframes rotate {
+    from{
+        transform: translate(-50%, -50%) rotate(0deg) ;
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+
 .block{
     width: 100%;
-    /* margin-bottom: 20px; */
     transition: transform 0.2s ease-out;
+    position: relative;
 }
 
 
@@ -19,7 +29,19 @@
     width: 100%;
     border-radius: 55px;
     padding: 18px 0;
+    height: 24px;
     font-size: 20px;
     cursor: pointer;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25);
+    
+}
+.loader{
+    font-size: 26px;
+    position: absolute;
+    top: 0;
+    color: #fff;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    animation: rotate 0.9s linear infinite;
 }
