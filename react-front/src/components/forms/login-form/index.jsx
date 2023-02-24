@@ -7,18 +7,15 @@ import Messager from 'UI/Messager'
 import css from './loginForm.module.css'
 import formCss from '../forms.module.css'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import AuthService from 'services/AuthService'
-import { useDispatch } from 'react-redux'
 import { useLoading } from 'hooks/useLoading'
 import LinkSwither from 'UI/LinkSwitcher'
-
+import user from 'store/user'
 
 function LoginForm ({ onSubmited }) {
     
-    // const access_token = useSelector(state => state.users.access)
-    const dispatch = useDispatch()
-    const auth = new AuthService(dispatch)
+
+    const auth = new AuthService()
 
 
     const { isLoading, startLoading, stopLoading } = useLoading()
@@ -32,12 +29,12 @@ function LoginForm ({ onSubmited }) {
         startLoading()
         await auth.login(formData.email.value, formData.password.value)
         stopLoading()
-        onSubmited()
+       
 
     } 
     return (
         <form onSubmit={OnSubmit} className={[formCss.block, formCss.flex].join(' ')}>
-
+            {user.access}
             <LinkSwither links={[{ text: 'Register', to: '/accounts/register'}, {text: 'Sign in', to: '/accounts/login'}]} className={css.links} selected={1}/>
 
             <div className={[formCss.inputs, css.inputs].join(' ')}>

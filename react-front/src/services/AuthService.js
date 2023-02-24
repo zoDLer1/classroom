@@ -1,28 +1,25 @@
 import { AuthApiInstanse } from "api";
-import { useDispatch } from "react-redux";
-
-import { UserLogin, UserRegister, UserLogout } from 'store/reducers/userReducer'
-
+import user from "store/user";
 
 
 
  class AuthService {
 
-    constructor (dispatch){
-        this.dispatch = dispatch
-    }
-
     async login(email, password){
-        await AuthApiInstanse.post('/token/', {email, password}).then(
-            (response) => this.dispatch(UserLogin(response.data))
+        await AuthApiInstanse.post('/users/login/', {email, password}).then(
+            (response) => user.login(response.data.access, response.data.refresh)
         )
     }
-
+    async get_user(){
+        await AuthApiInstanse.post('/users/account/').then(
+            (response) => console.log(response)
+        )
+    }
     async register(email, password){
-        return AuthApiInstanse.post('/register', {email, password})
+        return AuthApiInstanse.post('/users/register/', {email, password})
     }
     async logout(){
-        return AuthApiInstanse.post('/logout')
+        return AuthApiInstanse.post('/users/logout')
     }
     
 }

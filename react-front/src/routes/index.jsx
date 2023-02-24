@@ -5,7 +5,6 @@ import urlpatternts from './urlpatternts';
 
 
 export default () => {
-  console.log(urlpatternts.map(route => route))
   return (
     <>
       <Routes>

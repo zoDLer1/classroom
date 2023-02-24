@@ -1,12 +1,8 @@
-import { useSelector } from 'react-redux'
-
+import { redirect } from './actions'
+import { LOGIN_URL } from './RouterConfig'
+import user from 'store/user'
 
 export const IsUserAuth = (onReject) => {
-    const useUserAuth = () =>{
-        const access_token = useSelector(state => state.users.access)
-        const access = Boolean(access_token)
-        return access
-
-    }
-    return [useUserAuth, onReject]
+    const isAuth = Boolean(user.access)
+    return [isAuth, onReject ? onReject: redirect(LOGIN_URL)]
 }

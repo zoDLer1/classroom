@@ -1,6 +1,6 @@
-import Route from "./route"
-import RoutesGroup from "./routesGroup";
-
+// import Route from "./routing"
+// import RoutesGroup from "./routesGroup";
+import { Route, RoutesGroup } from './routing';
 
 
 import Class from 'pages/class';
@@ -17,7 +17,7 @@ import { redirect } from "./actions";
 
 export default [
     new RoutesGroup('/classes', [
-        new Route('/:id', Class, [IsUserAuth(redirect('/accounts/login'))])
+        new Route('/:id', Class, [IsUserAuth()])
     ]),
     new RoutesGroup('/tests', [
         new RoutesGroup('/:id', [
@@ -26,12 +26,14 @@ export default [
         ]),
         new Route('', Tests),
         new Route('/create', CreateTest)
-    ]),
+    ], [IsUserAuth()]),
+
+
     new RoutesGroup('/accounts', [
         new Route('/profile', Profile),
         new Route('/login', Login),
         new Route('/register', Register)
-    ])
-    
+    ]),
+    new Route('*', redirect('/accounts/login'))
     
 ]
