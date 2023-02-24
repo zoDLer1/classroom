@@ -6,7 +6,7 @@ export default ({ router }) => {
  
     return (
         <div className={pagesCss.content_center}>
-            <LoginForm onSubmited={() => router.navigate('/classes')} />
+            <LoginForm onSubmited={() => ''} />
         </div>
     )
 }
