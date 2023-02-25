@@ -1,8 +1,6 @@
 // import Route from "./routing"
 // import RoutesGroup from "./routesGroup";
 import { Route, RoutesGroup } from './routing';
-
-
 import Class from 'pages/class';
 import Login from 'pages/login'
 import Register from 'pages/register'

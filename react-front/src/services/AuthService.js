@@ -1,24 +1,31 @@
-import { AuthApiInstanse } from "api";
+import DefaultApiInstanse, { AuthApiInstanse } from "api";
 import user from "store/user";
 
 
 
  class AuthService {
 
-    async login(email, password){
-        await AuthApiInstanse.post('/users/login/', {email, password}).then(
-            (response) => user.login(response.data.access, response.data.refresh)
-        )
+    static async login(email, password){
+        try{
+            await AuthApiInstanse.post('/users/login/', {email, password}).then(
+                (response) => user.login(response.data.access, response.data.refresh),
+                (error) => console.log(error)
+            )
+            await this.get_user()
+        }
+        catch (e){
+         
+        }
     }
-    async get_user(){
-        await AuthApiInstanse.post('/users/account/').then(
+    static async get_user(){
+        await DefaultApiInstanse.get('/users/account/').then(
             (response) => console.log(response)
         )
     }
-    async register(email, password){
+    static async register(email, password){
         return AuthApiInstanse.post('/users/register/', {email, password})
     }
-    async logout(){
+    static async logout(){
         return AuthApiInstanse.post('/users/logout')
     }
     

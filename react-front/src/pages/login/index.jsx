@@ -2,11 +2,12 @@ import LoginForm from 'components/forms/login-form'
 import pagesCss from '../pages.module.css'
 
 
-export default ({ router }) => {
+function Login ({ router }) {
  
     return (
         <div className={pagesCss.content_center}>
-            <LoginForm onSubmited={() => ''} />
+            <LoginForm  />
         </div>
     )
 }
+export default Login

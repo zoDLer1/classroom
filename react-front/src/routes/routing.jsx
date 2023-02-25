@@ -1,20 +1,11 @@
 import { Route as ReactRoute } from "react-router-dom"
 import BaseRoute from "./baseRoute"
+import ElementLayer from "./ElementLayer"
 
 export class Route extends BaseRoute {
 
     render(key){
-        let access = true
-        let RejectComponent = null
-        for (const [guard, reject] of this.guards){
-            if (!guard){
-                access = false
-                RejectComponent = reject
-                break
-            }
-        }
-        const element = access ? <this.element /> : <RejectComponent />
-        return (<ReactRoute path={this.url} key={key} element={element} />)
+        return (<ReactRoute path={this.url} key={key} element={<ElementLayer element={<this.element />} guards={this.guards} />} />)
     }  
 } 
 
@@ -26,8 +17,6 @@ export class RoutesGroup extends BaseRoute {
                     route.setGuards([...route.guards, ...this.guards])
                     route.setUrl(this.url+route.url)              
                     return route.render(key+"-"+index)
-                })
-            
-        
+        }) 
     }  
 } 

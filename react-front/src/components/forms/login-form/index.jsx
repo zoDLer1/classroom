@@ -10,14 +10,13 @@ import { useState } from 'react'
 import AuthService from 'services/AuthService'
 import { useLoading } from 'hooks/useLoading'
 import LinkSwither from 'UI/LinkSwitcher'
-import user from 'store/user'
+import { useNavigate } from 'react-router-dom'
 
-function LoginForm ({ onSubmited }) {
+
+function LoginForm () {
     
-
-    const auth = new AuthService()
-
-
+    
+    const navigate = useNavigate()
     const { isLoading, startLoading, stopLoading } = useLoading()
     
     const [formData, set] = useState({
@@ -27,14 +26,13 @@ function LoginForm ({ onSubmited }) {
     const OnSubmit = async (evt) =>{
         evt.preventDefault()
         startLoading()
-        await auth.login(formData.email.value, formData.password.value)
+        await AuthService.login(formData.email.value, formData.password.value)
         stopLoading()
-       
+        navigate('/tests')
 
     } 
     return (
         <form onSubmit={OnSubmit} className={[formCss.block, formCss.flex].join(' ')}>
-            {user.access}
             <LinkSwither links={[{ text: 'Register', to: '/accounts/register'}, {text: 'Sign in', to: '/accounts/login'}]} className={css.links} selected={1}/>
 
             <div className={[formCss.inputs, css.inputs].join(' ')}>

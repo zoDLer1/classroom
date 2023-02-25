@@ -1,7 +1,6 @@
 import './css/main.css'
 import './css/navigation.css'
 import css from './css/header.module.css'
-import { Link } from 'react-router-dom'
 import NavigationItem from './NavigationItem'
 
 
@@ -15,7 +14,7 @@ export default () => {
                 <NavigationItem to='/' text ='About Us'/>
                 <NavigationItem to='/' text ='Autors'/>
                 <NavigationItem to='/tests' text ='Tests'/>
-                <NavigationItem to='/classes' text ='Classes'/>
+                <NavigationItem to='/classes/classes/1' text ='Classes'/>
 
                 {
                     isAuth 

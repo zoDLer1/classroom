@@ -1,9 +1,10 @@
 @keyframes rotate {
     from{
-        transform: translate(-50%, -50%) rotate(0deg) ;
+        transform: rotate(0deg) ;
+        
     }
     to {
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 
@@ -37,7 +38,11 @@
 }
 .loader{
     font-size: 26px;
-    position: absolute;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    /* position: absolute; */
     top: 0;
     color: #fff;
     top: 50%;

@@ -1,4 +1,6 @@
 import axios from "axios";
+import user from "store/user";
+
 
 const DOMAIN = 'http://localhost:8000/api/v1'
 // axios.defaults.timeout = 1000 * 100;
@@ -8,13 +10,25 @@ export const Defaultconfig = {
     headers:{},
     
 }
-const token = localStorage.getItem('access_token')
-if (token) Defaultconfig.headers['authorization'] = `Bearer ${token}`
 
 
-export const DefaultApiInstanse = axios.create(Defaultconfig)
+
+
+const DefaultApiInstanse = axios.create(Defaultconfig)
+
+DefaultApiInstanse.interceptors.request.use((config)=>{
+    config.headers.Authorization = `Bearer ${user.access}`
+    return config
+})
+
+
+
+
+
 
 export const AuthApiInstanse = axios.create({
     baseURL: DOMAIN,
 
 })
+
+export default DefaultApiInstanse
