@@ -4,7 +4,7 @@ from .models import *
 # Register your models here.
 @admin.register(Class)
 class ClassAdmin(admin.ModelAdmin):
-    list_display = ('id', 'creator', 'type')
+    list_display = ('id', 'creator', 'type', 'color')
 
 @admin.register(ClassType)
 class ClassTypeAdmin(admin.ModelAdmin):

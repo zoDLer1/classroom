@@ -8,11 +8,11 @@ class TemplateAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'time', 'test')
+    list_display = ('id', 'time', 'test', 'type')
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'question', 'type', 'isCorrect', 'value')
+    list_display = ('id', 'name', 'question', 'isCorrect', 'value')
 
 @admin.register(AnswerType)
 class AnswerTypeAdmin(admin.ModelAdmin):
