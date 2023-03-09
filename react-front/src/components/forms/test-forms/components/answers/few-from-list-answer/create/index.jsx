@@ -1,50 +1,46 @@
 import css from '../css/few-from-list-answer.module.css'
-import Input from 'UI/Input'
-import Checkbox from 'UI/Checkbox'
-import Link from 'UI/Link'
+import Input from 'UI/Inputs/Input'
+import Checkbox from 'UI/Inputs/Checkbox'
+import Action from 'UI/Inputs/action'
 
-export default (props) =>  {
-
-
-    // const setList = (ar) =>{
-    //     props.set(ar)
-    // }
+const FewFromListAnswer = ({value, set, questionIndex}) =>  {
 
 
-    const change = (index, key, value) => {
-        let newList = [...props.value]
+   
+    const change = (index, key, newValue) => {
+        let newList = [...value]
         let obj = {...newList[index]}
-        obj[key] = value
+        obj[key] = newValue
         newList[index] = obj
-        props.set(newList)
+        set(newList)
     }
 
     
     const addItem = () => {
-        props.set([...props.value, {value:'', correct: false}])
+        set([...value, {name:'', isCorrect: false}])
     }
     const removeItem = (index) => {
-        props.set(props.value.filter((item, i) => i !== index))
+        set(value.filter((item, i) => i !== index))
     }
 
 
 
     return (
         <div className={css.list}>
-            {props.value.map((item, index) => 
+            {value.map((item, index) => 
                 <div className={css.item} key={index}>
-                    <Checkbox text='' name={`question_${props.numb}_answer_${index+1}_checkbox`} checked={item.correct} onChange={(evt) => change(index, 'correct', evt.target.checked)}/>
-                    <Input onChange={(evt) => change(index, 'value', evt.target.value)} value={item.value} name={`question_${props.numb}_answer${index+1}`} placeholder={`Answer ${index+1}`} />
+                    <Checkbox text='' name={`question_${questionIndex}_answer_${index+1}_checkbox`} checked={item.isCorrect} onChange={(evt) => change(index, 'isCorrect', evt.target.checked)}/>
+                    <Input placeholderOffset={-15} onChange={(evt) => change(index, 'name', evt.target.value)} value={item.name} name={`question_${questionIndex}_answer${index+1}`} placeholder={`Answer ${index+1}`} />
                     <i onClick={()=>removeItem(index)} className={`${css.icon} fa-solid fa-xmark`}></i>
                     
                 </div>
             )}
-
-            <div className={[css.item, css.add].join(' ')}>
-                <Link onClick={addItem} text='Add answer'>
-                    <i className="fa-solid fa-plus"></i>
-                </Link>
-            </div>
+            {value.length < 12 &&
+               <div className={[css.item, css.add].join(' ')}>
+                    <Action icon={"fa-solid fa-plus"} onClick={addItem} text='Add answer' />
+                </div>
+            
+            }
             
         </div>
         
@@ -52,15 +48,4 @@ export default (props) =>  {
         
     )
 }
-
-
-// const changeValue = (index, value) =>{
-    //     let newList = [...props.value]
-    //     newList[index] = {...newList[index], value: value}
-    //     setList(newList)
-    // }
-    // const changeCorrect = (index, value) =>{
-    //     let newList = [...props.value]
-    //     newList[index] = {...newList[index], correct: value}
-    //     setList(newList)
-    // }
+export default FewFromListAnswer 

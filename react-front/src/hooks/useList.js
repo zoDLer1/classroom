@@ -1,54 +1,88 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CloseContext } from 'contexts/closeContext';
 import { useContext } from "react";
 
-export const useList = (data, onAutoClose=()=>null) => {
-    const [list, setList] = useState(
-        data.map(
-            (item) =>{
-                return {value: item, stored: {}, state: {loading: false, editMode: false}}
-            }
-         
-        )
-    )
- 
+export const useList = (onAutoClose=()=>null) => {
 
+    
+
+    const [list, setList] = useState([])
+
+    useEffect(()=>{
+        // console.log(list)
+    }, [list])
+
+ 
+    const setItems = (items) => {
+        setList(() => {
+            let newList = []
+            for (const item of items){
+                newList.push({value: item, stored: {}, state: {loading: false, editMode: false}})
+            }
+            return newList
+        })
+        
+    }
 
     const { add, remove } = useContext(CloseContext)
-    const findItemIndex = (id) => {
-        return [...list].findIndex(item => item.value.id === id)
+
+
+
+    const findItemIndex = (lst, id) => {
+        return [...lst].findIndex(item => item.value.id === id)
     }
+    
     const storeProp = (id, key) =>{
-        const newList = [...list]
-        const index = findItemIndex(id)
-        newList[index].stored[key] = newList[index].value[key]
-        setList(newList)
+        setList(
+            (list) => {
+                const newList = [...list]
+                const index = findItemIndex(list, id)
+                newList[index].stored[key] = newList[index].value[key]
+                return newList
+            }    
+        )
+        
     }
     const reject = (id, key) =>{
-        const newList = [...list]
-        const index = findItemIndex(id)
-        newList[index].value[key] = newList[index].stored[key]
-        delete newList[index].stored[key]
-        setList(newList)
+        setList((list)=>{
+            const newList = [...list]
+            const index = findItemIndex(list, id)
+            newList[index].value[key] = newList[index].stored[key]
+            delete newList[index].stored[key]
+            return newList
+        })
+        
+        
+        
+        
     }
     const commit = (id, key) => {
-        const newList = [...list]
-        const index = findItemIndex(id)
-        delete newList[index].stored[key]
-        setList(newList)
+        setList((list)=>{
+            const newList = [...list]
+            const index = findItemIndex(list, id)
+            delete newList[index].stored[key]
+            return newList
+        })
     }
     const loadingState = (id, value) =>{
-        const newList = [...list]
-        newList[findItemIndex(id)].state.loading = value
-        setList(newList)
+        setList((list)=>{
+            const newList = [...list]
+            newList[findItemIndex(list, id)].state.loading = value
+            return newList
+        })
+        
     }
     const editModeState = (id, value) =>{
-        const newList = [...list]
-        newList[findItemIndex(id)].state.editMode = value
-        setList(newList)
+        setList((list)=>{
+            const newList = [...list]
+            newList[findItemIndex(list, id)].state.editMode = value
+            return newList
+        })
     }
     const editModeOn = (id) => {
+        
         editModeState(id, true)
+        
         add({id, close: ()=> {
             editModeOff(id)
             onAutoClose(id)
@@ -60,21 +94,25 @@ export const useList = (data, onAutoClose=()=>null) => {
         
     }
     const setItemProp = (id, key, value) =>{
-        const newList = [...list]
-        newList[findItemIndex(id)].value[key] = value
-        setList(newList)
+        setList((list)=>{
+            const newList = [...list]
+            newList[findItemIndex(list, id)].value[key] = value
+            return newList
+        })
+        
     }
     const setItem = (data) => {
-        setList([...list, {value: data, stored: {}, state: {loading: false, editMode: false}}])
+        setList((list)=>[...list, {value: data, stored: {}, state: {loading: false, editMode: false}}])
     }
     const updateItem = (id, data) => {
-        const newList = [...list]
-        newList[findItemIndex(id)].value = data
-        setList(newList)
+        setList((list)=>{
+            const newList = [...list]
+            newList[findItemIndex(list, id)].value = data
+            return newList
+        })
     }
     const removeItem = (id) => {
-        setList([...list].filter(item => item.value.id !== id))
+        setList((list)=>[...list].filter(item => item.value.id !== id))
     }
-    
-    return [list, { setItem, updateItem, removeItem, setItemProp }, {storeProp, reject, commit}, { editModeOn, editModeOff, loadingState }]
+    return [list, { setItems, setItem, updateItem, removeItem, setItemProp }, {storeProp, reject, commit}, { editModeOn, editModeOff, loadingState }]
 }

@@ -1,5 +1,5 @@
 import css from '../css/footer.module.css'
-import Button from 'UI/Button'
+import Button from 'UI/Inputs/Button'
 
 
 export default (props) =>  {

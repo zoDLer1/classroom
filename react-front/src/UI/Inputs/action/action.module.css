@@ -1,0 +1,39 @@
+.text{
+    font-size: 15px;
+    
+    font-weight: 500;
+}
+
+.block{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 10px;
+    width: fit-content; 
+}
+.icon{
+    font-size: 16px;
+}
+.default .text,
+.default .icon{
+    color: var(--primary-color);
+}
+.default:hover{
+    background-color: #d5f0ff;
+}
+.error .text,
+.error .icon{
+    color: var(--error-color);
+}
+.error:hover{
+    background-color: #ffdcdc;
+}
+.disabled-true:hover{
+    background-color: transparent
+}
+.disabled-true .text,
+.disabled-true .icon{
+    color: var(--alt-color);
+}

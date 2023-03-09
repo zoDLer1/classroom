@@ -7,9 +7,15 @@
     padding: 42px 80px;
     width: 680px;
     display: flex;
+    justify-content: space-between;
+    
 }
 .label{
     margin-bottom: 20px;
+}
+.group{
+    gap: 25px;
+    display: flex;
 }
 .view{
     justify-content: space-between;

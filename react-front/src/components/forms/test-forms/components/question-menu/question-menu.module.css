@@ -1,0 +1,19 @@
+.block{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.body{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    align-items: center;
+    border-radius: 20px;
+    gap: 15px;
+    height: fit-content;
+    box-shadow: 0 10px 70px 0 rgb(0 0 0 / 20%);
+}
+
+

@@ -19,3 +19,8 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.block{
+    justify-content: center;
+    width: 320px;
+    height: 230px;
+}

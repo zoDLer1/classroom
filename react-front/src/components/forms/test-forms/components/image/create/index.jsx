@@ -1,6 +1,6 @@
 import css from '../css/image.module.css'
 
-export default ({data, onClose, ...props}) =>  {
+const CreateQuestion = ({data, onClose, ...props}) =>  {
 
     // https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
     function shortenBytes(n) {
@@ -25,3 +25,4 @@ export default ({data, onClose, ...props}) =>  {
         
     )
 }
+export default CreateQuestion 

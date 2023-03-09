@@ -1,9 +1,10 @@
 import css from './css/card.module.css'
-import Event from './event'
 import DefaultLink from 'UI/defaultLink'
+
 
 function Card ({ menuOpen, update, value, state, nameEdit }) {
 
+    
     
     const setName = (name) =>{
         update(value.id, {...value, name: name})
@@ -16,7 +17,7 @@ function Card ({ menuOpen, update, value, state, nameEdit }) {
     return (
         <>
             <div className={css.block}>
-                <header style={{backgroundColor: value.color}} className={css.header}>
+                <DefaultLink to={`/classes/${value.id}`} style={{backgroundColor: `#${value.color}`}} className={css.header}>
                     {state.editMode 
                         ? <div className={css.edit_layer} onClick={(evt)=>evt.stopPropagation()}>
                             <div className={css.input}>
@@ -26,11 +27,12 @@ function Card ({ menuOpen, update, value, state, nameEdit }) {
                         </div>
                         :<>
                             <h3 className={css.label}>{value.name}</h3>
-                            <i style={{WebkitTextStroke: `1px ${value.color}`}} className={`${css.icon} fa-regular fa-file-lines`}></i>
+                            <i style={{WebkitTextStroke: `1px #${value.color}`}} className={`${css.icon} fa-solid fa-users`}></i>
+                            
                         </>}
-                </header>
+                </DefaultLink>
                 <div className={css.events}>
-                    {value.events.map(event => <Event key={event.id} data={event}/>)}
+                    {/* {value.events.map(event => <Event key={event.id} data={event}/>)} */}
                 </div>
                 <footer className={css.footer}>
                     <div className={css.action}>

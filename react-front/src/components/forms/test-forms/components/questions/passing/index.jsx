@@ -3,7 +3,7 @@ import TextAnswer from 'components/forms/test-forms/components/answers/text-answ
 import FewFromListAnswer from 'components/forms/test-forms/components/answers/few-from-list-answer/passing'
 import OneFromListAnswer from 'components/forms/test-forms/components/answers/one-from-list-answer/passing'
 import Image from 'components/forms/test-forms/components/image/view'
-import Button from 'UI/Button'
+import Button from 'UI/Inputs/Button'
 import { useTimer } from 'hooks/useTimer'
 
 

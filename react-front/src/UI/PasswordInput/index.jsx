@@ -1,4 +1,4 @@
-import Input  from 'UI/Input'
+import Input  from 'UI/Inputs/Input'
 import IconCheckbox from 'UI/IconCheckbox'
 import { useState } from 'react'
 
@@ -12,7 +12,7 @@ export default ({icon, ...props}) =>  {
 
 
     return (
-        <Input type={type} {...props} icon={icon} ads={<IconCheckbox icon='fa-regular fa-eye-slash' func={toggleType} />} />
+        <Input type={type} {...props} icon={icon} ads={<IconCheckbox name={props.name} icon='fa-regular fa-eye-slash' func={toggleType} />} />
     )
 }
 

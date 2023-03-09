@@ -1,7 +1,10 @@
-import Input from 'UI/Input'
+import { useEffect } from 'react'
+import Input from 'UI/Inputs/Input'
 
-export default (props) =>  {
+const CreateTextAnswer = ({value, set, questionIndex}) =>  {
+
     return (
-        <Input value={props.value} onChange={(evt) => props.set(evt.target.value)} name={`question_${props.numb}_answer`} placeholder="Text answer" icon='fa-solid fa-pen'/>
+        <Input value={value[0].value} onChange={(evt) => set([{...value[0], value: evt.target.value}])} name={`question_${questionIndex}_answer`} placeholder="Text answer" icon='fa-solid fa-font'/>
     )
 }
+export default CreateTextAnswer

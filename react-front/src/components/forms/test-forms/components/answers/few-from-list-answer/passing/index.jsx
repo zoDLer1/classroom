@@ -1,5 +1,5 @@
 import css from '../css/few-from-list-answer.module.css'
-import Checkbox from 'UI/Checkbox'
+import Checkbox from 'UI/Inputs/Checkbox'
 
 
 export default (props) =>  {

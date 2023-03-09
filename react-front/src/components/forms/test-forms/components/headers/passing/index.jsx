@@ -1,5 +1,5 @@
-import css from '../css/form-header.module.css'
-import Button from 'UI/Button'
+import css from '../form-header.module.css'
+import Button from 'UI/Inputs/Button'
 
 export default (props) =>  {
     return (

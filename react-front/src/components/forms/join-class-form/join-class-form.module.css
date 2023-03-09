@@ -1,0 +1,25 @@
+.title{
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+.block{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    align-content: flex-start;
+}
+.description{
+    font-size: 14px;
+}
+.actions{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

@@ -3,7 +3,7 @@ import Metric from './metric'
 import CircleDiagram from './circle-diagram'
 import MultipleDiagram from './multiple-diagram'
 import { useState } from 'react'
-import Action from 'UI/action'
+import Action from 'UI/Inputs/action'
 
 
 

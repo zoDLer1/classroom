@@ -2,4 +2,14 @@
     display: flex;
     align-items: center;
     flex: 1;
+    justify-content: center;
+    flex-direction: column;
 }
+.content_up_100_down_200{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    height: 100%;
+}
+

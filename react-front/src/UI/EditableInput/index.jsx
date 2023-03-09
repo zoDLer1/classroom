@@ -1,4 +1,4 @@
-import Input from "UI/Input"
+import Input from "UI/Inputs/Input"
 import css from './css/editableInput.module.css'
 
 export default ({ isEditable=true, ...props}) =>  {

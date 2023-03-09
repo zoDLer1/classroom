@@ -20,23 +20,6 @@ export default ({list=[], label, labelEmptyList='List is empty', Elem, ...props 
 
 
     return (
-        <div className={css.block}>
-            <div  className={css.body}>
-                <div onClick={toggle} className={css.header}>
-                    <div className={css.label}>
-                        <i className={`${props.icon} ${css.icon}`}></i>
-                        <h3>{label}</h3>
-                    </div>
-                    
-                    <i className={`fa-solid ${icons[hidden]}`}></i>
-                </div>
-                {!hidden && <div className={css.list}>
-                    {list.length 
-                    ? list.map(item => <Elem data={item}></Elem>)
-                    : <p className={css.empty}>{labelEmptyList}</p>}
-                </div>}
-                
-            </div>
-        </div>
+        
     )
 }

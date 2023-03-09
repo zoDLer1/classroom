@@ -1,4 +1,4 @@
-import Input from 'UI/Input'
+import Input from 'UI/Inputs/Input'
 
 export default (props) =>  {
     return (

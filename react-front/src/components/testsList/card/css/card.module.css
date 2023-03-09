@@ -63,11 +63,10 @@
 }
 .icon{
     position: absolute;
-    right: 42px;
+    right: 30px;
     bottom: 235px;
-    
     color: #fff;
-    font-size: 80px;
+    font-size: 70px;
     transform: scale(-1,1);
 }
 .events{

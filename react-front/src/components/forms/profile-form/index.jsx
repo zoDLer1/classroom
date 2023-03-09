@@ -1,6 +1,6 @@
 import css from './css/profile.module.css'
 import formCss from 'components/forms/css/form.module.css'
-import Input from 'UI/Input'
+import Input from 'UI/Inputs/Input'
 import EditableInput from 'UI/EditableInput'
 import NavLink from 'UI/NavLink'
 import { useState } from 'react'

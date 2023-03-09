@@ -1,0 +1,19 @@
+.block{
+
+}
+.header{
+    padding: 15px 10px 20px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid rgb(0, 0, 0, 20%);
+    margin-bottom: 10px;
+    /* justify-content: end; */
+}
+.tasks{
+    padding: 0 10px;
+}
+.add{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

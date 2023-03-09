@@ -1,12 +1,12 @@
-import Input from 'UI/Input'
+import Input from 'UI/Inputs/Input'
 import Link from 'UI/Link'
-import Submit from 'UI/Submit'
-import Checkbox from 'UI/Checkbox'
+import Submit from 'UI/Inputs/Submit'
+import Checkbox from 'UI/Inputs/Checkbox'
 import LinkSwither from 'UI/LinkSwitcher'
 import css from './registerForm.module.css'
 import formCss from '../forms.module.css'
 import PasswordInput from 'UI/PasswordInput'
-import Select from 'UI/Select'
+import Select from 'UI/Inputs/Select'
 import { useState } from 'react'
 
 

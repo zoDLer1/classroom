@@ -1,24 +1,22 @@
-import './css/main.css'
-import './css/navigation.css'
-import css from './css/header.module.css'
+import css from './header.module.css'
 import NavigationItem from './NavigationItem'
+import user from "store/user";
+import { observer } from 'mobx-react-lite';
+import HeaderAction from './headerAction';
 
-
-export default () => {
-    const isAuth = true // !!!
-    const user = {username: 'zoDLer'} // !!!
+const Header = observer(({ actions=[] }) => {
     return (
         <header className={css.block}>
             <div className={css.logo}></div>
             <div className={css.navigation}>
-                <NavigationItem to='/' text ='About Us'/>
-                <NavigationItem to='/' text ='Autors'/>
-                <NavigationItem to='/tests' text ='Tests'/>
-                <NavigationItem to='/classes/classes/1' text ='Classes'/>
-
+                {actions.map((item, index) => <HeaderAction key={index} {...item}/>)} 
                 {
-                    isAuth 
-                    ? <NavigationItem to='/accounts/profile' text = {user.username} icon='fa-solid fa-user'/> // !!!
+                    user.isAuth && user.data
+                    ? 
+                    <div className={css.user}>
+                        {user.data.avatar && <img className={css.avatar} src={user.data.avatar} alt="" />}
+                        <NavigationItem to='/accounts/profile' text = {`${user.data.first_name} ${user.data.last_name}`} />
+                    </div>
                     : <NavigationItem to='/accounts/login' text = 'Sign in' icon='fa-solid fa-arrow-right-to-bracket'/>
                 }
 
@@ -26,4 +24,5 @@ export default () => {
             </div>
         </header>
     )
-}
+})
+export default Header

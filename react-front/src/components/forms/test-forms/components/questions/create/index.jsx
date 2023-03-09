@@ -1,14 +1,17 @@
 import questionCss from 'components/forms/test-forms/components/questions/css/question.module.css'
-import Input from 'UI/Input'
-import Select from 'UI/Select'
+import Input from 'UI/Inputs/Input'
+import Select from 'UI/Inputs/Select'
 import TextAnswer from 'components/forms/test-forms/components/answers/text-answer/create'
 import FewFromListAnswer from 'components/forms/test-forms/components/answers/few-from-list-answer/create'
 import OneFromListAnswer from 'components/forms/test-forms/components/answers/one-from-list-answer/create'
-import Switch from 'UI/Switch'
+import Switch from 'UI/Inputs/Switch'
 import Image from 'components/forms/test-forms/components/image/create'
+import QuestionMenu from '../../question-menu'
+import { useState } from 'react'
 
+const CreateQuestion = ({ set, remove, create, copy, index, data }) => {
 
-export default (props) => {
+    const [useTime, setUseTime] = useState(false)
 
     const types = [
         { name: 'Text', id: 1 },
@@ -16,10 +19,8 @@ export default (props) => {
         { name: "Few from list", id: 3 }
     ]
 
-
-
     const addImg = (evt) => {
-        props.set(props.numb, { ...props.data, photos: [...props.data.photos , ...Array.from(evt.target.files).map(item => {
+        set({ ...data, photos: [...data.photos , ...Array.from(evt.target.files).map(item => {
                 return {
                     url: URL.createObjectURL(item),
                     info: {
@@ -32,115 +33,95 @@ export default (props) => {
         ]})
     }
     const removeImg = (itm) => {
-        props.set(props.numb, { ...props.data, photos: props.data.photos.filter((item) => item !== itm)})
+        set({ ...data, photos: data.photos.filter((item) => item !== itm)})
     }
 
-    const computeTime = (time, offset) => {
-        let maxTime = props.timeInfo.total - props.timeInfo.has + offset
+    const setTime = (time) =>{
+        set({ ...data, time: time })
+    }
     
-        if (props.timeInfo.total){
-            if (time >= maxTime){
-                time = maxTime
-            }
-        }
-        return time
-    }
-
-
-    const setTime = (value) =>{
-        let time = Number(value)
-        props.set(props.numb, { ...props.data, time:  computeTime(time, props.data.time)})
-    }
-
     const setRequired = (value) => {
-        props.set(props.numb, { ...props.data, required: value })
+        set({ ...data, required: value })
     }
     const setQuestionType = (type) => {
-        props.set(props.numb, { ...props.data, answer_type: type, answer: elems[type.id].DefaultValue })
-      
-
+        console.log(elems[type.id])
+        set({ ...data, type: type.id, answers: elems[type.id].DefaultValue })
     }
     const setAnswer = (value) => {
-        props.set(props.numb, { ...props.data, answer: value })
+        set({ ...data, answers: value })
     }
+    // console.log(data.answers)
     const elems = {
-        1: { elem: <TextAnswer numb={props.numb} value={props.data.answer} set={setAnswer} />, DefaultValue: '' },
+        1: { elem: <TextAnswer questionIndex={index} value={data.answers} set={setAnswer} />, DefaultValue: [{value: '', isCorrect: true}] },
         2: {
-            elem: <OneFromListAnswer numb={props.numb} value={props.data.answer} set={setAnswer} />, DefaultValue: [
-                { value: '', correct: false },
-                { value: '', correct: true },
-                { value: '', correct: false }
+            elem: <OneFromListAnswer questionIndex={index} value={data.answers} set={setAnswer} />, DefaultValue: [
+                { name: '', isCorrect: false },
+                { name: '', isCorrect: true },
+                { name: '', isCorrect: false }
             ]
         },
         3: {
-            elem: <FewFromListAnswer numb={props.numb} value={props.data.answer} set={setAnswer} />, DefaultValue: [
-                { value: '', correct: true },
-                { value: '', correct: false },
-                { value: '', correct: false }
+            elem: <FewFromListAnswer questionIndex={index} value={data.answers} set={setAnswer} />, DefaultValue: [
+                { name: '', isCorrect: true },
+                { name: '', isCorrect: false },
+                { name: '', isCorrect: false }
             ]
         }
     }
 
     let cols = 1
-    if (props.data.photos.length > 1){
+    if (data.photos.length > 1){
         cols = 2
     }
-    if (props.data.photos.length > 4){
+    if (data.photos.length > 4){
         cols = 3
     }
 
     return (
-        <div className={questionCss.block}>     
+        
+        <div className={questionCss.block}>   
+            
             <div className={questionCss.header}>
-                <Input value={props.data.name} name={`question_${props.numb}_name`} onChange={(evt) => props.set(props.numb, { ...props.data, name: evt.target.value })} placeholder="Question name" icon='fa-solid fa-pen' />
-                <Select value={props.data.answer_type.name} select={setQuestionType} options={types} name={`question_${props.numb}_type`} placeholder="Answer type" icon='fa-solid fa-list-ol' />
+                <Input value={data.name} name={`question_${index}_name`} onChange={(evt) => set({ ...data, name: evt.target.value })} placeholder="Question name" icon='fa-solid fa-pen' />
             </div>
 
-            {props.data.photos.length 
+            {data.photos.length 
                 ? <div className={questionCss.photos} style={{gridTemplateColumns: `repeat(${cols}, 1fr)`}}>
-                    {props.data.photos.map((item) => <Image onClose={removeImg} data={item} alt="..." />)}
+                    {data.photos.map((item) => <Image onClose={removeImg} data={item} alt="..." />)}
                 </div>: ''}
 
             <div className={questionCss.body}>
                 <div className={questionCss.answer}>
-                    {elems[props.data.answer_type.id].elem}
+                    {elems[data.type].elem}
+                    <div className={questionCss.answer_options}>
+                        <Select value={types[data.type-1].name} select={setQuestionType} options={types} name={`question_${index}_type`} placeholder="Answer type" icon='fa-solid fa-list-ol' />
+                        {useTime &&
+                        <div className={questionCss.time}>
+                            <Input reg={/^[0-9]+$/i} value={data.time} onChange={(evt) => setTime(evt.target.value)} name={`question_${index}_time`} placeholder="Time" icon='fa-regular fa-clock' />
+                        </div>}
+                    </div>
+                    
                 </div>
                 
-                {props.testType.id === 2 && <div className={questionCss.time}>
-                    <Input value={props.data.time} onChange={(evt) => setTime(evt.target.value)} type="number" name={`question_${props.numb}_time`} placeholder="Time" icon='fa-regular fa-clock' />
-                </div>}
-
+                
 
             </div>
             <div className={questionCss.footer}>
                 <div className={questionCss.actions}>
-                    <i onClick={()=>props.delete(props.numb)} className={`${[questionCss.icon, questionCss.action, questionCss.delete].join(' ')} fa-solid fa-trash`}></i>
-                    <i onClick={()=>props.copy(props.numb, {...props.data, time: computeTime(props.data.time, 0)})} className={`${[questionCss.icon, questionCss.action, questionCss.copy].join(' ')} fa-regular fa-copy`}></i>
+                    <i onClick={()=>remove()} className={`${[questionCss.icon, questionCss.action, questionCss.delete].join(' ')} fa-solid fa-trash`}></i>
+                    <i onClick={()=>copy(data)} className={`${[questionCss.icon, questionCss.action, questionCss.copy].join(' ')} fa-regular fa-copy`}></i>
                 </div>
                 <div className={questionCss.seporator}></div>
-                <Switch checked={props.data.required} onChange={(evt) => setRequired(evt.target.checked)} name={`question_${props.numb}_required`} text='Required' />
+                <Switch checked={data.required} onChange={(evt) => setRequired(evt.target.checked)} name={`question_${index}_required`} text='Required' />
                 <i className={`${questionCss.icon} fa-solid fa-ellipsis-vertical`}></i>
             </div>
-
-            <div className={questionCss.menu}>
-                <div className={questionCss.menu_body}>
-                    <div>
-                        <i onClick={() => props.create(props.numb, props.data)} className={`${questionCss.item} ${questionCss.fs24} fa-solid fa-circle-plus`}></i>
-                    </div>
-                    <div>
-                        <input multiple onChange={addImg} type="file" id={`question_${props.numb}_img-upload`} accept=".png, .jpg, .jpeg" hidden />
-                        <label htmlFor={`question_${props.numb}_img-upload`}>
-                            <i className={`${questionCss.item} ${questionCss.fs24} fa-solid fa-image`}></i>
-                        </label>
-                    </div>
-                    <div>
-                        <i className={`${questionCss.item} ${questionCss.fs28} fa-solid fa-file-audio`}></i>
-                    </div>
-                    <div>
-                        <i className={`${questionCss.item} ${questionCss.fs28} fa-solid fa-file-video`}></i>
-                    </div>
-                </div>
-            </div>
+            <QuestionMenu id={index} className={questionCss.menu} items={[
+                {icon: 'fa-solid fa-circle-plus', action: () => create()},
+                {icon: 'fa-solid fa-clock', action: () =>{ useTime ? setUseTime(false) : setUseTime(true); setTime('')} , isChecked: useTime},
+                {icon: 'fa-solid fa-image', useInput:{multiple: true, onChange: addImg, type: "file", accept:".png, .jpg, .jpeg"}},
+                {icon: 'fa-solid fa-file-audio'}
+            ]}/>
         </div>
     )
 }
+export default CreateQuestion
