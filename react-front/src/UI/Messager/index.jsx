@@ -1,11 +1,12 @@
 import css from './css/messager.module.css'
 
 
-export default (props) =>  {
+const Messager = ({to, children}) =>  {
 
     return (
-        <a href={props.to}>
-            <i className={`${css.icon} ${props.icon}`}></i>
+        <a className={css.icon} href={to}>
+            {children}
         </a>
     )
 }
+export default Messager

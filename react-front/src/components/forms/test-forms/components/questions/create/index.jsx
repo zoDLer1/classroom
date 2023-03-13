@@ -8,6 +8,10 @@ import Switch from 'UI/Inputs/Switch'
 import Image from 'components/forms/test-forms/components/image/create'
 import QuestionMenu from '../../question-menu'
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
+
+
 
 const CreateQuestion = ({ set, remove, create, copy, index, data }) => {
 
@@ -37,7 +41,7 @@ const CreateQuestion = ({ set, remove, create, copy, index, data }) => {
     }
 
     const setTime = (time) =>{
-        set({ ...data, time: time })
+        set({ ...data, time: Number(time) })
     }
     
     const setRequired = (value) => {
@@ -82,7 +86,7 @@ const CreateQuestion = ({ set, remove, create, copy, index, data }) => {
         <div className={questionCss.block}>   
             
             <div className={questionCss.header}>
-                <Input value={data.name} name={`question_${index}_name`} onChange={(evt) => set({ ...data, name: evt.target.value })} placeholder="Question name" icon='fa-solid fa-pen' />
+                <Input value={data.name} name={`question_${index}_name`} onChange={(evt) => set({ ...data, name: evt.target.value })} placeholder="Question name" icon={<FontAwesomeIcon icon={solid('pen')} size='sm'/>} />
             </div>
 
             {data.photos.length 
@@ -94,10 +98,10 @@ const CreateQuestion = ({ set, remove, create, copy, index, data }) => {
                 <div className={questionCss.answer}>
                     {elems[data.type].elem}
                     <div className={questionCss.answer_options}>
-                        <Select value={types[data.type-1].name} select={setQuestionType} options={types} name={`question_${index}_type`} placeholder="Answer type" icon='fa-solid fa-list-ol' />
+                        <Select value={types[data.type-1].name} select={setQuestionType} options={types} name={`question_${index}_type`} placeholder="Answer type"  icon={<FontAwesomeIcon icon={solid('list-ol')} size='sm'/>}  />
                         {useTime &&
                         <div className={questionCss.time}>
-                            <Input reg={/^[0-9]+$/i} value={data.time} onChange={(evt) => setTime(evt.target.value)} name={`question_${index}_time`} placeholder="Time" icon='fa-regular fa-clock' />
+                            <Input reg={/^[0-9]{0,2}$/i} value={data.time} onChange={(evt) => setTime(evt.target.value)} name={`question_${index}_time`} placeholder="Time" icon={<FontAwesomeIcon icon={solid('clock')} size='sm'/>} />
                         </div>}
                     </div>
                     

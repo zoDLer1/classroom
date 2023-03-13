@@ -21,18 +21,20 @@ export default (props) =>  {
 
     const onNext = (evt) =>{
         evt.preventDefault()
-        props.next()
         setAnswerTime(time)
+        props.next()
+        
         reset()
         
         // console.log(time)
     }
 
+   
+        const { time, reset } = useTimer(props.data.time, timeIsUp, props.data.time)
 
-    const { time, reset } = useTimer(props.data.time, timeIsUp)
     
     const setAnswer = (value) => {
-        props.set(props.data.id, { ...props.data, answer: value })
+        props.set(props.data.id, { ...props.data, answers: value })
     }
 
     const setAnswerTime = (value) => {
@@ -41,13 +43,13 @@ export default (props) =>  {
 
     const elems = {
         1: { 
-            elem: <TextAnswer questionId={props.data.id} set={setAnswer} value={props.data.answer} />
+            elem: <TextAnswer questionId={props.data.id} set={setAnswer} value={props.data.answers} />
         },
         2: {
-            elem: <OneFromListAnswer questionId={props.data.id} set={setAnswer} value={props.data.answer} />
+            elem: <OneFromListAnswer questionId={props.data.id} set={setAnswer} value={props.data.answers} />
         },
         3: {
-            elem: <FewFromListAnswer questionId={props.data.id} set={setAnswer} value={props.data.answer} />
+            elem: <FewFromListAnswer questionId={props.data.id} set={setAnswer} value={props.data.answers} />
         }
     }
 
@@ -67,10 +69,11 @@ export default (props) =>  {
 
     return (
 
-        <div className={css.block}>
+        <div className={css.block} style={{overflow: 'hidden'}}>
+            { props.data.time? <>
             {`${Math.round(time/props.data.time *100)/100}% ${time+' - '+props.data.time}`}
             { props.data.time && <div style={{ width: `${Math.round(time/props.data.time *100)}%` }}   className={css.time_line}></div>}
-            
+            </> : ''}
             <div className={css.header}>
                 <h2 className={css.label}>{props.data.name}</h2>
             </div>
@@ -81,7 +84,7 @@ export default (props) =>  {
 
             <div className={css.body}>
                 <div className={css.answer}>
-                    {elems[props.data.answer_type.id].elem}
+                    {elems[props.data.type].elem}
                 </div>
             </div>
             <div className={css.footer}>
@@ -89,7 +92,7 @@ export default (props) =>  {
                 <Button text={'back'}  icon='fa-solid fa-arrow-left' style={ {backgroundColor:'rgb(240, 167, 32)'}}/>
                 
                 {props.total === props.current 
-                ? <Button text={'finish'} onClick={onNext}  icon='fa-solid fa-flag-checkered' style={ {backgroundColor:'var(--success-color)'}}/> 
+                ? <Button text={'finish'} onClick={(evt)=>{onNext(evt)}}  icon='fa-solid fa-flag-checkered' style={ {backgroundColor:'var(--success-color)'}}/> 
                 : <Button text={'next'} onClick={onNext} icon='fa-solid fa-arrow-right' />}
 
 

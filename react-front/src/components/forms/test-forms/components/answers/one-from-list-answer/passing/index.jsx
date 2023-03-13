@@ -5,10 +5,10 @@ import RadioButton from 'UI/RadioButton'
 export default (props) =>  {
     const check = (id) =>{
         let newList = [...props.value]
-        let indx = props.value.findIndex(item => item.correct)
+        let indx = props.value.findIndex(item => item.isCorrect)
         let index = props.value.findIndex(item => id === item.id)
-        newList[indx] = {...newList[indx], correct: false}
-        newList[index] = {...newList[index], correct: true}
+        newList[indx] = {...newList[indx], isCorrect: false}
+        newList[index] = {...newList[index], isCorrect: true}
         props.set(newList)
     }
 
@@ -16,8 +16,8 @@ export default (props) =>  {
         <div className={css.view}>
             {props.value.map((item) => 
                 <div className={css.item} key={item.id}>
-                    <RadioButton checked={item.correct} onChange={() => check(item.id)} text='' name={`question_${props.questionId}_answer_radio`} />
-                    <h3 className={css.label}>{item.value}</h3>
+                    <RadioButton onChange={() => check(item.id)} text='' name={`question_${props.questionId}_answer_radio`} />
+                    <h3 className={css.label}>{item.name}</h3>
                 </div>
             )}            
         </div>

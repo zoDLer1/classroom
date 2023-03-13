@@ -4,10 +4,6 @@ import Question from 'components/forms/test-forms/components/questions/create'
 
 const CreateQuestionList = ({questionsActions, questions }) =>  {
 
-
-    
-
-
     return (
         <div className={css.block}>
             

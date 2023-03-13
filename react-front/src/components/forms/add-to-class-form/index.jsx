@@ -7,6 +7,9 @@ import FormLoader from '../formLoader'
 import { useLoading } from 'hooks/useLoading'
 import ClassServise from 'services/ClassSevrice'
 import TestsServise from 'services/TestsService'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
+
 
 function AddToClassForm ({ current, close }){
     const [classes, setClasses] = useState([
@@ -38,7 +41,7 @@ function AddToClassForm ({ current, close }){
                     {class_ && <span className={css.class_}>{class_.name}</span> }
                 </h2>
                 <div className={[formCss.inputs, css.inputs].join(' ')}>
-                    <Select select={(obj)=>{setClass(obj)}} value={class_.name} options={classes} name="class" placeholder="Class name" icon='fa-solid fa-users'></Select>
+                    <Select select={(obj)=>{setClass(obj)}} value={class_.name} options={classes} name="class" placeholder="Class name" icon={<FontAwesomeIcon icon={solid('users')} size='sm'/>}></Select>
                 </div>
                 <div className={css.submit}>
                     <Submit onClick={submit} text='create'/>

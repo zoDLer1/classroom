@@ -22,13 +22,13 @@ export function useOpen(onAutoClose=()=>null){
 
 
     const open = () => {
-        console.log('open')
+        // console.log('open')
         setOpen(true)
         add({id, close: closing})
         
     }
     const close = () => {
-        console.log('close')
+        // console.log('close')
         setOpen(false)
         remove(id)
         

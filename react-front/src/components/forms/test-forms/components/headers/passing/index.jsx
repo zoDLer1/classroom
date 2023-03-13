@@ -1,7 +1,9 @@
 import css from '../form-header.module.css'
 import Button from 'UI/Inputs/Button'
 
+
 export default (props) =>  {
+
     return (
         <div className={[css.block, css.view].join(' ')}>
             <h2 className={css.label}>{props.name}</h2>

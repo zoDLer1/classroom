@@ -4,8 +4,17 @@ import DefaultApiInstanse from "api";
 
 class ClassServise {
 
-    static async get(id){
-        return await DefaultApiInstanse.get(`classes/${id}`)
+    static async get(id, onFulfilled, onRejected){
+        const response =  await DefaultApiInstanse.get(`classes/${id}`).then(
+            (response) => {
+                onFulfilled(response)
+            },
+            
+            (error) => {
+                onRejected(error)
+            }
+        )
+        return response
     }
 
     static async all(){

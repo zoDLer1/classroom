@@ -2,7 +2,9 @@ import css from './css/test-passing.module.css'
 import PageSection from 'components/pageSection'
 import TestPassingForm from 'components/forms/test-forms/test-passing-form'
 import { useState } from 'react'
-
+import TestsServise from 'services/TestsService'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 export default () =>  {
 
@@ -85,6 +87,30 @@ export default () =>  {
             }
         ]
     })
+
+    const { id } = useParams()
+    useEffect(()=>{
+        const fetchTask = async () =>{
+            const response = await TestsServise.get_task(id)
+            // console.log({...response.data.template, questions: response.data.template.questions.map(i=> ({...i, photos:[]}))})
+            setTest({...response.data.template, questions: response.data.template.questions.map((i)=> {
+                if (i.type === 1){
+                    i.answers[0].value = ''
+                    
+                }
+                // console.log(i.answers.length)
+                for (let a=0; a < i.answers.length; a++){
+                    i.answer_time=0
+                    // delete i.answers[a].isCorrect
+                    
+                }
+                return {...i, photos:[]}
+                
+        })})
+        }
+        fetchTask()
+    },[])
+
 
     return (
         <PageSection className={css.section}>

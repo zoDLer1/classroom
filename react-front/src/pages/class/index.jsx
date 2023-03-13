@@ -2,34 +2,39 @@ import pagesCss from '../pages.module.css'
 import ClassForm from 'components/forms/class-form'
 import { useState } from 'react'
 import Header from 'components/header'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ClassServise from 'services/ClassSevrice'
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
-const ClassPage = (props) =>  {
+const ClassPage = ( ) =>  {
     
-    const location = useLocation()
+    const {id} = useParams()
     const navigate = useNavigate()
-
-    async function fetchClass() {
-        let response = []
-        try{
-            response = await ClassServise.get(location.pathname[location.pathname.length-1])
-            setClass(response.data)
-        }
-        catch{
-            navigate('/serverunavailable')
-        }
-    }
 
 
     useEffect(()=>{
+        async function fetchClass() {
+            await ClassServise.get(id,
+                (response)=>{
+                    if (response.status === 200){
+                        setClass(response.data)
+                    }
+                },
+                (error)=>{
+                    if (error.code === 'ERR_NETWORK'){
+                        navigate('/serverunavailable')
+                    }
+                }
+            
+            )
+        }
         fetchClass()
-    }, [])
+    }, [id, navigate])
 
 
     const [_class, setClass] = useState({
-        id: props.id,
+        id: 1,
         name: 'Class 1',
         color: '#F0A720',
         code: 'KDSK3D',
@@ -48,6 +53,7 @@ const ClassPage = (props) =>  {
 
     return (
         <>
+            
            <Header />
             <div className={pagesCss.content_up_100_down_200}>       
                 

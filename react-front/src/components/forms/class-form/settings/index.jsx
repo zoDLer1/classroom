@@ -1,13 +1,11 @@
 import css from './settings.module.css'
-import Select from 'UI/Inputs/Select'
 import Input from 'UI/Inputs/Input'
-import Checkbox from 'UI/Inputs/Checkbox'
-import TextArea from 'UI/Inputs/TextArea'
 import Action from 'UI/Inputs/action'
-// import Button from 'UI/Inputs/Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 
-export default (props) =>  {
+const Settings = (props) =>  {
 
     return (
         <div className={css.block}>
@@ -17,10 +15,10 @@ export default (props) =>  {
                         <p className={[css.text, css.title].join(' ')}>Сведения</p>
                     </div>
                     <div className={css.inputs}>
-                        <Input icon="fa-solid fa-pen" placeholder={'Название'}/>
-                        <Input icon="fa-solid fa-cube" placeholder={'Предмет'}/>
+                        <Input icon={<FontAwesomeIcon icon={solid('pen')} size="sm" />} placeholder={'Название'}/>
+                        <Input icon={<FontAwesomeIcon icon={solid('cube')} size="sm" />} placeholder={'Предмет'}/>
                         <div className={css.textarea}>
-                            <Input icon="fa-solid fa-pen" placeholder={'Описание'} />
+                            <Input icon={<FontAwesomeIcon icon={solid('pen')} size="sm" />} placeholder={'Описание'} />
                         </div>
                     </div> 
                 </div>
@@ -32,7 +30,7 @@ export default (props) =>  {
                         <div className={css.invite_link}>
                             <p className={css.label}>Ссылка для приграшения:</p>
                             <div className={css.input}>
-                                <Input icon="fa-solid fa-link" onChange={()=>""} value="https://google.com"/>
+                                <Input  icon={<FontAwesomeIcon icon={solid('link')} size="sm" />} onChange={()=>""} value="https://some_invite_link"/>
                                 <div className={css.actions}>
                                     <Action text={'Поменять'} icon="fa-solid fa-arrow-right-arrow-left"/>
                                     <Action text={'Копировать'} icon="fa-regular fa-copy"/>
@@ -74,3 +72,4 @@ export default (props) =>  {
         </div>
     )
 }
+export default Settings

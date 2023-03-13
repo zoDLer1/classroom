@@ -15,5 +15,11 @@ class TestsServise {
     static async add_to_class(_class, template){
         return await DefaultApiInstanse.post('tests/tasks', {_class, template})
     }
+    static async get_task(id){
+        return await DefaultApiInstanse.get(`tests/tasks/${id}`)
+    }
+    static async delete(id){
+        return await DefaultApiInstanse.delete(`tests/${id}`)
+    }
 }
 export default TestsServise

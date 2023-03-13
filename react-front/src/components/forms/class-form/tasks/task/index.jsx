@@ -1,12 +1,15 @@
 import css from './task.module.css'
 import { useOpen } from 'hooks/useOpen'
 import Action from 'UI/Inputs/action'
+import user from 'store/user'
+import Access from 'components/Access'
 
 
-function Task({name}) {
+function Task({id, name, taskId}) {
     const { condition, open } = useOpen(()=>'')
     
     return (
+        
         <div onClick={open} className={[css.block, css[`isOpen-${condition}`]].join(' ')}>
             <div className={css.header}>
                 <div className={css.heading}>
@@ -36,10 +39,15 @@ function Task({name}) {
                     </div>
                 </div>
                 <div className={css.footer}>
-                    {/* <Action icon="fa-solid fa-file-pen" text={'Приступить к выполнению'}/> */}
-                    <Action icon={"fa-solid fa-eye"} text="Просмотреть выполнненые" />
-                    <Action icon={"fa-solid fa-pen"} text='Изменить' />
-                    <Action icon={"fa-solid fa-trash"} styleAction='error' text='Удалить' />
+                    <Access current_permission={user.data.role} permission={1}>
+                        <Action icon="fa-solid fa-file-pen"  to={`/tests/${taskId}/passing`} text={'Приступить к выполнению'}/>
+                    </Access>
+                    <Access current_permission={user.data.role} permission={2}>
+                        <Action icon={"fa-solid fa-eye"} text="Просмотреть выполнненые" />
+                        <Action icon={"fa-solid fa-pen"} text='Изменить' to={`/tests/${id}/edit`}/>
+                        <Action icon={"fa-solid fa-trash"} styleAction='error' text='Удалить' />
+                    </Access>
+                    
                     
                 </div>
             </div>

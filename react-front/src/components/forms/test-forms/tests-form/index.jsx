@@ -34,7 +34,10 @@ function TestsForm() {
 
     
 
-    
+    const deleteTest = async (id) =>{
+        await TestsServise.delete(id)
+        setTests((tests)=>tests.filter(test=> test.id !== id))
+    }
 
     return (
         <>
@@ -53,7 +56,7 @@ function TestsForm() {
                 <div className={css.content}>
                     <FormLoader condition={isLoading}>
                         <div className={css.tests}>
-                            {tests.map(test=><TestTemplate addToClass={()=>{open(); hook.setCurrent(test)}} key={test.id}  {...test} />)}
+                            {tests.map(test=><TestTemplate remove={() => deleteTest(test.id)} addToClass={()=>{open(); hook.setCurrent(test)}} key={test.id}  {...test} />)}
                         </div>
                         {tests.length < 4 ? 
                             <div className={css.empty}>

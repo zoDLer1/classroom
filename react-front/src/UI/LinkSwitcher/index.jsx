@@ -1,4 +1,3 @@
-import NavLink from 'UI/NavLink'
 import css from './link-switcher.module.css'
 import DefaultLink from 'UI/defaultLink'
 

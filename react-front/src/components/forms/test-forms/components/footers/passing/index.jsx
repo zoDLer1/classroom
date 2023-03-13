@@ -1,11 +1,15 @@
 import css from '../css/footer.module.css'
 import Button from 'UI/Inputs/Button'
 import Link from 'UI/Link'
+import { useEffect } from 'react'
+
 
 export default (props) => {
 
 
-
+    useEffect(()=>{
+        console.log(props.data)
+    },[])
 
     return (
         <div className={css.passing}>

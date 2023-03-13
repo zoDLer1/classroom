@@ -14,7 +14,7 @@ const Header = observer(({ actions=[] }) => {
                     user.isAuth && user.data
                     ? 
                     <div className={css.user}>
-                        {user.data.avatar && <img className={css.avatar} src={user.data.avatar} alt="" />}
+                        {user.data.avatar && <img className={css.avatar} src={'https://avatars.mds.yandex.net/i?id=9950d0fcff49dfe85650bd0578579ee58f0d114d-5104820-images-thumbs&n=13'} alt="" />}
                         <NavigationItem to='/accounts/profile' text = {`${user.data.first_name} ${user.data.last_name}`} />
                     </div>
                     : <NavigationItem to='/accounts/login' text = 'Sign in' icon='fa-solid fa-arrow-right-to-bracket'/>

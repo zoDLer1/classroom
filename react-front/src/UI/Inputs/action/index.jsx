@@ -1,7 +1,7 @@
 import css from './action.module.css'
 import { Link } from 'react-router-dom'
 
-function Action ({text, icon, styleAction='default', to, disabled=false, onClick}) {
+function Action ({text, icon, styleAction='default', to, disabled=false, onClick }) {
 
 
     return (

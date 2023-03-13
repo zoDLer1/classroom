@@ -1,5 +1,6 @@
 import css from './submit.module.css'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 function Submit ({text, loading=false, ...props}) {
     return (
@@ -9,7 +10,7 @@ function Submit ({text, loading=false, ...props}) {
              
                 {!loading
                 ? text
-                : <i className={`${css.loader} fa-solid fa-spinner`}></i>
+                : <FontAwesomeIcon icon={solid('spinner')} spinReverse spinPulse size='lg' />
                 }
 
                 

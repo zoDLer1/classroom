@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 
-export const useTimer = (to, onDone) => {
+export const useTimer = (to, onDone, initialValue=false) => {
     const [time, setTime] = useState(0);
     const [timeout, _setTimeout] = useState();
-    const [isRunning, setRunning] = useState(true)
+    const [isRunning, setRunning] = useState(initialValue)
   
     const countDown = () => {
       setTime((prev) => prev + 0.5);

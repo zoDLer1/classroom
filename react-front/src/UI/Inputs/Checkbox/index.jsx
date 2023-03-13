@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 const CheckBox = ({text, children, name, color='default', type="checkbox", ...props}) => {
-    const [id] = useState(_uniqueId('prefix-'))
+    const [id] = useState(_uniqueId('checkbox-'))
     return (
         <div className={css.block}>
             

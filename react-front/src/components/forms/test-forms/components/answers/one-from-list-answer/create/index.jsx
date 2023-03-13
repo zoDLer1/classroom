@@ -3,6 +3,9 @@ import css from '../css/one-from-list-answer.module.css'
 import RadioButton from 'UI/RadioButton'
 import Input from 'UI/Inputs/Input'
 
+
+
+
 const CreateOneFromListAnswer = ({questionIndex, set, value}) =>  {
 
     const check = (index) =>{

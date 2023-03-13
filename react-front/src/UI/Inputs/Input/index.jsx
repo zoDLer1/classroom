@@ -2,6 +2,9 @@ import css from "./input.module.css";
 import _uniqueId from 'lodash/uniqueId';
 import { useState } from "react";
 
+
+
+
 function Input ({ads, icon, onClick, placeholder, placeholderOffset=0, reg, onChange=()=>null, ...props}){
 
     const ChangeValue = (evt) =>{
@@ -18,9 +21,9 @@ function Input ({ads, icon, onClick, placeholder, placeholderOffset=0, reg, onCh
         
         <div onClick={onClick} className={[css.block].join(' ')}>
             <div className={css.body}>
-                {icon && (
-                    <i className={`${css.icon} ${icon}`}></i>
-                )}
+                <div className={css.icon}>
+                    {icon}
+                </div>
                 
                 <input id={id} onChange={ChangeValue} {...props} required />
                 <label htmlFor={id}>

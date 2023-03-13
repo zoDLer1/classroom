@@ -11,6 +11,7 @@
 }
 .tasks{
     padding: 0 10px;
+    min-height: 20rem;
 }
 .add{
     display: flex;

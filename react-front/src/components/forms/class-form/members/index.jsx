@@ -4,7 +4,8 @@ import Action from 'UI/Inputs/action'
 import Popup from 'UI/Popup'
 import { usePopup } from 'hooks/usePopup'
 import InviteClassForm from 'components/forms/invite-class-form'
-
+import Access from 'components/Access'
+import user from 'store/user'
 
 function Members({ teacher, members, expectations }) {
     
@@ -45,11 +46,14 @@ function Members({ teacher, members, expectations }) {
                     {
                         !members.length
                         ? <div className={css.empty}>
-                            <p className={css.text}>Добавить участников</p>
-                            <Action text={"Добавить"} onClick={()=>hook.open()} icon={'fa-solid fa-user-plus'}/>
+                            <Access current_permission={user.data.role} permission={2}>
+                                <p className={css.text}>Добавить участников</p>
+                                <Action text={"Добавить"} onClick={()=>hook.open()} icon={'fa-solid fa-user-plus'}/>
+                            </Access>
+                            
                         </div>
                         :<div className={css.members}>
-                            {members.map(member=> <Member key={member.id}s {...member}/>)}
+                            {members.map(member=> <Member key={member.id} {...member}/>)}
                         </div>
                     }
                     
@@ -59,10 +63,12 @@ function Members({ teacher, members, expectations }) {
            
             
        </div>
-       <Popup {...hook}>
-            <InviteClassForm />
-
-       </Popup>
+       <Access current_permission={user.data.role} permission={2}>
+        <Popup {...hook}>
+                <InviteClassForm />
+        </Popup>
+       </Access>
+       
         
         </>
        

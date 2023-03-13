@@ -1,19 +1,18 @@
 import css from './class-from.module.css'
 import Settings from './settings'
-import { useMenu } from 'hooks/useMenu'
 import { useAlert } from 'hooks/useAlert'
-import Menu from 'UI/Menu'
 import Alert from 'UI/alert'
 import Members from './members'
 import Swither from 'UI/Switcher'
 import { useState } from 'react'
 import Tasks from './tasks'
 import { useParams } from 'react-router-dom'
-
+import user from 'store/user'
+import Access from 'components/Access'
 
 const ClassForm = (props) => {
 
-    const [menu, menuSwitch] = useMenu()
+
     const alertHook = useAlert()
 
     const { id } = useParams()
@@ -29,12 +28,7 @@ const ClassForm = (props) => {
 
     }
 
-    const items = [
-        {text: 'Share link', icon:'fa-solid fa-share', action: () => ''},
-        {text: 'Copy code', icon: 'fa-solid fa-copy', action: copyCode},
-        {text: 'Change code', icon: 'fa-solid fa-arrow-right-arrow-left', action: () => ''}
-    ]
-    
+
  
 
 
@@ -82,11 +76,15 @@ const ClassForm = (props) => {
 
     const[section, setSection] = useState(0)
 
+
+    const settings = Access({current_permission: user.data.role, permission: 2, children: {elem: <Settings />, text: 'Настройки'}})
+
     const sections = [
         {elem: <Tasks class_id={id} />, text: 'Задания'},
         {elem: <Members {...members}/>, text: 'Участники'},
-        {elem: <Settings />, text: 'Настройки'}
     ]
+    if (settings)
+        sections.push(settings)
 
     return (
         <>
@@ -102,8 +100,7 @@ const ClassForm = (props) => {
             
             
 
-            
-            <Menu size={2} menu={menu} items={items}/>
+ 
             <Alert hook={alertHook}/>
         </>
         

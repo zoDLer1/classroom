@@ -9,7 +9,7 @@ const CreateTest = () =>  {
     const navigate = useNavigate()
     const Submit = async (formData) =>{
         
-        
+        console.log(formData)
         await TestsServise.create({...formData.header, type: formData.header.type.id, questions: formData.questions})
         navigate('/tests')
 

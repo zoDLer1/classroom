@@ -5,6 +5,8 @@ import FormLoader from 'components/forms/formLoader'
 import ClassServise from 'services/ClassSevrice'
 import { useLoading } from 'hooks/useLoading'
 import { useState } from 'react'
+import Access from 'components/Access'
+import user from 'store/user'
 
 function Tasks( { class_id } ) {
 
@@ -13,6 +15,7 @@ function Tasks( { class_id } ) {
         async () =>{
             const response = await ClassServise.tasks(class_id)
             setTests(response.data.tests)
+            console.log(response.data.tests)
         },
         true
     )
@@ -21,11 +24,15 @@ function Tasks( { class_id } ) {
         <div className={css.block}>
             <FormLoader condition={isLoading}>
                 <div className={css.header}>
-                    <Action text={'Добавить'} to={'/tests'} icon='fa-solid fa-plus'/>
-                    <Action icon="fa-solid fa-file-circle-check" text={'Мои пройденные задания'}/>
+                    <Access current_permission={user.data.role} permission={2}>
+                        <Action text={'Добавить'} to={'/tests'} icon='fa-solid fa-plus'/>
+                    </Access>
+                    <Access current_permission={user.data.role} permission={1}>
+                        <Action icon="fa-solid fa-file-circle-check" text={'Мои пройденные задания'}/>
+                    </Access>
                 </div>
                 <div className={css.tasks}>
-                    {tests.map(test => <Task key={`task-${test.id}`} {...test.template}/>)}
+                    {tests.map(test => <Task taskId={test.id} key={`task-${test.id}`} {...test.template}/>)}
                 </div>
                 <div className={css.add}>
                     <Action text={'Ещё'} />

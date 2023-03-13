@@ -2,7 +2,7 @@ import Input  from 'UI/Inputs/Input'
 import IconCheckbox from 'UI/IconCheckbox'
 import { useState } from 'react'
 
-export default ({icon, ...props}) =>  {
+const PasswordInput = ({icon, ...props}) =>  {
 
     const [type, setType] = useState('password')
 
@@ -16,3 +16,4 @@ export default ({icon, ...props}) =>  {
     )
 }
 
+export default PasswordInput

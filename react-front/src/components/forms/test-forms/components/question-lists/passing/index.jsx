@@ -14,7 +14,7 @@ export default (props) =>  {
 
     return (
         <div className={css.block}>
-            <PassingQuestion total={props.questions.length} current={props.question+1} next={props.next} set={setQuestion} data={props.questions[props.question]} />
+            <PassingQuestion  onSubmit={props.onSubmit} total={props.questions.length} current={props.question+1} next={props.next} set={setQuestion} data={props.questions[props.question]} />
         </div>
     )
 }

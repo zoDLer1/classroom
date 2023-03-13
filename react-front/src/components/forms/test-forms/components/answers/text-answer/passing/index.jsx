@@ -1,7 +1,13 @@
 import Input from 'UI/Inputs/Input'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
+
 
 export default (props) =>  {
-    return (
-        <Input value={props.value} onChange={(evt) => props.set(evt.target.value)} name={`question_${props.questionId}_answer`} placeholder="Text answer" icon='fa-solid fa-pen'/>
+    return (<>
+        {/* {JSON.stringify(props)} */}
+        <Input value={props.value[0].value} onChange={(evt) => props.set([{...props.value[0], value: evt.target.value}])} name={`question_${props.questionId}_answer`} placeholder="Text answer" icon={<FontAwesomeIcon icon={solid('pen')} size='sm'/>}/>
+        </>
+        
     )
 }

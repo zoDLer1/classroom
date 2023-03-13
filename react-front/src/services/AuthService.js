@@ -2,24 +2,26 @@ import DefaultApiInstanse, { AuthApiInstanse, BAESDOMAIN } from "api";
 import user from "store/user";
 import tokens from "store/tokens";
 
-
  class AuthService {
 
-    static async auth(email, password){
-        try{
-            await AuthApiInstanse.post('/users/login/', {email, password}).then(
-                (response) => {
-                    tokens.access_token(response.data.access)
-                    tokens.refresh_token(response.data.refresh)
-                },
-                (error) => console.log(error)
-            )
-            await this.login()
+    static async auth(onFulfilled, onRejected, {email, password}){
+        
+        const response =  await AuthApiInstanse.post('/users/login/', {email, password}).then(
+            async (response) => {
+                tokens.access_token(response.data.access)
+                tokens.refresh_token(response.data.refresh)
+                await this.login()
+                onFulfilled(response)
+                
+            },
+            async (error) =>{
+                onRejected(error)
+            }
+            
+        )
+        return response
 
-        }
-        catch (e){
-         
-        }
+        
     }
     static async login(){
         await DefaultApiInstanse.get('/users/account/').then(

@@ -27,16 +27,22 @@ DefaultApiInstanse.interceptors.response.use(
         return config
     },
     async (error) => {
-        
-        if(error.response.status === 401){
-            try{
+        try{
+            if(error.response.status === 401){
+            
                 await AuthService.refresh_token()
                 return DefaultApiInstanse.request(error.config)
             }
-            catch{
-                console.log('na')
-            }
+            
         }
+        catch{
+            // console.log(error)
+        }
+        
+        return Promise.reject(error)
+        
+    
+        
         
     }
 )
