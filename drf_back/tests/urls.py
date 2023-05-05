@@ -1,8 +1,11 @@
-from .views import TemplatesAPIView, TemplateAPIView, TestsAPIView
+from .views import TemplatesAPIView, TemplateAPIView, TestsAPIView, TestAPIView, PassTestAPIView, PassedTestAPIView
 from django.urls import path
 
 urlpatterns = [
-    path('', TemplatesAPIView.as_view()),
-    path('<int:pk>', TemplateAPIView.as_view()),
-    path('tasks', TestsAPIView.as_view())
+    path('templates', TemplatesAPIView.as_view()),
+    path('templates/<int:pk>', TemplateAPIView.as_view()),
+    path('', TestsAPIView.as_view()),
+    path('<int:pk>', TestAPIView.as_view()),
+    path('pass/<int:pk>', PassTestAPIView.as_view()),
+    path('passed/<int:pk>', PassedTestAPIView.as_view())
 ]

@@ -4,7 +4,11 @@ from .models import *
 # Register your models here.
 @admin.register(Class)
 class ClassAdmin(admin.ModelAdmin):
-    list_display = ('id', 'creator', 'type', 'color')
+    list_display = ('id', 'creator', 'type', 'color', 'code')
+
+@admin.register(ClassSettings)
+class ClassSettingsAdmin(admin.ModelAdmin):
+    list_display = ('_class', 'allow_view_members_list')
 
 @admin.register(ClassType)
 class ClassTypeAdmin(admin.ModelAdmin):

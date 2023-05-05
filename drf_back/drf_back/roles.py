@@ -1,0 +1,2 @@
+TEACHER = 2
+STUDENT = 1
