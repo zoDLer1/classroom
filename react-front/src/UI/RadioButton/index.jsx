@@ -1,11 +1,9 @@
-import Checkbox from "UI/Inputs/Checkbox"
-
-
+import FormCheckBox from "components/forms/components/inputs/FormCheckBox"
 
 export default ({children, ...props}) =>  {
     return (
-        <Checkbox {...props} type="radio">
+        <FormCheckBox {...props} type="radio">
             {children}
-        </Checkbox>
+        </FormCheckBox>
     )
 }

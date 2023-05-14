@@ -1,5 +1,5 @@
 import css from './css/messager.module.css'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Messager = ({to, children}) =>  {
 

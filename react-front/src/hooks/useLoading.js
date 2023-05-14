@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useLoading(func = async ()=>null, defaultLoad=false) {
+export function useLoading(func = async ()=>null, defaultLoad=false, payload) {
     const [isLoading, setLoading] = useState(defaultLoad)
 
     const startLoading = () => setLoading(true)
@@ -9,7 +9,7 @@ export function useLoading(func = async ()=>null, defaultLoad=false) {
     useEffect(()=>{
         const fetchLoading = async () =>{
             startLoading()
-            await func()
+            await func(payload)
             stopLoading()
        }
        fetchLoading()

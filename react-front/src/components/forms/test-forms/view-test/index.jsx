@@ -3,7 +3,7 @@ import ViewHeader from '../components/headers/view'
 import ViewQuestionList from '../components/question-lists/view'
 import ViewFooter from '../components/footers/view'
 import Popup from 'UI/Popup'
-import AddToClassForm from 'components/forms/add-to-class-form'
+import AddToClassForm from 'components/forms/components/sections/components/AddToClassForm'
 import { useState } from 'react'
 
 

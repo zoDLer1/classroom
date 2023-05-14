@@ -1,14 +1,12 @@
 import { useState } from "react"
-import { usePopup } from "./usePopup"
+import { useCurrent } from "./useCurrent"
 
-
-export function useMenu(itms, onAutoClose=()=> null) {
-    const {condition, current, setCurrent, ...popupHook} = usePopup(onAutoClose)
-    const [items, changeItems] = useState(itms) 
+export function useMenu(onAutoClose=()=> null) {
+    const [currentState, currentFunctions] = useCurrent(onAutoClose)
+    const [items, setItems] = useState([]) 
     const [coords, set] = useState([0, 0])
     const setCoords = (x, y) => set([x,y])
-    const setDefaultItems = () => changeItems(itms)
-    
-    return [{condition, items, coords, current}, {setCoords, setDefaultItems, changeItems, setCurrent, ...popupHook}]
+ 
+    return [{...currentState, items, coords}, {...currentFunctions, setCoords, setItems}]
 }
 

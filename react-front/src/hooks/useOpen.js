@@ -14,7 +14,6 @@ export function useOpen(onAutoClose=()=>null){
     const [id] = useState(_uniqueId())
 
     const closing = () =>{
-        
         onAutoClose()
         close()
     }
@@ -22,23 +21,20 @@ export function useOpen(onAutoClose=()=>null){
 
 
     const open = () => {
-        // console.log('open')
         setOpen(true)
         add({id, close: closing})
         
     }
     const close = () => {
-        // console.log('close')
         setOpen(false)
-        remove(id)
-        
+        remove(id)        
     }
 
     const toggle = () =>{
         isOpen ? close() : open()
     }
 
-    return {condition:isOpen, open, close, toggle} 
+    return [ {condition:isOpen}, {open, close, toggle} ] 
 }   
 
 

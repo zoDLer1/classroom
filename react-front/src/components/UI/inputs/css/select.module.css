@@ -1,0 +1,18 @@
+.options{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    width: 100%;
+    gap: 5px;
+    padding: 15px 0;
+    border-radius: 10px;
+    max-height: 225px;
+    overflow-x: auto;
+}
+
+.block{
+    position: relative;  
+}

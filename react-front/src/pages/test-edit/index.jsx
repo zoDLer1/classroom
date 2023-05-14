@@ -1,6 +1,6 @@
 import css from './test-edit.module.css'
 import useTestCreation from 'hooks/useTestCreation'
-import TestCreationForm from 'components/forms/test-forms/test-creation-form'
+import TestCreationForm from 'components/forms/TemplateCreationForm'
 import TestsServise from 'services/TestsService'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'

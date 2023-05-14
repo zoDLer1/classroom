@@ -1,6 +1,5 @@
 import css from '../css/few-from-list-answer.module.css'
-import Checkbox from 'UI/Inputs/Checkbox'
-
+import CheckBox from 'components/UI/inputs/CheckBox'
 
 export default (props) =>  {
 
@@ -9,7 +8,7 @@ export default (props) =>  {
         <div className={css.view}>
             {props.value.map((item, index) => 
                 <div className={css.item} key={index}>
-                    <Checkbox text='' name={`question_${props.numb}_answer_${index+1}_checkbox`} checked={item.correct} readOnly />
+                    <CheckBox text='' name={`question_${props.numb}_answer_${index+1}_checkbox`} checked={item.correct} readOnly />
                     <h3 className={css.label}>{item.value}</h3>
                     
                 </div>

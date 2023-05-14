@@ -9,10 +9,7 @@ export default (props) =>  {
 
 
 
-    const submit = () =>{
-        console.log(props)
-    }
-
+  
     const [passing, setPassing] = useState({
         stage: 0,
         question: 0,
@@ -44,8 +41,8 @@ export default (props) =>  {
 
     const stages = {
         0: <FormHeader name={props.data.name} start={next} description={props.data.description} />,
-        1: <QuestionList onSubmit={submit} next={next} set={setQuestions} question={passing.question} questions={props.data.questions} />,
-        2: <FormFooter data={props.data} />
+        1: <QuestionList next={next} set={setQuestions} question={passing.question} questions={props.data.questions} />,
+        2: <FormFooter id={props.id} data={props.data} />
     }
 
     return (

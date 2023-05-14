@@ -1,33 +1,39 @@
-@keyframes input_border{
-    to{
+@keyframes input_border {
+    to {
         width: 100%;
     }
 }
 
-@keyframes input_icon{
-    
-    to{
+@keyframes input_icon {
+
+    to {
         color: var(--primary-color);
     }
 }
-@keyframes input_error{
-    
-    to{
+
+@keyframes input_error {
+
+    to {
         color: var(--error-color);
     }
 }
 
-.block{
+.block {
     padding: 0 8px;
     border-bottom: 2px solid var(--alt-color);
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
+    min-width: 295px;
 }
 
-.block::after{
+.input_wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.block::after {
     content: '';
     left: 50%;
     bottom: -3px;
@@ -37,30 +43,30 @@
     position: absolute;
     background-color: var(--primary-color);
 }
-.warning::after{
-    background-color: var(--error-color);
-}
 
-.body{
+.body {
     padding: 10px 2px;
     font-size: 19px;
     display: flex;
     align-items: center;
     gap: 10px;
+
     width: 100%;
 }
-.placeholder{
+
+.placeholder {
     position: absolute;
-    top: 10px;
-    left: 35px;
+    top: -1px;
+    left: 0;
     color: rgba(0, 0, 0, .3);
     font-weight: 500;
     transition: top 0.2s linear;
     transition: font-size 0.2s linear;
     cursor: text;
+    user-select: none;
 }
-.body input{
- 
+
+.body input {
     appearance: none;
     outline: none;
     border: none;
@@ -73,53 +79,39 @@
     transition: background-color 600000s 0s, color 600000s 0s;
 }
 
-
-.body input:disabled{
+.body input:disabled {
     background-color: transparent;
     color: #000;
 }
 
-.body input::placeholder{
-    color: var(--alt-color);
-    font-size: 19px;
-    text-justify: center;
-}
-
-.icon{
+.icon {
     color: var(--alt-color);
 }
 
-.form__input > .icon{
+.form__input>.icon {
     cursor: pointer;
 }
-.body:has(input:focus)  .placeholder{
+
+.body:has(input:focus) .placeholder {
     font-size: 12px;
     color: var(--primary-color);
-    top: -8px;
+    top: -17px;
 }
-.body:has(input:valid) .placeholder{
+
+.body:has(input:valid) .placeholder {
     font-size: 12px;
-    top: -8px;
+    top: -17px;
 }
-.body .icon:has(+ input:focus),
-.body .icon:has(+ select:focus){
+
+.body:has(input:focus) .icon{
     animation: input_icon 0.3s linear forwards;
 }
 
-.warning .body .icon:has(+ input:focus),
-.warning .body .icon:has(+ select:focus){
-    animation: input_error 0.3s linear forwards;
-}
-
-
 .block:has(input:focus)::after,
-.block:has(select:focus)::after{
+.block:has(select:focus)::after {
     animation: input_border 0.3s ease-in-out forwards;
 }
-.ads{
-    width: 50px;
+.notices{
     display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    
+    gap: 5px;
 }

@@ -1,23 +1,12 @@
-import { useOpen } from "./useOpen"
 import { useState } from "react"
+import { useCurrent } from "./useCurrent"
 
 export function usePopup(onAutoClose = () => null) {
 
-    const [current, setCurrent] = useState()
-
-    const onPopupAutoClose = () =>{
-        setCurrent((current)=> {
-            onAutoClose(current)
-            return current
-        })
-        
-    }
-
-    const openHook = useOpen(onPopupAutoClose)
+    const [currentHookStates, openHookFunctions] = useCurrent(onAutoClose)
+    const [content, setContent] = useState(<></>)
     
-
-
-    return {...openHook, current, setCurrent}
+    return [{...currentHookStates, content}, {...openHookFunctions, setContent}]
 
 }
 

@@ -1,41 +1,29 @@
 import css from "./input.module.css";
 import _uniqueId from 'lodash/uniqueId';
-import { useState } from "react";
+import { useId } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
-
-function Input ({ads, icon, onClick, placeholder, placeholderOffset=0, reg, onChange=()=>null, ...props}){
-
-    const ChangeValue = (evt) =>{
-       
-        if (reg === undefined || reg.test(evt.target.value) || evt.target.value === '')
-            onChange(evt)
-    }
-
-    
-
-
-    const [id] = useState(_uniqueId('input-'))
+function Input({ notices, icon, placeholder, ...props }) {
+    const id = useId()
     return (
-        
-        <div onClick={onClick} className={[css.block].join(' ')}>
+        <div className={[css.block].join(' ')}>
             <div className={css.body}>
                 <div className={css.icon}>
-                    {icon}
+                    <FontAwesomeIcon icon={icon} size="sm" />
                 </div>
-                
-                <input id={id} onChange={ChangeValue} {...props} required />
-                <label htmlFor={id}>
-                    <p style={placeholderOffset ? {left: 35+placeholderOffset} : {}} className={css.placeholder}>{placeholder}</p>
-                </label>
+                <div className={css.input_wrapper}>
+                    <input autoComplete="off" id={id} {...props} required />
+                    <label htmlFor={id}>
+                        <p className={css.placeholder}>{placeholder}</p>
+                    </label>
+                </div>
             </div>
-            <div className={css.ads}>
-                {ads}
+            <div className={css.notices}>
+                {notices}
             </div>
-            
         </div>
     )
 }
-
 export default Input

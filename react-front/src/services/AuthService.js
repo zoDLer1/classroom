@@ -2,48 +2,42 @@ import DefaultApiInstanse, { AuthApiInstanse, BAESDOMAIN } from "api";
 import user from "store/user";
 import tokens from "store/tokens";
 
- class AuthService {
+class AuthService {
 
-    static async auth(onFulfilled, onRejected, {email, password}){
-        
-        const response =  await AuthApiInstanse.post('/users/login/', {email, password}).then(
-            async (response) => {
-                tokens.access_token(response.data.access)
-                tokens.refresh_token(response.data.refresh)
-                await this.login()
-                onFulfilled(response)
-                
+
+
+    static async auth({ refresh, access }, userData) {
+        tokens.access_token(access)
+        tokens.refresh_token(refresh)
+        user.login(userData)
+    }
+    static async login({ email, password }) {
+        const response = await AuthApiInstanse.post('/users/login/', { email, password }).then(
+            (response) => {
+                this.auth(response.data.tokens, response.data.user)
+                return response
             },
-            async (error) =>{
-                onRejected(error)
-            }
-            
         )
         return response
-
-        
     }
-    static async login(){
-        await DefaultApiInstanse.get('/users/account/').then(
-            (response) => {
-                user.login({...response.data, avatar: BAESDOMAIN + response.data.avatar})
-            }
-
-        )
-    }
-    static async refresh_token(){
-        return DefaultApiInstanse.post('users/refresh/', {refresh:tokens.refresh}).then(
+    static async refresh_token() {
+        return DefaultApiInstanse.post('users/refresh/', { refresh: tokens.refresh }).then(
             (s) => tokens.access_token(s.data.access),
             (e) => console.log(e)
         )
     }
 
-    static async register(email, password){
-        return AuthApiInstanse.post('/users/register/', {email, password})
+    static async register(data) {
+        const response = await AuthApiInstanse.post('/users/register/', data).then(
+            (response) => {
+                this.auth(response.data.tokens, response.data.user)
+                return response
+            })
+        return response
     }
-    static async logout(){
+    static async logout() {
         return AuthApiInstanse.post('/users/logout')
     }
-    
+
 }
 export default AuthService

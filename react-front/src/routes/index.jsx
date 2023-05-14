@@ -1,15 +1,15 @@
 
 import { Routes as ReactRoutes } from 'react-router-dom';
 import { Route as ReactRoute } from "react-router-dom"
-import Class from 'pages/class';
-import Login from 'pages/login'
-import Register from 'pages/register'
-import Classes from 'pages/classes'
+import Class from 'pages/ClassPage';
+import LoginPage from 'pages/LoginPage';
+import Register from 'pages/RegisterPage'
+import Classes from 'pages/ClassesPage'
 import Test from 'pages/test';
 import TestPassing from 'pages/test-passing';
 import Profile from 'pages/profile';
-import CreateTest from 'pages/createTest'
-import Tests from 'pages/tests';
+import CreateTest from 'pages/CreateTemplatePage'
+import Templates from 'pages/TemplatesPage';
 import ServerIsUnavalible from 'pages/server-is-unavailable';
 import EditTest from 'pages/test-edit';
 import WithGuards from './withGuards';
@@ -25,7 +25,7 @@ const Routes = () => {
       
       <ReactRoutes>
 
-        <ReactRoute path='/accounts/login' element={<Login/>}/>
+        <ReactRoute path='/accounts/login' element={<LoginPage/>}/>
         <ReactRoute path='/accounts/register' element={<Register/>}/>
         <ReactRoute path='/serverunavailable' element={<ServerIsUnavalible/>}/>
 
@@ -33,7 +33,7 @@ const Routes = () => {
         <ReactRoute path='/accounts/profile' element={
           <WithGuards guards={
               [
-                {guard: IsUserAuth, onReject:Redirect('/accounts/login')}
+                // {guard: IsUserAuth, onReject:Redirect('/accounts/login')}
               ]
             }>
             <Profile/>
@@ -44,7 +44,7 @@ const Routes = () => {
         <ReactRoute path='/classes' element={
           <WithGuards guards={
             [
-              {guard: IsUserAuth, onReject: Redirect('/accounts/login')}
+              // {guard: IsUserAuth, onReject: Redirect('/accounts/login')}
             ]
           }>
             <Classes/>
@@ -55,25 +55,25 @@ const Routes = () => {
           <Class/>
         }/>
         
-        <ReactRoute path='/tests/create' element={
+        <ReactRoute path='/tests/templates/create' element={
             <WithGuards guards={
               [
-                {guard: IsUserAuth, onReject: Redirect('/accounts/login')},
-                {guard: IsTeacher, onReject: Redirect('/classes')}
+                // {guard: IsUserAuth, onReject: Redirect('/accounts/login')},
+                // {guard: IsTeacher, onReject: Redirect('/classes')}
               ] 
             }>
             <CreateTest/>
           </WithGuards>
             
         }/>
-        <ReactRoute path='/tests' element={
+        <ReactRoute path='/tests/templates' element={
           <WithGuards guards={
             [
               {guard: IsUserAuth, onReject: Redirect('/accounts/login')},
               {guard: IsTeacher, onReject: Redirect('/classes')}
             ] 
           }>
-            <Tests/>
+            <Templates/>
           </WithGuards>
           
         }/>
@@ -95,7 +95,7 @@ const Routes = () => {
           <WithGuards guards={
             [
               {guard: IsUserAuth, onReject: Redirect('/accounts/login')},
-              {guard: IsStudent, onReject: Redirect('/classes')},
+              // {guard: IsStudent, onReject: Redirect('/classes')},
               // IsClassMember
             ]
           }>

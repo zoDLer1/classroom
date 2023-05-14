@@ -2,45 +2,77 @@
 
 
 
-:root{
-  --primary-color: #0388D4;
-  --alt-color: #B6B2B1;
-  --error-color: #D61414;
-  --faded-primary: #75B8DF;
-  --success-color: #1AD92C;
+:root {
+    --primary-color: #0388D4;
+    --alt-color: #B6B2B1;
+    --warning-color: #ffcc00;
+    --error-color: #D61414;
+    --faded-primary: #75B8DF;
+    --success-color: #1AD92C;
+    --light-color: #fff;
+    --dark-op15-color: rgba(0, 0, 0, 0.15);
+    --gray-color: #B6B2B1;
 }
 
-#root{
-  background-image: url('../public/media/background.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  height: 100%
+#root {
+    background-image: url('../public/media/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    height: 100%
 }
 
 
 
-.page-root{
-  display: flex;
-  flex-direction: column;
-}
-html, body, .page-root{
-  min-height: 100vh;
+.page-root {
+    display: flex;
+    flex-direction: column;
 }
 
-*{
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto';
+html,
+body,
+.page-root {
+    min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6{
-  font-family: 'Ubuntu';
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
 }
 
-a{
-  text-decoration: none;
-  color: #fff;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Ubuntu';
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    min-height: 28px;
+    border-radius: 10px;
+    border: solid 5px #fff;
+    background: rgba(0, 0, 0, 20%);
+}
+
+::-webkit-scrollbar-corner {
+    background: none;
 }

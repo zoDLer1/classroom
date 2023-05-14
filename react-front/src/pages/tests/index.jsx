@@ -1,5 +1,5 @@
 import pagesCss from '../pages.module.css'
-import TestsForm from 'components/forms/test-forms/tests-form'
+import TestsForm from 'components/forms/TemplatesForm'
 import Header from 'components/header'
 
 function Tests() {

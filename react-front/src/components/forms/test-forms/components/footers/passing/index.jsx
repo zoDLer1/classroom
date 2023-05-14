@@ -1,14 +1,19 @@
 import css from '../css/footer.module.css'
 import Button from 'UI/Inputs/Button'
-import Link from 'UI/Link'
+import Link from 'components/UI/navigation/Link'
 import { useEffect } from 'react'
-
+import TestsServise from 'services/TestsService'
+import user from 'store/user'
 
 export default (props) => {
 
 
     useEffect(()=>{
         console.log(props.data)
+        const questions = props.data.questions.map(q=>
+            ({question: q.id, time: q.passed_time, passed_answers:q.answers.filter(n => n.isCorrect).map(a => ({answer: a.id, value: a.value}))})    
+        )
+        TestsServise.pass({member: `${user.member}`, test: props.id, passed_questions:questions})
     },[])
 
     return (

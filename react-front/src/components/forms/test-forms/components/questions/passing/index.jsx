@@ -43,13 +43,13 @@ export default (props) =>  {
 
     const elems = {
         1: { 
-            elem: <TextAnswer questionId={props.data.id} set={setAnswer} value={props.data.answers} />
+            elem: <TextAnswer questionId={props.data.id} set={setAnswer} value={props.data.answer} />
         },
         2: {
-            elem: <OneFromListAnswer questionId={props.data.id} set={setAnswer} value={props.data.answers} />
+            elem: <OneFromListAnswer questionId={props.data.id} set={setAnswer} value={props.data.answer} />
         },
         3: {
-            elem: <FewFromListAnswer questionId={props.data.id} set={setAnswer} value={props.data.answers} />
+            elem: <FewFromListAnswer questionId={props.data.id} set={setAnswer} value={props.data.answer} />
         }
     }
 
@@ -84,7 +84,7 @@ export default (props) =>  {
 
             <div className={css.body}>
                 <div className={css.answer}>
-                    {elems[props.data.type].elem}
+                    {elems[props.data.answer_type.id].elem}
                 </div>
             </div>
             <div className={css.footer}>

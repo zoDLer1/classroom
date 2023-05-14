@@ -26,7 +26,7 @@ export default () =>  {
                     "name": "One from list",
                     "id": 2
                 },
-                "time": 10,
+                "time": null,
                 "answer": [
                     {
                         'id': 1,
@@ -50,7 +50,7 @@ export default () =>  {
                     "name": "Few from list",
                     "id": 3
                 },
-                "time": 10,
+                "time": null,
                 "answer": [
                     {
                         'id': 3,
@@ -80,28 +80,28 @@ export default () =>  {
                     "id": 1
                 },
                 'answer_time': 0,
-                "time": 15,
+                "time": null,
                 "answer": "",
                 "required": false,
                 "photos": []
             }
         ]
     })
-
+    
     const { id } = useParams()
     useEffect(()=>{
         const fetchTask = async () =>{
             const response = await TestsServise.get_task(id)
-            // console.log({...response.data.template, questions: response.data.template.questions.map(i=> ({...i, photos:[]}))})
+            
             setTest({...response.data.template, questions: response.data.template.questions.map((i)=> {
                 if (i.type === 1){
                     i.answers[0].value = ''
                     
                 }
-                // console.log(i.answers.length)
+      
                 for (let a=0; a < i.answers.length; a++){
                     i.answer_time=0
-                    // delete i.answers[a].isCorrect
+
                     
                 }
                 return {...i, photos:[]}
@@ -114,7 +114,7 @@ export default () =>  {
 
     return (
         <PageSection className={css.section}>
-            <TestPassingForm  set={setTest} data={test}/>
+            <TestPassingForm id={id}  set={setTest} data={test}/>
         </PageSection>
     )
 }

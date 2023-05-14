@@ -1,20 +1,21 @@
-import DefaultApiInstanse from "api";
+import DefaultApiInstanse, { AuthApiInstanse } from "api";
 
 
 
 class ClassServise {
 
-    static async get(id, onFulfilled, onRejected){
-        const response =  await DefaultApiInstanse.get(`classes/${id}`).then(
-            (response) => {
-                onFulfilled(response)
-            },
-            
-            (error) => {
-                onRejected(error)
-            }
-        )
-        return response
+    static async getSubjects(){
+        return await AuthApiInstanse.get('classes/subjects')
+    }
+    static async getColors(){
+        return await AuthApiInstanse.get('classes/colors')
+    }
+    static async getClassTypes(){
+        return await AuthApiInstanse.get('classes/types')
+    }
+
+    static async get(id){
+        return  await DefaultApiInstanse.get(`classes/${id}`)
     }
 
     static async all(){
@@ -29,9 +30,19 @@ class ClassServise {
     static async patch(id, data){
         return await DefaultApiInstanse.patch(`classes/${id}`, data)
     }
-    static async tasks(id){
-        return await DefaultApiInstanse.get(`classes/${id}/tasks`)
+    static async put(id, data){
+        return await DefaultApiInstanse.put(`classes/${id}`, data)
     }
+    static async deleteMember(id){
+        return await DefaultApiInstanse.delete(`classes/member/${id}`)
+    }
+    static async acceptWaiter(id){
+        return await DefaultApiInstanse.post(`classes/waiter/${id}`)
+    }
+    static async rejectWaiter(id){
+        return await DefaultApiInstanse.delete(`classes/waiter/${id}`)
+    }
+
 
 }
 export default ClassServise

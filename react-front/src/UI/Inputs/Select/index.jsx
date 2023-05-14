@@ -1,35 +1,29 @@
 import css from './select.module.css'
-import Input  from 'UI/Inputs/Input'
-import IconCheckbox from 'UI/IconCheckbox'
+import Input from 'UI/Inputs/Input'
 import Option from 'UI/Inputs/Select/Option'
-import { useState } from 'react'
 import { useOpen } from 'hooks/useOpen'
 
 
-function Select (props){
+function Select({ options, onChange, value, placeholder, icon }) {
 
-    const {condition, close, toggle} = useOpen()
-    const [icon] = useState('down')
+    const { condition, close, toggle } = useOpen()
 
-  
-    const select = (option) =>{
-        if (props.select){
-            close()
-            props.select(option)
-        }
 
-    } 
-        
+    const select = (option) => {
+        close()
+        onChange(option)
+    }
+
 
     return (
         <div className={css.block}>
-            <Input onClick={toggle} onChange={()=>null} value={props.value === undefined ? '' : props.value} name={props.name} placeholder={props.placeholder} icon={props.icon} ads={<IconCheckbox name={props.name} icon={`fa-solid fa-angle-${icon}`} func={()=>''} /> } />
+            <Input onClick={toggle} value={value ? value : ''} placeholder={placeholder} icon={icon} />
             {condition &&
-            <div className={css.options} >
-                {props.options.map(item => 
-                    <Option key={item.id} data={item} onSelect={() => select(item)}/>
-                )}
-            </div>
+                <div className={css.options}>
+                    {options.map(item =>
+                        <Option key={item.id} data={item} onSelect={() => select(item)} />
+                    )}
+                </div>
             }
         </div>
     )
