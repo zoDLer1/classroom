@@ -27,25 +27,11 @@ class IsWaiter(BasePermission, IsWaiterPermissionMixin):
         return self.check_waiter(request, obj)
 
 
-class IsNotWaiter(IsWaiter):
-    message = 'Запрос на вступление в этот класс уже отправлен'
-
-    def has_object_permission(self, request, view, obj):
-        return not super().has_object_permission(request, view, obj)
-
-
 class IsMember(BasePermission, IsMemberPermissionMixin):
     message = 'Эта функция доступна только участникам этого класса'
 
     def has_object_permission(self, request, view, obj):
         return self.check_member(request, obj)
-
-
-class IsNotMember(IsMember):
-    message = 'Вы уже находитесь в этом классе'
-
-    def has_object_permission(self, request, view, obj):
-        return not super().has_object_permission(request, view, obj)
 
 
 class IsCreator(BasePermission, IsCreatorPermissionMixin):
@@ -58,6 +44,20 @@ class ReadOnly(BasePermission, ReadOnlyPermissionMixin):
         return self.check_read_only(request)
 
 
+class IsNotWaiter(IsWaiter):
+    message = 'Запрос на вступление в этот класс уже отправлен'
+
+    def has_object_permission(self, request, view, obj):
+        return not super().has_object_permission(request, view, obj)
+
+
+class IsNotMember(IsMember):
+    message = 'Вы уже находитесь в этом классе'
+
+    def has_object_permission(self, request, view, obj):
+        return not super().has_object_permission(request, view, obj)
+
+
 class IsTeacherOrMember(BasePermission, IsTeacherPermissionMixin, IsMemberPermissionMixin):
     def has_object_permission(self, request, view, obj):
         return self.check_teacher(request) or self.check_member(request, obj)
@@ -67,8 +67,9 @@ class IsCreatorOrMember(BasePermission, IsCreatorPermissionMixin, IsMemberPermis
     def has_object_permission(self, request, view, obj):
         return self.check_creator(request, obj) or (request.method == 'GET' and self.check_member(request, obj))
 
-
+# * passed
 class IsTeacherOrReadOnly(BasePermission, ReadOnlyPermissionMixin, IsTeacherPermissionMixin):
+    message = 'Эта функция доступна только преподавателям'
     def has_permission(self, request, view):
         return self.check_teacher(request) or self.check_read_only(request)
 
@@ -94,7 +95,7 @@ class InTestInClassIsMemberOrCreator(BasePermission,IsMemberPermissionMixin, IsC
     def has_object_permission(self, request, view, obj):
         return self.check_creator(request, obj.test._class) or self.check_member(request, obj.test._class)
 
-
+# * passed
 class IsCreatorOrMemberReadOnly(BasePermission, IsCreatorPermissionMixin, IsMemberPermissionMixin, ReadOnlyPermissionMixin):
     def has_object_permission(self, request, view, obj):
         return self.check_creator(request, obj) or (self.check_read_only(request) and self.check_member(request, obj))

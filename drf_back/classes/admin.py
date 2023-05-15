@@ -21,3 +21,7 @@ class MemberAdmin(admin.ModelAdmin):
 @admin.register(WaitingMember)
 class WaitingMemberAdmin(admin.ModelAdmin):
     list_display = ('id', '_class', 'user')
+
+@admin.register(Subject)
+class SubjectMemberAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')

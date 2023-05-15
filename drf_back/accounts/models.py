@@ -17,11 +17,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_("first name"), max_length=50)
     last_name = models.CharField(_("last name"), max_length=50)
     role = models.ForeignKey('Role', on_delete=models.DO_NOTHING) # Определение роли как внешнего ключа
-    avatar = models.ImageField(upload_to='media/avatars', null=True, blank=True)
+    avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
     is_staff = models.BooleanField(_('staff'), default=False) # Внутреннеe обязательноe поле Djago, которое дает доступ к встроеной панели аднимистрирования
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager()
+
+    def __str__(self) -> str:
+        return self.get_full_name()
 
     # Возвращает данные в формате "{имя_пользователя} {фамилия_пользователя}"
     def get_full_name(self):

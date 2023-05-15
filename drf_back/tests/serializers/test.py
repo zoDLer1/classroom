@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import Test
+from ..models import Test, TestSettings
 from drf_back.roles import TEACHER
 
 
@@ -35,6 +35,18 @@ class TestsSerializer(serializers.ModelSerializer, TestValidators):
         }
 
 
+    def to_representation(self, instance):
+        fields = super().to_representation(instance)
+        if not self.context['request'].user.role.id == TEACHER:
+            fields['is_test_passed'] = instance.passed_tests.filter(member__user=self.context['request'].user).exists()
+        return fields
+
+    def create(self, validated_data):
+        instance = super().create(validated_data)
+        TestSettings.objects.create(test=instance)
+        return instance
+
+
 class TestSerializer(serializers.ModelSerializer, TestValidators):
     from .template import TemplatesSerializer
     from .passed_test import PassedTestsSerializer
@@ -46,11 +58,14 @@ class TestSerializer(serializers.ModelSerializer, TestValidators):
         model = Test
         fields = ['id', 'template', 'passed_tests', 'date']
 
+
+
     def to_representation(self, instance):
         fields = super(TestSerializer, self).to_representation(instance)
         if not self.context['request'].user.role.id == TEACHER:
             fields.pop('passed_tests')
         else:
             fields.pop('template')
-
+     
         return fields
+

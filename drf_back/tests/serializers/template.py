@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from ..models import Template, Question, Answer
-
-# ! REFACTOR
+from ..types.question import TEXT_FIELD, MANY_TO_MANY
+from ..validators import ValidateQuestion
 
 
 class CorrectAnswersSerializer(serializers.ModelSerializer):
@@ -23,20 +23,24 @@ class AnswersSerializer(serializers.ModelSerializer):
             'value': {'write_only': True},
         }
 
-    def validate(self, attrs):
+    def validate(self, attrs): 
         data = super().validate(attrs)
         value = data.get('value', None)
         name = data.get('name', None)
-        type = self.context['question_type'].id
-        if type == 1 and not value:  # ! constant
-            raise serializers.ValidationError({"value": "Обязательное поле."})
-        elif not name and type != 1:
-            raise serializers.ValidationError({"name": "Обязательное поле."})
+        isCorrect = data.get('isCorrect', True)
+        type = self.context['question_type']
 
-        if type != 1:
-            data['value'] = None
-        else:
+        if type.id == TEXT_FIELD:
+            if not value:
+                raise serializers.ValidationError({"value": "Обязательное поле."})
             data['name'] = None
+            if not isCorrect:
+                raise serializers.ValidationError({"isCorrect": f'У типа вопроса `{type.name}` isCorrect не может быть False'})
+        else:
+            if not name:
+                raise serializers.ValidationError({"name": "Обязательное поле."})
+            data['value'] = None
+
         return data
 
 
@@ -50,14 +54,27 @@ class QuestionSerializer(serializers.ModelSerializer):
     def validate_answers(self, value):
         if not value:
             raise serializers.ValidationError('Поле не должно быть пустым')
-        if self.context['question_type'].id != 3 and len(value) > 1:
-            raise serializers.ValidationError(
-                'На данный тип вопроса может быть только 1 ответ')
         return value
-
-    def validate_type(self, value):
+ 
+    def validate_type(self, value): 
         self.context.update({'question_type': value})
         return value
+    
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        question_type = data.get('type')
+        question_answers = data.get('answers')
+        count_corrected_answers = len([True for question_answer in question_answers if question_answer['isCorrect']])
+
+        if not count_corrected_answers:
+            raise serializers.ValidationError({"answers": f'Должен присутствовать хотя бы 1 корректный ответ'})
+        
+        if data.get('required', False) and  data.get('time', None):
+            raise serializers.ValidationError({'time': 'Воросу с параметром `required` не может быть назначено время'})
+
+        ValidateQuestion.validate(question_answers, count_corrected_answers, question_type)
+
+        return data
 
     def to_representation(self, instance):
         fields = super().to_representation(instance)
@@ -67,7 +84,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ['id', 'name', 'type', 'answers', 'time', 'correct_answers']
+        fields = ['id', 'name', 'type', 'answers', 'time', 'correct_answers', 'required']
 
 
 class TemplatesSerializer(serializers.ModelSerializer):
