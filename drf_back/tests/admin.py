@@ -8,7 +8,7 @@ class TemplateAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'time', 'test', 'type')
+    list_display = ('id', 'time', 'test', 'type', 'required')
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
@@ -21,6 +21,11 @@ class AnswerTypeAdmin(admin.ModelAdmin):
 @admin.register(Test)
 class TestAdmin(admin.ModelAdmin):
     list_display = ('id', 'template', '_class')
+
+@admin.register(TestSettings)
+class TestSettingsAdmin(admin.ModelAdmin):
+    list_display = ('test', 'allow_view_answers_after_passing')
+
 
 @admin.register(PassedTest)
 class PassedTestAdmin(admin.ModelAdmin):

@@ -29,7 +29,5 @@ urlpatterns = [
     path('api/v1/users/', include('accounts.urls')),
     path('api/v1/tests/', include('tests.urls'))
 ]
-
-
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

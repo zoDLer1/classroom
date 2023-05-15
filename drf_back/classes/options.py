@@ -1,4 +1,4 @@
-from .serializers import CLassesListSerializer, MembersListSerializer, WaitingMemberSerializer, MemberSerializer
+from .serializers import CLassesListSerializer, WaitingMemberSerializer, MemberSerializer
 from .models import Class, Member, WaitingMember
 from drf_back.class_types import OPENED, BY_INVENTATION
 from drf_back.roles import STUDENT, TEACHER
@@ -8,7 +8,7 @@ class ClassViewOptions:
     model = Class
 
 class MemberViewOptions:
-    serializer = MembersListSerializer
+    serializer = CLassesListSerializer
     model = Member
 
 class WaitingMemberViewOptions:

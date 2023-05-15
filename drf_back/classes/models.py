@@ -12,6 +12,12 @@ class ClassType(models.Model):
 
 # создание таблицы классов
 
+class Subject(models.Model):
+    name = models.CharField(max_length=75)
+
+    def __str__(self):
+        return self.name
+
 
 class Class(models.Model):
     # Определение пользователя как внешнего ключа
@@ -23,7 +29,7 @@ class Class(models.Model):
         'ClassType', on_delete=models.DO_NOTHING, default=1)
     color = models.ForeignKey(
         'main.Color', on_delete=models.DO_NOTHING, default=1)
-    subject = models.CharField(max_length=100, blank=True, null=True)
+    subject = models.ForeignKey('Subject', on_delete=models.SET_NULL, null=True)
     code = models.UUIDField(default=uuid.uuid4, unique=True)
 
     def __str__(self):

@@ -1,7 +1,8 @@
-from .models import Class, WaitingMember, Member
-from .serializers import CLassSerializer, MemberSerializer
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView, DestroyAPIView
-from main.permissions import IsTeacherOrReadOnly, IsStudent, IsCreatorOrMember, IsNotWaiter, IsNotMember, IsNotClassClosed, InClassIsCreator, IsCreatorOrMemberReadOnly
+from .models import Class, WaitingMember, Member, Subject, ClassType
+from main.models import Color
+from .serializers import CLassSerializer, MemberSerializer, SubjectSerializer, ColorSerializer, ClassTypeSerializer
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView, DestroyAPIView, ListAPIView
+from main.permissions import IsTeacherOrReadOnly, IsStudent, IsNotWaiter, IsNotMember, IsNotClassClosed, InClassIsCreator, IsCreatorOrMemberReadOnly
 from main.filters import OwnerFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -62,3 +63,16 @@ class AcceptRejectMemberAPIView(GenericAPIView):
 class ExceptMemberAPIView(DestroyAPIView):
     queryset = Member.objects.all()
     permission_classes = (IsAuthenticated, InClassIsCreator)
+
+
+class SubjectAPIView(ListAPIView):
+    queryset = Subject.objects.all()
+    serializer_class = SubjectSerializer
+
+class ColorAPIView(ListAPIView):
+    queryset = Color.objects.all()
+    serializer_class = ColorSerializer
+
+class TypeAPIVIew(ListAPIView):
+    queryset = ClassType.objects.all()
+    serializer_class = ClassTypeSerializer
