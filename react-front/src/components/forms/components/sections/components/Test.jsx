@@ -4,11 +4,12 @@ import Action from 'components/UI/inputs/Action'
 import Access from 'components/Access'
 import { faEye, faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
 import { IsStudent, IsTeacher } from 'routes/Guards'
+import { useNavigate } from 'react-router-dom'
 
 
-
-function Test({ name, description, is_test_passed }) {
+function Test({ id, name, description, passed_test }) {
     const [{ condition }, { open }] = useOpen(() => null)
+    const navigate = useNavigate()
 
     return (
 
@@ -42,16 +43,15 @@ function Test({ name, description, is_test_passed }) {
                 <div className={css.footer}>
                     <Access permission={IsStudent}>
                         {
-                            !is_test_passed 
-                            ? <Action icon={faPen} text={'Приступить к выполнению'}/>
-                            : <Action icon={faEye} text={'Просмотреть результат'}/>
+                            !passed_test
+                                ? <Action onClick={()=>navigate(`/tests/pass/${id}`)} icon={faPen} text={'Приступить к выполнению'} />
+                                : <Action icon={faEye} onClick={()=>navigate(`/tests/passed/${passed_test}`)} text={'Просмотреть результат'} />
                         }
-                        
-                        
+
+
                     </Access>
                     <Access permission={IsTeacher}>
-                        <Action icon={faEye} text="Просмотреть выполнненые" />
-                        <Action icon={faPen} text='Изменить' />
+                        <Action onClick={()=>navigate(`/tests/${id}`)} icon={faEye} text="Просмотреть выполнненые" />
                         <Action icon={faTrash} styleAction='error' text='Удалить' />
                     </Access>
 

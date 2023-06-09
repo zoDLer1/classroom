@@ -20,13 +20,13 @@ const Settings = ({ name, code, description, type, setClassData, subject_info })
             200: (resp) => {
                 setClassData(resp.data)
                 const { name, description, type } = resp.data
-                setInputsValues({name, description, type })
+                getValues({ name, description, type })
             }
         }
 
-    ) 
+    )
 
-    const { getSubmit, getInput, isEdited, setInputsValues } = useForm({
+    const { getSubmit, getInput, isEdited, getValues } = useForm({
         name: {
             value: name
         },
@@ -48,9 +48,9 @@ const Settings = ({ name, code, description, type, setClassData, subject_info })
         }
 
     },
-    updateRequest)
+        updateRequest)
 
-    
+
     return (
         <div className={css.block}>
             <div className={css.sections}>
@@ -79,7 +79,7 @@ const Settings = ({ name, code, description, type, setClassData, subject_info })
                         <div className={css.invite_link}>
                             <p className={css.label}>Ссылка для приграшения:</p>
                             <div className={css.input}>
-                                <Input icon={faLink} value={`http://localhost:8000/classes/join${code}`} readOnly />
+                                <Input icon={faLink} value={`http://localhost:3000/classes/join/${code}`} readOnly />
                                 <div className={css.actions}>
                                     <Action text={'Поменять'} icon={faArrowRightArrowLeft} />
                                     <Action text={'Копировать'} icon={faCopy} />

@@ -2,20 +2,21 @@ import css from './css/question-list.module.css'
 import Question from 'components/forms/components/tests/components/Question'
 import useFormList from 'hooks/forms/useFormList'
 
-const QuestionList = ({ getModule }) => {
+const QuestionList = ({ module, mode }) => {
 
-    const module = getModule('questions')
+    const { addListItem, getListItem, removeItem } = useFormList(module, 2)
 
-    const { values, getListItem } = useFormList(2, module)
-
-    
-    
     return (
         <div className={css.block}>
-            {/* {JSON.stringify(errors)} */}
-            {values.map((item, index) =>
+            {module.values.map((item, index) =>
                 <Question
+                    mode={mode}
+                    remove={() => removeItem(index)}
+                    isNotRemove={module.values.length > 1}
+                    index={index}
                     key={index}
+                    isLast={module.values.length-1 === index}
+                    add={() => addListItem(index)}
                     {...getListItem(index)}
                 />)}
         </div>

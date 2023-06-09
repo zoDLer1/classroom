@@ -13,17 +13,16 @@ import { faGraduationCap, faEnvelope, faKey } from '@fortawesome/free-solid-svg-
 import { IS_EMAIL__VALIDATOR, MAX_LENGTH__VALIDATOR, REQUIRED__VALIDATOR, PASSWORDS_MATCH__VALIDATOR } from 'validation/validators'
 import useForm from 'hooks/forms/useForm'
 import useRequest from 'hooks/useRequest'
-
+import { useNavigate } from 'react-router-dom'
 
 function RegisterForm() {
 
-    const { FIRST_PASSWORD__VALIDATOR, SECOND_PASSWORD__VALIDATOR } = PASSWORDS_MATCH__VALIDATOR()
-    
+    const navigate = useNavigate()
 
     const registerRequest = useRequest(
         async (validatedData) => await AuthService.register(validatedData),
         {
-            200: (response)=>console.log(response),
+            200: (response) => navigate('/classes'),
             400: (response) => {
                 handleServerErrors(response.response.data)
             }
@@ -50,13 +49,11 @@ function RegisterForm() {
             }
         },
         password: {
-            validators: [FIRST_PASSWORD__VALIDATOR(), REQUIRED__VALIDATOR()],
-            linked: ["repeat_password"]
+            validators: [REQUIRED__VALIDATOR()],
 
         },
         password_confim: {
-            validators: [SECOND_PASSWORD__VALIDATOR(), REQUIRED__VALIDATOR()],
-            linked: ["password"]
+            validators: [REQUIRED__VALIDATOR()],
         }
     }, registerRequest)
 

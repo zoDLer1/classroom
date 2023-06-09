@@ -21,10 +21,10 @@ class AuthService {
         return response
     }
     static async refresh_token() {
-        return DefaultApiInstanse.post('users/refresh/', { refresh: tokens.refresh }).then(
-            (s) => tokens.access_token(s.data.access),
-            (e) => console.log(e)
+        const response = await DefaultApiInstanse.post('users/refresh/', { refresh: tokens.refresh }).then(
+            (s) => tokens.access_token(s.data.access)
         )
+        return response
     }
 
     static async register(data) {

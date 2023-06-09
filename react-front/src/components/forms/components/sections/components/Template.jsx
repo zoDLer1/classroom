@@ -2,10 +2,12 @@ import css from './css/test-template.module.css'
 import Action from 'components/UI/inputs/Action'
 import { useOpen } from 'hooks/useOpen'
 import { faFileCirclePlus, faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
 
 
 function Template({ onAppoint, onDelete, ...testData }) {
-
+    const navigate = useNavigate()
     const [{ condition }, { open }] = useOpen()
     const { id, name, description } = testData
 
@@ -23,8 +25,9 @@ function Template({ onAppoint, onDelete, ...testData }) {
             </div>
             <div onClick={(evt) => evt.stopPropagation()} className={css.footer}>
                 <Action onClick={() => onAppoint(testData)} icon={faFileCirclePlus} text='Назначить' />
+
                 <div className={css.ed}>
-                    <Action icon={faPen} text='Изменить' to={`/tests/${id}/edit`} />
+                    <Action onClick={() => navigate('/tests/templates/' + testData.id + '#view')} icon={faEye} text='Просмотреть' />
                     <Action icon={faTrash} styleAction='error' onClick={() => onDelete(id)} text='Удалить' />
                 </div>
 

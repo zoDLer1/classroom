@@ -12,8 +12,16 @@
     }
     
 }
+.isCorrect-true{
+    border: 1px solid var(--success-color);
+}
+.isCorrect-false{
+    border: 1px solid var(--error-color);
+}
 
-
+.mode-pass{
+    overflow: hidden;
+}
 .block{
     display: flex;
     flex-direction: column;
@@ -25,8 +33,10 @@
     background-color: #fff;
     border-radius: 55px;
     box-shadow: 0 10px 70px 0 rgb(0 0 0 / 20%);
-    
-    
+}
+
+.btns{
+    display: flex;
 }
 
 .time_line{

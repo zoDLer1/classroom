@@ -1,7 +1,6 @@
 .block{
     display: flex;
     text-transform: uppercase;
-    letter-spacing: 3px;
     justify-content: center;
     background-color: var(--primary-color);
     color: #fff;
@@ -9,12 +8,25 @@
     position: relative;    
     width: 100%;
     border-radius: 55px;
-    padding: 18px 0;
-    height: 24px;
-    font-size: 20px;
     cursor: pointer;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25);
 }
+.disabled-true{
+    background-color: var(--alt-color);
+}
+
+.size-1{
+    padding: 18px 0;
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+.size-2{
+    padding: 10px 25px;
+    gap: 5px;
+    font-size: 15px;
+    letter-spacing: 2px;
+}
+
 .block:hover{
     transform: scale(1.05);
 }

@@ -1,5 +1,5 @@
 import css from './css/card.module.css'
-import DefaultLink from 'UI/defaultLink'
+import DefaultLink from 'components/UI/navigation/DefaultLink'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 

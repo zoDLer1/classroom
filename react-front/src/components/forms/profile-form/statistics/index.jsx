@@ -1,7 +1,7 @@
 import css from './css/statistics.module.css'
 import Metric from './metric'
 import CircleDiagram from './circle-diagram'
-import MultipleDiagram from './multiple-diagram'
+import MultipleDiagram from 'components/UI/diagrams/multiple-diagram'
 import { useState } from 'react'
 import Action from 'components/UI/inputs/Action'
 

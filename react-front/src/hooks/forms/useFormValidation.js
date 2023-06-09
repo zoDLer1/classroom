@@ -3,6 +3,7 @@ import { useState, useMemo } from "react"
 
 const useFormValidation = (InputsData) => {
 
+
     const NormalizedData = useMemo(() => {
         const NormalizedData = {}
         for (const key in InputsData) {
@@ -12,21 +13,39 @@ const useFormValidation = (InputsData) => {
                 options: InputsData[key].options || {},
                 validators: InputsData[key].validators || [],
                 rools: InputsData[key].rools || [],
+                readOnly: InputsData[key].readOnly || false,
+                isOptional: InputsData[key].isOptional || false
             }
         }
         return NormalizedData
-    }, [])
+    }, [InputsData])
 
     const [inputs, setInputs] = useState(NormalizedData)
     const [errors, setErrors] = useState({})
     const [isEdited, setEdited] = useState(false)
-
+    const [isSubmited, setSubmited] = useState(false)
 
     const setInput = (inputName, key, value) => {
-        const newInputs = { ...inputs }
-        newInputs[inputName][key] = value
-        setInputs(newInputs)
+        setInputs((inputs) => {
+
+            const newInputs = { ...inputs }
+            newInputs[inputName][key] = value
+            return newInputs
+        })
     }
+
+
+    const setValues = (values) => {
+        setInputs((inputs) => {
+            const newInputs = { ...inputs }
+            for (const key in values) {
+                newInputs[key].value = values[key]
+
+            }
+            return newInputs
+        })
+    }
+
     const InputCondition = (inputName, value) => setInput(inputName, 'hidden', value)
 
     const setInputValue = (inputName, value) => setInput(inputName, 'value', value)
@@ -44,7 +63,7 @@ const useFormValidation = (InputsData) => {
     const changeError = (inputName, error) => {
         setErrors((errors) => {
             const newErrors = { ...errors }
-            if (error) {
+            if (Object.keys(error).length) {
                 newErrors[inputName] = error
             }
             else {
@@ -53,13 +72,12 @@ const useFormValidation = (InputsData) => {
             return newErrors
         })
     }
-    const validateInput = (inputName) => {
+    const validateInput = (inputName, context = {}) => {
         const validators = inputs[inputName].validators
         setEdited((InputsData[inputName].value) !== inputs[inputName].value)
-
         for (const validator of validators) {
             if (!inputs[inputName].hidden) {
-                const errorMessage = validator(inputs[inputName].value)
+                const errorMessage = validator(inputs[inputName].value, errors[inputName], context)
                 changeError(inputName, errorMessage)
                 if (errorMessage) {
                     return true
@@ -71,15 +89,12 @@ const useFormValidation = (InputsData) => {
     const validateInputs = (keys) => {
         let error = false
         for (const key of keys) {
-            error = errors[key]
-            if (!error) {
-                error = validateInput(key)
-            }
+            error = validateInput(key)
         }
         return error
     }
     const getInput = (inputName) => {
-        const input = inputs[inputName]
+        const { isOptional, readOnly, ...input } = inputs[inputName]
         return {
             ...input,
             error: errors[inputName] || '',
@@ -94,33 +109,38 @@ const useFormValidation = (InputsData) => {
     const getModule = (inputName) => {
         return {
             values: inputs[inputName].value || [],
-            errors: errors[inputName] || [],
+            errors: errors[inputName] || {},
+            isSubmited,
             validationMethods: {
-                validate: () => validateInput(inputName),
-                setValues: (value) => setInputValue(inputName, value),
-                setErrors: (errorMessage) => changeError(inputName, errorMessage)
+                setValues: (value) => {
+                    setInputValue(inputName, value)
+                },
+                setErrors: (errorMessage) => {
+                    changeError(inputName, errorMessage)
+                },
             },
+
         }
     }
     const getValues = () => {
         const validatedData = {}
         for (const key in inputs) {
-            if (!inputs[key].hidden) {
-                validatedData[key] = inputs[key].value
+            if (!inputs[key].hidden && !inputs[key].readOnly) {
+                if (!inputs[key].isOptional) {
+                    validatedData[key] = inputs[key].value
+                }
+                else {
+                    if (inputs[key].value) {
+                        validatedData[key] = inputs[key].value
+                    }
+                }
+
             }
         }
         return validatedData
     }
-    const getValidatedData = () => {
-        const error = validateInputs(Object.keys(inputs))
-        // if (!error) {
-            setEdited(false)
-            return getValues()
-        // }
-    }
 
-
-    return { isEdited, inputs, errors, InputCondition, setInputValue, getInput, getModule, getValidatedData, changeError, getValues }
+    return { isSubmited, isEdited, inputs, errors, setValues, InputCondition, setInputValue, getInput, getModule, changeError, getValues, setSubmited, validateInputs }
 }
 
 export default useFormValidation

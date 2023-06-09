@@ -1,17 +1,29 @@
+import { useEffect } from 'react'
 import useFormValidation from './useFormValidation'
 
 function useForm(InputsData, requestHook = []) {
 
     const [request, waitingForResponse] = requestHook
 
-    const { changeError, getValidatedData, ...validation } = useFormValidation(InputsData)
 
 
-    //     for (const [key, value] of Object.entries(inputs)) {
-    //         setInputValue(key, value)
-    //     }
-    // }
+    const { errors, inputs, isSubmited, getValues, validateInputs, setSubmited, changeError, getValidatedData, ...validation } = useFormValidation(InputsData)
 
+    
+
+
+    useEffect(() => {
+        if (isSubmited) {
+            const error = validateInputs(Object.keys(inputs))
+            console.log(error)
+            console.log(errors)
+            setSubmited(false)
+            if (!Object.keys(errors).length && !error){
+                request(getValues())
+            }
+            
+        }
+    }, [isSubmited])
 
 
     const handleServerErrors = (errors) => {
@@ -26,13 +38,9 @@ function useForm(InputsData, requestHook = []) {
         }
     }
     const onSubmit = async () => {
-        const validated_data = getValidatedData()
-        if (validated_data) {
-            await request(validated_data)
-        }
-
+        setSubmited(true)
     }
-    return { getSubmit, changeError, handleServerErrors, ...validation }
+    return { inputs, errors, getValues, getSubmit, changeError, handleServerErrors, ...validation }
 }
 
 export default useForm

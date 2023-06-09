@@ -1,70 +1,70 @@
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
+
+const useFormList = ({ values, isSubmited, errors, validationMethods }, count, useInit = false) => {
+
+    const [list, setList] = useState(values.length && !useInit ? values : Array(count).fill({}))
+    const [errorsList, setErrorsList] = useState(errors)
 
 
-
-const useFormList = (listLength, { errors, values, validationMethods }) => {
-    const { setValues, setErrors } = validationMethods
-    const [list, setList] = useState(Array(listLength).fill({}))
-    const [errorsList, setErrorsList] = useState(Array(listLength).fill({}))
 
 
     useEffect(() => {
-        setValues(list)
+        validationMethods.setValues(list)
     }, [list])
 
+
     useEffect(() => {
-        setErrors(errorsList)
+        validationMethods.setErrors(errorsList)
     }, [errorsList])
 
+    
+    const removeItem = (index) => {
+        const newValues = [...list]
+        delete errorsList[index]
+        setList(newValues.filter((v, i) => index !== i))   
+    } 
 
-    const setListValue = (index, value) => {
-        setList((list) => {
-            const newValues = [...list]
-            newValues[index] = value
-            return newValues
-        })
-    }
-    const setListError = (index, errorMessage) => {
-        setErrorsList((errorsList) => {
-            let newErorrs = [...errorsList]
-            if (!newErorrs.length) {
-                newErorrs = Array(listLength).fill({})
-            }
-            newErorrs[index] = errorMessage
-            return newErorrs
-        })
+    const addListItem = () => {
+        const newValues = [...list]
+        validationMethods.setValues([...newValues, {}])
+
     }
     const getListItem = (index) => {
-        return ({
-            options: {
-                error: errors[index] || {},
-                value: values[index] || {},
-                validationMethods: {
-                    setValue: (value) => setListValue(index, value),
-                    setError: (errorMessage) => setListError(index, errorMessage)
+        return {
+            value: values[index],
+            error: errors[index] || {},
+            isSubmited,
+            validationMethods: {
+                setValue: (value) => {
+                    setList((values) => {
+                        const newValues = [...values]
+                        newValues[index] = value
+                        return newValues
+                    })
+                },
+                setError: (error) => {
+
+                    setErrorsList((errors) => {
+                        const newErrors = { ...errors }
+                        for (const key in error) {
+                            if (!Object.keys(error[key]).length) {
+                                delete error[key]
+                            }
+                        }
+                        if (Object.keys(error).length) {
+                            newErrors[index] = error
+                        }
+                        else {
+                            delete newErrors[index]
+                        }
+                        return newErrors
+                    })
                 }
             }
-        })
-    }
-
-    const removeItem = (index) => {
-        if (list.length > 2) {
-            const newList = [...list]
-            newList.splice(index, 1)
-            setList(newList)
-            const newErorrs = [...errors]
-            newErorrs.splice(index, 1)
-            setErrorsList(newErorrs)
         }
-
     }
 
-    const addItem = () => {
-        setList([...list, {}])
-    }
-
-
-    return { values: list, getListItem, addItem, removeItem }
+    return { removeItem, getListItem, addListItem }
 }
 
 export default useFormList

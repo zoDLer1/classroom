@@ -2,45 +2,27 @@ import { useEffect } from "react";
 import useFormValidation from "./useFormValidation";
 
 
-function useFormModule(InputsData, { error, value, validationMethods }) {
+function useFormModule(InputsData, { isSubmited, validationMethods }) {
 
 
-    const { setInputValue, changeError, getModule, getInput, ...validation } = useFormValidation(InputsData)
+    const { isEdited, inputs, errors, setSubmited, ...validation } = useFormValidation(InputsData)
     const { setError, setValue } = validationMethods
 
-
-
-
-    const getModuleInput = (inputName) => {
-        const inputData = getInput(inputName)
-        return {
-            ...inputData,
-            error: error[inputName] || '',
-            value: value[inputName] || '',
-
+    useEffect(() => {
+        if (isSubmited){
+            validation.validateInputs(Object.keys(inputs))
+            setSubmited(true)
         }
-    }
-
-    const getSubModule = (inputName) => {
-        return {
-            errors: error[inputName] || [],
-            values: value[inputName] || [],
-            validationMethods: {
-                setErrors: (error) => changeError(inputName, error),
-                setValues: (value) => setInputValue(inputName, value),
-            }
-        }
-    }
-
+    }, [isSubmited])
 
     useEffect(() => {
         setValue(validation.getValues())
-    }, [validation.inputs])
+    }, [inputs])
 
     useEffect(() => {
-        setError(validation.errors)
-    }, [validation.errors])
+        setError(errors)
+    }, [errors])
 
-    return { error, getInput: getModuleInput, getModule: getSubModule, setInputValue, ...validation }
+    return { inputs, ...validation }
 }
 export default useFormModule

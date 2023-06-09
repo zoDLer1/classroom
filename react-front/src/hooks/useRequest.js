@@ -17,12 +17,15 @@ const useRequest = (func = async () => null, statuses = {}) => {
         setWaiting(true)
         const response = await func(data).then(
             (success) => {
+                console.log(success)
                 handleResponse(success, data)
             },
             (error) => {
                 if (error.code === 'ERR_NETWORK') {
                     alert.show('Сервер недоступен')
                 }
+                console.log(error)
+                // if (error.code)
                 handleResponse(error, data)
             }
         )

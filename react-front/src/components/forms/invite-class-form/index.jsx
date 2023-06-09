@@ -1,6 +1,6 @@
 import css from './invite-class-form.module.css'
 import formCss from 'components/forms/css/form.module.css'
-import Input from 'UI/Inputs/Input'
+import Input from 'components/UI/inputs/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 

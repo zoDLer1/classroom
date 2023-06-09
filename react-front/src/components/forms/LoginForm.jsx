@@ -30,11 +30,9 @@ function LoginForm() {
     const { getSubmit, getInput, handleServerErrors } = useForm({
         email: {
             validators: [REQUIRED__VALIDATOR()],
-            value: '123@123.124'
         },
         password: {
             validators: [REQUIRED__VALIDATOR()],
-            value: '123123123s'
         }
     },
     loginRequest)

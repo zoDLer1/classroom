@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 
 
-function User({ id, first_name, last_name, avatar, actions = [], isLoading = false }) {
+function User({ id, first_name, last_name, avatar, children, actions = [], isLoading = false }) {
 
 
     const [actionUsed, setActionUsed] = useState(false)
@@ -27,6 +27,7 @@ function User({ id, first_name, last_name, avatar, actions = [], isLoading = fal
                     <p className={css.lastName}>{last_name}</p>
                 </div>
             </div>
+            {children && <div className={css.info}>{children}</div>}
             {
                 !isLoading
                     ? <div className={css.actions}>

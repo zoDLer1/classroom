@@ -15,9 +15,11 @@ class ClassServise {
     }
 
     static async get(id){
-        return  await DefaultApiInstanse.get(`classes/${id}`)
+        return await DefaultApiInstanse.get(`classes/${id}`)
     }
-
+    static async join(uuid){
+        return await DefaultApiInstanse.post(`classes/join/${uuid}`)
+    }
     static async all(){
         return await DefaultApiInstanse.get('classes/')
     }

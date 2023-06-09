@@ -1,25 +1,43 @@
 import React from 'react'
 import css from './css/switcher.module.css'
-import { useState, useId } from 'react';
+import { useEffect } from 'react';
 import FormLoader from '../formLoader';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-function SectionsSwither({ isLoading, sections, initial_selected = 0 }) {
-    const [id] = useId()
 
-    const [selected, set] = useState(initial_selected || Number(localStorage.getItem('ClassSectionsSwitherIndex')))
+function SectionsSwither({ isLoading, sections}) {
+    const navigate = useNavigate()
+    const { hash } = useLocation()
 
-    const setSelected = (index) =>{
-        set(index)
-        localStorage.setItem('ClassSectionsSwitherIndex', index)
+
+    const setSelected = (index) => {
+        // set(index)
     }
-    const ButtonController = (evt) =>{
-        if (!isNaN(evt.key)){
+    const ButtonController = (evt) => {
+        if (!isNaN(evt.key)) {
             const number = Number(evt.key)
-            if (number && number <= sections.length){
-                setSelected(number-1)
+            if (number && number <= sections.length) {
+                setSelected(number - 1)
             }
         }
     }
+    useEffect(()=>{
+        if (sections.length) {
+            if(!sections.find(item => item.hash === hash)){
+                navigate(sections[0].hash)
+            }
+        }
+    }, [hash])
+
+
+    useEffect(() => {
+        if (sections.length) {
+            if (!hash) {
+                navigate(sections[0].hash)
+            }
+        }
+    }, [sections])
 
     return (
 
@@ -27,14 +45,11 @@ function SectionsSwither({ isLoading, sections, initial_selected = 0 }) {
             <FormLoader condition={isLoading}>
                 <div className={css.body}>
                     {sections.map((item, index) =>
-                        <div key={`switcher-${index}`} className={css.item}>
-                            <input id={`switcher-${id}-${index}`} name={`switcher-${id}`} checked={index === selected} onChange={() => setSelected(index)} type="radio" hidden />
-                            <label htmlFor={`switcher-${id}-${index}`}>{item.text}</label>
-                        </div>
+                        <div onClick={() => navigate(sections[index]?.hash)} key={`switcher-${index}`} className={[css.item, css[`selected--${sections[index]?.hash === hash}`]].join(' ')}>{item.text}</div>
                     )}
                 </div>
                 <div className={css.section}>
-                    {sections[selected]?.elem}
+                    {sections.find(item => item.hash === hash)?.elem}
                 </div>
             </FormLoader>
         </div>

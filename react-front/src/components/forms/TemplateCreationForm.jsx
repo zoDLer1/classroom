@@ -1,52 +1,44 @@
 import css from './css/test.module.css'
 import FormHeader from 'components/forms/components/tests/TestHeader'
 import QuestionList from 'components/forms/components/tests/QuestionList'
-import FormFooter from 'components/forms/test-forms/components/footers/create'
 import useForm from 'hooks/forms/useForm'
-import useRequest from 'hooks/useRequest'
-import TestsServise from 'services/TestsService'
+import { MIN_LENGTH__VALIDATOR, REQUIRED__VALIDATOR } from 'validation/validators'
+import React from 'react'
+{/* <FormFooter submit={getSubmit} mode={mode} setMode={setMode} /> */ }
+
+const TemplateCreationForm = ({ request, mode, data, children }) => {
+
+    const { name, description, questions } = data
 
 
 
-const TemplateCreationForm = () => {
 
-
-    const create = useRequest(
-        TestsServise.createTemplate,
-        {
-            400: (response) => {
-                // console.log()
-                handleServerErrors(response.response.data)
-            }
-        }
-    )
-
-    const { errors, getInput, getModule, getSubmit, handleServerErrors } = useForm({
+    const { isEdited, getInput, getModule, getSubmit } = useForm({
         name: {
-            value: 'Lorem ipsum, dolor sit amet consect',
+            value: name || '',
+            validators: [REQUIRED__VALIDATOR()]
         },
         description: {
-            value: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic officia explicabo nulla harum at, dolorem saepe nemo illo quod. Ullam aspernatur blanditiis, temporibus error consequuntur laborum nemo asperiores earum reiciendis?'
+            value: description || ''
         },
         questions: {
-            options: {
-                isModule: true
-            }
-        }
+            value: questions || [],
+            validators: [MIN_LENGTH__VALIDATOR(1, { 'detail': 'Должно быть не менее 1 вопроса' })],
+            isModule: true
 
-    }, create)
+        },
+
+    }, request)
 
 
 
 
     return (
         <div className={css.block}>
-            <FormHeader getInput={getInput} />
-            {JSON.stringify(errors)}
-            <QuestionList getModule={getModule} />
-            <button {...getSubmit()}>send</button>
-            {/* <FormFooter submit={() => submit(formData)} /> */}
 
+            <FormHeader mode={mode} getInput={getInput} />
+            <QuestionList mode={mode} module={getModule('questions')} />
+            {React.cloneElement(children, { submit: getSubmit, isEdited })}
         </div>
     )
 }
