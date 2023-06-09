@@ -12,3 +12,4 @@ class OwnerFilterBackend(filters.BaseFilterBackend):
 class MemberBackend(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
         return queryset.filter(user=request.user)
+

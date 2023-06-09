@@ -11,7 +11,7 @@ class ValidatePassedQuestion:
 
     @classmethod
     def is_valid_text_field(cls, passed_question):
-        return cls.get_answers(passed_question)[0].answer.value == passed_question.question.correct_answers[0].value
+        return cls.get_answers(passed_question)[0].value == passed_question.question.correct_answers[0].value
 
     @classmethod
     def is_valid_many_to_one(cls, passed_question):

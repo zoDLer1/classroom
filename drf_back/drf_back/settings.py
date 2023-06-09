@@ -206,8 +206,12 @@ CORS_ALLOW_CREDENTIALS = False
 #     }
 # }
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "http://127.0.0.1:3000",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://26.238.98.162"
+]
+
+ALLOWED_HOSTS = [
+    "26.238.98.162"
+]
+
 

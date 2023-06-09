@@ -73,6 +73,7 @@ class PassedTestSerializer(serializers.ModelSerializer):
     passed_questions = PassedQuestionSerializer(many=True)
     test_info = TestsSerializer(read_only=True, source='test')
     member_info = MemberSerializer(read_only=True, source='member')
+    _class = serializers.IntegerField(source='test._class.id', read_only=True)
 
     def validate_passed_questions(self, value):
 
@@ -94,8 +95,6 @@ class PassedTestSerializer(serializers.ModelSerializer):
             
         return value
         
-        
-
     def create(self, validated_data):
         passed_questions = validated_data.pop('passed_questions')
         passed_test = PassedTest.objects.create(**validated_data)
@@ -112,7 +111,7 @@ class PassedTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = PassedTest
         fields = ['id', 'test', 'member',
-                  'passed_questions', 'test_info', 'member_info']
+                  'passed_questions', 'test_info', 'member_info', '_class']
         extra_kwargs = {
             'test': {'write_only': True},
             'member': {'write_only': True},

@@ -1,5 +1,5 @@
-from .models import Template, Test, PassedTest
-from .serializers import TemplatesSerializer, TestSerializer, PassedTestSerializer, TestsSerializer
+from .models import Template, Test, PassedTest, PassedQuestion
+from .serializers import TemplatesSerializer, TestSerializer, PassedTestSerializer, TestsSerializer, TestStatisticSerializer
 from main.filters import OwnerFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, GenericAPIView, RetrieveAPIView
@@ -41,7 +41,8 @@ class TestAPIView(RetrieveUpdateDestroyAPIView):
 class PassTestAPIView(GenericAPIView):
     queryset = Test.objects.all()
     serializer_class = PassedTestSerializer
-    permission_classes = (IsAuthenticated, InClassIsMember, ) # TestNotPassed
+    permission_classes = (IsAuthenticated, InClassIsMember,
+                          TestNotPassed)  # TestNotPassed
 
     def post(self, request, pk):
         self.test_instance = self.get_object()
@@ -56,8 +57,9 @@ class PassTestAPIView(GenericAPIView):
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
-        viewAnswers =  self.test_instance.settings.allow_view_answers_after_passing
-        context.update({"test": self.test_instance, 'viewAnswers': viewAnswers})
+        viewAnswers = self.test_instance.settings.allow_view_answers_after_passing
+        context.update({"test": self.test_instance,
+                       'viewAnswers': viewAnswers})
         return context
 
 
@@ -71,10 +73,20 @@ class PassedTestAPIView(GenericAPIView):
         serializer = self.get_serializer(self.instance)
         return Response(serializer.data)
 
-
     def get_serializer_context(self):
         context = super().get_serializer_context()
         is_creator = self.instance.test._class.creator.id == context['request'].user.id
-        viewAnswers =  self.instance.test.settings.allow_view_answers_after_passing or is_creator
+        viewAnswers = self.instance.test.settings.allow_view_answers_after_passing or is_creator
         context.update({'viewAnswers': viewAnswers})
         return context
+
+
+class PassedTestStatisticsAPIView(GenericAPIView):
+    queryset = Test.objects.all()
+    serializer_class = TestStatisticSerializer
+    permission_classes = (IsAuthenticated, InClassIsCreatorOrMemberReadOnly)
+
+    def get(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)

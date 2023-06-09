@@ -65,7 +65,7 @@ class PassedTest(models.Model):
         passed_questions = self.passed_questions.all()
         correct_questions = [
             passed_question.is_correct for passed_question in passed_questions if passed_question.is_correct]
-        return str(len(correct_questions) / passed_questions.count() * 100) + '%'
+        return len(correct_questions) / passed_questions.count() * 100
 
 
 class PassedQuestion(models.Model):

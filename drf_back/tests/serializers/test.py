@@ -38,7 +38,11 @@ class TestsSerializer(serializers.ModelSerializer, TestValidators):
     def to_representation(self, instance):
         fields = super().to_representation(instance)
         if not self.context['request'].user.role.id == TEACHER:
-            fields['is_test_passed'] = instance.passed_tests.filter(member__user=self.context['request'].user).exists()
+            passed = instance.passed_tests.filter(member__user=self.context['request'].user)
+            if (passed.exists()):
+                fields['passed_test'] = passed[0].id
+            
+            
         return fields
 
     def create(self, validated_data):
@@ -48,24 +52,44 @@ class TestsSerializer(serializers.ModelSerializer, TestValidators):
 
 
 class TestSerializer(serializers.ModelSerializer, TestValidators):
-    from .template import TemplatesSerializer
+    from .template import TemplatesSerializer, TemplatesSerializerList
     from .passed_test import PassedTestsSerializer
+    from classes.serializers import CLassesListSerializer
 
     template = TemplatesSerializer(read_only=True)
+    template_info = TemplatesSerializerList(read_only=True, source='template')
     passed_tests = PassedTestsSerializer(many=True)
+    _class = CLassesListSerializer()
+
 
     class Meta:
         model = Test
-        fields = ['id', 'template', 'passed_tests', 'date']
-
+        fields = ['id', 'template', 'passed_tests', 'date', '_class', 'template_info']
 
 
     def to_representation(self, instance):
         fields = super(TestSerializer, self).to_representation(instance)
         if not self.context['request'].user.role.id == TEACHER:
             fields.pop('passed_tests')
+            fields.pop('_class')
+            fields.pop('template_info')
         else:
             fields.pop('template')
      
         return fields
 
+
+
+class TestStatisticSerializer(serializers.ModelSerializer, TestValidators):
+    from .template import TemplateStatisticSerializer
+
+    template = TemplateStatisticSerializer()
+
+
+
+    class Meta:
+        model = Test
+        fields = ['id', 'template']
+
+
+    

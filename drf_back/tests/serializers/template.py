@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import Template, Question, Answer
+from ..models import Template, Question, Answer, PassedQuestion, Test
 from ..types.question import TEXT_FIELD, MANY_TO_MANY
 from ..validators import ValidateQuestion
 
@@ -23,7 +23,7 @@ class AnswersSerializer(serializers.ModelSerializer):
             'value': {'write_only': True},
         }
 
-    def validate(self, attrs): 
+    def validate(self, attrs):
         data = super().validate(attrs)
         value = data.get('value', None)
         name = data.get('name', None)
@@ -32,13 +32,16 @@ class AnswersSerializer(serializers.ModelSerializer):
 
         if type.id == TEXT_FIELD:
             if not value:
-                raise serializers.ValidationError({"value": "Обязательное поле."})
+                raise serializers.ValidationError(
+                    {"value": "Обязательное поле."})
             data['name'] = None
             if not isCorrect:
-                raise serializers.ValidationError({"isCorrect": f'У типа вопроса `{type.name}` isCorrect не может быть False'})
+                raise serializers.ValidationError(
+                    {"isCorrect": f'У типа вопроса `{type.name}` isCorrect не может быть False'})
         else:
             if not name:
-                raise serializers.ValidationError({"name": "Обязательное поле."})
+                raise serializers.ValidationError(
+                    {"name": "Обязательное поле."})
             data['value'] = None
 
         return data
@@ -55,24 +58,28 @@ class QuestionSerializer(serializers.ModelSerializer):
         if not value:
             raise serializers.ValidationError('Поле не должно быть пустым')
         return value
- 
-    def validate_type(self, value): 
+
+    def validate_type(self, value):
         self.context.update({'question_type': value})
         return value
-    
+
     def validate(self, attrs):
         data = super().validate(attrs)
         question_type = data.get('type')
         question_answers = data.get('answers')
-        count_corrected_answers = len([True for question_answer in question_answers if question_answer['isCorrect']])
+        count_corrected_answers = len(
+            [True for question_answer in question_answers if question_answer['isCorrect']])
 
         if not count_corrected_answers:
-            raise serializers.ValidationError({"answers": f'Должен присутствовать хотя бы 1 корректный ответ'})
-        
-        if data.get('required', False) and  data.get('time', None):
-            raise serializers.ValidationError({'time': 'Воросу с параметром `required` не может быть назначено время'})
+            raise serializers.ValidationError(
+                {"answers": f'Должен присутствовать хотя бы 1 корректный ответ'})
 
-        ValidateQuestion.validate(question_answers, count_corrected_answers, question_type)
+        if data.get('required', False) and data.get('time', None):
+            raise serializers.ValidationError(
+                {'time': 'Воросу с параметром `required` не может быть назначено время'})
+
+        ValidateQuestion.validate(
+            question_answers, count_corrected_answers, question_type)
 
         return data
 
@@ -84,7 +91,36 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ['id', 'name', 'type', 'answers', 'time', 'correct_answers', 'required']
+        fields = ['id', 'name', 'type', 'answers',
+                  'time', 'correct_answers', 'required']
+
+
+
+class QuestionStatisticSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(required=False)
+    name = serializers.CharField(required=True)
+    correct = serializers.SerializerMethodField()
+
+
+    def get_correct(self, obj):
+        passed_questions = PassedQuestion.objects.filter(question=obj)
+        correct_count = 0
+        for passed_question in passed_questions:
+            if (passed_question.is_correct):
+                correct_count += 1
+        return round(correct_count/passed_questions.count(), 2)*100
+
+    class Meta:
+        model = Question
+        fields = ['id', 'name', 'correct']
+
+class TemplateStatisticSerializer(serializers.ModelSerializer):
+    questions = QuestionStatisticSerializer(many=True)
+
+    class Meta:
+        model = Template
+        fields = ['id', 'name', 'description', 'questions']
+    
 
 
 class TemplatesSerializer(serializers.ModelSerializer):
@@ -141,6 +177,8 @@ class TemplatesSerializer(serializers.ModelSerializer):
                     'type', question_with_id.type)
                 question_with_id.time = question.get(
                     'time', question_with_id.time)
+                question_with_id.required = question.get(
+                    'required', question_with_id.required)
                 question_with_id.save()
                 instance = question_with_id
             else:
@@ -177,3 +215,9 @@ class TemplatesSerializer(serializers.ModelSerializer):
         else:
             instance = Answer.objects.create(**answer, question=question)
         return instance
+
+
+class TemplatesSerializerList(serializers.ModelSerializer):
+    class Meta:
+        model = Template
+        fields = ['id', 'name', 'description']
