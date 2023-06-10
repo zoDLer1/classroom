@@ -1,0 +1,150 @@
+{
+    "title": "Math Quiz",
+    "description": "This quiz tests your knowledge on a range of math topics from algebra to calculus. You will be presented with 20 multiple-choice questions, each with four possible answers. Choose the answer you think is correct, and at the end of the quiz, you will receive your score along with the correct answers. Good luck!",
+    "questions": [
+        {
+            "question": "What is the square root of 64?",
+            "options": [
+                {
+                    "a": "4"
+                },
+                {
+                    "b": "6"
+                },
+                {
+                    "c": "8"
+                },
+                {
+                    "d": "10"
+                }
+            ],
+            "answer": ["c"]
+        },
+        {
+            "question": "What is the equation of the line that passes through the points (2,3) and (4,5)?",
+            "options": [
+                {
+                    "a": "y = 2x + 1"
+                },
+                {
+                    "b": "y = x + 1"
+                },
+                {
+                    "c": "y = 2x - 1"
+                },
+                {
+                    "d": "y = x - 1"
+                }
+            ],
+            "answer": ["b"]
+        },
+        {
+            "question": "What is the value of pi (π) to 3 decimal places?",
+            "options": [
+                {
+                    "a": "3.141"
+                },
+                {
+                    "b": "3.142"
+                },
+                {
+                    "c": "3.143"
+                },
+                {
+                    "d": "3.144"
+                }
+            ],
+            "answer": ["b"]
+        },
+        {
+            "question": "What is the derivative of f(x) = x^2 + 3x - 1?",
+            "options": [
+                {
+                    "a": "2x + 3"
+                },
+                {
+                    "b": "2x - 3"
+                },
+                {
+                    "c": "x^2 + 3x - 1"
+                },
+                {
+                    "d": "2x + 3"
+                }
+            ],
+            "answer": ["a"]
+        },
+        {
+            "question": "What is the value of x in the equation 2x + 4 = 10?",
+            "options": [
+                {
+                    "a": "2"
+                },
+                {
+                    "b": "3"
+                },
+                {
+                    "c": "4"
+                },
+                {
+                    "d": "5"
+                }
+            ],
+            "answer": ["d"]
+        },
+        {
+            "question": "What is the integral of f(x) = 2x + 3?",
+            "options": [
+                {
+                    "a": "x^2 + 3x + C"
+                },
+                {
+                    "b": "x^2 + 3x"
+                },
+                {
+                    "c": "2x^2 + 3x + C"
+                },
+                {
+                    "d": "2x^2 + 3x"
+                }
+            ],
+            "answer": ["a"]
+        },
+        {
+            "question": "What is the value of sin(60 degrees)?",
+            "options": [
+                {
+                    "a": "1/2"
+                },
+                {
+                    "b": "1/4"
+                },
+                {
+                    "c": "3/4"
+                },
+                {
+                    "d": "2/3"
+                }
+            ],
+            "answer": ["a"]
+        },
+        {
+            "question": "What is the Pythagorean theorem?",
+            "options": [
+                {
+                    "a": "a^2 + b^2 = c"
+                },
+                {
+                    "b": "a^2 - b^2 = c"
+                },
+                {
+                    "c": "a + b + c = 180"
+                },
+                {
+                    "d": "a/b = c/d"
+                }
+            ],
+            "answer": ["a"]
+        }
+    ]
+}

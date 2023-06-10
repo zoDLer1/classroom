@@ -1,0 +1,168 @@
+{
+    "title": "Physics Quiz",
+    "description": "This quiz tests your knowledge on a range of physics topics from mechanics to electromagnetism. You will be presented with 16 multiple-choice questions, each with four possible answers. Choose the answer you think is correct, and at the end of the quiz, you will receive your score along with the correct answers. Good luck!",
+    "questions": [
+        {
+            "question": "What is the SI unit of force?",
+            "options": [
+                {
+                    "a": "Watt"
+                },
+                {
+                    "b": "Joule"
+                },
+                {
+                    "c": "Newton"
+                },
+                {
+                    "d": "Kilogram"
+                }
+            ],
+            "answer": ["c"]
+        },
+        {
+            "question": "What is the formula for Newton's second law?",
+            "options": [
+                {
+                    "a": "F = ma"
+                },
+                {
+                    "b": "a = F/m"
+                },
+                {
+                    "c": "m = Fa"
+                },
+                {
+                    "d": "F = am"
+                }
+            ],
+            "answer": ["a"]
+        },
+        {
+            "question": "What is the formula for kinetic energy?",
+            "options": [
+                {
+                    "a": "KE = mv^2/2"
+                },
+                {
+                    "b": "KE = 1/2mv^2"
+                },
+                {
+                    "c": "KE = mgh"
+                },
+                {
+                    "d": "KE = P/t"
+                }
+            ],
+            "answer": ["b"]
+        },
+        {
+            "question": "What is the SI unit of power?",
+            "options": [
+                {
+                    "a": "Joule"
+                },
+                {
+                    "b": "Watt"
+                },
+                {
+                    "c": "Volt"
+                },
+                {
+                    "d": "Ohm"
+                }
+            ],
+            "answer": ["b"]
+        },
+        {
+            "question": "What is the formula for electric power?",
+            "options": [
+                {
+                    "a": "P = IV"
+                },
+                {
+                    "b": "P = I^2R"
+                },
+                {
+                    "c": "P = V^2/R"
+                },
+                {
+                    "d": "P = IR"
+                }
+            ],
+            "answer": ["a"]
+        },
+        {
+            "question": "What is the formula for Ohm's law?",
+            "options": [
+                {
+                    "a": "V = IR"
+                },
+                {
+                    "b": "I = V/R"
+                },
+                {
+                    "c": "R = V/I"
+                },
+                {
+                    "d": "V = I/R"
+                }
+            ],
+            "answer": ["b"]
+        },
+        {
+            "question": "What is the formula for gravitational force?",
+            "options": [
+                {
+                    "a": "F = G(m1 + m2)"
+                },
+                {
+                    "b": "F = G(m1m2/r^2)"
+                },
+                {
+                    "c": "F = m1m2/r"
+                },
+                {
+                    "d": "F = m1 + m2"
+                }
+            ],
+            "answer": ["b"]
+        },
+        {
+            "question": "What is the formula for electric potential energy?",
+            "options": [
+                {
+                    "a": "U = qV"
+                },
+                {
+                    "b": "U = qEd"
+                },
+                {
+                    "c": "U = 1/2CV^2"
+                },
+                {
+                    "d": "U = mgh"
+                }
+            ],
+            "answer": ["a"]
+        },
+        {
+            "question": "What is the formula for the period of a pendulum?",
+            "options": [
+                {
+                    "a": "T = 2π(L/g)"
+                },
+                {
+                    "b": "T = 2π(L/g)^2"
+                },
+                {
+                    "c": "T = 2πg/L"
+                },
+                {
+                    "d": "T = 2π(L/m)"
+                }
+            ],
+            "answer": ["b"]
+        }
+    ]
+}

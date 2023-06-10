@@ -41,7 +41,7 @@ const FewFromListAnswerItem = ({ correct_answers, passed_answers, mode, index, v
     else if (is_correct) {
         style = 'default'
     }
-    else if (is_passed && !is_correct){
+    else if (is_passed && !is_correct && correct_answers.length){
         style = 'error'
     }
 

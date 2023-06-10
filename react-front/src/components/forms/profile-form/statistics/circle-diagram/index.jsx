@@ -7,7 +7,7 @@ import css from './css/circle-diagram.module.css'
 export default (props) =>  {
     return (
         <div className={css.block}>
-            <div className={[css.diagram, css.animate].join(' ')} style={{'--p':props.value}}>{props.value}%</div>
+            <div className={[css.diagram, css.animate].join(' ')} style={{'--p':props.percent}}>{props.value}</div>
             <p className={css.text}>{props.text}</p>
         </div>
     )

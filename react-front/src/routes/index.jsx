@@ -130,7 +130,6 @@ const Routes = () => {
                         <></>
                     </WithGuards>
                 } />
-                <ReactRoute path='*' element={<></>} />
             </ReactRoutes>
 
         </>
