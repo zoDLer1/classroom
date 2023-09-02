@@ -1,6 +1,6 @@
 import css from './css/test-template.module.css'
 import Action from 'components/UI/inputs/Action'
-import { useOpen } from 'hooks/useOpen'
+import { useOpen } from 'hooks/globalUIContent/useOpen'
 import { faFileCirclePlus, faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import { faEye } from '@fortawesome/free-solid-svg-icons'

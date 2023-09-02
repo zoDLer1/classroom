@@ -1,46 +1,26 @@
-import FormInput from 'components/forms/components/inputs/FormInput'
-import useFormList from 'hooks/forms/useFormList'
-import useFormModule from 'hooks/forms/useFormModue'
+import { FormNestedFastInput } from '../../inputs/FormInput'
 import { faFont } from '@fortawesome/free-solid-svg-icons'
-import { REQUIRED__VALIDATOR } from 'validation/validators'
-import Input from 'components/UI/inputs/Input'
+import { FieldArray } from 'formik'
 
 
 
-const TextAnswer = ({ module, mode, correct_answers }) => {
-
-
-
-    const { getListItem } = useFormList(module, 1, true)
-    const { value, error, isSubmited, validationMethods } = getListItem(0)
-
-
-    const { getInput } = useFormModule({
-        id: {
-            value: value.id || null,
-            isOptional: true
-        },
-        value: {
-            validators: mode !== 'pass' ? [REQUIRED__VALIDATOR()] : [],
-            value: value.value || correct_answers.filter(answer => answer.id === value.id)[0]?.value || ''
-        },
-        isCorrect: {
-            value: true
-        }
-    }, { validationMethods, isSubmited })
-
-
-    const valueInput = getInput('value')
-
-
-    const viewConditions = {
-        creation: <FormInput {...valueInput} placeholder="Введите ответ" icon={faFont} />,
-        view: <Input value={valueInput.value} readOnly placeholder="Введите ответ" icon={faFont} />,
-        pass: <FormInput {...valueInput} placeholder="Введите ответ" icon={faFont} />,
-       
-    }
-
-
-    return viewConditions[mode]
+const TextAnswer = ({ question, index }) => {
+    return <FormNestedFastInput name={`questions.${question}.answers.${index}.value`} placeholder="Введите ответ" icon={faFont} />
 }
-export default TextAnswer
+
+
+const TextAnswerList = ({ data, question }) => {
+    return <FieldArray name={`questions.${question}.answers`} >
+        {({ insert, remove, form }) =>
+            data.map((answer, index) => <TextAnswer
+                question={question}
+                index={index}
+                key={index}
+            />)
+        }
+    </FieldArray>
+
+
+
+}
+export default TextAnswerList

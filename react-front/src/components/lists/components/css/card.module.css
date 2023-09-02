@@ -6,8 +6,8 @@
 
 
 .block{
-    width: 350px;
-    height: 350px;
+    width: 320px;
+    height: 320px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -31,7 +31,7 @@
 
 
 .label{
-    width: 190px;
+    width: 170px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -46,35 +46,25 @@
     cursor: pointer;
 }
 
-.input{
-    display: flex;
-    border-color: #fff;
-    flex: 1;
-    border-bottom: 2px solid #fff;
-    padding: 0 0 5px 0;
-}
-.input *{
-    background: transparent;
-    font-size: 26px;
-    font-weight: 500;
-    width: 100%;
-    outline: none;
-    border: none;
-    color: #fff;
-}
 
+
+.input{
+    /* width: 200px; */
+}
 .edit_layer{
-    margin-top: 45px;
+    
+    overflow: hidden;
+    margin-top: 33px;
     display: flex;
     gap: 25px;
     align-items: center;
 }
 .icon{
     position: absolute;
-    right: 30px;
-    bottom: 235px;
+    right: 20px;
+    bottom: 210px;
     color: #fff;
-    font-size: 70px;
+    font-size: 65px;
     transform: scale(-1,1);
 }
 .events{

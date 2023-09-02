@@ -1,72 +1,51 @@
-import CardList from 'components/lists/TestsList'
-import { useState, useContext } from 'react'
-import Help from 'components/help'
-import HelpAction from 'components/help/helpAction'
-import Header from 'components/header'
+import CardList from 'components/lists/ClassesList'
+import ClassServise from 'services/ClassSevrice'
 import CreateClassForm from 'components/forms/CreateClassForm'
 import JoinClassForm from 'components/forms/join-class-form'
-import user from 'store/user'
-import { GlobalUIContext } from 'contexts/GlobalUIContext'
+import { usePopup } from 'hooks/globalUIContent/useGlobalUI'
 import { useCollection } from 'hooks/useCollection'
+import { useInitialRequest } from 'hooks/useInitialRequest'
+import formCss from 'components/forms/forms.module.css'
+import css from './css/classes.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
+function ClassesPage() {
 
-function TestPage (){
+    const popup = usePopup()
 
-    const { popup } = useContext(GlobalUIContext)
-    
-    const [help, setHelp] = useState(false) 
+    const [wait] = useInitialRequest(
+        {},
+        ClassServise.all,
+        {
+            200: (response) => classesActions.setItems(response.data)
+        }
+    )
 
-    const [classes, classesActions, classesStateActions, classesStoreActions] = useCollection((current) => classesStoreActions.reject(current.value.id, 'name'))
+    const [classes, storedValues, classesActions] = useCollection()
 
-    const addClass = (item) => {
-        classesActions.addItem(item)
-    }
-
-    const popupOpen = () =>{
+    const popupOpen = () => {
         popup.open()
-        const content = user.data.role === 2 ? <CreateClassForm addClass={addClass}  close={popup.close} /> : <JoinClassForm  close={popup.close} />
+        const content = true ? <CreateClassForm addClass={classesActions.addItem} close={popup.close} /> : <JoinClassForm close={popup.close} />
         popup.setContent(content)
     }
 
-    
     return (
-        <>
-            <Header actions={[
-                {icon: "fa-solid fa-plus", text: '', action: popupOpen}
-            ]}
-            />
-            <div>
-                <CardList classes={classes} classesActions={classesActions} classesStateActions={classesStateActions} classesStoreActions={classesStoreActions} />
+        <div className={css.block}>
+            <div className={[formCss.block, css.header].join(' ')}>
+                <h3>Мои классы</h3>
+                <div className={css.actions}>
+                    <div className={css.action} onClick={popupOpen}>
+                        <FontAwesomeIcon icon={faPlus} />
+                    </div>
+
+                </div>
             </div>
-            <Help active={help} set={setHelp}>
-                <HelpAction 
-                    data={{
-                        pointer: {direction: 'right'},
-                        coords: {x: 360, y: -10}, 
-                        width: 350, 
-                        label: "OMG it's your class!!!", 
-                        info: 'Start from scratch by drawing new paths and shapes.'
-                    }} 
-                    window={{
-                        coords: {x: 160, y: 250}, 
-                        size: {width: 360, height: 150}
-                    }}/>
-                    <HelpAction 
-                    data={{
-                        pointer: {direction: 'top'},
-                        coords: {x: 160, y: 365}, 
-                        width: 350, 
-                        label: "OMG it's yoasdasdur class!!!", 
-                        info: 'Start fsrom scratch by drawing new paths and shapes.'
-                    }} 
-                    window={{
-                        coords: {x: 160, y: 145}, 
-                        size: {width: 360, height:365 }
-                    }}/>
-            </Help>
-        </>
-        
+            <CardList classes={classes} storedValues={storedValues} classesActions={classesActions} />
+        </div>
+
+
     )
 }
-export default TestPage
+export default ClassesPage

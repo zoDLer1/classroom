@@ -7,8 +7,10 @@
     background-color: #fff;
     border-radius: 55px;
     box-shadow: 0 10px 70px 0 rgb(0 0 0 / 20%);
+   
 }
 .inputs{ 
+    min-width: 310px;
     gap: 40px;
     display: flex;
     flex-direction: column;

@@ -1,14 +1,13 @@
 import css from './css/test.module.css'
-import { useOpen } from 'hooks/useOpen'
+import { useOpen } from 'hooks/globalUIContent/useOpen'
 import Action from 'components/UI/inputs/Action'
 import Access from 'components/Access'
 import { faEye, faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
-import { IsStudent, IsTeacher } from 'routes/Guards'
 import { useNavigate } from 'react-router-dom'
 
 
-function Test({ id, name, description, passed_test }) {
-    const [{ condition }, { open }] = useOpen(() => null)
+function Test({ id, name, description, passed_test, permissions }) {
+    const [{ condition }, { open }] = useOpen()
     const navigate = useNavigate()
 
     return (
@@ -41,7 +40,7 @@ function Test({ id, name, description, passed_test }) {
                     </div>
                 </div>
                 <div className={css.footer}>
-                    <Access permission={IsStudent}>
+                    <Access permission={permissions.isStudent}>
                         {
                             !passed_test
                                 ? <Action onClick={()=>navigate(`/tests/pass/${id}`)} icon={faPen} text={'Приступить к выполнению'} />
@@ -50,7 +49,7 @@ function Test({ id, name, description, passed_test }) {
 
 
                     </Access>
-                    <Access permission={IsTeacher}>
+                    <Access permission={permissions.isTeacher}>
                         <Action onClick={()=>navigate(`/tests/${id}`)} icon={faEye} text="Просмотреть выполнненые" />
                         <Action icon={faTrash} styleAction='error' text='Удалить' />
                     </Access>

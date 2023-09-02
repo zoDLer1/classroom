@@ -12,16 +12,42 @@
 }
 
 
+.default{
+    --self-color: var(--primary-color);
+    --inactive-color: var(--gray-color);
+    --placeholder-color: rgba(0, 0, 0, .3);
+    --input-color: #000;
+}
+.light{
+    --self-color: #fff;
+    --inactive-color: #fff;
+    --placeholder-color: rgba(0, 0, 0, .3);
+    --input-color: #fff;
+}
 
-.block {
+.main {
     padding: 0 8px;
-    border-bottom: 2px solid var(--gray-color);
+    border-bottom: 2px solid var(--inactive-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
-    min-width: 295px;
-    --self-color: var(--primary-color);
+    min-height: 45px;
+    
+}
+.readOnly{
+    border: none;
+}
+
+
+.label{
+    /* width: 170px; */
+    overflow: hidden;
+    /* white-space: nowrap; */
+    text-overflow: ellipsis;
+    color: var(--input-color);
+    font-size: 26px;
+    font-weight: 500;
 }
 
 .hasError{
@@ -33,7 +59,7 @@
     flex: 1;
 }
 
-.block::after {
+.main::after {
     content: '';
     left: 50%;
     bottom: -3px;
@@ -50,7 +76,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-
     width: 100%;
 }
 
@@ -58,7 +83,7 @@
     position: absolute;
     top: -1px;
     left: 0;
-    color: rgba(0, 0, 0, .3);
+    color: var(--placeholder-color);
     font-weight: 500;
     transition: top 0.2s linear;
     transition: font-size 0.2s linear;
@@ -71,7 +96,9 @@
     outline: none;
     border: none;
     font-size: 18px;
+    background: transparent;
     width: 100%;
+    color: var(--input-color);
 }
 
 .body input:-webkit-autofill,
@@ -85,7 +112,7 @@
 }
 
 .icon {
-    color: var(--gray-color);
+    color: var(--inactive-color);
 }
 
 .form__input > .icon {
@@ -106,7 +133,7 @@
     animation: input_icon 0.3s linear forwards;
 }
 
-.block:has(input:focus)::after{
+.main:has(input:focus)::after{
     animation: input_border 0.3s ease-in-out forwards;
 }
 
@@ -115,3 +142,18 @@
     gap: 5px;
     user-select: none;
 }
+.error{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: var(--self-color);
+    height: 15px;
+    margin-left: 30px;
+    overflow: hidden;
+}
+/* .main:has(input:disabled){
+    background-color: #e9ecef;
+} */
+/* .main:has(input:disabled) .placeholder{
+    color: var(--self-color);
+} */

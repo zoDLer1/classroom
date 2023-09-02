@@ -9,7 +9,7 @@ function DefaultLink ({disabled=false, to, text, children, ...props}) {
         <>
             {!disabled 
                 ? <Link {...props} to={to}>{children} {text}</Link>
-                : <p {...props}>{children} {text}</p>
+                : <div {...props}>{children} {text}</div>
             } 
         </>
           

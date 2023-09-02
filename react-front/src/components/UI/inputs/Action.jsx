@@ -5,7 +5,7 @@ function Action({ text, icon, styleAction = 'default', disabled = false, onClick
 
 
     return (
-        <div onClick={() => !disabled && onClick()} className={[css.block, css[styleAction], css[`disabled-${disabled}`], css[`compact-${compact}`]].join(' ')}>
+        <div onClick={(evt) => !disabled && onClick(evt)} className={[css.block, css[styleAction], css[`disabled-${disabled}`], css[`compact-${compact}`]].join(' ')}>
             <div className={css.text}>
                 {icon && <FontAwesomeIcon icon={icon} />}
                 {text && <span >{text}</span>}

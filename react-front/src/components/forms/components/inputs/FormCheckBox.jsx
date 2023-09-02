@@ -1,12 +1,11 @@
-import useCheckBox from "hooks/useCheckBox";
-import CheckBox from "components/UI/inputs/CheckBox";
+import CheckBox from "components/UI/inputs/CheckBox"
+import { Field, FastField } from "formik"
 
+export default function FormCheckBox({ name, ...props }) {
 
-const FormCheckBox = ({value, validationMethods, ...props}) => {
-    
-    const { getProps } = useCheckBox({ value, validationMethods })
-    return <CheckBox {...getProps()} {...props} />
-    
+    return <Field component={CheckBox} name={name} {...props} />
 }
 
-export default FormCheckBox
+export const FormFastCheckBox = ({ name, ...props }) => {
+    return <FastField component={CheckBox} name={name} {...props} />
+}

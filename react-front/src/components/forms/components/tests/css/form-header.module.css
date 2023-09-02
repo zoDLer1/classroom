@@ -9,7 +9,7 @@
 .label{
     margin-bottom: 20px;
 }
-.creation{
+.creation_mode{
     display: grid;
     column-gap: 40px;
     row-gap: 40px;

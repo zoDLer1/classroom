@@ -1,42 +1,59 @@
+.default {
+    --self-color: var(--primary-color);
+}
 
-.checkbox{
+.correct {
+    --self-color: var(--success-color);
+}
+
+.error {
+    --self-color: var(--error-color);
+}
+
+.disabled {
+    --self-color: var(--alt-color);
+}
+
+
+.icon {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 18px;
     height: 18px;
     background-color: var(--light-color);
-    border-radius: 5px;
     box-shadow: 0 0 8px 0.5px var(--dark-op15-color);
 }
-.style-default .checkbox{ 
-    border: 2px solid var(--primary-color);
-}
-.style-default:has(input:checked) .checkbox{
-    background-color: var(--primary-color);
+
+.block .icon {
+    border: 2px solid var(--self-color);
 }
 
-.style-correct .checkbox{
-    border: 2px solid var(--success-color);
+.button{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.style-correct:has(input:checked) .checkbox{
-    background-color: var(--success-color);
-}
-.style-error .checkbox{
-    border: 2px solid var(--error-color);
-}
-.style-error:has(input:checked) .checkbox{
-    background-color: var(--error-color);
-}
-.style-disabled .checkbox{
-    border: 2px solid var(--alt-color);
-}
-.style-disabled:has(input:checked) .checkbox{
-    background-color: var(--alt-color);
+
+.block:has(input:checked) .icon {
+    background-color: var(--self-color);
 }
 
 
-.body{
+.checkbox .icon{
+    border-radius: 5px;
+}
+
+.circle .icon{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+
+.body {
     display: flex;
     user-select: none;
     cursor: pointer;

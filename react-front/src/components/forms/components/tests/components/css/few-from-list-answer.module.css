@@ -23,16 +23,25 @@
     grid-template-columns: repeat(2, 1fr);
 }
 .icon{
-    display: none;
+    font-size: 20px;
     color: var(--alt-color);
     cursor: pointer;
 }
-.item:hover .icon{
-    display: block;
+.item:hover .actions {
+    display: flex;
 }
-.icon:hover{
-    color: var(--error-color);
+
+.actions {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
 }
-.add{
-    margin-top: 10px;
+
+.add:hover {
+    color: var(--success-color)
+}
+
+.remove:hover {
+    color: var(--error-color)
 }

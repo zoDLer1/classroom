@@ -1,26 +1,62 @@
 
 import { makeAutoObservable } from "mobx"
+import AuthService from "services/AuthService";
 
 
 
-class User{
-    data = null || JSON.parse(localStorage.getItem('user'))
-    isAuth = localStorage.getItem('isAuth') || false
-    member = Number(localStorage.getItem('member')) || null
-    constructor(){
-        makeAutoObservable(this)
+export default class UserStore {
+    user = {}
+    isAuth = false
+    token = null
+
+
+    constructor() {
+        makeAutoObservable(this);
     }
 
-    login(user){
-        this.data = user
-        this.isAuth = true
-        localStorage.setItem('isAuth', true)
-        localStorage.setItem('user', JSON.stringify(user))
+    setAuth(bool) {
+        this.isAuth = bool;
     }
-    setMember (member){
-        this.member = Number(member)
-        member = localStorage.setItem('member', member)
+
+
+    setUser(user) {
+        this.user = user
     }
+
+    setToken(token) {
+        this.token = token
+    }
+
+    authenticate(userData, token) {
+        this.setAuth(true)
+        this.setUser(userData)
+        this.setToken(token)
+    }
+
+    async refresh() {
+        try {
+            const response = await AuthService.refresh_token()
+            const { user, access } = response.data
+            this.authenticate(user, access)
+            return response
+        }
+        catch (e) {
+            return e
+        }
+        
+    }
+
+    async login(data) {
+        try {
+            const response = await AuthService.login(data)
+            const { user, access } = response.data
+            this.authenticate(user, access)
+            return response
+        }
+        catch (e) {
+            return e
+        }
+    }
+
 }
 
-export default new User()

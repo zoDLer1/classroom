@@ -7,7 +7,7 @@ import useConditionSwitch from "hooks/useConditionSwitch"
 function PasswordInput({ ...props }) {
 
     const { condition, open, close } = useConditionSwitch()
-
+    
     const conditionStyles = {
         true: {
             icon: faEye,

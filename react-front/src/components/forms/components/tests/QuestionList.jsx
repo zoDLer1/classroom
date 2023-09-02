@@ -1,25 +1,29 @@
 import css from './css/question-list.module.css'
 import Question from 'components/forms/components/tests/components/Question'
-import useFormList from 'hooks/forms/useFormList'
+import { FieldArray } from 'formik'
+import { defaultQuestionValue } from 'components/forms/TemplateCreationForm'
 
-const QuestionList = ({ module, mode }) => {
+const QuestionList = ({ values }) => {
 
-    const { addListItem, getListItem, removeItem } = useFormList(module, 2)
 
     return (
-        <div className={css.block}>
-            {module.values.map((item, index) =>
-                <Question
-                    mode={mode}
-                    remove={() => removeItem(index)}
-                    isNotRemove={module.values.length > 1}
-                    index={index}
-                    key={index}
-                    isLast={module.values.length-1 === index}
-                    add={() => addListItem(index)}
-                    {...getListItem(index)}
-                />)}
-        </div>
+        <FieldArray validateOnChange={false} name='questions' render={({ insert, remove, form }) =>
+            <div className={css.block}>
+                {
+                    values.questions.map((question, index) => <Question
+                        data={question}
+                        copy={() => insert(index + 1, question)}
+                        index={index}
+                        key={index}
+                        form={form}
+                        add={() => insert(index + 1, defaultQuestionValue)}
+                        remove={() => remove(index)}
+                    />)
+                }
+
+            </div>
+        } />
+
     )
 }
 

@@ -1,41 +1,26 @@
 import css from './css/select.module.css'
 import Input from './Input'
 import Option from './Option'
-import { useOpen } from 'hooks/useOpen'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import useRequest from 'hooks/useRequest'
+import { useOpen } from 'hooks/globalUIContent/useOpen'
 
 
-function Select({ value, options, onChange, ...props }) {
-    const { asyncLoadOptions } = options
+
+function Select({ field: { value, onChange, ...fieldOptions }, onSelect = () => null, form, options, ...props }) {
+
     const [{ condition }, { close, toggle }] = useOpen()
-    const [selfOptions, setSelfOptions] = useState(options?.selectOptions || [])
-    const [loadData, isLoad] = useRequest(asyncLoadOptions,
-        {
-            200: (response) => setSelfOptions(response.data)
-        }
-    )
-
-
-    useEffect(()=>{
-        if (asyncLoadOptions){
-            loadData()
-        }
-    }, [])
-
-    const select = (option) => {
+    const select = (id) => {
         close()
-        onChange(option)
+        form.setFieldValue(fieldOptions.name, id)
+        onSelect(fieldOptions.name, id, value)
     }
 
     return (
         <div className={css.block}>
-            <Input onClick={toggle} value={selfOptions.find(option=> option.id === value)?.name || ''} {...props} readOnly />
+            <Input form={form} field={{ value: options.find(option => option.id === value)?.name || '', ...fieldOptions, onChange: () => null }} onClick={toggle} {...props} />
             {condition &&
                 <div className={css.options}>
-                    {selfOptions.map(item =>
-                        <Option key={item.id} data={item} onSelect={() => select(item)} />
+                    {options.map(item =>
+                        <Option key={item.id} data={item} onSelect={() => select(item.id)} />
                     )}
                 </div>
             }

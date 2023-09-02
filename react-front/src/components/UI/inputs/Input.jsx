@@ -2,34 +2,42 @@ import css from "./css/input.module.css";
 import { useId } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Error from "../notices/Error";
-import Warning from "../notices/Warning";
+import classNames from "classnames/bind";
 
-function Input({ children, icon, placeholder, error, warning, ...props }) {
+
+const cx = classNames.bind(css);
+
+
+function Input({ field, error, touched, children, icon, styleType = 'default', labelStyle, readOnly = false, placeholder, ...props }) {
+    const inputClasses = cx({ hasError: error && touched, readOnly }, styleType)
     const id = useId()
+    
 
-    const InputStyles = {
-        hasError: (error) => error ? css.hasError : null
-    }
     return (
-        <div className={[css.block, InputStyles.hasError(error)].join(' ')}>
-            <div className={css.body}>
-                <div className={css.icon}>
-                    <FontAwesomeIcon icon={icon} size="sm" />
+        <div className={inputClasses}>
+            {readOnly ? <h3 className={[css.label, labelStyle].join(' ')}>{field.value}</h3>
+                : <div className={css.block}>
+                    <div className={css.main}>
+                        <div className={css.body}>
+                            <div className={css.icon}>
+                                {icon && <FontAwesomeIcon icon={icon} size="sm" />}
+                            </div>
+                            <div className={css.inputWrapper}>
+                                <input autoComplete="off" id={id} {...props} {...field} /> {/* disabled={isSubmitting} */}
+                                <label htmlFor={id}>
+                                    <p className={css.placeholder}>{placeholder}</p>
+                                </label>
+                            </div>
+                        </div>
+                        <div className={css.notices}>
+                            {children}
+                            {(error && touched) && <Error message={error} />}
+                        </div>
+                    </div>
                 </div>
-                <div className={css.inputWrapper}>
-                    <input autoComplete="off" id={id} {...props} required />
-                    <label htmlFor={id}>
-                        <p className={css.placeholder}>{placeholder}</p>
-                    </label>
-                </div>
-            </div>
-            <div className={css.notices}>
-                {children}
-                {error && <Error message={error} />}
-                {warning && <Warning message={warning} />}
-                
-            </div>
+            }
         </div>
+
     )
 }
 

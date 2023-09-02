@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useCurrent } from "./useCurrent"
 
-export function useMenu(onAutoClose=()=> null) {
+export function useMenuControl(onAutoClose=()=> null) {
     const [currentState, currentFunctions] = useCurrent(onAutoClose)
     const [items, setItems] = useState([]) 
     const [coords, set] = useState([0, 0])

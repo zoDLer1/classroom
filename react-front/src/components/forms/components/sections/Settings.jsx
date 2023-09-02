@@ -1,74 +1,87 @@
 import css from './css/settings.module.css'
-import FormInput from '../inputs/FormInput'
 import Action from 'components/UI/inputs/Action'
 import Input from 'components/UI/inputs/Input'
-import Select from 'components/UI/inputs/Select'
-import CheckBox from 'components/UI/inputs/CheckBox'
 import { faPen, faCube, faLink, faArrowRightArrowLeft, faCopy, faFloppyDisk, faListOl } from '@fortawesome/free-solid-svg-icons'
-import useForm from 'hooks/forms/useForm'
 import ClassServise from 'services/ClassSevrice'
-import FormSelect from '../inputs/FormSelect'
 import useRequest from 'hooks/useRequest'
-import { useParams } from 'react-router-dom'
+import { useParams, useOutletContext } from 'react-router-dom'
+import { useClassTypes, useSubjects } from 'hooks/useGlobalStorage'
+import { useState } from 'react'
+import { useAlert } from 'hooks/globalUIContent/useGlobalUI'
+import { Form, Formik } from 'formik'
+import FormInputSender from '../inputs/senders/FormInputSender'
+import FormSelectSender from '../inputs/senders/FormSelectSender'
+import FormCheckBoxSender from '../inputs/senders/FormCheckBoxSender'
 
 
-const Settings = ({ name, code, description, type, setClassData, subject_info }) => {
+
+const Settings = () => {
     const { id } = useParams()
-    const updateRequest = useRequest(
-        async (validated_data) => await ClassServise.put(id, validated_data),
-        {
-            200: (resp) => {
-                setClassData(resp.data)
-                const { name, description, type } = resp.data
-                getValues({ name, description, type })
-            }
-        }
 
+    const { data, setFullData, defaultRedirect } = useOutletContext()
+
+    const [updateRequest] = useRequest(
+        async (formatedData) => await ClassServise.put(id, formatedData),
+        {
+            200: (resp) => setFullData(resp.data)
+        }
     )
 
-    const { getSubmit, getInput, isEdited, getValues } = useForm({
-        name: {
-            value: name
-        },
-        subject: {
-            value: subject_info.id,
-            options: {
-                asyncLoadOptions: ClassServise.getSubjects
+
+    if (!data?.settings) {
+        return defaultRedirect
+    }
+    return (
+        <Formik
+            enableReinitialize={true}
+            initialValues={
+                {
+                    name: data.name,
+                    subject: data.subject_info.id,
+                    type: data.type,
+                    description: data.description,
+                    code: data.code,
+                    settings: data.settings
+                }
             }
-        },
-        type: {
-            value: type,
-            options: {
-                asyncLoadOptions: ClassServise.getClassTypes
-            }
-        },
-        description: {
-            value: description,
+            onSubmit={async (values, form) => {
+                await updateRequest(values)
+                form.setSubmitting(false)
+            }}
+        >
+            {FormSettings}
+        </Formik>
+    )
+}
 
-        }
 
-    },
-        updateRequest)
 
+export function FormSettings({ values }) {
+
+    const alert = useAlert()
+    const types = useClassTypes()
+    const subjects = useSubjects()
+
+
+    const copyLink = () => {
+        navigator.clipboard.writeText(`${window.location.host}/classes/join/${values.code}`)
+        alert.show('Ссылка скопирована')
+    }
 
     return (
-        <div className={css.block}>
+        <Form className={css.block}>
             <div className={css.sections}>
                 <div className={css.cutom}>
                     <div className={css.heading}>
                         <p className={[css.text, css.title].join(' ')}>Сведения</p>
                     </div>
                     <div className={css.inputs}>
-                        <FormInput icon={faPen} {...getInput('name')} placeholder={'Название'} />
-                        <FormSelect icon={faCube} {...getInput('subject')} placeholder={'Предмет'} />
-                        <FormSelect placeholder='Тип' {...getInput('type')} icon={faListOl} />
-
+                        <FormInputSender icon={faPen} name='name' placeholder={'Название'} />
+                        <FormSelectSender options={subjects} icon={faCube} name='subject' placeholder={'Предмет'} />
+                        <FormSelectSender options={types} placeholder='Тип' name='type' icon={faListOl} />
                         <div className={css.textarea}>
-                            <FormInput icon={faPen} {...getInput('description')} placeholder={'Описание'} />
+                            <FormInputSender icon={faPen} name='description' placeholder={'Описание'} />
                         </div>
-                    </div>
-                    <div className={css.submit}>
-                        <Action disabled={!isEdited} text={'Сохранить'} icon={faFloppyDisk} {...getSubmit()} />
                     </div>
                 </div>
                 <div className={css.main}>
@@ -79,17 +92,22 @@ const Settings = ({ name, code, description, type, setClassData, subject_info })
                         <div className={css.invite_link}>
                             <p className={css.label}>Ссылка для приграшения:</p>
                             <div className={css.input}>
-                                <Input icon={faLink} value={`http://localhost:3000/classes/join/${code}`} readOnly />
+                                <Input
+                                    icon={faLink}
+                                    field={{ value: `${window.location.host}/classes/join/${values.code}`, onChange: () => null }}
+                                    form={{ isSubmitting: false, errors: {}, touched: {} }}
+                                >
+                                </Input>
                                 <div className={css.actions}>
                                     <Action text={'Поменять'} icon={faArrowRightArrowLeft} />
-                                    <Action text={'Копировать'} icon={faCopy} />
+                                    <Action text={'Копировать'} onClick={copyLink} icon={faCopy} />
                                 </div>
                             </div>
                         </div>
                         <div className={css.invite_code}>
                             <p className={css.label}>Код класса:</p>
                             <div className={css.invite_code}>
-                                <span>{code}</span>
+                                <span>{values.code}</span>
                             </div>
                         </div>
                     </div>
@@ -99,16 +117,15 @@ const Settings = ({ name, code, description, type, setClassData, subject_info })
                         <p className={[css.text, css.title].join(' ')}>Дополнительно</p>
                     </div>
                     <div className={css.additionally}>
-                        <CheckBox>
+                        <FormCheckBoxSender name='settings.allow_view_members_list'>
                             <span>Разрешать другим пользователям просматривать список участников</span>
-                        </CheckBox>
+                        </FormCheckBoxSender>
                     </div>
                 </div>
             </div>
-
-
-
-        </div>
+        </Form>
     )
 }
+
+
 export default Settings

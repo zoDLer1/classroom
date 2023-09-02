@@ -1,36 +1,56 @@
-import Settings from './components/sections/Settings'
-import Members from './components/sections/Members'
-import SectionsSwither from './components/SectionsSwither'
-import Tests from './components/sections/Tests'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-
-const ClassForm = ({ data, isLoading, setClassData }) => {
+import { useEffect } from 'react'
+import css from './css/class-from.module.css'
+import { Outlet } from 'react-router-dom'
+import { useLocation, useNavigate, Navigate, useParams } from 'react-router-dom'
+import classNames from 'classnames/bind'
 
 
-    const [sections, setSections] = useState([])
+const cx = classNames.bind(css);
+
+export const defaultRedirectPage = 'tests'
+
+
+
+const ClassForm = ({ pages, classData, setClassData, setFullData }) => {
+
+    const { id } = useParams()
+
+    const defaultRedirect = <Navigate to={`/classes/${id}/${defaultRedirectPage}`} state={{ key: defaultRedirectPage }} />
+
+    const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(() => {
-        if (data.id) {
-            const { tests, creator, members, waiters, settings, ...props } = data
-            const newSections = []
-            if (tests) {
-                newSections.push({ hash: '#tests', elem: <Tests tests={tests} setTests={(tests) => setClassData({ ...data, tests })} />, text: 'Задания' })
-            }
-            if (members) {
-                newSections.push({ hash: '#members', elem: <Members teacher={creator} setMembers={(members) => setClassData((data) => ({ ...data, members }))} setWaiters={(waiters) => setClassData((data) => ({ ...data, waiters }))} members={members} waiters={waiters} />, text: 'Участники' })
-            }
-            if (settings) {
-                newSections.push({  hash: '#settings', elem: <Settings setClassData={(data) => setClassData({ ...data, type: 1 })} settings={settings} {...props} />, text: 'Настройки' })
-            }
-            setSections(newSections)
+        if (!location.state?.key) {
+            navigate(defaultRedirectPage, { replace: true, state: { key: defaultRedirectPage } })
         }
-    }, [data])
+    }, [location])
+
+
+    const navigateTo = (page) => navigate(page, { state: { key: page } })
+
+
+
 
 
 
     return (
-        <SectionsSwither isLoading={isLoading} sections={sections}></SectionsSwither>
+        <div className={css.block} tabIndex={0}>
+
+            <div className={css.body}>
+                {Object.entries(pages).map(([key, value]) =>
+                    <div
+                        onClick={() => navigateTo(key)}
+                        key={key}
+                        className={cx('item', { selected: key === location.state?.key })}>
+                        {value}
+                    </div>)}
+            </div>
+            <div className={css.section}>
+                <Outlet context={{ data: classData[location.state?.key], setData: setClassData, setFullData, defaultRedirect }} />
+            </div>
+
+        </div>
     )
 }
 export default ClassForm

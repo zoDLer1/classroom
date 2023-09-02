@@ -3,25 +3,44 @@ import Member from './components/Member'
 import Action from 'components/UI/inputs/Action'
 import InviteClassForm from 'components/forms/invite-class-form'
 import Access from 'components/Access'
-import { IsTeacher } from 'routes/Guards'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import User from './components/User'
 import useRequest from 'hooks/useRequest'
 import ClassServise from 'services/ClassSevrice'
 import Waiter from './components/Waiter'
+import { usePermissions } from 'hooks/user/useUser'
+import { useOutletContext, Navigate, useParams } from 'react-router-dom'
+
+function Members() {
+
+    const { data, setData, defaultRedirect } = useOutletContext()
+    const permissions = usePermissions()
+    const { isTeacher } = permissions
 
 
-function Members({ members, waiters, teacher, setMembers, setWaiters }) {
-
-
-    const isTeacher = IsTeacher()    
     const MemberItem = isTeacher ? Member : User
     const WaiterItem = isTeacher ? Waiter : User
+
+    const setGlobalData = (key, items) => {
+        const newData = { ...data }
+        newData[key] = items
+        setData((_data) => {
+            return {
+                ..._data,
+                members: newData
+            }
+        })
+    }
+    const setMembers = (members) => setGlobalData('members', members)
+
+    const setWaiters = (waiters) => setGlobalData('waiters', waiters)
 
     const [deleteMember, isDeleteMemberLoading] = useRequest(
         ClassServise.deleteMember,
         {
-            204: (resp, id) => setMembers(members.filter(member => member.id !== id))
+            204: (resp, id) => {
+                setMembers(data.members.filter(member => member.id !== id))
+            }
         }
     )
 
@@ -29,8 +48,8 @@ function Members({ members, waiters, teacher, setMembers, setWaiters }) {
         ClassServise.acceptWaiter,
         {
             200: (resp, id) => {
-                setWaiters(waiters.filter(waiter => waiter.id !== id))
-                setMembers([...members, resp.data])
+                setWaiters(data.waiters.filter(waiter => waiter.id !== id))
+                setMembers([...data.members, resp.data])
             }
         }
     )
@@ -39,14 +58,15 @@ function Members({ members, waiters, teacher, setMembers, setWaiters }) {
         ClassServise.rejectWaiter,
         {
             200: (resp, id) => {
-                setWaiters(waiters.filter(waiter => waiter.id !== id))
+                setMembers(data.waiters.filter(waiter => waiter.id !== id))
             }
         }
     )
-
+    if (!data?.members) {
+        return defaultRedirect
+    }
 
     return (
-
         <div className={css.block}>
             <div className={css.body}>
                 <div className={css.teachers}>
@@ -54,18 +74,18 @@ function Members({ members, waiters, teacher, setMembers, setWaiters }) {
                         <p className={[css.text, css.title].join(' ')}>Преподаватель</p>
                     </div>
                     <div className={css.members}>
-                        <User {...teacher} />
+                        <User {...data.creator} />
                     </div>
                 </div>
                 {
-                    waiters?.length ?
+                    data.waiters?.length ?
                         <div className={css.students}>
                             <div className={css.heading}>
                                 <p className={[css.text, css.title].join(' ')}>Ожидающие вступления</p>
-                                <p className={css.text}>{waiters.length}</p>
+                                <p className={css.text}>{data.waiters.length}</p>
                             </div>
                             <div className={css.members}>
-                                {waiters.map(waiter => <WaiterItem onAccept={acceptWaiter} isLoading={isAcceptWaiterLoading || isRejectWaiterLoading} onExcept={rejectWaiter} id={waiter.id} key={waiter.id} {...waiter.info} />)}
+                                {data.waiters.map(waiter => <WaiterItem onAccept={acceptWaiter} isLoading={isAcceptWaiterLoading || isRejectWaiterLoading} onExcept={rejectWaiter} id={waiter.id} key={waiter.id} {...waiter.info} />)}
                             </div>
                         </div>
                         : null
@@ -73,20 +93,20 @@ function Members({ members, waiters, teacher, setMembers, setWaiters }) {
                 <div className={css.students}>
                     <div className={css.heading}>
                         <p className={[css.text, css.title].join(' ')}>Участники</p>
-                        <p className={css.text}>{members.length}</p>
+                        <p className={css.text}>{data.members.length}</p>
                     </div>
 
                     {
-                        !members.length
+                        !data.members.length
                             ? <div className={css.empty}>
-                                <Access permission={IsTeacher}>
+                                <Access permission={isTeacher}>
                                     <p className={css.text}>Добавить участников</p>
                                     <Action text={"Добавить"} icon={faPlus} />
                                 </Access>
 
                             </div>
                             : <div className={css.members}>
-                                {members.map(member => <MemberItem isTeacher={isTeacher} onExcept={deleteMember} isLoading={isDeleteMemberLoading} key={member.id} id={member.id} {...member.info} />)}
+                                {data.members.map(member => <MemberItem isTeacher={isTeacher} onExcept={deleteMember} isLoading={isDeleteMemberLoading} key={member.id} id={member.id} {...member.info} />)}
                             </div>
                     }
                 </div>

@@ -7,90 +7,47 @@ import formCss from './forms.module.css'
 import Submit from './components/inputs/Submit'
 import FormSelect from './components/inputs/FormSelect'
 import PasswordInput from './components/inputs/PasswordInput'
-import AuthService from 'services/AuthService'
 import { faUser } from "@fortawesome/free-regular-svg-icons"
 import { faGraduationCap, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons'
-import { IS_EMAIL__VALIDATOR, MAX_LENGTH__VALIDATOR, REQUIRED__VALIDATOR, PASSWORDS_MATCH__VALIDATOR } from 'validation/validators'
-import useForm from 'hooks/forms/useForm'
-import useRequest from 'hooks/useRequest'
-import { useNavigate } from 'react-router-dom'
+import { Form } from 'formik'
 
-function RegisterForm() {
+function RegisterForm({ isSubmitting }) {
 
-    const navigate = useNavigate()
-
-    const registerRequest = useRequest(
-        async (validatedData) => await AuthService.register(validatedData),
-        {
-            200: (response) => navigate('/classes'),
-            400: (response) => {
-                handleServerErrors(response.response.data)
-            }
-        }
-    )
-
-    const { getInput, getSubmit, handleServerErrors } = useForm({
-        first_name: {
-            validators: [REQUIRED__VALIDATOR(), MAX_LENGTH__VALIDATOR(50)]
-        },
-        last_name: {
-            validators: [REQUIRED__VALIDATOR(), MAX_LENGTH__VALIDATOR(50)]
-        },
-        email: {
-            validators: [REQUIRED__VALIDATOR(), IS_EMAIL__VALIDATOR(), MAX_LENGTH__VALIDATOR(70)]
-        },
-        role: {
-            validators: [REQUIRED__VALIDATOR()],
-            options: {
-                selectOptions: [
-                    { name: 'Ученик', id: 1 },
-                    { name: 'Преподаватель', id: 2 }
-                ]
-            }
-        },
-        password: {
-            validators: [REQUIRED__VALIDATOR()],
-
-        },
-        password_confim: {
-            validators: [REQUIRED__VALIDATOR()],
-        }
-    }, registerRequest)
-
-
+    const RoleOptions = [
+        { name: 'Ученик', id: 1 },
+        { name: 'Преподаватель', id: 2 }
+    ]
 
 
     return (
-        <div className={[formCss.block, formCss.flex].join(' ')}>
+        <Form className={[formCss.block, formCss.flex].join(' ')}>
             <LinkSwither links={[{ text: 'Регистрация', to: '/accounts/register' }, { text: 'Войти', to: '/accounts/login' }]} className={css.links} selected={0} />
             <div className={[formCss.inputs, css.inputs].join(' ')}>
-                <FormInput {...getInput('first_name')} placeholder="Имя" icon={faUser} />
-                <FormInput {...getInput('last_name')} placeholder="Фамилия" icon={faUser} />
-                <FormInput {...getInput('email')} placeholder="Почта" icon={faEnvelope} />
-                <FormSelect {...getInput('role')} placeholder="Роль" icon={faGraduationCap} />
-                <PasswordInput {...getInput('password')} placeholder="Пароль" icon={faKey} />
-                <PasswordInput {...getInput('password_confim')} placeholder="Повторите пароль" icon={faKey} />
+                <FormInput name='first_name' placeholder="Имя" icon={faUser} />
+                <FormInput name='last_name' placeholder="Фамилия" icon={faUser} />
+                <FormInput name='email' placeholder="Почта" icon={faEnvelope} />
+                <FormSelect name='role' options={RoleOptions} placeholder="Роль" icon={faGraduationCap} />
+                <PasswordInput name='password' placeholder="Пароль" icon={faKey} />
+                <PasswordInput name='password_confim' placeholder="Повторите пароль" icon={faKey} />
             </div>
             <div className={css.statements}>
-                <CheckBox>
-
+                {/* <CheckBox>
                     <p className={css.text}>
                         Я принимаю
                     </p>
                     <Link to='/' text='Лицензионное соглашениe' />
 
-
-                </CheckBox>
+                </CheckBox> */}
             </div>
             <div className={css.submit}>
-                <Submit text='Регистрация' {...getSubmit()} />
+                <Submit loading={isSubmitting} text='Регистрация'  />
             </div>
 
             <div className={[formCss.text, formCss.flex, css.login].join(' ')}>
                 Уже есть аккаунт?
                 <Link to='/accounts/login' text='Войти' />
             </div>
-        </div>
+        </Form>
     )
 }
 export default RegisterForm

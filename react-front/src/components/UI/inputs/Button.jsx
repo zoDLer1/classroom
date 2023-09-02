@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 
-function Button({ text, disabled, onClick, loading = false, icon, size=1, ...props }) {
+function Button({ text, disabled, loading = false, icon, size = 1, ...props }) {
     return (
-        <div {...props} onClick={(e) => !disabled ? onClick(e) : null} className={[css.block, css[`size-${size}`], css[`disabled-${disabled}`]].join(' ')}>
+        <button {...props} className={[css.block, css[`size-${size}`], css[`disabled-${disabled}`]].join(' ')}>
             {!loading
                 ? <>
                     {icon && <FontAwesomeIcon icon={icon} />}
@@ -13,7 +13,7 @@ function Button({ text, disabled, onClick, loading = false, icon, size=1, ...pro
                 </>
                 : <FontAwesomeIcon icon={faSpinner} spinReverse spinPulse size='lg' />
             }
-        </div>
+        </button>
     )
 }
 

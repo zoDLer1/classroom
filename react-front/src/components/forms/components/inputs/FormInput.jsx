@@ -1,12 +1,28 @@
 import Input from "components/UI/inputs/Input"
-import useInput from "hooks/useInput"
+import { Field, FastField, getIn } from "formik"
 
-function FormInput({ value, validationMethods, ...props }) {
-    const { getProps } = useInput({ value, validationMethods })
-    
+
+export default function FormInput({ name, ...props }) {
     return (
-        <Input {...getProps()} {...props} />
+        <Field name={name}>
+            {({ form: { errors, touched }, field }) => <Input error={errors[field.name]} touched={touched[field.name]} field={field} {...props} />}
+        </Field>
     )
 }
 
-export default FormInput
+export const FormFastInput = ({ name, ...props }) => {
+    return (
+        <FastField name={name} {...props}>
+            {({ form: { errors, touched }, field }) => <Input error={errors[field.name]} touched={touched[field.name]} field={field} {...props} />}
+        </FastField>
+    )
+}
+
+export const FormNestedFastInput = ({ name, ...props }) => {
+    return (
+        <FastField name={name} {...props}>
+            {({ form: { errors, touched }, field }) => <Input error={getIn(errors, field.name)} touched={getIn(touched, field.name)} field={field} {...props} />}
+            
+        </FastField>
+    )
+}

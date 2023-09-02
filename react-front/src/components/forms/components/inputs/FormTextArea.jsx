@@ -1,12 +1,14 @@
 import TextArea from "components/UI/inputs/TextArea"
-import useInput from "hooks/useInput"
+import { Field, FastField } from "formik"
 
-function FormTextArea({ value, validationMethods, ...props }) {
-    const { getProps } = useInput({ value, validationMethods })
-    
+export default function FormTextArea({ name, ...props }) {
     return (
-        <TextArea {...getProps()} {...props} />
+        <Field component={TextArea} name={name} {...props}/>
     )
 }
 
-export default FormTextArea
+export const FormFastTextArea = ({ name, ...props }) => {
+    return (
+        <FastField component={TextArea} name={name} {...props}/>
+    )
+}

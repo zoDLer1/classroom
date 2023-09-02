@@ -1,17 +1,27 @@
 import Select from "components/UI/inputs/Select"
-import useInput from "hooks/useInput"
-import { useEffect } from "react"
+import { Field, FastField, getIn } from "formik"
 
 
-function FormSelect({ value, validationMethods, ...props }) {
-    
-    
-    const { getProps } = useInput({ value, validationMethods, getValue: (option) => option.id })
-
+export default function FormSelect({ name, ...props }) {
     return (
-        <Select {...getProps()} {...props} />
+        <Field name={name}>
+            {({ form: { errors, touched }, field }) => <Select error={errors[field.name]} touched={touched[field.name]} field={field} {...props} />}
+        </Field>
     )
-    
 }
 
-export default FormSelect
+export const FormFastSelect = ({ name, ...props }) => {
+    return (
+        <FastField name={name}>
+            {({ form: { errors, touched }, field }) => <Select error={errors[field.name]} touched={touched[field.name]} field={field} {...props} />}
+        </FastField>
+    )
+}
+
+export const FormNestedFastSelect = ({ name, ...props }) => {
+    return (
+        <FastField name={name}>
+            {({ form: { errors, touched, ...form }, field }) => <Select error={getIn(errors, field.name)} touched={getIn(touched, field.name)} form={form} field={field} {...props} />}
+        </FastField>
+    )
+}

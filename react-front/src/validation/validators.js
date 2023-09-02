@@ -1,5 +1,60 @@
 import { useState } from "react"
 
+class Validator {
+
+    get errorMessage() {
+        return 'error'
+    }
+
+    validate(value) {
+        return !Boolean(value)
+    }
+}
+
+
+export class Required extends Validator {
+
+    get errorMessage() {
+        return 'Поле не должно быть пустым'
+    }
+}
+
+export class MaxLenght extends Validator {
+
+    get errorMessage() {
+        return `Максимальная длина ${this.length} символов`
+    }
+
+    constructor(length) {
+        super()
+        this.length = length
+    }
+
+    validate(value) {
+        return value.length > this.length
+    }
+}
+
+export class IsEmail extends Validator {
+    get errorMessage(){
+        return 'Введите корректный email'
+    }
+
+    validate(value){
+        return !value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    }
+}
+
+export const MAX_LENGTH__VALIDATOR = (length) => new MaxLenght(length)
+
+export const REQUIRED__VALIDATOR = new Required()
+
+
+
+
+
+
+
 export const QUESTION__VALIDATOR = () => {
     return (value) => {
         const questionError = {}
@@ -17,7 +72,7 @@ export const QUESTIONS_VALIDATOR = () => {
         console.log(inputName)
         const getErrorsInit = () => {
             const initedErrors = {}
-            for (let i = 0; values.length > i; i++){
+            for (let i = 0; values.length > i; i++) {
                 initedErrors[i] = {}
             }
             return initedErrors
@@ -28,7 +83,7 @@ export const QUESTIONS_VALIDATOR = () => {
             const error = QUESTION__VALIDATOR()(values[index],)
             errors[index] = error || {}
         }
-        
+
         if (only !== undefined) {
             setError(only)
         }
@@ -45,22 +100,15 @@ export const QUESTIONS_VALIDATOR = () => {
     }
 }
 
+export const IS_EMAIL__VALIDATOR = new IsEmail()
 
 
 
-export const MAX_LENGTH__VALIDATOR = (length, errorMessage = `Максимальная длина ${length} символов`) => {
-    return (value) => value.length > length ? errorMessage : ''
-}
-export const IS_EMAIL__VALIDATOR = (errorMessage = 'Введите корректный email') => {
-    return (value) =>
-        !value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-            ? errorMessage
-            : ''
 
-}
-export const REQUIRED__VALIDATOR = (errorMessage = 'Поле не должно быть пустым') => {
-    return (value) => !value ? errorMessage : ''
-}
+
+
+
+
 export const MIN_LENGTH__VALIDATOR = (length, errorMessage = `Минимальная длина ${length} символов`) => {
     return (value) => value.length < length ? errorMessage : ''
 }

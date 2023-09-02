@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-export const useAlert = () => {
+export const useAlertControl = () => {
     const [isShowing, setShowing] = useState(false)
     const [info, setInfo] = useState()
 

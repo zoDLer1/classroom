@@ -1,139 +1,72 @@
-import { useState } from "react";
-import { CloseContext } from "contexts/closeContext";
-import { useContext } from "react";
+import useDict from "./forms/s/lists/useDict";
 
 
 
 
+export const useCollection = () => {
 
-export const useCollection = (onAutoClose = () => null) => {
-
-    const [collection, setList] = useState({})
-
-
-
-
-    const { add, remove } = useContext(CloseContext)
+    const [values, setValue, setValues] = useDict()
+    const [storedValues, setStoredValue] = useDict()
 
 
     // * Items Collection Methods
     const setItems = (items) => {
-        setList(() => {
-            let newCollection = {}
-            for (const item of items) {
-                newCollection[item.id] = { value: item, stored: {}, state: { loading: false, editMode: false, selected: false } }
-            }
-            return newCollection
+
+        for (const item of items) {
+            addItem(item.id, item)
+        }
+
+    }
+    const removeItem = (id) => {
+        setValues((values) => {
+            const newValues = { ...values }
+            delete newValues[id]
+            return newValues
         })
     }
 
     // * Item Store Methods
-
-
-
-
-    const storeProp = (id, key) => {
-        setList(
-            (collection) => {
-                const newCollection = {...collection}
-                newCollection[id].stored[key] = newCollection[id].value[key]
-                return newCollection
-            }
-        )
+    const saveProperty = (id, key) => {
+        const newStoredValue = {}
+        newStoredValue[key] = values[id][key]
+        setStoredValue(id, newStoredValue)
     }
+
     const reject = (id, key) => {
-        setList((collection) => {
-            const newCollection = {...collection}
-            newCollection[id].value[key] = newCollection[id].stored[key]
-            delete newCollection[id].stored[key]
-            return newCollection
-        })
+        const storedValue = { ...storedValues[id] }
+        setValue(id, { ...values[id], ...storedValue })
+        delete storedValue[key]
+        setStoredValue(id, storedValue)
     }
+
     const commit = (id, key) => {
-        setList((collection) => {
-            const newCollection = {...collection}
-            delete newCollection[id].stored[key]
-            return newCollection
-        })
+        const storedValue = { ...storedValues[id] }
+        delete storedValue[key]
+        setStoredValue(id, storedValue)
     }
 
-    const loadingState = (id, condition) => {
-        setList((collection) => {
-            const newCollection = {...collection}
-            newCollection[id].state.loading = condition
-            return newCollection
-        })
+    const addItem = (id, item) => {
+        setValue(id, item)
+        setStoredValue(id, {})
     }
 
-    // * Item State Methods
-
-
-    const editModeState = (id, value) => {
-        setList((collection) => {
-            const newCollection = {...collection}
-            newCollection[id].state.editMode = value
-            return newCollection
-        })
-    }
-
-    const editModeOn = (id) => {
-
-        editModeState(id, true)
-        add({
-            id, close: () => {
-                editModeOff(id)
-                onAutoClose(collection[id])
-            }
-        })
-    }
-    const editModeOff = (id) => {
-        editModeState(id, false)
-        remove(id)
-
-    }
-
-    const setItemProp = (id, key, value) => {
-        setList((collection) => {
-            const newCollection = {...collection}
-            newCollection[id].value[key] = value
-            return newCollection
-        })
-
-    }
-
-    const appendItem = (data) => {
-        setList((collection) => {
-            const newCollection = {...collection}
-            newCollection[data.id] = { value: data, stored: {}, state: { loading: false, editMode: false, selected: false } }
-            return newCollection
-        })
-    }
-
-    const updateItem = (id, data) => {
-        setList((collection) => {
-            const newCollection = {...collection}
-            newCollection[id].value = data
-            return newCollection
-        })
-    }
-
-    const getItem = (id) => {
-        return {
-            update: (data) => updateItem(id, data),
-            remove: () => removeItem(id),
-            setProp: (key, value) => setItemProp(id, key, value),
-            editModeOn: () => editModeOn(id),
-            editModeOff: () => editModeOff(id)
+    const getItems = () => {
+        const collection = []
+        for (const [id, value] of Object.entries(values)) {
+            collection.push([id, {
+                value,
+                stored: storedValues[id],
+                methods: {
+                    update: (data) => setValue(id, data),
+                    store: (key) => saveProperty(id, key),
+                    reject: (key) => reject(id, key),
+                    commit: (key) => commit(id, key),
+                    remove: () => removeItem(id)
+                }
+            }])
         }
+        return collection
     }
 
-    const removeItem = (id) => {
-        setList((collection) => {
-            const newCollection = {...collection}
-            delete newCollection[id]
-            return newCollection
-        })
-    }
-
-    return [collection, { setItems, addItem: appendItem, updateItem, removeItem, setItemProp, getItem }, { editModeOn, editModeOff, loadingState }, { storeProp, reject, commit }]
+    return [getItems, storedValues, { setItems, setValue, saveProperty, reject, commit, removeItem, addItem }]
 }

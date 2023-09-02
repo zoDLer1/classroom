@@ -2,8 +2,8 @@ import axios from "axios";
 import tokens from "store/tokens";
 import AuthService from "services/AuthService";
 
-export const DOMAIN = 'http://26.238.98.162:8000/api/v1'
-export const BAESDOMAIN = 'http://26.238.98.162:8000'
+export const DOMAIN = 'http://localhost:8000/api/v1'
+export const BAESDOMAIN = 'http://localhost:8000'
 // axios.defaults.timeout = 1000 * 100;
 
 export const Defaultconfig = {
@@ -19,7 +19,7 @@ export const Defaultconfig = {
 const DefaultApiInstanse = axios.create(Defaultconfig)
 
 DefaultApiInstanse.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${tokens.access}`
+    config.headers.Authorization = `Bearer ${localStorage.getItem('access')}`
     return config
 })
 DefaultApiInstanse.interceptors.response.use(
@@ -27,27 +27,16 @@ DefaultApiInstanse.interceptors.response.use(
         return config
     },
     async (error) => {
-        if (error?.response?.data?.code === "user_not_found"){
-            window.location = '/accounts/login'
-        }
         if (error.response.status === 401) {
-            try{
-                const response = await AuthService.refresh_token()
-                console.log(response)
-                return DefaultApiInstanse.request(error.config)
-            }
-            catch{
+            const response = await AuthService.refresh_token()
+            if (response?.status === 401) {
                 window.location = '/accounts/login'
             }
-            
+            else {
+                return DefaultApiInstanse.request(error.config)
+            }
         }
-
-
         return Promise.reject(error)
-
-
-
-
     }
 )
 
@@ -58,7 +47,7 @@ DefaultApiInstanse.interceptors.response.use(
 
 export const AuthApiInstanse = axios.create({
     baseURL: DOMAIN,
-
+    withCredentials: true
 })
 
 export default DefaultApiInstanse

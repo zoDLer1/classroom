@@ -1,4 +1,4 @@
-import DefaultApiInstanse, { AuthApiInstanse, BAESDOMAIN } from "api";
+import { AuthApiInstanse } from "api";
 import user from "store/user";
 import tokens from "store/tokens";
 
@@ -12,28 +12,15 @@ class AuthService {
         user.login(userData)
     }
     static async login({ email, password }) {
-        const response = await AuthApiInstanse.post('/users/login/', { email, password }).then(
-            (response) => {
-                this.auth(response.data.tokens, response.data.user)
-                return response
-            },
-        )
-        return response
+        return await AuthApiInstanse.post('/users/login/', { email, password })
+         
     }
     static async refresh_token() {
-        const response = await DefaultApiInstanse.post('users/refresh/', { refresh: tokens.refresh }).then(
-            (s) => tokens.access_token(s.data.access)
-        )
-        return response
+        return await AuthApiInstanse.post('users/refresh/')
     }
 
     static async register(data) {
-        const response = await AuthApiInstanse.post('/users/register/', data).then(
-            (response) => {
-                this.auth(response.data.tokens, response.data.user)
-                return response
-            })
-        return response
+        return await AuthApiInstanse.post('/users/register/', data)
     }
     static async logout() {
         return AuthApiInstanse.post('/users/logout')
