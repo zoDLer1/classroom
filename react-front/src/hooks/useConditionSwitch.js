@@ -2,7 +2,7 @@ import { useState } from "react"
 
 
 
-function useConditionSwitch(){
+function useConditionSwitch() {
 
     const [isOpen, setOpen] = useState(false)
 
@@ -10,12 +10,12 @@ function useConditionSwitch(){
         setOpen(true)
     }
     const close = () => {
-        setOpen(false)  
+        setOpen(false)
     }
-    const toggle = () =>{
+    const toggle = () => {
         isOpen ? close() : open()
     }
-    return {condition:isOpen, open, close, toggle} 
-}   
+    return { condition: isOpen, open, close, toggle }
+}
 
 export default useConditionSwitch

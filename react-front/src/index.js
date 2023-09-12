@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import { UserContextWrapper } from 'hooks/user/useUser';
+import { UserContextWrapper } from 'hooks/store/useUser';
 
 
 

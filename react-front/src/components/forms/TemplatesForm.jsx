@@ -2,14 +2,14 @@ import formCss from './forms.module.css'
 import css from './css/tests-form.module.css'
 import Action from 'components/UI/inputs/Action'
 import { useState, useContext } from 'react'
-import Template from './components/sections/components/Template'
-import AddToClassForm from 'components/forms/components/sections/components/AddToClassForm'
+import Template from 'components/lists/items/Template'
+import AddToClassForm from 'components/forms/AddToClassForm'
 import TestsServise from 'services/TestsService'
-import FormLoader from 'components/forms/formLoader'
-import { useInitialRequest } from 'hooks/useInitialRequest'
+import FormLoader from 'components/forms/FormLoader'
+import { useInitialRequest } from 'hooks/requests/useInitialRequest'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import useRequest from 'hooks/useRequest'
-import { usePopup } from 'hooks/globalUIContent/useGlobalUI'
+import useRequest from 'hooks/requests/useRequest'
+import { usePopup } from 'hooks/globalUI/useGlobalUI'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -62,7 +62,7 @@ function TestsForm() {
             <div className={css.content}>
                 <FormLoader condition={isLoading}>
                     <div className={css.tests}>
-                        {templates.map(test => <Template onAppoint={popupOpen} onDelete={deteleTemplate} key={test.id}  {...test} />)}
+                        {templates.map(test => <Template onAppoint={popupOpen} onDelete={deteleTemplate} key={test.id} {...test} />)}
                     </div>
                     {templates.length < 4 ?
                         <div className={css.empty}>

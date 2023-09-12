@@ -6,9 +6,10 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(css);
 
-const CheckBox = ({ field: { value, onChange, ...field }, form, children, onCustomChange, checkboxSlyle = 'default', type = "checkbox", color = 'light', ...props }) => {
+const CheckBox = ({ field: { value, onChange, ...field }, form, children, onCustomChange, error, touched, checkboxSlyle = 'default', type = "checkbox", color = 'light', ...props }) => {
     const id = useId()
-    const checkboxStyles = cx('block', checkboxSlyle, type)
+    const checkboxStyles = cx('block', checkboxSlyle, type, { hasError: error && touched })
+
 
     return (
         <div className={checkboxStyles}>

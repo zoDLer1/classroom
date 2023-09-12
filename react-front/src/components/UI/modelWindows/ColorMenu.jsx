@@ -1,5 +1,5 @@
 import css from './css/colormenu.module.css'
-import Color from './components/ColorItem'
+import Color from './ColorItem'
 import Link from 'components/UI/navigation/Link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'

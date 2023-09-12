@@ -11,7 +11,6 @@ const cx = classNames.bind(css);
 function Input({ field, error, touched, children, icon, styleType = 'default', labelStyle, readOnly = false, placeholder, ...props }) {
     const inputClasses = cx({ hasError: error && touched, readOnly }, styleType)
     const id = useId()
-    
 
     return (
         <div className={inputClasses}>

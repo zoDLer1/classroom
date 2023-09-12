@@ -1,21 +1,21 @@
 import CardList from 'components/lists/ClassesList'
 import ClassServise from 'services/ClassSevrice'
 import CreateClassForm from 'components/forms/CreateClassForm'
-import JoinClassForm from 'components/forms/join-class-form'
-import { usePopup } from 'hooks/globalUIContent/useGlobalUI'
+import JoinClassForm from 'components/forms/JoinClassForm'
+import { usePopup } from 'hooks/globalUI/useGlobalUI'
 import { useCollection } from 'hooks/useCollection'
-import { useInitialRequest } from 'hooks/useInitialRequest'
+import { useInitialRequest } from 'hooks/requests/useInitialRequest'
 import formCss from 'components/forms/forms.module.css'
 import css from './css/classes.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-
+import FormLoader from 'components/forms/FormLoader'
 
 function ClassesPage() {
 
     const popup = usePopup()
 
-    const [wait] = useInitialRequest(
+    const [waitForResponse] = useInitialRequest(
         {},
         ClassServise.all,
         {
@@ -42,7 +42,11 @@ function ClassesPage() {
 
                 </div>
             </div>
-            <CardList classes={classes} storedValues={storedValues} classesActions={classesActions} />
+            <div className={css.body}>
+                <FormLoader condition={waitForResponse}>
+                    <CardList classes={classes} storedValues={storedValues} classesActions={classesActions} />
+                </FormLoader>
+            </div>
         </div>
 
 

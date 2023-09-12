@@ -16,3 +16,15 @@
 .block{
     position: relative;  
 }
+.view_placeholder{
+    font-size: 14px;
+}
+.viewMode{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.viewMode p {
+    font-style: italic;
+    font-size: 16px;
+}

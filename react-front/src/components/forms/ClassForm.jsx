@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import css from './css/class-from.module.css'
 import { Outlet } from 'react-router-dom'
 import { useLocation, useNavigate, Navigate, useParams } from 'react-router-dom'
@@ -15,39 +15,34 @@ const ClassForm = ({ pages, classData, setClassData, setFullData }) => {
 
     const { id } = useParams()
 
-    const defaultRedirect = <Navigate to={`/classes/${id}/${defaultRedirectPage}`} state={{ key: defaultRedirectPage }} />
 
     const navigate = useNavigate()
     const location = useLocation()
+    const current = useMemo(() => pages.findIndex(item => `/classes/${id}/${item.url}` === location.pathname), [location, pages])
+    
 
-    useEffect(() => {
-        if (!location.state?.key) {
-            navigate(defaultRedirectPage, { replace: true, state: { key: defaultRedirectPage } })
+    useEffect(()=>{
+        if (current === -1){
+            navigate(`/classes/${id}/tests`)
         }
     }, [location])
-
-
-    const navigateTo = (page) => navigate(page, { state: { key: page } })
-
-
-
-
-
+   
+  
 
     return (
         <div className={css.block} tabIndex={0}>
 
             <div className={css.body}>
-                {Object.entries(pages).map(([key, value]) =>
+                {pages.map(({ text, url }, index) =>
                     <div
-                        onClick={() => navigateTo(key)}
-                        key={key}
-                        className={cx('item', { selected: key === location.state?.key })}>
-                        {value}
+                        onClick={() => navigate(url)}
+                        key={index}
+                        className={cx('item', { selected: current === index })}>
+                        {text}
                     </div>)}
             </div>
             <div className={css.section}>
-                <Outlet context={{ data: classData[location.state?.key], setData: setClassData, setFullData, defaultRedirect }} />
+                {current !== -1 && <Outlet context={{ data: classData[pages[current].url], setData: setClassData, setFullData }} />}
             </div>
 
         </div>

@@ -10,7 +10,8 @@
     --faded-primary: #75B8DF;
     --success-color: #1AD92C;
     --light-color: #fff;
-    --dark-op15-color: rgba(0, 0, 0, 0.15);
+    --dark-op15-color: rgba(0, 0, 0, 15%);
+    --dark-op20-color: rgb(0 0 0 / 20%);
     --gray-color: #B6B2B1;
 }
 
@@ -34,7 +35,7 @@
 html,
 body,
 .page-root {
-    height: 100%;
+    min-height: 100vh;
 }
 
 * {

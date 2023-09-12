@@ -5,7 +5,7 @@ import { useState } from 'react'
 import Statistics from './statistics'
 import Profile from './user-profile'
 import { useEffect } from 'react'
-import { useInitialRequest } from 'hooks/useInitialRequest'
+import { useInitialRequest } from 'hooks/requests/useInitialRequest'
 import TestsServise from 'services/TestsService'
 
 

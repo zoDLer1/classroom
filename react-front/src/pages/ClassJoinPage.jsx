@@ -1,7 +1,7 @@
-import { useInitialRequest } from "hooks/useInitialRequest"
+import { useInitialRequest } from "hooks/requests/useInitialRequest"
 import ClassServise from "services/ClassSevrice"
 import { useParams } from "react-router-dom"
-import { useInfoAndRedirect } from "hooks/useInfoAndRedirect"
+import { useInfoAndRedirect } from "hooks/globalUI/useInfoAndRedirect"
 
 
 export default function ClassJoinPage() {

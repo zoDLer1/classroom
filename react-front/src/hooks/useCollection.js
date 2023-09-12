@@ -1,4 +1,4 @@
-import useDict from "./forms/s/lists/useDict";
+import useDict from "./helpers/useDict";
 
 
 

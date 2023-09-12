@@ -1,46 +1,20 @@
 import RegisterForm from 'components/forms/RegisterForm'
-import MainLayout from 'layouts/MainLayout'
 import { Formik } from 'formik'
-import * as Yup from 'yup';
-import useRequest from 'hooks/useRequest'
+import { RegisterSchema } from 'validation/Schemes'
+import useRequest from 'hooks/requests/useRequest'
 import { useNavigate } from 'react-router-dom'
-import { useUser } from 'hooks/user/useUser'
+import { useUser } from 'hooks/store/useUser'
 import AuthService from 'services/AuthService'
 
-const registerSchema = Yup.object().shape({
-    first_name: Yup.string()
-        .required('Заполните поле')
-        .min(2, 'Поле должно содержать не менее 2 символов')
-        .max(50, 'Поле должно содержать не более 50 символов'),
-    last_name: Yup.string()
-        .required('Заполните поле')
-        .min(2, 'Поле должно содержать не менее 2 символов')
-        .max(50, 'Поле должно содержать не более 50 символов'),
-    email: Yup.string()
-        .required('Заполните поле')
-        .email('Введите правильный email')
-        .min(2, 'Поле должно содержать не менее 2 символов')
-        .max(50, 'Поле должно содержать не более 50 символов'),
-    role: Yup.number()
-        .required()
-        .positive()
-        .integer(),
-    password: Yup.string()
-        .required('Заполните поле')
-        .min(6, 'Поле должно содержать не менее 6 символов'),
-    password_confim: Yup.string()
-        .required('Заполните поле')
-        .min(6, 'Поле должно содержать не менее 6 символов')
-
-});
 
 
-function Register() {
+
+function RegisterPage() {
 
     const navigate = useNavigate()
     const user = useUser()
 
-    const [sendRegisterRequest, waitForResponse] = useRequest(
+    const [sendRegisterRequest] = useRequest(
         AuthService.register,
         {
             200: (response) => {
@@ -58,30 +32,29 @@ function Register() {
         return errors
     }
     return (
-        <MainLayout>
-            <Formik
-                initialValues={{
-                    first_name: '',
-                    last_name: '',
-                    email: '',
-                    role: '',
-                    password: '123123123s',
-                    password_confim: '123123123s',
-                }}
-                validationSchema={registerSchema}
-                validate={validateRegister}
-                onSubmit={
-                    async (values, { setErrors, setSubmitting }) => {
-                        await sendRegisterRequest(values, { 400: (response) => setErrors(response.response.data) })
-                        setSubmitting(false)
-                    }
-                }
-            >
-                {RegisterForm}
-            </Formik>
 
-        </MainLayout>
+        <Formik
+            initialValues={{
+                first_name: '',
+                last_name: '',
+                email: '',
+                role: '',
+                password: '123123123s',
+                password_confim: '123123123s',
+                lisence: false
+            }}
+            validationSchema={RegisterSchema}
+            validate={validateRegister}
+            onSubmit={
+                async (values, { setErrors, setSubmitting }) => {
+                    await sendRegisterRequest(values, { 400: (response) => setErrors(response.response.data) })
+                    setSubmitting(false)
+                }
+            }
+        >
+            {RegisterForm}
+        </Formik>
     )
 }
 
-export default Register 
+export default RegisterPage 

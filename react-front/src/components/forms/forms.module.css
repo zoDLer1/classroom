@@ -1,14 +1,24 @@
 .block{
     justify-items: center;
     flex-direction: column;
-    padding: 42px 80px;
     margin: 0 auto;
     position: relative;
-    background-color: #fff;
+    background-color: var(--light-color);
     border-radius: 55px;
-    box-shadow: 0 10px 70px 0 rgb(0 0 0 / 20%);
-   
+    box-shadow: 0 10px 70px 0 var(--dark-op20-color);
 }
+
+
+.pad_1{
+    padding: 42px 80px;
+}
+
+.text{
+    font-size: 16px;
+    color: var(--alt-color);
+}
+
+
 .inputs{ 
     min-width: 310px;
     gap: 40px;
@@ -19,12 +29,8 @@
     display: flex;
     align-items: center;
 } 
-.links{
+/* .links{
     width: 100%;
     gap: 35px;
     justify-content: end;
-}
-.text{
-    font-size: 16px;
-    color: var(--alt-color);
-}
+} */

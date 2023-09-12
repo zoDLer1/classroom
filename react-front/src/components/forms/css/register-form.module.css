@@ -13,6 +13,7 @@
 }
 .login{
     gap: 10px;
+    justify-content: center;
 }
 .links{
     margin-bottom: 30px;

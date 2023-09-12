@@ -1,10 +1,10 @@
 import React from 'react'
-import { useInitialRequest } from 'hooks/useInitialRequest'
+import { useInitialRequest } from 'hooks/requests/useInitialRequest'
 import TestsServise from 'services/TestsService'
 import formCss from './css/form.module.css'
-import FormLoader from './formLoader'
+import FormLoader from './FormLoader'
 import { useState } from 'react'
-import StatisticQuestion from './components/tests/components/StatisticQuestion'
+import StatisticQuestion from '../lists/items/StatisticQuestion'
 import css from './css/passed-test-statistic.module.css'
 
 

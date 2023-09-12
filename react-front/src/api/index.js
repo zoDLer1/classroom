@@ -1,5 +1,4 @@
 import axios from "axios";
-import tokens from "store/tokens";
 import AuthService from "services/AuthService";
 
 export const DOMAIN = 'http://localhost:8000/api/v1'
@@ -33,6 +32,7 @@ DefaultApiInstanse.interceptors.response.use(
                 window.location = '/accounts/login'
             }
             else {
+                localStorage.setItem('access', response.data.access)
                 return DefaultApiInstanse.request(error.config)
             }
         }

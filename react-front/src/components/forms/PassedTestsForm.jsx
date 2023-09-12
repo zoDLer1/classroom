@@ -1,14 +1,14 @@
 import formCss from './css/form.module.css'
-import FormLoader from "components/forms/formLoader"
-import membersCss from './components/sections/css/members.module.css'
+import FormLoader from "components/forms/FormLoader"
+import membersCss from 'pages/css/members.module.css'
 import css from './css/passed-test-form.module.css'
 import DefaultLink from 'components/UI/navigation/DefaultLink'
 import { useNavigate } from 'react-router-dom'
-import PassedTest from './components/sections/components/PassedTest'
+import PassedTest from '../lists/items/PassedTest'
 import Action from 'components/UI/inputs/Action'
 import { faAnglesLeft, faSquarePollVertical } from '@fortawesome/free-solid-svg-icons'
 import TestsServise from "services/TestsService"
-import { useInitialRequest } from "hooks/useInitialRequest"
+import { useInitialRequest } from "hooks/requests/useInitialRequest"
 import { useState } from "react"
 
 

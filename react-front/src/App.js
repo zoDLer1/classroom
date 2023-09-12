@@ -1,8 +1,8 @@
 
 import Routes from './routes'
-import { CloseWrapper } from 'hooks/globalUIContent/useClose';
-import { GlobalUIWrapper } from 'hooks/globalUIContent/useGlobalUI';
-import { GlobalStorageWrapper } from 'hooks/useGlobalStorage';
+import { CloseWrapper } from 'hooks/globalUI/useClose';
+import { GlobalUIWrapper } from 'hooks/globalUI/useGlobalUI';
+import { GlobalStorageWrapper } from 'hooks/store/useGlobalStorage';
 
 function App() {
 

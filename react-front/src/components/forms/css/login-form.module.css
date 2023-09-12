@@ -1,9 +1,10 @@
 .inputs{ 
     margin: 40px 0;
 }
-.userFunctions{
+.remember{
     width: 100%;
-    justify-content: space-between;
+    /* justify-content: flex-end; */
+    
 }
 .submit{
     margin-bottom: 40px;
@@ -20,8 +21,4 @@
 }
 .links{
     margin-bottom: 30px;
-}
-.remember{
-    font-size: 15px;
-    color: var(--gray-color);
 }

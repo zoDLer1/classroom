@@ -1,0 +1,27 @@
+.submit{
+    margin-bottom: 20px;
+    width: 100%;
+}
+.inputs{
+    margin-bottom: 30px;
+    width: 90%
+}
+.label{
+    margin-bottom: 40px;
+    color: #4c9fcd;
+    display: flex;
+    gap: 10px;
+
+}
+.class_{
+    display: block;
+    max-width: 285px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.block{
+    justify-content: center;
+    width: 320px;
+    height: 230px;
+}

@@ -1,16 +1,9 @@
 import { AuthApiInstanse } from "api";
-import user from "store/user";
-import tokens from "store/tokens";
+
+
 
 class AuthService {
 
-
-
-    static async auth({ refresh, access }, userData) {
-        tokens.access_token(access)
-        tokens.refresh_token(refresh)
-        user.login(userData)
-    }
     static async login({ email, password }) {
         return await AuthApiInstanse.post('/users/login/', { email, password })
          

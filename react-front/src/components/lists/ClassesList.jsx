@@ -1,10 +1,10 @@
 import css from './css/card-list.module.css'
-import Class from './components/Class'
-import { useMenuControl } from 'hooks/globalUIContent/useMenuControl'
+import Class from './items/Class'
+import { useMenuControl } from 'hooks/globalUI/controls/useMenuControl'
 import ColorMenu from 'components/UI/modelWindows/ColorMenu'
 import ClassServise from 'services/ClassSevrice'
-import useDataRequest from 'hooks/useDataRequest'
-import { useInitialRequest } from 'hooks/useInitialRequest'
+import useDataRequest from 'hooks/requests/useDataRequest'
+import { useInitialRequest } from 'hooks/requests/useInitialRequest'
 import { useEffect } from 'react'
 
 
@@ -14,10 +14,10 @@ function ClassesList({ classes, storedValues, classesActions }) {
 
     const applyColor = async (current) => {
         await updateRequest({ id: current.id, data: { color: current.color_info.id } }, {
-            200: (response, { id }) => {
+            200: (_, { id }) => {
                 classesActions.commit(id, 'color_info')
             },
-            'bad': (response, { id }) => {
+            'bad': (_, { id }) => {
                 classesActions.reject(id, 'color_info')
             }
         })
@@ -30,7 +30,7 @@ function ClassesList({ classes, storedValues, classesActions }) {
     const [deleteRequest, deleteRequestData] = useDataRequest(
         ClassServise.delete,
         {
-            204: (resp, id) => classesActions.removeItem(id)
+            204: (_, id) => classesActions.removeItem(id)
         },
     )
 

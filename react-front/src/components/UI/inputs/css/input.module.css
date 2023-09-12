@@ -12,18 +12,34 @@
 }
 
 
-.default{
+.default {
     --self-color: var(--primary-color);
     --inactive-color: var(--gray-color);
     --placeholder-color: rgba(0, 0, 0, .3);
     --input-color: #000;
 }
-.light{
+
+.light {
     --self-color: #fff;
     --inactive-color: #fff;
     --placeholder-color: rgba(0, 0, 0, .3);
     --input-color: #fff;
 }
+
+.error {
+    --self-color: var(--error-color);
+    --inactive-color: var(--error-color);
+    --placeholder-color: var(--error-color);
+    --input-color: #000;
+}
+.correct{
+    --self-color: var(--success-color);
+    --inactive-color: var(--success-color);
+    --placeholder-color: var(--success-color);
+    --input-color: #000;
+}
+
+
 
 .main {
     padding: 0 8px;
@@ -33,24 +49,21 @@
     justify-content: space-between;
     position: relative;
     min-height: 45px;
-    
+
 }
-.readOnly{
+
+.readOnly {
     border: none;
 }
 
 
-.label{
-    /* width: 170px; */
-    overflow: hidden;
-    /* white-space: nowrap; */
-    text-overflow: ellipsis;
+.label {
     color: var(--input-color);
     font-size: 26px;
     font-weight: 500;
 }
 
-.hasError{
+.hasError {
     --self-color: var(--error-color)
 }
 
@@ -115,16 +128,17 @@
     color: var(--inactive-color);
 }
 
-.form__input > .icon {
+.form__input>.icon {
     cursor: pointer;
 }
 
-.body:has(input:focus) .placeholder{
+.body:has(input:focus) .placeholder {
     font-size: 12px;
     color: var(--self-color);
     top: -17px;
 }
-.body:not(:has(input[value=""])) .placeholder{
+
+.body:not(:has(input[value=""])) .placeholder {
     font-size: 12px;
     top: -17px;
 }
@@ -133,7 +147,7 @@
     animation: input_icon 0.3s linear forwards;
 }
 
-.main:has(input:focus)::after{
+.main:has(input:focus)::after {
     animation: input_border 0.3s ease-in-out forwards;
 }
 
@@ -142,7 +156,8 @@
     gap: 5px;
     user-select: none;
 }
-.error{
+
+/* .error {
     width: 100%;
     margin-top: 0.25rem;
     font-size: .875em;
@@ -150,7 +165,8 @@
     height: 15px;
     margin-left: 30px;
     overflow: hidden;
-}
+} */
+
 /* .main:has(input:disabled){
     background-color: #e9ecef;
 } */

@@ -1,21 +1,12 @@
 import TestsServise from "services/TestsService"
-import { useInitialRequest } from "hooks/useInitialRequest"
+import { useInitialRequest } from "hooks/requests/useInitialRequest"
 import { useParams } from "react-router-dom"
-import PageSection from "components/pageSection"
 import TemplateCreationForm from "components/forms/TemplateCreationForm"
 import css from './pages.module.css'
 import { useState } from "react"
-import footerCss from 'components/forms/components/tests/css/footer.module.css'
-import Action from "components/UI/inputs/Action"
-import { useNavigate } from "react-router-dom"
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons"
+import { Formik, Form } from "formik"
 
-const Footer = ({ _class }) => {
-    const navigate = useNavigate()
-    return <div className={footerCss.block}>
-        <Action text={'Назад'} onClick={() => navigate('/classes/' + _class)} icon={faAngleLeft}></Action>
-    </div>
-}
+
 
 export default function PassedTestPage() {
     const { id } = useParams()
@@ -27,12 +18,20 @@ export default function PassedTestPage() {
         TestsServise.getPassedTest,
         {
             200: (resp) => {
-                const test_data = { ...resp.data.test_info, _class: resp.data._class }
+                const { template_info: { name, description }, ...test_info } = resp.data.test_info
+
+                const test_data = { name, description, ...test_info, member: resp.data.member_info, _class: resp.data._class }
                 const questions = []
                 for (const passed_question of resp.data.passed_questions) {
-                    const { id, ...question_info } = passed_question.question_info
                     const { is_correct, passed_answers, time } = passed_question
-                    const question = { ...question_info, is_correct, passed_answers, passed_time: time }
+                    const { id, answers, ...question_info } = passed_question.question_info
+                    for (let i = 0; i < answers.length; i++) {
+                        const index = passed_answers.findIndex(passed_answer => passed_answer.answer === answers[i].id)
+                        const isPassed = index !== -1 
+
+                        answers[i] = { ...answers[i], isCorrect: isPassed || answers[i].isCorrect, right: answers[i].value ?? answers[i].isCorrect, isPassed, value: passed_answers[index]?.value }
+                    }
+                    const question = { ...question_info, answers, is_correct, passed_time: time }
                     questions.push(question)
                 }
                 test_data['questions'] = questions
@@ -43,13 +42,12 @@ export default function PassedTestPage() {
     )
 
     return (
-        <PageSection className={css.section}>
-            {data && <TemplateCreationForm mode={'view'} data={data}>
-
-                <Footer _class={data._class} />
-            </TemplateCreationForm>}
-
-        </PageSection>
+        <div className={css.section}>
+            {data && <Formik
+            initialValues={data}>
+                {TemplateCreationForm}
+            </Formik>}
+        </div>
     )
 }
 

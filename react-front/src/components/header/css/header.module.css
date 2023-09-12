@@ -1,0 +1,38 @@
+.block{
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 70px;
+
+}
+.logo{
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+}
+.navigation{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 40px;
+}
+.avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.user{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.actions {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 300px 1fr 1fr;
+}
+
+.action_container{
+    display: flex;
+    gap: 40px;
+}

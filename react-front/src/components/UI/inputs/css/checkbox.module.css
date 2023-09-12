@@ -14,6 +14,9 @@
     --self-color: var(--alt-color);
 }
 
+.hasError {
+    --self-color: var(--error-color);
+}
 
 .icon {
     display: flex;
