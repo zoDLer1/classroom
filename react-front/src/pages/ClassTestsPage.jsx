@@ -1,5 +1,5 @@
 import css from './css/tests.module.css'
-import Task from '../components/lists/items/Test'
+import Test from '../components/lists/items/Test'
 import Action from 'components/UI/inputs/Action'
 import Access from 'components/permissions/Access'
 import { faPlus, faCircleCheck } from '@fortawesome/free-solid-svg-icons'
@@ -25,7 +25,7 @@ function ClassTestsPage() {
                 </Access>
             </div>
             <div className={css.tasks}>
-                {data.map(test => <Task permissions={permissions} key={`task-${test.id}`} {...test} />)}
+                {data.map(test => <Test permissions={permissions} key={`task-${test.id}`} {...test} />)}
             </div>
             <div className={css.add}>
                 <Action text={'Ещё'} />

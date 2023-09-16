@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import css from './css/sidebar-menu.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import itemCss from './css/menu-item.module.css'
 
 function SidebarMenu({ items, className, id }) {
     return (
@@ -16,7 +17,7 @@ function MenuItem({ icon, fs = 24, action, isChecked = false }) {
 
     const [checked, setChecked] = useState(isChecked)
 
-    return <FontAwesomeIcon onClick={() => action(setChecked)} icon={icon} className={[css.block, css[`fs${fs}`], css[`isChecked-${checked}`]].join(' ')}></FontAwesomeIcon>
+    return <FontAwesomeIcon onClick={() => action(setChecked)} icon={icon} className={[itemCss.block, itemCss[`fs${fs}`], itemCss[`isChecked-${checked}`]].join(' ')}></FontAwesomeIcon>
 }
 
 

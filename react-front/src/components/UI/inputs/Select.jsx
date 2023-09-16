@@ -11,7 +11,7 @@ function Select({ field: { value, onChange, ...fieldOptions }, onSelect = () => 
     const select = (id) => {
         close()
         form.setFieldValue(fieldOptions.name, id)
-        onSelect(fieldOptions.name, id, value)
+        onSelect(fieldOptions.name, id, value, form)
     }
 
     return (

@@ -1,7 +1,5 @@
 .block{
-    padding: 10px 50px;
     display: flex;
     flex-direction: column;
-    
-    /* gap: 30px; */
+    gap: 30px;
 }

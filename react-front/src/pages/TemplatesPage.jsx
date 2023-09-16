@@ -1,12 +1,12 @@
-import pagesCss from './pages.module.css'
+import ContentUpper from './containers/ContentUpper'
 import TestsForm from 'components/forms/TemplatesForm'
 
 
 function Templates() {
     return (
-        <div className={pagesCss.content_up_100_down_200}>
+        <ContentUpper>
             <TestsForm />
-        </div>
+        </ContentUpper>
     )
 }
 

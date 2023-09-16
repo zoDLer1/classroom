@@ -23,10 +23,9 @@
     border: 1px solid var(--error-color);
 }
 
-.mode-pass {
+.passing{
     overflow: hidden;
 }
-
 .block {
     display: flex;
     flex-direction: column;

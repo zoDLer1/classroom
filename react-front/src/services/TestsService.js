@@ -25,8 +25,8 @@ class TestsServise {
     static async get(id) {
         return await DefaultApiInstanse.get(`tests/${id}`)
     }
-    static async create(data) {
-        return await DefaultApiInstanse.post('tests/', data)
+    static async update(id, data) {
+        return await DefaultApiInstanse.patch(`tests/${id}`, data)
     }
     static async add_to_class({ _class, template }) {
         return await DefaultApiInstanse.post('tests/', { _class, template })

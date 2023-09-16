@@ -1,29 +1,16 @@
 import React from 'react'
-import { Field } from 'formik'
-import Select from 'components/UI/inputs/Select'
+import FormSelect from '../FormSelect'
 
 
-export function SelectSender({ field, form, ...props }) {
 
 
-    const onSelect = (name, newValue, oldValue) => {
+export default function FormSelectSender(props) {
+   
+    const onSelect = (_, newValue, oldValue, form) => {
         if (newValue !== oldValue) form.submitForm()
     }
 
     return (
-        <Select
-            field={field}
-            {...props}
-            onSelect={onSelect}
-            form={form}
-        />
-    )
-}
-
-
-
-export default function FormSelectSender({ ...props }) {
-    return (
-        <Field component={SelectSender} {...props} />
+        <FormSelect {...props} onSelect={onSelect} />
     )
 }

@@ -1,7 +1,7 @@
 import formCss from './forms.module.css'
 import css from './css/tests-form.module.css'
 import Action from 'components/UI/inputs/Action'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import Template from 'components/lists/items/Template'
 import AddToClassForm from 'components/forms/AddToClassForm'
 import TestsServise from 'services/TestsService'
@@ -32,7 +32,7 @@ function TestsForm() {
     const [deteleTemplate] = useRequest(
         TestsServise.deteleTemplate,
         {
-            204: (resp, id) => setTemplates(templates.filter(template => template.id !== id))
+            204: (_, id) => setTemplates(templates.filter(template => template.id !== id))
         }
     )
 

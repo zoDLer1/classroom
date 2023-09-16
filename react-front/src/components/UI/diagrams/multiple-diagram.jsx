@@ -6,7 +6,6 @@ import { useState } from 'react'
 const MultipleDiagram = ({ data, fillIn = true, width = "450", height = "450" }) => {
 
     let totalOffset = 0
-
     const [sections, setSections] = useState(data)
 
 

@@ -4,7 +4,9 @@
     box-shadow: 0 10px 70px 0 rgb(0 0 0 / 20%);
     padding: 42px 80px;
     width: 680px;
-
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .label{
     margin-bottom: 20px;

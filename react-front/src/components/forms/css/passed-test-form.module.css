@@ -1,49 +1,71 @@
-.block{
+.block {
     padding: 20px;
 }
-.name{
+
+.name {
     color: var(--primary-color);
 }
-.header{
+
+.header {
     padding: 0 10px 30px 10px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.passed_test{
-    min-height: 300px;
+
+.passed_test {
+    min-height: 150px;
 }
-.passed_tests{
+
+.passed_tests {
     font-size: 20px;
 }
-.class_info{
+
+.class_info {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.class_info span{
+.class_info span {
     color: var(--primary-color);
 }
-.status{
+
+.status {
     padding: 3px 5px;
     color: #fff;
     font-size: 14px;
     border-radius: 10px;
 }
-.perfect{
+
+.perfect {
     background-color: var(--success-color);
 }
-.great{
+
+.great {
     background-color: #18b126;
 }
-.normal{
+
+.normal {
     background-color: #6e9d22;
 }
-.middle{
+
+.middle {
     background-color: #9d9922;
 }
-.bad{
+
+.bad {
     background-color: #974a25;
 }
 
+.view {
+    display: flex;
+    gap: 10px;
+}
+
+.passing {
+    background-color: var(--primary-color);
+}
+.ended {
+    background-color: var(--success-color);
+}

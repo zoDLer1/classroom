@@ -1,7 +1,7 @@
 import css from './css/question-list.module.css'
 import Question from 'components/lists/items/Question'
 import { FieldArray } from 'formik'
-import { defaultQuestionValue } from 'components/forms/TemplateCreationForm'
+import { defaultQuestionValue } from 'pages/CreateTemplatePage'
 
 const QuestionList = ({ values, viewMode }) => {
 

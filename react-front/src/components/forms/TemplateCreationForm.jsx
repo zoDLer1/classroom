@@ -4,58 +4,53 @@ import QuestionList from 'components/lists/QuestionList'
 import { Form } from 'formik'
 import { useHeader, useHeaderBack } from 'hooks/globalUI/useGlobalUI'
 import { useEffect, useState, useRef } from 'react'
-import { faPlus, faFileImport, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-import { TemplateCreationSchema } from 'pages/CreateTemplatePage'
-
-
-export const defaultTextAnswer = { value: '', isCorrect: true }
-
-export const defaultManyAnswer = { name: '', isCorrect: false }
-
-export const defaultAnswersValues = {
-    1: [defaultTextAnswer],
-    2: Array(4).fill(defaultManyAnswer),
-    3: Array(4).fill(defaultManyAnswer)
-}
-
-
-export const defaultQuestionValue = {
-    name: "",
-    type: 1,
-    time: undefined,
-    answers: [defaultTextAnswer]
-}
+import { faPlus, faFileImport, faEye, faEyeSlash, faFileExport } from '@fortawesome/free-solid-svg-icons'
+import { TemplateCreationSchema } from 'validation/Schemes'
 
 
 
 
 
-const TemplateCreationForm = ({ values, handleSubmit, errors, setValues }) => {
+
+const TemplateCreationForm = ({ values, handleSubmit, setValues, validateForm, initialViewMode = false, viewActions = true }) => {
 
     useHeaderBack()
     const { setAction, editAction } = useHeader()
 
-    const uploadRef = useRef()
+    const importRef = useRef()
 
-    const [viewMode, setMode] = useState(false)
+    const exportRef = useRef()
+
+    const [viewMode, setMode] = useState(initialViewMode)
+
 
     useEffect(() => {
-        setAction(0,
-            [
-                { icon: faPlus, text: 'Создать', action: handleSubmit },
-                { icon: faFileImport, text: 'Загрузить', action: () => uploadRef.current.click() },
-                { icon: faEye, text: 'Просмотр', action: () => setMode((mode) => !mode) }
-            ]
-        )
+        if (viewActions)
+            setAction(0,
+                [
+                    { icon: faPlus, text: 'Создать', action: handleSubmit },
+                    { icon: faFileImport, text: 'Загрузить', action: () => importRef.current.click() },
+                    { icon: faFileExport, text: 'Экспорт', action: () => exportRef.current.click() },
+                    {
+                        icon: viewMode ? faEyeSlash : faEye, text: 'Просмотр', action: async () => {
+                            const errors = await validateForm()
+
+                            if (!Object.keys(errors).length) {
+                                setMode((mode) => !mode)
+                            }
+                        }
+                    }
+                ]
+            )
     }, [])
 
 
     useEffect(() => {
-        editAction(0, 2, { icon: viewMode ? faEyeSlash : faEye })
+        editAction(0, 3, { icon: viewMode ? faEyeSlash : faEye })
     }, [viewMode])
 
 
-    const uploadInfo = (evt) => {
+    const importInfo = (evt) => {
         const file = evt.target.files[0]
         const reader = new FileReader()
         reader.onload = (event) => {
@@ -73,6 +68,14 @@ const TemplateCreationForm = ({ values, handleSubmit, errors, setValues }) => {
         }
         reader.readAsText(file)
     }
+    const exportInfo = () => {
+        const { name, description, questions } = values
+        return {
+            name,
+            description,
+            questions: questions.map(({ name, time, type, answers }) => ({ name, time, type, answers: answers.map(({ name, isCorrect, value }) => ({ name, isCorrect, value })) }))
+        }
+    }
 
     return (
         <>
@@ -81,7 +84,8 @@ const TemplateCreationForm = ({ values, handleSubmit, errors, setValues }) => {
                 <FormHeader viewMode={viewMode} />
                 <QuestionList viewMode={viewMode} values={values} />
             </Form>
-            <input onChange={uploadInfo} type='file' accept='.json' ref={uploadRef} hidden />
+            <a ref={exportRef} href={'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportInfo()))} download={`${values.name}.json`}>asdasdasd</a>
+            <input onChange={importInfo} type='file' accept='.json' ref={importRef} hidden />
         </>
     )
 }

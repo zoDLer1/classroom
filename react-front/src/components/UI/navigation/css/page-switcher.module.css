@@ -1,0 +1,20 @@
+.item{
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 10px 10px 0 0;
+}
+
+.block{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    
+}
+
+.selected{
+    color: rgb(24,90,188);
+    background-color: #bbe6ff;
+    border-bottom: 2px solid rgb(24,90,188);
+    font-weight: 500;
+
+}

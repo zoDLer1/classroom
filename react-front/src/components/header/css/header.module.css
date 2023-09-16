@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     padding: 25px 70px;
-
+    position: relative;
 }
 .logo{
     min-width: 50px;
@@ -27,12 +27,16 @@
     align-items: center;
 }
 .actions {
-    display: grid;
+    /* display: grid;
     gap: 20px;
-    grid-template-columns: 300px 1fr 1fr;
+    grid-template-columns: 300px 1fr 1fr; */
 }
 
 .action_container{
     display: flex;
+    position: absolute;
     gap: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

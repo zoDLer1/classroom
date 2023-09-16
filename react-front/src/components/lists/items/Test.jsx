@@ -2,11 +2,15 @@ import css from './css/test.module.css'
 import { useOpen } from 'hooks/globalUI/useOpen'
 import Action from 'components/UI/inputs/Action'
 import Access from 'components/permissions/Access'
-import { faEye, faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faTrash, faPen, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-function Test({ id, name, description, passed_test, permissions }) {
+
+
+
+function Test({ id, template_info: { name, description }, passed_test, permissions }) {
     const [{ condition }, { open }] = useOpen()
     const navigate = useNavigate()
 
@@ -23,10 +27,11 @@ function Test({ id, name, description, passed_test, permissions }) {
                 <div className={css.ending}>
                     <p className={css.time}>Опубликовано 15 февр.</p>
                     <div className={css.menu}>
-                        <i className="fa-solid fa-ellipsis-vertical"></i>
+                        <FontAwesomeIcon icon={faEllipsisVertical} />
                     </div>
                 </div>
             </div>
+
             <div className={css.body} onClick={(evt) => evt.stopPropagation()}>
                 <div className={css.main}>
                     <div className={css.deadlines}>
@@ -43,14 +48,14 @@ function Test({ id, name, description, passed_test, permissions }) {
                     <Access permission={permissions.isStudent}>
                         {
                             !passed_test
-                                ? <Action onClick={()=>navigate(`/tests/pass/${id}`)} icon={faPen} text={'Приступить к выполнению'} />
-                                : <Action icon={faEye} onClick={()=>navigate(`/tests/passed/${passed_test}`)} text={'Просмотреть результат'} />
+                                ? <Action onClick={() => navigate(`/tests/pass/${id}`)} icon={faPen} text={'Приступить к выполнению'} />
+                                : <Action icon={faEye} onClick={() => navigate(`/tests/passed/${passed_test}`)} text={'Просмотреть результат'} />
                         }
 
 
                     </Access>
                     <Access permission={permissions.isTeacher}>
-                        <Action onClick={()=>navigate(`/tests/${id}`)} icon={faEye} text="Просмотреть выполнненые" />
+                        <Action onClick={() => navigate(`/tests/${id}`)} icon={faEye} text="Просмотреть выполнненые" />
                         <Action icon={faTrash} styleAction='error' text='Удалить' />
                     </Access>
 

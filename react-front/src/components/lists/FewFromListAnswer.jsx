@@ -4,16 +4,28 @@ import { faPen, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { faSquarePlus } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FieldArray } from 'formik'
-import { defaultManyAnswer } from 'components/forms/TemplateCreationForm'
+import { defaultManyAnswer } from 'pages/CreateTemplatePage'
 import { FormFastCheckBox } from 'components/forms/inputs/FormCheckBox'
 
 
 const FewFromListAnswerItem = ({ name, add, remove, index, viewMode, data, passingMode }) => {
 
     const getCheckBoxStyle = () => {
+        if (data.right !== undefined && viewMode && data.isCorrect) {
+            if (data.right && !data.isPassed) {
+                return 'disabled'
+            }
+            if (data.right) {
+                return 'correct'
+            }
+            if (!data.right) {
+                return 'error'
+            }
+        }
         if (viewMode && !passingMode) {
             return 'disabled'
         }
+
         return 'default'
     }
 
@@ -33,7 +45,7 @@ const FewFromListAnswerItem = ({ name, add, remove, index, viewMode, data, passi
     </div>
 }
 
-const FewFromListAnswer = ({ data, name, viewMode, passingMode=false }) => {
+const FewFromListAnswer = ({ data, name, viewMode, passingMode = false }) => {
 
     return <FieldArray name={name} render={({ insert, remove, form }) =>
         <div className={css.list}>

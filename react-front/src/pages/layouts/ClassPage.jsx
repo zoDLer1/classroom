@@ -1,10 +1,11 @@
-import pagesCss from '../pages.module.css'
 import ClassForm from 'components/forms/ClassForm'
 import { useInitialRequest } from 'hooks/requests/useInitialRequest'
 import ClassServise from 'services/ClassSevrice'
-import FormLoader from 'components/forms/FormLoader'
+import ContentUpper from 'pages/containers/ContentUpper'
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import FormLoader from 'components/forms/FormLoader'
+import css from 'components/forms/css/class-from.module.css'
 
 const ClassLayout = () => {
 
@@ -57,14 +58,13 @@ const ClassLayout = () => {
     const [classData, setClass] = useState({})
 
     return (
-
-        <div className={pagesCss.content_up_100_down_200}>
-            <FormLoader condition={isLoading}>
-                <ClassForm id={id} classData={classData} pages={pages} setFullData={setFormatedData} setClassData={setClass} />
-            </FormLoader>
-        </div>
-
-
+        <ContentUpper>
+            <div className={css.block}>
+                <FormLoader condition={isLoading}>
+                    <ClassForm id={id} classData={classData} pages={pages} setFullData={setFormatedData} setClassData={setClass} />
+                </FormLoader>
+            </div>
+        </ContentUpper>
     )
 }
 

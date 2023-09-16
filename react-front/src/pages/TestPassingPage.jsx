@@ -4,7 +4,7 @@ import TestsServise from "services/TestsService"
 import TestHeader from "components/forms/TestHeader"
 import pagesCss from './pages.module.css'
 import useRequest from "hooks/requests/useRequest"
-import { faPen, faArrowLeft, faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faPlay } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { Formik, Form } from "formik"
@@ -17,20 +17,19 @@ export default function TestsPassingPage() {
 
     const [data, setData] = useState()
 
+    const toNext = ({ passing_test, next_question, status }) => {
+        if (status === 2){
+            navigate(`/tests/passed/${passing_test}/`, { replace: true })
+        }
+        else{
+            navigate(`/tests/pass/${passing_test}/question/${next_question}`,  { replace: true })
+        }
+    }
 
     const [passRequest] = useRequest(
         async () => await TestsServise.pass(id),
         {
-            200: (resp) => {
-                const { status, passing_test, next_question } = resp.data
-
-                if (status === 1) {
-                    navigate(`/tests/pass/${passing_test}/question/${next_question}`)
-                }
-                if (status === 2){
-                    navigate(`/tests/passed/${passing_test}/`)
-                }
-            },
+            200: (resp) => toNext(resp.data)
         }
     )
 
@@ -49,10 +48,7 @@ export default function TestsPassingPage() {
             }
             else{
                 passRequest()
-            }
-            
-
-            
+            }   
         }
     })
 
@@ -66,7 +62,7 @@ export default function TestsPassingPage() {
                         <div className={headerCss.footer}>
                             <div className={headerCss.footer_btns}>
                                 <Button text={'Назад'} onClick={() => navigate(-1)} size={2} icon={faArrowLeft} style={{ backgroundColor: 'rgb(240, 167, 32)' }} />
-                                <Button text={'Старт'} onClick={passRequest} size={2} icon={faPlay} />
+                                <Button loading={loading} text={'Старт'} onClick={passRequest} size={2} icon={faPlay} />
                             </div>
                         </div>
                     </TestHeader>

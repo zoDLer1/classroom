@@ -12,9 +12,7 @@ import { FormNestedFastInput, FormFastInput } from 'components/forms/inputs/Form
 // import FormSwitch from '../../inputs/FormSwitch'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
-import { defaultAnswersValues } from 'components/forms/TemplateCreationForm'
-
-
+import { defaultAnswersValues } from 'pages/CreateTemplatePage'
 
 
 const Question = ({ form, data, remove, index, add, copy, viewMode }) => {
@@ -38,7 +36,7 @@ const Question = ({ form, data, remove, index, add, copy, viewMode }) => {
     const changeAnswerType = (_, type) => {
         form.setFieldValue(`questions.${index}.answers`, defaultAnswersValues[type])
     }
-
+    
 
 
     const menuItems = [
@@ -73,7 +71,7 @@ const Question = ({ form, data, remove, index, add, copy, viewMode }) => {
 
     return (
         <div className={questionCss.block}>
-            {/* <div className={questionCss.time_line} style={{ width: time / timeInput.value * 100 + '%' }}></div> */}
+            {}
             <div className={questionCss.header}>
                 <FormNestedFastInput readOnly={viewMode} name={`questions.${index}.name`} placeholder="Название" icon={faPen} />
             </div>
@@ -90,13 +88,14 @@ const Question = ({ form, data, remove, index, add, copy, viewMode }) => {
 
                     <div className={questionCss.answer_options}>
                         <FormNestedFastSelect readOnly={viewMode} onSelect={changeAnswerType} labelStyle={questionCss.type} name={`questions.${index}.type`} options={typeOptions} placeholder="Тип" icon={faListOl} />
-
                         {viewMode ?
                             data.time && <div className={questionCss.viewTime}>
                                 <h5>Время:</h5>
-                                <p>{data.time}</p>
+                                {data.passed_time && <p>{data.passed_time}s /</p>}
+                                <p>{data.time}s</p>
                             </div>
                             : (data.time || viewTime) && <div className={questionCss.time}>
+                                
                                 <FormNestedFastInput name={`questions.${index}.time`} placeholder="Время" icon={faClock} />
                             </div>}
                     </div>

@@ -4,7 +4,7 @@ import { faPen, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { faSquarePlus } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FieldArray } from 'formik'
-import { defaultManyAnswer } from 'components/forms/TemplateCreationForm'
+import { defaultManyAnswer } from 'pages/CreateTemplatePage'
 import { FormFastCheckBox } from 'components/forms/inputs/FormCheckBox'
 
 

@@ -9,15 +9,14 @@ import Action from 'components/UI/inputs/Action'
 import useRequest from 'hooks/requests/useRequest'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Formik } from 'formik'
-import { TemplateCreationSchema } from './CreateTemplatePage'
+import { TemplateCreationSchema } from 'validation/Schemes'
 import { useHeaderBack } from 'hooks/globalUI/useGlobalUI'
-
+import ContentCenter from './containers/ContentCenter'
 
 
 const TemplatePage = () => {
 
     const navigate = useNavigate()
-    // useHeaderBack()
 
     const { id } = useParams()
     const [updateTemplateRequest] = useRequest(
@@ -39,7 +38,7 @@ const TemplatePage = () => {
         }
     )
     return (
-        <div className={css.section}>
+        <ContentCenter>
             {data &&
                 <Formik
                     validationSchema={TemplateCreationSchema}
@@ -48,11 +47,11 @@ const TemplatePage = () => {
                     initialValues={data}
                     onSubmit={updateTemplateRequest}
                 >
-                    {TestCreationForm}
+                    {(form) => <TestCreationForm initialViewMode={true} {...form} />}
                 </Formik>
             }
 
-        </div>
+        </ContentCenter>
     )
 }
 

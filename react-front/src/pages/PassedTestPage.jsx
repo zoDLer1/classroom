@@ -2,9 +2,9 @@ import TestsServise from "services/TestsService"
 import { useInitialRequest } from "hooks/requests/useInitialRequest"
 import { useParams } from "react-router-dom"
 import TemplateCreationForm from "components/forms/TemplateCreationForm"
-import css from './pages.module.css'
 import { useState } from "react"
 import { Formik, Form } from "formik"
+import ContentCenter from "./containers/ContentCenter"
 
 
 
@@ -18,7 +18,7 @@ export default function PassedTestPage() {
         TestsServise.getPassedTest,
         {
             200: (resp) => {
-                const { template_info: { name, description }, ...test_info } = resp.data.test_info
+                const { name, description, ...test_info } = resp.data.test_info
 
                 const test_data = { name, description, ...test_info, member: resp.data.member_info, _class: resp.data._class }
                 const questions = []
@@ -36,18 +36,17 @@ export default function PassedTestPage() {
                 }
                 test_data['questions'] = questions
                 setData(test_data)
-                console.log(test_data)
             }
         }
     )
 
     return (
-        <div className={css.section}>
+        <ContentCenter>
             {data && <Formik
             initialValues={data}>
-                {TemplateCreationForm}
+                {(form) => <TemplateCreationForm {...form} initialViewMode={true} viewActions={false} />}
             </Formik>}
-        </div>
+        </ContentCenter>
     )
 }
 

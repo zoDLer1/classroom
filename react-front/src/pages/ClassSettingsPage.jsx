@@ -1,7 +1,7 @@
 import css from './css/settings.module.css'
 import Action from 'components/UI/inputs/Action'
 import Input from 'components/UI/inputs/Input'
-import { faPen, faCube, faLink, faArrowRightArrowLeft, faCopy, faFloppyDisk, faListOl } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faCube, faLink, faArrowRightArrowLeft, faCopy, faListOl } from '@fortawesome/free-solid-svg-icons'
 import ClassServise from 'services/ClassSevrice'
 import useRequest from 'hooks/requests/useRequest'
 import { useParams, useOutletContext } from 'react-router-dom'
@@ -11,7 +11,7 @@ import { Form, Formik } from 'formik'
 import FormInputSender from 'components/forms/inputs/senders/FormInputSender'
 import FormSelectSender from 'components/forms/inputs/senders/FormSelectSender'
 import FormCheckBoxSender from 'components/forms/inputs/senders/FormCheckBoxSender'
-
+import { ClassValidationSchema } from 'validation/Schemes'
 
 
 const ClassSettingsPage = () => {
@@ -29,6 +29,7 @@ const ClassSettingsPage = () => {
     return (
         <Formik
             enableReinitialize={true}
+            validationSchema={ClassValidationSchema}
             initialValues={
                 {
                     name: data.name,

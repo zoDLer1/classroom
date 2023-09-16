@@ -1,24 +1,19 @@
-import formCss from './css/form.module.css'
-import FormLoader from "components/forms/FormLoader"
 import membersCss from 'pages/css/members.module.css'
 import css from './css/passed-test-form.module.css'
 import DefaultLink from 'components/UI/navigation/DefaultLink'
 import { useNavigate } from 'react-router-dom'
 import PassedTest from '../lists/items/PassedTest'
 import Action from 'components/UI/inputs/Action'
-import { faAnglesLeft, faSquarePollVertical } from '@fortawesome/free-solid-svg-icons'
-import TestsServise from "services/TestsService"
-import { useInitialRequest } from "hooks/requests/useInitialRequest"
-import { useState } from "react"
-
+import { faAnglesLeft } from '@fortawesome/free-solid-svg-icons'
+import { useOutletContext } from 'react-router-dom'
 
 export default function PassedTestsForm({ id }) {
-    const [data, setData] = useState({})
+
+    const { data } = useOutletContext()
+
+
     const { _class, passed_tests, template_info } = data
     const navigate = useNavigate()
-    const [isLoading] = useInitialRequest(id, TestsServise.get, {
-        200: (req) => setData(req.data)
-    })
 
 
     const getStatus = (percent) => {
@@ -38,37 +33,37 @@ export default function PassedTestsForm({ id }) {
     }
 
     return (
-        <div className={[formCss.body, css.block].join(' ')}>
-            <FormLoader condition={isLoading}>
-                <div className={css.header}>
-                    <h2 className={css.name}>{template_info?.name}</h2>
-                    <p className={css.description}>{template_info?.description}</p>
-                    <div className={css.class_info}>
-                        <p>Класс: </p>
-                        <DefaultLink to={'/classes/' + _class?.id}>
-                            <span>{_class?.name}</span>
-                        </DefaultLink>
+        <>
+            <div className={css.header}>
+                <h2 className={css.name}>{template_info?.name}</h2>
+                <p className={css.description}>{template_info?.description}</p>
+                <div className={css.class_info}>
+                    <p>Класс: </p>
+                    <DefaultLink to={'/classes/' + _class?.id}>
+                        <span>{_class?.name}</span>
+                    </DefaultLink>
+                </div>
+            </div>
+            <div className={[membersCss.heading].join(' ')}>
+                <p className={[css.passed_tests, membersCss.text].join(' ')}>Пройденные тесты</p>
+            </div>
+            <div className={[membersCss.members, css.passed_test].join(' ')}>
+                {!passed_tests.length
+                    ? <div className={membersCss.empty}>
+                        <p className={membersCss.text}>Пройденных тестов пока нет</p>
                     </div>
-                </div>
-                <div className={[membersCss.heading].join(' ')}>
-                    <p className={[css.passed_tests, membersCss.text].join(' ')}>Пройденные тесты</p>
-                </div>
-                <div className={[membersCss.members, css.passed_test].join(' ')}>
-                    {!(passed_tests || []).length
-                        ? <div className={membersCss.empty}>
-                            <p className={membersCss.text}>Пройденных тестов пока нет</p>
-                        </div>
-                        : (passed_tests || []).map(passed_test =>
-                            <PassedTest key={passed_test.member.id} id={passed_test.member.id} {...passed_test.member.info} onView={() => navigate(`/tests/passed/${passed_test?.id}/`)}>
+                    : passed_tests.map(passed_test =>
+                        <PassedTest key={passed_test.member.id} id={passed_test.member.id} {...passed_test.member.info} onView={() => navigate(`/tests/passed/${passed_test?.id}/`)}>
+                            <div className={css.view}>
+                                <div className={[css.status, passed_test.status === 1 ? css.passing : css.ended].join(' ')}>{passed_test.status === 1 ? 'Проходится' : 'Пройден'}</div>
                                 <div className={[css.status, getStatus(passed_test.results)].join(' ')}>{passed_test.results + '%'}</div>
-                            </PassedTest>)}
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Action onClick={() => navigate('/classes/' + _class?.id)} icon={faAnglesLeft} text={"Назад"}></Action>
-                    {(passed_tests || []).length && <Action onClick={() => navigate('#statistic')} icon={faSquarePollVertical} text={"Статистика"}></Action>}
-                </div>
+                            </div>
+                        </PassedTest>)}
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Action onClick={() => navigate('/classes/' + _class?.id)} icon={faAnglesLeft} text={"Назад"}></Action>
+            </div>
 
-            </FormLoader>
-        </div>
+        </>
     )
 }
