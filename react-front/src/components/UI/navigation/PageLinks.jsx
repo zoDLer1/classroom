@@ -1,21 +1,17 @@
-import css from './css/link-switcher.module.css'
 import { Link } from 'react-router-dom'
-import classNames from 'classnames/bind'
+import classNames from 'classnames'
 import { useLocation } from 'react-router-dom'
 
 
 
-const cx = classNames.bind(css)
-
-function PageLinks({ links, className }) {
+function PageLinks({ links }) {
 
     const { pathname } = useLocation()
 
-    const linkStyle = (to) => cx('link', { choosen: pathname === to })    
+    const linkStyle = (to) => classNames('cursor-pointer', pathname !== to ? 'text-primary-faded' : 'text-primary')    
     
-
     return (
-        <div className={[css.block, className].join(' ')}>
+        <div className='flex items-center w-full gap-9 mb-8 justify-end'>
             {links.map(({ to, text}, index) =>
                 <Link key={index} className={linkStyle(to)} to={to}>{text}</Link>
             )}

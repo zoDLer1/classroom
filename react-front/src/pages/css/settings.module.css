@@ -48,7 +48,6 @@
 
 .invite_link{
     display: flex;
-
     align-items: flex-start;
     position: relative;
     justify-content: space-between;
@@ -84,7 +83,7 @@
 }
 .sections > *{
     border-radius: 20px;
-    padding: 10px  ;
+    padding: 10px ;
     border: 1px solid rgba(0, 0, 0, .25);
 }
 .sections{

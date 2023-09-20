@@ -1,0 +1,16 @@
+.link {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.unselected {
+    color: var(--faded-primary);
+}
+
+.text {
+    color: var(--alt-color);
+}
+
+.fs_16{
+    font-size: 16px;
+}

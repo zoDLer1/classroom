@@ -22,8 +22,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     background-color: var(--light-color);
     box-shadow: 0 0 8px 0.5px var(--dark-op15-color);
 }
@@ -51,8 +51,8 @@
 
 .circle .icon{
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
 }
 
 

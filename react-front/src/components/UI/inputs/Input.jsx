@@ -22,7 +22,7 @@ function Input({ field, error, touched, children, icon, styleType = 'default', l
                                 {icon && <FontAwesomeIcon icon={icon} size="sm" />}
                             </div>
                             <div className={css.inputWrapper}>
-                                <input autoComplete="off" id={id} {...props} {...field} /> {/* disabled={isSubmitting} */}
+                                <input autoComplete="off" id={id} {...props} {...field} />
                                 <label htmlFor={id}>
                                     <p className={css.placeholder}>{placeholder}</p>
                                 </label>

@@ -10,6 +10,9 @@ import ClassServise from 'services/ClassSevrice'
 import Waiter from '../components/lists/items/Waiter'
 import { usePermissions } from 'hooks/store/useUser'
 import { useOutletContext } from 'react-router-dom'
+import TitleList from 'components/lists/TitleList'
+
+
 
 function ClassMembersPage() {
 
@@ -61,57 +64,35 @@ function ClassMembersPage() {
             }
         }
     )
-    // if (!data?.members) {
-    //     return defaultRedirect
-    // }
 
     return (
-        <div className={css.block}>
-            <div className={css.body}>
-                <div className={css.teachers}>
-                    <div className={css.heading}>
-                        <p className={[css.text, css.title].join(' ')}>Преподаватель</p>
-                    </div>
-                    <div className={css.members}>
-                        <User {...data.creator} />
-                    </div>
-                </div>
-                {
-                    data.waiters?.length ?
-                        <div className={css.students}>
-                            <div className={css.heading}>
-                                <p className={[css.text, css.title].join(' ')}>Ожидающие вступления</p>
-                                <p className={css.text}>{data.waiters.length}</p>
-                            </div>
-                            <div className={css.members}>
-                                {data.waiters.map(waiter => <WaiterItem onAccept={acceptWaiter} isLoading={isAcceptWaiterLoading || isRejectWaiterLoading} onExcept={rejectWaiter} id={waiter.id} key={waiter.id} {...waiter.info} />)}
-                            </div>
-                        </div>
-                        : null
+        <div className='flex flex-col gap-12 px-5 py-3'>
+            <TitleList
+                title='Преподаватель'
+                hidding
+                useSwitch
+            >
+                {[<User {...data.creator} key={'teacher'} />]}
+            </TitleList>
+            <TitleList>
+                {data.waiters.map(waiter => <WaiterItem onAccept={acceptWaiter} isLoading={isAcceptWaiterLoading || isRejectWaiterLoading} onExcept={rejectWaiter} id={waiter.id} key={waiter.id} {...waiter.info} />)}
+            </TitleList>
+            <TitleList
+                empty={
+                    <Access permission={isTeacher}>
+                        <p className='text-base'>Добавить участников</p>
+                        <Action text={"Добавить"} icon={faPlus} />
+                    </Access>
                 }
-                <div className={css.students}>
-                    <div className={css.heading}>
-                        <p className={[css.text, css.title].join(' ')}>Участники</p>
-                        <p className={css.text}>{data.members.length}</p>
-                    </div>
-
-                    {
-                        !data.members.length
-                            ? <div className={css.empty}>
-                                <Access permission={isTeacher}>
-                                    <p className={css.text}>Добавить участников</p>
-                                    <Action text={"Добавить"} icon={faPlus} />
-                                </Access>
-
-                            </div>
-                            : <div className={css.members}>
-                                {data.members.map(member => <MemberItem isTeacher={isTeacher} onExcept={deleteMember} isLoading={isDeleteMemberLoading} key={member.id} id={member.id} {...member.info} />)}
-                            </div>
-                    }
-                </div>
-            </div>
+                title={'Участники'}
+                hidding
+            >
+                {data.members.map(member => <MemberItem isTeacher={isTeacher} onExcept={deleteMember} isLoading={isDeleteMemberLoading} key={member.id} id={member.id} {...member.info} />)}
+            </TitleList>
         </div>
     )
 }
 
 export default ClassMembersPage
+
+

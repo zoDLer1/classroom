@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { useCurrent } from "../useCurrent"
 
-export function usePopupControl(onAutoClose = () => null) {
+export function usePopupControl() {
 
-    const [currentHookStates, openHookFunctions] = useCurrent(onAutoClose)
+    const [currentHookStates, openHookFunctions] = useCurrent()
     const [content, setContent] = useState(<></>)
     
     return [{...currentHookStates, content}, {...openHookFunctions, setContent}]

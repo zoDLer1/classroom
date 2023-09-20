@@ -10,10 +10,8 @@ import { SignupSchema } from 'validation/Schemes'
 
 function LoginPage() {
 
-
     const user = useUser()
     const navigate = useNavigate()
-
 
     const [sendLoginRequest] = useRequest(
         AuthService.login,
@@ -26,11 +24,10 @@ function LoginPage() {
     )
 
     return (
-
         <Formik
             initialValues={{
-                email: 'kuptsov.valya@gmail.com',
-                password: '123123123s'
+                email: '',
+                password: ''
             }}
             onSubmit={
                 async (values, { setSubmitting, setErrors }) => {

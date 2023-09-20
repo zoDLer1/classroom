@@ -1,6 +1,5 @@
 import React from 'react'
 import MultipleDiagram from 'components/UI/diagrams/multiple-diagram'
-import questionCss from './css/question.module.css'
 import css from './css/statistic-question.module.css'
 import membersCss from 'pages/css/members.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

@@ -25,10 +25,10 @@ export const useHeader = () => useGlobalUI().header[1]
 export const useHeaderInfo = () => useGlobalUI().header[0]
 
 export const useHeaderBack = () => {
-    
     const { setBack } = useHeader()
     useEffect(() => {
         setBack(true)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 } 
 
@@ -44,6 +44,8 @@ export const GlobalUIWrapper = ({ children }) => {
     useEffect(() => {
         closeAll()
         headerController[1].clearActions()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location.pathname])
 
     return <GlobalUIContext.Provider value={{ alert: alertActions, popup: popupActions, menu: menuActions, header: headerController }}>

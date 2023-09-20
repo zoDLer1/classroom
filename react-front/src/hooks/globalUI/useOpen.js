@@ -4,14 +4,13 @@ import { useClose } from "./useClose";
 
 
 
-export function useOpen(onAutoClose = () => null) {
+export function useOpen() {
     const [isOpen, setOpen] = useState(false)
     const stopPropRef = useRef()
     const { add, remove } = useClose()
     const id = useId()
 
     const closing = () => {
-        onAutoClose()
         close()
     }
 

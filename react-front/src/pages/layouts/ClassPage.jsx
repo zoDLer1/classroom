@@ -5,7 +5,7 @@ import ContentUpper from 'pages/containers/ContentUpper'
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import FormLoader from 'components/forms/FormLoader'
-import css from 'components/forms/css/class-from.module.css'
+
 
 const ClassLayout = () => {
 
@@ -59,7 +59,7 @@ const ClassLayout = () => {
 
     return (
         <ContentUpper>
-            <div className={css.block}>
+            <div className='flex flex-col gap-3 min-h-[300px] w-[800px] px-[15px] py-5 rounded-2xl container mx-auto'>
                 <FormLoader condition={isLoading}>
                     <ClassForm id={id} classData={classData} pages={pages} setFullData={setFormatedData} setClassData={setClass} />
                 </FormLoader>

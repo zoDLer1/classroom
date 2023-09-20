@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Messager = ({ to, size="xl", ...props }) => {
     return (
-        <a className={css.icon} href={to}>
+        <a className={'text-gray-450'} href={to}>
             <FontAwesomeIcon size={size} {...props} />
         </a>
     )

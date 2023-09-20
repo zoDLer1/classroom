@@ -1,5 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700&family=Ubuntu:wght@300;400;500;700&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Ubuntu';
+    }
+
+    * {
+        
+        @apply m-0 p-0;
+        font-family: 'Roboto';
+    }
+    *::before{
+        /* box-sizing: content-box; */
+        @apply m-0 p-0;
+    }
+
+    a{
+        @apply no-underline text-white;
+    }
+
+    html,
+    body,
+    .page-root {
+        @apply min-h-screen;
+    }
+}
+
+@layer components{
+    .container{
+        @apply shadow-2xl bg-white w-fit;
+    }
+}
 
 
 :root {
@@ -32,31 +67,6 @@
     flex-direction: column;
 }
 
-html,
-body,
-.page-root {
-    min-height: 100vh;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto';
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'Ubuntu';
-}
-
-a {
-    text-decoration: none;
-    color: #fff;
-}
 
 body::-webkit-scrollbar {
     display: none;

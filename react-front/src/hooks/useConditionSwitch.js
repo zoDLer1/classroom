@@ -2,9 +2,9 @@ import { useState } from "react"
 
 
 
-function useConditionSwitch() {
+function useConditionSwitch(initialValue = false) {
 
-    const [isOpen, setOpen] = useState(false)
+    const [isOpen, setOpen] = useState(initialValue)
 
     const open = () => {
         setOpen(true)

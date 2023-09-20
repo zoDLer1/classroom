@@ -5,8 +5,6 @@ import JoinClassForm from 'components/forms/JoinClassForm'
 import { usePopup } from 'hooks/globalUI/useGlobalUI'
 import { useCollection } from 'hooks/useCollection'
 import { useInitialRequest } from 'hooks/requests/useInitialRequest'
-import formCss from 'components/forms/forms.module.css'
-import css from './css/classes.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import FormLoader from 'components/forms/FormLoader'
@@ -30,23 +28,22 @@ function ClassesPage() {
         const content = true ? <CreateClassForm addClass={classesActions.addItem} close={popup.close} /> : <JoinClassForm close={popup.close} />
         popup.setContent(content)
     }
-
     return (
-        <div className={css.block}>
-            <div className={[formCss.block, css.header].join(' ')}>
-                <h3>Мои классы</h3>
-                <div className={css.actions}>
-                    <div className={css.action} onClick={popupOpen}>
+        <div className='mt-12 mx-auto'>
+            <div className='container flex justify-between px-10 py-8 w-full rounded-3xl mb-16'>
+                <h3 className='font-bold'>Мои классы</h3>
+                <div>
+                    <div className='text-gray-450 cursor-pointer relative text-xl hover:text-primary' onClick={popupOpen}>
                         <FontAwesomeIcon icon={faPlus} />
                     </div>
 
                 </div>
             </div>
-            <div className={css.body}>
-                <FormLoader condition={waitForResponse}>
-                    <CardList classes={classes} storedValues={storedValues} classesActions={classesActions} />
-                </FormLoader>
-            </div>
+
+            <FormLoader condition={waitForResponse}>
+                <CardList classes={classes} storedValues={storedValues} classesActions={classesActions} />
+            </FormLoader>
+
         </div>
 
 

@@ -5,7 +5,6 @@ import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage'
 import Classes from 'pages/ClassesPage'
 import TestsPassingPage from 'pages/TestPassingPage';
-import Profile from 'pages/profile';
 import CreateTemplatePage from 'pages/CreateTemplatePage'
 import Templates from 'pages/TemplatesPage';
 import ServerIsUnavalible from 'pages/ServerIsUnavalible';
@@ -44,7 +43,7 @@ const Routes = () => {
                 <ReactRoute path='register' element={<RegisterPage />} />
             </ReactRoute>
             <ReactRoute element={<AuthLayout waitForResponse={waitForResponse} />}>
-                <ReactRoute path='/' element={<Navigate to={'/classes'} />} />
+                <ReactRoute path='/' element={<Navigate replace to={'/classes'} />} />
                 <ReactRoute path='/classes' element={<Classes />} />
                 <ReactRoute path='/classes/:id' element={<Class />}>
                     <ReactRoute path='tests' element={<ClassTestsPage />} />

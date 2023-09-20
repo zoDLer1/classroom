@@ -1,7 +1,5 @@
 import FormInput from './inputs/FormInput'
 import Link from 'components/UI/navigation/Link'
-import css from './css/register-form.module.css'
-import formCss from './forms.module.css'
 import Submit from './inputs/Submit'
 import FormSelect from './inputs/FormSelect'
 import PasswordInput from './inputs/PasswordInput'
@@ -22,7 +20,7 @@ function RegisterForm({ isSubmitting }) {
 
     return (
         <Form>
-            <div className={[formCss.inputs, css.inputs].join(' ')}>
+            <div className='min-w-[310px] mb-10 flex flex-col gap-8'>
                 <FormInput name='first_name' placeholder="Имя" icon={faUser} />
                 <FormInput name='last_name' placeholder="Фамилия" icon={faUser} />
                 <FormInput name='email' placeholder="Почта" icon={faEnvelope} />
@@ -30,19 +28,18 @@ function RegisterForm({ isSubmitting }) {
                 <PasswordInput name='password' placeholder="Пароль" icon={faKey} />
                 <PasswordInput name='password_confim' placeholder="Повторите пароль" icon={faKey} />
             </div>
-            <div className={css.statements}>
+            <div className='mb-5'>
                 <FormCheckBox name='lisence'> 
-                    <p className={css.text}>
+                    <p className='text-gray-450 text-base'>
                         Я принимаю
                     </p>
                     <Link to='/' text='Лицензионное соглашениe' />
                 </FormCheckBox>
             </div>
-            <div className={css.submit}>
+            <div className='mb-5'>
                 <Submit loading={isSubmitting} text='Регистрация'  />
             </div>
-
-            <div className={[formCss.text, formCss.flex, css.login].join(' ')}>
+            <div className='text-gray-450 text-base flex justify-center gap-3'>
                 Уже есть аккаунт?
                 <Link to='/accounts/login' text='Войти' />
             </div>

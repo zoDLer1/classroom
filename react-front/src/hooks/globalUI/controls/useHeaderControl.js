@@ -25,7 +25,6 @@ const useHeaderControl = () => {
 
     const clearActions = () => {
         if (!loaded) {
-
             if (actions.length) {
                 setActions([[], []])
             }

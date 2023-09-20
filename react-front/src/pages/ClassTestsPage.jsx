@@ -1,4 +1,3 @@
-import css from './css/tests.module.css'
 import Test from '../components/lists/items/Test'
 import Action from 'components/UI/inputs/Action'
 import Access from 'components/permissions/Access'
@@ -15,8 +14,8 @@ function ClassTestsPage() {
 
 
     return (
-        <div className={css.block}>
-            <div className={css.header}>
+        <div>
+            <div className='p-3 flex items-center border-b-2 border-opacity-20 border-black mb-3'>
                 <Access permission={permissions.isTeacher}>
                     <Action text={'Добавить'} onClick={() => navigate('/tests/templates')} icon={faPlus} />
                 </Access>
@@ -24,10 +23,10 @@ function ClassTestsPage() {
                     <Action icon={faCircleCheck} text={'Мои пройденные задания'} />
                 </Access>
             </div>
-            <div className={css.tasks}>
+            <div className='flex-1 min-h-[15rem]'>
                 {data.map(test => <Test permissions={permissions} key={`task-${test.id}`} {...test} />)}
             </div>
-            <div className={css.add}>
+            <div className='flex justify-center'>
                 <Action text={'Ещё'} />
             </div>
         </div>

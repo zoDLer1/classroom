@@ -1,4 +1,3 @@
-import css from './css/class-from.module.css'
 import { Outlet } from 'react-router-dom'
 import PageSwitcher from 'components/UI/navigation/PageSwitcher'
 import useCurrectLocationPage from 'hooks/useCurrectLocationPage'
@@ -17,7 +16,7 @@ const ClassForm = ({ id, pages, classData, setClassData, setFullData }) => {
     return (
         <>
             <PageSwitcher current={current} pages={pages} />
-            <div className={css.section}>
+            <div className='w-full h-full'>
                 {current !== -1 && <Outlet context={{ data: classData[pages[current].url], setData: setClassData, setFullData }} />}
             </div>
         </>

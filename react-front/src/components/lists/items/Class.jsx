@@ -1,4 +1,3 @@
-import css from './css/class.module.css'
 import DefaultLink from 'components/UI/navigation/DefaultLink'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faUsers, faSpinner, faPen, faTrash, faPalette, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
@@ -8,7 +7,7 @@ import { useEffect } from 'react'
 import { useMenu } from 'hooks/globalUI/useGlobalUI'
 
 
-function Class({ stored, value, methods, onColorMenu, updateRequest, deleteRequest, loading, updateRequestData }) {
+function Class({ stored, value, methods, onColorMenu, updateRequest, deleteRequest, loading }) {
 
     const menu = useMenu()
 
@@ -67,28 +66,26 @@ function Class({ stored, value, methods, onColorMenu, updateRequest, deleteReque
     }
 
     return (
-        <div className={css.block}>
-            <DefaultLink disabled={editMode} to={`/classes/${value.id}`} onClick={(evt) => evt.stopPropagation()} style={{ backgroundColor: `#${value.color_info.value}` }} className={css.header}>
-                <div className={css.edit_layer} >
-                    <div className={css.input}>
-                        <Input labelStyle={css.input_label} onKeyUp={onKeyEnter} style={{ mixWidth: 200 }} styleType={'light'} readOnly={!editMode} field={{ value: value.name, onChange: (evt) => setName(evt.target.value) }}  >
-                            <FontAwesomeIcon icon={faCheck} onClick={editModeOff} className={css.apply} size='lg' />
+        <div className='h-[320px] w-[320px] flex flex-col overflow-hidden relative select-none bg-white rounded-[55px] shadow-xl'>
+            <DefaultLink className='h-24 px-10' disabled={editMode} to={`/classes/${value.id}`} onClick={(evt) => evt.stopPropagation()} style={{ backgroundColor: `#${value.color_info.value}` }}>
+                <div className='overflow-hidden mt-8 flex gap-6 items-center' >
+                    <div>
+                        <Input labelStyle={'overflow-hidden whitespace-nowrap w-44 text-ellipsis'} onKeyUp={onKeyEnter} styleType={'light'} readOnly={!editMode} field={{ value: value.name, onChange: (evt) => setName(evt.target.value) }}  >
+                            <FontAwesomeIcon className='text-white text-3xl cursor-pointer' icon={faCheck} onClick={editModeOff}  size='lg' />
                         </Input>
 
-                        {!editMode && <FontAwesomeIcon style={{ stroke: `#${value.color_info.value}`, strokeWidth: 3 }} className={css.icon} icon={faUsers}></FontAwesomeIcon>}
+                        {!editMode && <FontAwesomeIcon style={{ stroke: `#${value.color_info.value}`, strokeWidth: 3 }} className='absolute text-white text-6xl scale-110 right-[10%] top-[15%]' icon={faUsers}></FontAwesomeIcon>}
                     </div>
 
                 </div>
             </DefaultLink>
-            <div className={css.events}>
-
-                {/* {value.events.map(event => <Event key={event.id} data={event}/>)} */}
+            <div className='flex-1'>
             </div>
-            <footer className={css.footer}>
-                <div onClick={(evt) => onMenuOpen(evt, value)} className={css.action}>
+            <footer className='border-gray-450 border-t-[3px] mx-7 flex justify-end items-center px-[10px] py-3 gap-5 relative'>
+                <div onClick={(evt) => onMenuOpen(evt, value)} className='w-5 flex justify-center items-center cursor-pointer text-xl text-gray-450 hover:text-primary'>
                     <FontAwesomeIcon icon={faEllipsisVertical} />
                 </div>
-                {loading && <FontAwesomeIcon className={css.loader} icon={faSpinner} ></FontAwesomeIcon>}
+                {loading && <FontAwesomeIcon className='text-primary-faded text-xl absolute left-[5%]' icon={faSpinner} spinPulse ></FontAwesomeIcon>}
             </footer>
         </div>
 

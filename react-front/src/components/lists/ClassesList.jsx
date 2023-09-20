@@ -1,4 +1,3 @@
-import css from './css/card-list.module.css'
 import Class from './items/Class'
 import { useMenuControl } from 'hooks/globalUI/controls/useMenuControl'
 import ColorMenu from 'components/UI/modelWindows/ColorMenu'
@@ -74,7 +73,7 @@ function ClassesList({ classes, storedValues, classesActions }) {
     }
 
     return (
-        <div className={css.block}>
+        <div className='grid grid-cols-4 gap-12'>
             <ColorMenu {...colorMenuActions} {...colorMenuInfo} />
             {classes().map(([id, item]) =>
                 <Class
