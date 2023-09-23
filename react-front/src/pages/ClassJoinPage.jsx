@@ -18,7 +18,4 @@ export default function ClassJoinPage() {
             400: (response) => redirect(response.response.data.detail),
         }
     )
-    
-
-
 }

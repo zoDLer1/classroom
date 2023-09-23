@@ -2,7 +2,7 @@ import css from './css/textarea.module.css'
 import { useId } from 'react';
 
 
-function TextArea({ field, form: { isSubmitting, errors, touched }, placeholder, readOnly, ...props }) {
+function TextArea({ field, form: { isSubmitting}, placeholder, readOnly, ...props }) {
     const id = useId()
     return readOnly
         ? <p className={css.label}>{field.value}</p>

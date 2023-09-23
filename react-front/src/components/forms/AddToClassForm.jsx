@@ -1,5 +1,3 @@
-import css from './css/add-to-class-form.module.css'
-import formCss from 'components/forms/css/form.module.css'
 import Submit from 'components/forms/inputs/Submit'
 import FormSelect from 'components/forms/inputs/FormSelect'
 import ClassServise from 'services/ClassSevrice'
@@ -45,14 +43,14 @@ function AddToClassForm({ current, close }) {
             {({ isSubmitting }) => {
 
 
-                return <Form className={[formCss.block, formCss.flex, css.block].join(' ')}>
-                    <h2 className={css.label}>
-                        <span className={css.class_}>{current.name}</span>
+                return <Form className='w-[475px] flex items-center justify-center flex-col px-20 py-10 bg-white rounded-[55px] shadow-70_20'>
+                    <h2 className='text-primary text-2xl font-semibold mb-10'>
+                        <span className='overflow-hidden text-ellipsis max-w-[285px] whitespace-nowrap block'>{current.name}</span>
                     </h2>
-                    <div className={[formCss.inputs, css.inputs].join(' ')}>
+                    <div className='w-11/12 mb-8'>
                         <FormSelect options={classes} name='_class' placeholder="Класс" icon={faFile} />
                     </div>
-                    <div className={css.submit}>
+                    <div className='w-full'>
                         <Submit loading={isSubmitting} icon={faPaperPlane} text='Создать' />
                     </div>
                 </Form>

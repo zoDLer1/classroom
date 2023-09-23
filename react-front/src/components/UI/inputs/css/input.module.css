@@ -156,20 +156,3 @@
     gap: 5px;
     user-select: none;
 }
-
-/* .error {
-    width: 100%;
-    margin-top: 0.25rem;
-    font-size: .875em;
-    color: var(--self-color);
-    height: 15px;
-    margin-left: 30px;
-    overflow: hidden;
-} */
-
-/* .main:has(input:disabled){
-    background-color: #e9ecef;
-} */
-/* .main:has(input:disabled) .placeholder{
-    color: var(--self-color);
-} */

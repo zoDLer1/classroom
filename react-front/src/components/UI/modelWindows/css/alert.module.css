@@ -27,6 +27,7 @@
     transform: translate(-50%, 0);
     background-color: #fff;
     position: absolute;
+    z-index: 999;
     top: -60px;
     padding: 15px 30px;
     font-weight: 500;

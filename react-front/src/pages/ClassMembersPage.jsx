@@ -1,7 +1,6 @@
-import css from './css/members.module.css'
 import Member from '../components/lists/items/Member'
 import Action from 'components/UI/inputs/Action'
-import InviteClassForm from 'components/forms/InviteClassForm'
+// import InviteClassForm from 'components/forms/InviteClassForm'
 import Access from 'components/permissions/Access'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import User from '../components/lists/items/User'
@@ -24,9 +23,10 @@ function ClassMembersPage() {
     const WaiterItem = isTeacher ? Waiter : User
 
     const setGlobalData = (key, items) => {
-        const newData = { ...data }
-        newData[key] = items
         setData((_data) => {
+            const newData = { ..._data.members }
+            newData[key] = items
+            console.log(newData)
             return {
                 ..._data,
                 members: newData
@@ -50,8 +50,9 @@ function ClassMembersPage() {
         ClassServise.acceptWaiter,
         {
             200: (resp, id) => {
-                setWaiters(data.waiters.filter(waiter => waiter.id !== id))
+                setWaiters([...data.waiters].filter(waiter => waiter.id !== id))
                 setMembers([...data.members, resp.data])
+                
             }
         }
     )
@@ -60,7 +61,7 @@ function ClassMembersPage() {
         ClassServise.rejectWaiter,
         {
             200: (_, id) => {
-                setMembers(data.waiters.filter(waiter => waiter.id !== id))
+                setWaiters([...data.waiters].filter(waiter => waiter.id !== id))
             }
         }
     )
@@ -74,7 +75,8 @@ function ClassMembersPage() {
             >
                 {[<User {...data.creator} key={'teacher'} />]}
             </TitleList>
-            <TitleList>
+            <TitleList
+                title={'Ожидающие'}>
                 {(data.waiters ?? []).map(waiter => <WaiterItem onAccept={acceptWaiter} isLoading={isAcceptWaiterLoading || isRejectWaiterLoading} onExcept={rejectWaiter} id={waiter.id} key={waiter.id} {...waiter.info} />)}
             </TitleList>
             <TitleList

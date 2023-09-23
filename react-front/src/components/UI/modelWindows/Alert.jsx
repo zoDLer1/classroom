@@ -2,8 +2,6 @@ import css from './css/alert.module.css'
 
 
 export default ({ isShowing, hide, info }) => {
-
-
     const AnimEnd = (evt) => {
         if (evt.animationName.startsWith('alert_opening'))
             hide()
@@ -16,5 +14,4 @@ export default ({ isShowing, hide, info }) => {
             </div>
         )
     }
-
 }

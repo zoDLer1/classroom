@@ -2,7 +2,6 @@ import { useInitialRequest } from "hooks/requests/useInitialRequest"
 import { useParams } from "react-router-dom"
 import TestsServise from "services/TestsService"
 import TestHeader from "components/forms/TestHeader"
-import pagesCss from './pages.module.css'
 import useRequest from "hooks/requests/useRequest"
 import { faArrowLeft, faPlay } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom"
@@ -10,7 +9,6 @@ import { useState } from "react"
 import { Formik, Form } from "formik"
 import Button from 'components/UI/inputs/Button'
 import ContentUpper from "./containers/ContentUpper"
-import ContentCenter from "./containers/ContentCenter"
 
 export default function TestsPassingPage() {
     const { id } = useParams()

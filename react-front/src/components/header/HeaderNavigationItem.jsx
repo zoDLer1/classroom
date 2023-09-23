@@ -1,14 +1,13 @@
-import css from './css/navigationItem.module.css'
 import { Link } from "react-router-dom"
 
 
 const HeaderNavigationItem = (props) =>  {
     return (
-        <Link to={props.to} className={css.block}>
+        <Link to={props.to} className='flex items-center gap-[10px]'>
             {props.icon && 
                 <i className={props.icon}></i>
             }
-            <span className={css.text}>{props.text}</span>
+            <span className='text-lg'>{props.text}</span>
             
         </Link>
     )

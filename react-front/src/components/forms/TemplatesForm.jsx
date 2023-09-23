@@ -64,7 +64,7 @@ function TestsForm() {
                     </div>
                     {templates.length < 4 ?
                         <div className='flex flex-col mt-5 items-center gap-3'>
-                            <p className='text-black opacity-50'>Создать шаблоны</p>text-white
+                            <p className='text-black opacity-50'>Создать шаблоны</p>
                             <Action text={'Создать'} onClick={ToTestCreation} icon={faPlus} />
                         </div>
                         :

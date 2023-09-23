@@ -1,5 +1,3 @@
-import css from './css/create-class.module.css'
-import formCss from 'components/forms/forms.module.css'
 import FormInput from './inputs/FormInput'
 import FormSelect from './inputs/FormSelect'
 import FormTextArea from './inputs/FormTextArea'
@@ -21,14 +19,14 @@ export function CreateClassForm({ close, handleSubmit }) {
     })
 
     return (
-        <Form className={[formCss.block, formCss.flex].join(' ')}>
-            <div className={[css.inputs, formCss.inputs].join(' ')}>
+        <Form className='flex items-center justify-center flex-col px-20 py-10 bg-white rounded-[55px] shadow-70_20'>
+            <div className='flex flex-col gap-5 w-[310px]'>
                 <FormInput name='name' icon={faPen} placeholder={'Название'} />
                 <FormSelect options={subjects} name='subject' icon={faCube} placeholder={'Предмет'} />
-                <div className={css.textarea}>
+                <div className='mt-[10px]'>
                     <FormTextArea name='description' placeholder={'Описание'} rows='7' />
                 </div>
-                <div className={css.actions}>
+                <div className='flex items-center gap-[10px] justify-end'>
                     <Action icon={faBan} onClick={close} styleAction={'error'} text={'Отменить'} />
                     <Action icon={faPlus} onClick={handleSubmit} text={'Создать'} />
                 </div>

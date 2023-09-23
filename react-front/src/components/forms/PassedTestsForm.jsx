@@ -1,4 +1,3 @@
-import membersCss from 'pages/css/members.module.css'
 import DefaultLink from 'components/UI/navigation/DefaultLink'
 import { useNavigate } from 'react-router-dom'
 import PassedTest from '../lists/items/PassedTest'

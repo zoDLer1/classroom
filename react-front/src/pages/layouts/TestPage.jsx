@@ -2,7 +2,6 @@
 import { useParams } from "react-router-dom"
 import ContentUpper from "../containers/ContentUpper"
 import FormLoader from "components/forms/FormLoader"
-import formCss from 'components/forms/css/form.module.css'
 import TestsServise from "services/TestsService"
 import { useInitialRequest } from "hooks/requests/useInitialRequest"
 import { useState } from "react"

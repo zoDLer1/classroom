@@ -1,7 +1,6 @@
 import useCurrectLocationPage from "hooks/useCurrectLocationPage"
 import PageSwitcher from "components/UI/navigation/PageSwitcher"
 import { Outlet } from "react-router-dom"
-import css from 'components/forms/css/test-form.module.css'
 
 const pages = [
     {
@@ -22,7 +21,7 @@ const TestForm = ({ id, testData }) => {
     const current = useCurrectLocationPage(pages, `/tests/${id}`, 'results')
 
     return (
-        <div className={css.block}>
+        <div className='flex flex-col gap-[30px]'>
             <PageSwitcher pages={pages} current={current} />
             {current !== -1 && <Outlet context={{ data: testData[pages[current].url] }} />}
         </div>

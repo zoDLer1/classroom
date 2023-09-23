@@ -1,8 +1,15 @@
 import css from './css/select.module.css'
 import Input from './Input'
-import Option from './Option'
 import { useOpen } from 'hooks/globalUI/useOpen'
 
+
+const Option = ({ data, onSelect }) => {
+    return (
+        <div onClick={() => onSelect(data)} className='mx-[30px] border-b border-gray-450 last:border-none'>
+            <div className='px-[10px] py-[5px] text-lg cursor-pointer rounded-[6px] mb-[6px] hover:bg-primary-800'>{data.name}</div>
+        </div>
+    )
+}
 
 
 function Select({ field: { value, onChange, ...fieldOptions }, onSelect = () => null, form, options, readOnly, ...props }) {
@@ -16,7 +23,6 @@ function Select({ field: { value, onChange, ...fieldOptions }, onSelect = () => 
 
     return (
         <div className={css.block}>
-
             {readOnly ?
                 <div className={css.viewMode}>
                     <h5 className={css.view_placeholder}>{props.placeholder}:</h5>

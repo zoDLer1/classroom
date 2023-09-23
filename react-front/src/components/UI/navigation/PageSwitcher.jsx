@@ -1,8 +1,6 @@
-import css from './css/page-switcher.module.css'
-import classNames from 'classnames/bind'
+import cx from 'classnames'
 import { useNavigate } from 'react-router-dom';
 
-const cx = classNames.bind(css);
 
 
 export default function PageSwitcher({ pages, current }) {
@@ -10,12 +8,12 @@ export default function PageSwitcher({ pages, current }) {
     const navigate = useNavigate()
 
     return (
-        <div className={css.block}>
+        <div className='flex justify-center gap-4'>
             {pages.map(({ text, url }, index) =>
                 <div
                     onClick={() => navigate(url)}
                     key={index}
-                    className={cx('item', { selected: current === index })}
+                    className={cx('cursor-pointer py-2 px-4 rounded-t-[10px]', { 'text-primary-400 bg-primary-100 border-b-2 border-primary-400 font-medium': current === index })}
                 >
                     {text}
                 </div>)}

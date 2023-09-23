@@ -8,8 +8,13 @@ import { useInitialRequest } from 'hooks/requests/useInitialRequest'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import FormLoader from 'components/forms/FormLoader'
+import { usePermissions } from 'hooks/store/useUser'
+
+
 
 function ClassesPage() {
+
+    const { isTeacher } = usePermissions()
 
     const popup = usePopup()
 
@@ -25,7 +30,7 @@ function ClassesPage() {
 
     const popupOpen = () => {
         popup.open()
-        const content = true ? <CreateClassForm addClass={classesActions.addItem} close={popup.close} /> : <JoinClassForm close={popup.close} />
+        const content = isTeacher ? <CreateClassForm addClass={classesActions.addItem} close={popup.close} /> : <JoinClassForm close={popup.close} />
         popup.setContent(content)
     }
     return (
