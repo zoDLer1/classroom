@@ -1,9 +1,9 @@
-import css from './css/test-template.module.css'
 import Action from 'components/UI/inputs/Action'
 import { useOpen } from 'hooks/globalUI/useOpen'
-import { faFileCirclePlus, faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faFileCirclePlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
+import cx from 'classnames'
 
 
 function Template({ onAppoint, onDelete, ...testData }) {
@@ -13,20 +13,20 @@ function Template({ onAppoint, onDelete, ...testData }) {
 
 
     return (
-        <div onClick={() => { open() }} className={[css.block, css[`open-${condition}`]].join(' ')}>
+        <div onClick={() => { open() }} className={cx('flex flex-col gap-5 py-4 px-6 h-24 cursor-pointer transition-height overflow-hidden duration-200 shadow-custom rounded-2xl', { 'h-[11.6rem]': condition })}>
 
-            <div className={css.header}>
-                <p className={css.title}>{name}</p>
+            <div className='flex justify-between items-center'>
+                <p className={'text-gray-320 text-lg font-medium'}>{name}</p>
                 {/* <p className={css.question_count}>Вопросы: 15</p> */}
             </div>
-            <div className={css.body}>
-                <div className={css.subject}> </div>
-                <p className={css.description}>{description}</p>
+            <div className='flex-1'>
+                {/* <div className={css.subject}> </div> */}
+                <p className={cx('text-[#79797a] whitespace-nowrap text-sm line-clamp-3 text-ellipsis', { '!whitespace-normal': condition })}>{description}</p>
             </div>
-            <div className={css.footer}>
+            <div className={cx('hidden justify-between', { '!flex': condition })}>
                 <Action onClick={() => onAppoint(testData)} icon={faFileCirclePlus} text='Назначить' />
 
-                <div onClick={(evt) => evt.stopPropagation()} className={css.ed}>
+                <div onClick={(evt) => evt.stopPropagation()} className='flex'>
                     <Action onClick={() => navigate('/tests/templates/' + testData.id)} icon={faEye} text='Просмотреть' />
                     <Action icon={faTrash} styleAction='error' onClick={() => onDelete(id)} text='Удалить' />
                 </div>

@@ -1,4 +1,3 @@
-import css from './css/question-list.module.css'
 import Question from 'components/lists/items/Question'
 import { FieldArray } from 'formik'
 import { defaultQuestionValue } from 'pages/CreateTemplatePage'
@@ -8,7 +7,7 @@ const QuestionList = ({ values, viewMode }) => {
 
     return (
         <FieldArray validateOnChange={false} name='questions' render={({ insert, remove, form }) =>
-            <div className={css.block}>
+            <div className='flex flex-col gap-10'>
                 {
                     values.questions.map((question, index) => <Question
                         data={question}

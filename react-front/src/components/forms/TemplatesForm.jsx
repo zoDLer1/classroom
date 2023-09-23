@@ -1,5 +1,3 @@
-import formCss from './forms.module.css'
-import css from './css/tests-form.module.css'
 import Action from 'components/UI/inputs/Action'
 import { useState } from 'react'
 import Template from 'components/lists/items/Template'
@@ -46,31 +44,31 @@ function TestsForm() {
         popup.open()
     }
 
-
+    // [formCss.block, formCss.flex, css.block].join(' ')
     return (
-        <div className={[formCss.block, formCss.flex, css.block].join(' ')}>
-            <div className={css.header}>
-                <p className={css.title}>Мои шаблоны тестов</p>
+        <div className='container rounded-[20px] py-8 px-10 w-[600px] m-auto'>
+            <div className='border-b-2 border-gray-450'>
+                <p className='text-gray-750 text-2xl mb-4'>Мои шаблоны тестов</p>
                 {
                     templates.length >= 4 &&
-                    <div className={css.actions}>
+                    <div className="mb-1 flex">
                         <Action onClick={ToTestCreation} text={'Создать'} icon={faPlus} />
                     </div>
                 }
 
             </div>
-            <div className={css.content}>
+            <div className='min-h-[200px] flex flex-col items-center justify-center'>
                 <FormLoader condition={isLoading}>
-                    <div className={css.tests}>
+                    <div className='flex flex-col my-3 w-full gap-7'>
                         {templates.map(test => <Template onAppoint={popupOpen} onDelete={deteleTemplate} key={test.id} {...test} />)}
                     </div>
                     {templates.length < 4 ?
-                        <div className={css.empty}>
-                            <p className={css.label}>Создать шаблоны</p>
+                        <div className='flex flex-col mt-5 items-center gap-3'>
+                            <p className='text-black opacity-50'>Создать шаблоны</p>text-white
                             <Action text={'Создать'} onClick={ToTestCreation} icon={faPlus} />
                         </div>
                         :
-                        <div className={css.add}>
+                        <div className='flex justify-center'>
                             <Action text={'Ещё'} />
                         </div>
                     }

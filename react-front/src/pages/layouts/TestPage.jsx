@@ -25,7 +25,7 @@ export default function TestPage() {
 
     return (
         <ContentUpper>
-            <div style={{ padding: 20 }} className={formCss.body}>
+            <div className='p-5 flex-col gap-[10px] w-[800px] rounded-[20px] shadow-70_20 bg-white min-h-[300px]'>
                 <FormLoader condition={isLoading}>
                     <TestForm id={id} testData={testData} />
                 </FormLoader>

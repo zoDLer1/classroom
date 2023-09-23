@@ -1,15 +1,11 @@
-import questionCss from './css/question.module.css'
 import TextAnswerList from 'components/lists/TextAnswer'
 import FewFromListAnswer from 'components/lists/FewFromListAnswer'
 import OneFromListAnswer from 'components/lists/OneFromListAnswer'
 import Image from 'components/lists/items/Image'
 import SidebarMenu from '../../UI/modelWindows/SidebarMenu'
 import { faPen, faListOl, faClock, faTrash, faCirclePlus, faEllipsisVertical, faImage, faFileAudio, faArrowRight, faCopy, faFont } from '@fortawesome/free-solid-svg-icons'
-// import { FormFastInput, FormNestedFastInput } from '../../inputs/FormInput'
-// import { FormNestedFastSelect, FormFastSelect } from '../../inputs/FormSelect'
 import { FormNestedFastSelect } from 'components/forms/inputs/FormSelect'
 import { FormNestedFastInput, FormFastInput } from 'components/forms/inputs/FormInput'
-// import FormSwitch from '../../inputs/FormSwitch'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import { defaultAnswersValues } from 'pages/CreateTemplatePage'
@@ -70,9 +66,8 @@ const Question = ({ form, data, remove, index, add, copy, viewMode }) => {
 
 
     return (
-        <div className={questionCss.block}>
-            {}
-            <div className={questionCss.header}>
+        <div className={'group flex flex-col gap-9 py-12 px-20 bg-white shadow-70_20 rounded-[55px] relative min-h-[285px] w-[53rem]'}>
+            <div>
                 <FormNestedFastInput readOnly={viewMode} name={`questions.${index}.name`} placeholder="Название" icon={faPen} />
             </div>
             {/* {data.photos.length
@@ -80,42 +75,41 @@ const Question = ({ form, data, remove, index, add, copy, viewMode }) => {
                     {data.photos.map((item) => <Image onClose={removeImg} data={item} alt="..." />)}
                 </div> : ''} */}
 
-            <div className={questionCss.body}>
-                <div className={questionCss.answer}>
-                    <div className={questionCss.answer_item}>
+            <div className='flex justify-between flex-1'>
+                <div className='flex justify-between w-full items-start'>
+                    <div>
                         {answers[data.type]}
                     </div>
 
-                    <div className={questionCss.answer_options}>
-                        <FormNestedFastSelect readOnly={viewMode} onSelect={changeAnswerType} labelStyle={questionCss.type} name={`questions.${index}.type`} options={typeOptions} placeholder="Тип" icon={faListOl} />
+                    <div className='flex flex-col gap-5 w-80'>
+                        <FormNestedFastSelect readOnly={viewMode} onSelect={changeAnswerType} name={`questions.${index}.type`} options={typeOptions} placeholder="Тип" icon={faListOl} />
                         {viewMode ?
-                            data.time && <div className={questionCss.viewTime}>
-                                <h5>Время:</h5>
+                            data.time && <div className='flex items-center gap-1'>
+                                <h5 className='font-semibold text-sm'>Время:</h5>
                                 {data.passed_time && <p>{data.passed_time}s /</p>}
                                 <p>{data.time}s</p>
                             </div>
-                            : (data.time || viewTime) && <div className={questionCss.time}>
-                                
+                            : (data.time || viewTime) && <div className='w-80'>
                                 <FormNestedFastInput name={`questions.${index}.time`} placeholder="Время" icon={faClock} />
                             </div>}
                     </div>
                 </div>
             </div>
 
-            <div className={questionCss.footer}>
+            <div className='border-t-2 border-gray-450 pt-4 flex justify-end gap-5 items-center'>
                 {!viewMode &&
                     <>
-                        <div className={questionCss.actions}>
-                            <FontAwesomeIcon onClick={copy} icon={faCopy} className={[questionCss.icon, questionCss.action, questionCss.copy].join(' ')} />
-                            <FontAwesomeIcon onClick={remove} icon={faTrash} className={[questionCss.icon, questionCss.action, questionCss.delete].join(' ')} />
+                        <div className='flex gap-5'>
+                            <FontAwesomeIcon onClick={copy} icon={faCopy} className='text-gray-450 text-[22px] cursor-pointer hover:text-[#1AD92C]' />
+                            <FontAwesomeIcon onClick={remove} icon={faTrash} className='text-gray-450 text-[22px] cursor-pointer hover:text-[#D61414]' />
                         </div>
-                        <div className={questionCss.seporator}></div>
-                        <FontAwesomeIcon icon={faEllipsisVertical} className={questionCss.icon} />
+                        <div className={'w-0.5 h-6 bg-gray-450'}></div>
+                        <FontAwesomeIcon icon={faEllipsisVertical} className='text-gray-450 text-[22px]' />
                     </>
                 }
             </div>
 
-            {!viewMode && <SidebarMenu id={index} className={questionCss.menu} items={menuItems} />}
+            {!viewMode && <SidebarMenu id={index} className={'flex justify-center opacity-0 absolute p-8 top-1/2 -translate-y-1/2 -right-32 hover:!opacity-100 group-hover:opacity-50'} items={menuItems} />}
 
         </div>
     )

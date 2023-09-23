@@ -18,6 +18,7 @@
 }
 .view_placeholder{
     font-size: 14px;
+    font-weight: 600;
 }
 .viewMode{
     display: flex;

@@ -75,7 +75,7 @@ function ClassMembersPage() {
                 {[<User {...data.creator} key={'teacher'} />]}
             </TitleList>
             <TitleList>
-                {data.waiters.map(waiter => <WaiterItem onAccept={acceptWaiter} isLoading={isAcceptWaiterLoading || isRejectWaiterLoading} onExcept={rejectWaiter} id={waiter.id} key={waiter.id} {...waiter.info} />)}
+                {(data.waiters ?? []).map(waiter => <WaiterItem onAccept={acceptWaiter} isLoading={isAcceptWaiterLoading || isRejectWaiterLoading} onExcept={rejectWaiter} id={waiter.id} key={waiter.id} {...waiter.info} />)}
             </TitleList>
             <TitleList
                 empty={

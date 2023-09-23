@@ -1,4 +1,3 @@
-import css from './css/test.module.css'
 import FormHeader from 'components/forms/TestHeader'
 import QuestionList from 'components/lists/QuestionList'
 import { Form } from 'formik'
@@ -79,12 +78,11 @@ const TemplateCreationForm = ({ values, handleSubmit, setValues, validateForm, i
 
     return (
         <>
-            <Form
-                className={css.block}>
+            <Form className='flex flex-col my-[70px] gap-10'>
                 <FormHeader viewMode={viewMode} />
                 <QuestionList viewMode={viewMode} values={values} />
             </Form>
-            <a ref={exportRef} href={'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportInfo()))} download={`${values.name}.json`}>asdasdasd</a>
+            <a ref={exportRef} hidden href={'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportInfo()))} download={`${values.name}.json`}></a>
             <input onChange={importInfo} type='file' accept='.json' ref={importRef} hidden />
         </>
     )

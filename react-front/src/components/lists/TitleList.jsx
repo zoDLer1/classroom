@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 
 
-const TitleList = ({ children, title, empty = null, hidding = false, useSwitch = false }) => {
+const TitleList = ({ children, title, empty = null, hidding = false, useSwitch = false, initialCondition = true }) => {
 
-    const { condition, toggle } = useConditionSwitch(true)
+    const { condition, toggle } = useConditionSwitch(initialCondition)
 
     if (children.length || empty) {
         return (

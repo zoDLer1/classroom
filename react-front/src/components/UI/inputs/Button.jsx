@@ -7,7 +7,7 @@ function Button({ text, disabled, loading = false, icon, size = 1, ...props }) {
         // [css.block, css[`size-${size}`], css[`disabled-${disabled}`]].join(' ')
         <button type='button'
             className={cx(
-                'flex uppercase justify-center bg-primary text-white transition-transform duration-200 ease-out w-full gap-2 rounded-full cursor-pointer border-none hover:scale-105 shadow-2xl',
+                'flex uppercase items-center justify-center bg-primary text-white transition-transform duration-200 ease-out w-full gap-2 rounded-full cursor-pointer border-none hover:scale-105 shadow-2xl',
                 {
                     'py-4 text-xl tracking-widest': size === 1,
                     'bg-gray-450': disabled,

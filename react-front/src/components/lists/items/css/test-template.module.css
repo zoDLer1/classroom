@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    height: 4rem;
+    height: 6rem;
     transition: height 0.2s linear;
     border-radius: 15px;
     cursor: pointer;
@@ -22,12 +22,14 @@
     justify-content: space-between;
 }
 .description{
-    
     color: #79797a;
     white-space: nowrap;
     width: 100%;
     font-size: 14px;
     overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     text-overflow: ellipsis;
 }
 .question_count{
@@ -50,7 +52,7 @@
     justify-content: space-between;
 }
 .open-true{
-    height: 11rem;
+    height: 11.5rem;
 }
 .ed{
     display: flex;

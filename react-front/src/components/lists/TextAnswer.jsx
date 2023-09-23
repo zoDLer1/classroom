@@ -1,7 +1,6 @@
 import { FormNestedFastInput } from 'components/forms/inputs/FormInput'
 import { faFont } from '@fortawesome/free-solid-svg-icons'
 import { FieldArray } from 'formik'
-import css from './css/text-answer.module.css'
 
 
 const TextAnswer = ({ name, index, viewMode, passingMode, data }) => {
@@ -16,9 +15,9 @@ const TextAnswer = ({ name, index, viewMode, passingMode, data }) => {
     }
 
 
-    return <div className={css.block}>
+    return <div className='flex gap-6'>
         {/* {JSON.stringify(data)} */}
-        {((viewMode && !data.isPassed) && !passingMode || !!data.right) && <h4 className={css.title}>Ответ: <span className={css.label}>{data.right ?? data.value}</span></h4>}
+        {((viewMode && !data.isPassed) && !passingMode || !!data.right) && <h4 className='text-sm font-semibold'>Ответ: <span className='text-[18px] italic font-normal'>{data.right ?? data.value}</span></h4>}
         {(!viewMode || data.isPassed) && <FormNestedFastInput
             disabled={!!data.isPassed}
             styleType={getStyte()}

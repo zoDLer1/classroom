@@ -1,4 +1,3 @@
-import css from './css/few-from-list-answer.module.css'
 import { FormNestedFastInput } from 'components/forms/inputs/FormInput'
 import { faPen, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { faSquarePlus } from '@fortawesome/free-regular-svg-icons'
@@ -29,16 +28,16 @@ const FewFromListAnswerItem = ({ name, add, remove, index, viewMode, data, passi
         return 'default'
     }
 
-    return <div className={css.item} >
+    return <div className='group/answer flex items-center gap-[10px]' >
         <FormFastCheckBox name={`${name}.${index}.isCorrect`} checkboxSlyle={getCheckBoxStyle()} disabled={viewMode && !passingMode}>
-            {viewMode && <h3 className={css.label}>{data.name}</h3>}
+            {viewMode && <h3 className='text-[19px] w-72 overflow-hidden text-ellipsis'>{data.name}</h3>}
         </FormFastCheckBox>
         {!viewMode &&
             <>
                 <FormNestedFastInput name={`${name}.${index}.name`} icon={faPen} placeholder={`Введите ответ ${index + 1}`} />
-                <div className={css.actions}>
-                    <FontAwesomeIcon icon={faSquarePlus} onClick={add} className={[css.icon, css.add].join(' ')} size='lg'></FontAwesomeIcon>
-                    <FontAwesomeIcon icon={faXmark} onClick={remove} className={[css.icon, css.remove].join(' ')} size='lg'></FontAwesomeIcon>
+                <div className='flex-col hidden items-center gap-[5px] group-hover/answer:flex'>
+                    <FontAwesomeIcon icon={faSquarePlus} onClick={add} className='cursor-pointer text-xl text-gray-450 hover:text-[#1AD92C]'  size='lg'></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faXmark} onClick={remove} className='cursor-pointer text-xl text-gray-450 hover:text-[#D61414]' size='lg'></FontAwesomeIcon>
                 </div>
             </>
         }
@@ -48,7 +47,7 @@ const FewFromListAnswerItem = ({ name, add, remove, index, viewMode, data, passi
 const FewFromListAnswer = ({ data, name, viewMode, passingMode = false }) => {
 
     return <FieldArray name={name} render={({ insert, remove, form }) =>
-        <div className={css.list}>
+        <div className='flex flex-col gap-5'>
             {
                 data.map((answer, index) => <FewFromListAnswerItem
                     add={() => insert(index + 1, defaultManyAnswer)}

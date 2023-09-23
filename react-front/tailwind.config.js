@@ -5,6 +5,11 @@ module.exports = {
     ],
     theme: {
         extend: {
+            boxShadow:{
+                custom: '0 10px 30px rgba(10, 59, 82, 0.20)',
+                '70_20': '0 10px 70px 0 rgb(0 0 0 / 20%)'
+            },
+
             colors:{
                 primary: {
                     DEFAULT: '#0388D4',
@@ -15,6 +20,7 @@ module.exports = {
                 },
                 gray: {
                     450: '#B6B2B1',
+                    320: '#606061',
                     750: '#3c4043'
                 }            
             },
