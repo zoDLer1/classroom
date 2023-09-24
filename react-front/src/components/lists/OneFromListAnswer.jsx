@@ -32,7 +32,7 @@ const OneFromListAnswerItem = ({ viewMode, index, data, name, setOne, add, remov
 
 
     return (
-        <div className='group/answer flex items-center gap-[10px]' > 
+        <div className='group/answer flex-ic gap-2.5' > 
             <FormFastCheckBox
                 type='circle'
                 name={`${name}.${index}.isCorrect`}
@@ -40,7 +40,7 @@ const OneFromListAnswerItem = ({ viewMode, index, data, name, setOne, add, remov
                 disabled={viewMode && !passingMode}
                 checkboxSlyle={getCheckBoxStyle()}
             >
-                {viewMode && <h3 className='text-[19px] w-72 overflow-hidden text-ellipsis'>{data.name}</h3>}
+                {viewMode && <h3 className='text-xl w-72 text-sizing'>{data.name}</h3>}
             </FormFastCheckBox>
             {!viewMode &&
                 <>
@@ -65,7 +65,7 @@ const OneFromListAnswer = ({ form, name, viewMode, data, passingMode = false }) 
     }
 
     return <FieldArray validateOnChange={false} name={name} render={({ insert, remove, form }) =>
-        <div className='flex flex-col gap-5'>
+        <div className='flex-vertical gap-5'>
             {
                 data.map((answer, index) => <OneFromListAnswerItem
                     data={answer}

@@ -59,7 +59,7 @@ const ClassLayout = () => {
 
     return (
         <ContentUpper>
-            <div className='flex flex-col gap-3 min-h-[300px] w-[800px] px-[15px] py-5 rounded-2xl container mx-auto'>
+            <div className='flex-vertical gap-3 min-h-58 w-192 px-4 py-5 rounded-2xl box mx-auto'>
                 <FormLoader condition={isLoading}>
                     <ClassForm id={id} classData={classData} pages={pages} setFullData={setFormatedData} setClassData={setClass} />
                 </FormLoader>

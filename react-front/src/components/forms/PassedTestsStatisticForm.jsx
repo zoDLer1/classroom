@@ -9,7 +9,7 @@ export default function PassedTestsStatisticForm() {
     const { data } = useOutletContext()
 
     return (
-        <div className='py-[10px] px-12 flex flex-col'>
+        <div className='py-2.5 px-12 flex-vertical'>
             {data.questions.map(question => <StatisticQuestion key={question.id} {...question} />)}
         </div>
     )

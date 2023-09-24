@@ -1,5 +1,4 @@
 import User from "./User"
-
 import { faXmark } from "@fortawesome/free-solid-svg-icons"
 
 

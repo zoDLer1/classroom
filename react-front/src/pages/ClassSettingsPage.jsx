@@ -64,8 +64,8 @@ export function FormSettings({ values }) {
     }
 
     return (
-        <Form className='flex flex-col py-[10px] px-5'>
-            <div className='flex flex-col gap-10'>
+        <Form className='flex-vertical py-2.5 px-5'>
+            <div className='flex-vertical gap-10'>
                 <TitleBlock title={'Сведения'}>
                     <div className='my-8 grid grid-cols-2 gap-12 px-5'>
                         <FormInputSender icon={faPen} name='name' placeholder={'Название'} />
@@ -77,7 +77,7 @@ export function FormSettings({ values }) {
                     </div>
                 </TitleBlock>
                 <TitleBlock title={'Общие'}>
-                    <div className='p-5 flex flex-col gap-9'>
+                    <div className='p-5 flex-vertical gap-9'>
                         <div className='flex justify-between'>
                             <p className='text-gray-750 font-medium mt-4'>Ссылка для приграшения:</p>
                             <div className='w-96'>
@@ -93,14 +93,14 @@ export function FormSettings({ values }) {
                                 </div>
                             </div>
                         </div>
-                        <div className={'flex items-center gap-5'}>
+                        <div className={'flex-ic gap-5'}>
                             <p className='text-gray-750 font-medium'>Код класса:</p>
                             <span className='text-lg font-medium text-primary'>{values.code}</span>
                         </div>
                     </div>
                 </TitleBlock>
                 <TitleBlock title={'Дополнительно'}>
-                    <div className='p-5 flex flex-col gap-9'>
+                    <div className='p-5 flex-vertical gap-9'>
                         <FormCheckBoxSender name='settings.allow_view_members_list'>
                             <span>Разрешать другим пользователям просматривать список участников</span>
                         </FormCheckBoxSender>
@@ -113,8 +113,8 @@ export function FormSettings({ values }) {
 
 export const TitleBlock = ({ title, children }) => {
     return (
-        <div className='border rounded-[20px] border-gray-450 p-[10px]'>
-            <div className='px-5 pb-[10px] flex items-center justify-between pt-1'>
+        <div className='border rounded-2xs border-gray-450 p-[10px]'>
+            <div className='px-5 pb-2.5 flex items-center justify-between pt-1'>
                 <p className={'text-2xl text-primary-300'}>{title}</p>
             </div>
             {children}

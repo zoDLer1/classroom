@@ -12,7 +12,7 @@ function Input({ field, error, touched, children, icon, styleType = 'default', l
     const inputClasses = cx({ hasError: error && touched, readOnly }, styleType)
     const id = useId()
 
-    
+
 
     return (
         <div className={inputClasses}>

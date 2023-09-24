@@ -13,7 +13,7 @@ export default function SignLayout() {
 
     return (
         <ContentCenter>
-            <div className='flex items-center flex-col rounded-[55px] container px-20 py-11'>
+            <div className='flex-vertical-ic rounded-xl box px-20 py-11'>
                 <PageLinks links={links} />
                 <Outlet />
             </div>

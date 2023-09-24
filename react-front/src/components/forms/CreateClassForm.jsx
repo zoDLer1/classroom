@@ -19,14 +19,14 @@ export function CreateClassForm({ close, handleSubmit }) {
     })
 
     return (
-        <Form className='flex items-center justify-center flex-col px-20 py-10 bg-white rounded-[55px] shadow-70_20'>
-            <div className='flex flex-col gap-5 w-[310px]'>
+        <Form className='flex-vertical-ic-jc p-10-20 rounded-xl box'>
+            <div className='flex-vertical gap-5 w-75'>
                 <FormInput name='name' icon={faPen} placeholder={'Название'} />
                 <FormSelect options={subjects} name='subject' icon={faCube} placeholder={'Предмет'} />
-                <div className='mt-[10px]'>
+                <div className='mt-2.5'>
                     <FormTextArea name='description' placeholder={'Описание'} rows='7' />
                 </div>
-                <div className='flex items-center gap-[10px] justify-end'>
+                <div className='flex-ic-je gap-2.5'>
                     <Action icon={faBan} onClick={close} styleAction={'error'} text={'Отменить'} />
                     <Action icon={faPlus} onClick={handleSubmit} text={'Создать'} />
                 </div>
@@ -60,7 +60,7 @@ function CreateClassFormWrapper({ close, addClass }) {
             }
             onSubmit={(values, { setErrors }) => createClassRequest(values, { 400: (response) => setErrors(response.response.data) })}
         >
-            {(props) => <CreateClassForm {...props} close={close}/>}
+            {(props) => <CreateClassForm {...props} close={close} />}
         </Formik>
     )
 }

@@ -21,7 +21,7 @@ const TestForm = ({ id, testData }) => {
     const current = useCurrectLocationPage(pages, `/tests/${id}`, 'results')
 
     return (
-        <div className='flex flex-col gap-[30px]'>
+        <div className='flex-vertical gap-8'>
             <PageSwitcher pages={pages} current={current} />
             {current !== -1 && <Outlet context={{ data: testData[pages[current].url] }} />}
         </div>

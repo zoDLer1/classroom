@@ -17,10 +17,10 @@ function RegisterForm({ isSubmitting }) {
         { name: 'Преподаватель', id: 2 }
     ]
 
-
+ 
     return (
         <Form>
-            <div className='min-w-[310px] mb-10 flex flex-col gap-8'>
+            <div className='w-75 mb-10 flex-vertical gap-8'>
                 <FormInput name='first_name' placeholder="Имя" icon={faUser} />
                 <FormInput name='last_name' placeholder="Фамилия" icon={faUser} />
                 <FormInput name='email' placeholder="Почта" icon={faEnvelope} />
@@ -29,7 +29,7 @@ function RegisterForm({ isSubmitting }) {
                 <PasswordInput name='password_confim' placeholder="Повторите пароль" icon={faKey} />
             </div>
             <div className='mb-5'>
-                <FormCheckBox name='lisence'> 
+                <FormCheckBox name='lisence'>
                     <p className='text-gray-450 text-base'>
                         Я принимаю
                     </p>
@@ -37,7 +37,7 @@ function RegisterForm({ isSubmitting }) {
                 </FormCheckBox>
             </div>
             <div className='mb-5'>
-                <Submit loading={isSubmitting} text='Регистрация'  />
+                <Submit loading={isSubmitting} text='Регистрация' />
             </div>
             <div className='text-gray-450 text-base flex justify-center gap-3'>
                 Уже есть аккаунт?

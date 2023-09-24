@@ -44,9 +44,8 @@ function TestsForm() {
         popup.open()
     }
 
-    // [formCss.block, formCss.flex, css.block].join(' ')
     return (
-        <div className='container rounded-[20px] py-8 px-10 w-[600px] m-auto'>
+        <div className='box rounded-2xs py-8 px-10 w-134 w-1.5xl m-auto'>
             <div className='border-b-2 border-gray-450'>
                 <p className='text-gray-750 text-2xl mb-4'>Мои шаблоны тестов</p>
                 {
@@ -57,13 +56,13 @@ function TestsForm() {
                 }
 
             </div>
-            <div className='min-h-[200px] flex flex-col items-center justify-center'>
+            <div className='min-h-50 flex-vertical-ic-jc'>
                 <FormLoader condition={isLoading}>
                     <div className='flex flex-col my-3 w-full gap-7'>
                         {templates.map(test => <Template onAppoint={popupOpen} onDelete={deteleTemplate} key={test.id} {...test} />)}
                     </div>
                     {templates.length < 4 ?
-                        <div className='flex flex-col mt-5 items-center gap-3'>
+                        <div className='flex-vertical-ic mt-5 gap-3'>
                             <p className='text-black opacity-50'>Создать шаблоны</p>
                             <Action text={'Создать'} onClick={ToTestCreation} icon={faPlus} />
                         </div>

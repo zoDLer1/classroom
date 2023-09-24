@@ -16,8 +16,7 @@ const TextAnswer = ({ name, index, viewMode, passingMode, data }) => {
 
 
     return <div className='flex gap-6'>
-        {/* {JSON.stringify(data)} */}
-        {((viewMode && !data.isPassed) && !passingMode || !!data.right) && <h4 className='text-sm font-semibold'>Ответ: <span className='text-[18px] italic font-normal'>{data.right ?? data.value}</span></h4>}
+        {((viewMode && !data.isPassed) && !passingMode || !!data.right) && <h4 className='text-sm font-semibold'>Ответ: <span className='text-lg italic font-normal'>{data.right ?? data.value}</span></h4>}
         {(!viewMode || data.isPassed) && <FormNestedFastInput
             disabled={!!data.isPassed}
             styleType={getStyte()}

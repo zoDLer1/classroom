@@ -17,10 +17,10 @@ function User({ id, first_name, last_name, avatar, children, actions = [], isLoa
     }, [isLoading])
 
     return (
-        <div className='group flex items-center justify-between p-[10px] border-b-[1px] border-solid border-gray-300 last:border-none'>
-            <div className='flex items-center gap-5'>
+        <div className='group flex-ic-jb p-2.5 border-b border-solid border-gray-300 last:border-none'>
+            <div className='flex-ic gap-5'>
                 <img src={avatar || "https://lh3.googleusercontent.com/a/default-user=s36-c"} draggable="false" alt="..." className='rounded-full select-none h-9 w-9' />
-                <div className='flex items-center gap-1'>
+                <div className='flex-ic gap-1'>
                     <p className='text-sm text-gray-750 font-medium'>{first_name}</p>
                     <p className='text-sm text-gray-750 font-medium'>{last_name}</p>
                 </div>

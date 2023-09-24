@@ -67,7 +67,7 @@ function ClassMembersPage() {
     )
 
     return (
-        <div className='flex flex-col gap-12 px-5 py-3'>
+        <div className='flex-vertical gap-12 px-5 py-3'>
             <TitleList
                 title='Преподаватель'
                 hidding

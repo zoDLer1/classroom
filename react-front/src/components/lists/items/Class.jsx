@@ -64,11 +64,11 @@ function Class({ stored, value, methods, onColorMenu, updateRequest, deleteReque
             editModeOff()
         }
     }
-
+ 
     return (
-        <div className='h-[320px] w-[320px] flex flex-col overflow-hidden relative select-none bg-white rounded-[55px] shadow-xl'>
+        <div className='h-80 w-80 flex-vertical overflow-hidden relative select-none box rounded-xl'>
             <DefaultLink className='h-24 px-10' disabled={editMode} to={`/classes/${value.id}`} onClick={(evt) => evt.stopPropagation()} style={{ backgroundColor: `#${value.color_info.value}` }}>
-                <div className='overflow-hidden mt-8 flex gap-6 items-center' >
+                <div className='overflow-hidden mt-8 gap-6 flex-ic' >
                     <div>
                         <Input labelStyle={'overflow-hidden whitespace-nowrap w-44 text-ellipsis'} onKeyUp={onKeyEnter} styleType={'light'} readOnly={!editMode} field={{ value: value.name, onChange: (evt) => setName(evt.target.value) }}  >
                             <FontAwesomeIcon className='text-white text-3xl cursor-pointer' icon={faCheck} onClick={editModeOff}  size='lg' />
@@ -81,8 +81,8 @@ function Class({ stored, value, methods, onColorMenu, updateRequest, deleteReque
             </DefaultLink>
             <div className='flex-1'>
             </div>
-            <footer className='border-gray-450 border-t-[3px] mx-7 flex justify-end items-center px-[10px] py-3 gap-5 relative'>
-                <div onClick={(evt) => onMenuOpen(evt, value)} className='w-5 flex justify-center items-center cursor-pointer text-xl text-gray-450 hover:text-primary'>
+            <footer className='border-gray-450 border-t-[3px] mx-7 flex-ic-je px-2.5 py-3 gap-5 relative'>
+                <div onClick={(evt) => onMenuOpen(evt, value)} className='w-5 flex-ic-jc cursor-pointer text-xl text-gray-450 hover:text-primary'>
                     <FontAwesomeIcon icon={faEllipsisVertical} />
                 </div>
                 {loading && <FontAwesomeIcon className='text-primary-faded text-xl absolute left-[5%]' icon={faSpinner} spinPulse ></FontAwesomeIcon>}

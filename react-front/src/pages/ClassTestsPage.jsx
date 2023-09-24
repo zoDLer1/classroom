@@ -15,7 +15,7 @@ function ClassTestsPage() {
 
     return (
         <div>
-            <div className='p-3 flex items-center border-b-2 border-opacity-20 border-black mb-3'>
+            <div className='p-3 flex-ic border-b-2 border-opacity-20 border-black mb-3'>
                 <Access permission={permissions.isTeacher}>
                     <Action text={'Добавить'} onClick={() => navigate('/tests/templates')} icon={faPlus} />
                 </Access>
@@ -23,7 +23,7 @@ function ClassTestsPage() {
                     <Action icon={faCircleCheck} text={'Мои пройденные задания'} />
                 </Access>
             </div>
-            <div className='flex-1 min-h-[15rem]'>
+            <div className='flex-1 min-h-55'>
                 {data.map(test => <Test permissions={permissions} key={`task-${test.id}`} {...test} />)}
             </div>
             <div className='flex justify-center'>

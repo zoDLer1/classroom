@@ -11,9 +11,10 @@ import { Form } from 'formik'
 
 
 function LoginForm({ isSubmitting }) {
+
     return (
         <Form>
-            <div className='flex flex-col gap-10 min-w-[310px] my-10'>
+            <div className='flex-vertical gap-10 w-75 my-10'>
                 <FormInput name="email" placeholder="Почта" icon={faEnvelope} />
                 <PasswordInput name="password" placeholder="Пароль" icon={faKey} />
             </div>

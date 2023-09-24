@@ -11,7 +11,7 @@ function PageLinks({ links }) {
     const linkStyle = (to) => classNames('cursor-pointer', pathname !== to ? 'text-primary-faded' : 'text-primary')    
     
     return (
-        <div className='flex items-center w-full gap-9 mb-8 justify-end'>
+        <div className='flex-ic-je w-full gap-9 mb-8'>
             {links.map(({ to, text}, index) =>
                 <Link key={index} className={linkStyle(to)} to={to}>{text}</Link>
             )}

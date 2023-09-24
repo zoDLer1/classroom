@@ -13,7 +13,7 @@ export default function PageSwitcher({ pages, current }) {
                 <div
                     onClick={() => navigate(url)}
                     key={index}
-                    className={cx('cursor-pointer py-2 px-4 rounded-t-[10px]', { 'text-primary-400 bg-primary-100 border-b-2 border-primary-400 font-medium': current === index })}
+                    className={cx('cursor-pointer py-2 px-4 rounded-t-xs', { 'text-primary-400 bg-primary-100 border-b-2 border-primary-400 font-medium': current === index })}
                 >
                     {text}
                 </div>)}

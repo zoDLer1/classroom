@@ -59,8 +59,8 @@ export default function TestsPassingPage() {
                 return <ContentUpper>
                     <Form>
                         <TestHeader viewMode={true}>
-                            <div className='flex py-[10px] mt-6 border-t-2 border-gray-450 items-center justify-end'>
-                                <div className={'flex gap-5 px-[10px]'}>
+                            <div className='flex-ic-je py-2.5 mt-6 border-t-2 border-gray-450'>
+                                <div className={'flex gap-5 px-2.5'}>
                                     <Button text={'Назад'} onClick={() => navigate(-1)} size={2} icon={faArrowLeft} style={{ backgroundColor: 'rgb(240, 167, 32)' }} />
                                     <Button loading={loading} text={'Старт'} onClick={passRequest} size={2} icon={faPlay} />
                                 </div>

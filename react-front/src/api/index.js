@@ -3,7 +3,7 @@ import AuthService from "services/AuthService";
 
 export const DOMAIN = 'http://localhost:8000/api/v1'
 export const BAESDOMAIN = 'http://localhost:8000'
-// axios.defaults.timeout = 1000 * 100;
+
 
 export const Defaultconfig = {
     baseURL: DOMAIN,

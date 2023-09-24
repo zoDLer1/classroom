@@ -10,8 +10,8 @@ const Header = ({ user }) => {
     const { actions, isBackButton } = useHeaderInfo()
 
     return (
-        <header className='bg-primary flex justify-between py-6 px-[70px] relative'>
-            <div className='flex items-center'>
+        <header className='bg-primary flex justify-between py-6 px-18 relative'>
+            <div className='flex-ic'>
                 <div>
                     <div>
                         {isBackButton && <HeaderAction icon={faArrowLeft} action={() => navigate(-1)} />}
@@ -24,8 +24,8 @@ const Header = ({ user }) => {
                     </div>
                 </div>
             </div>
-            <div className='flex items-center justify-center gap-10'>
-                <div className='flex items-center gap-5'>
+            <div className='flex-ic-jc gap-10'>
+                <div className='flex-ic gap-5'>
                     <NavigationItem to='/accounts/profile' text={`${user?.data?.first_name} ${user?.data?.last_name}`} />
                     {user?.data?.avatar ? null : <img className='w-8 h-8 rounded-full' src={"https://lh3.googleusercontent.com/a/default-user=s36-c"} alt="" />}
                 </div>

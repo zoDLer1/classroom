@@ -35,7 +35,7 @@ function ClassesPage() {
     }
     return (
         <div className='mt-12 mx-auto'>
-            <div className='container flex justify-between px-10 py-8 w-full rounded-3xl mb-16'>
+            <div className='box flex justify-between px-10 py-8 w-full rounded-3xl mb-16'>
                 <h3 className='font-bold'>Мои классы</h3>
                 <div>
                     <div className='text-gray-450 cursor-pointer relative text-xl hover:text-primary' onClick={popupOpen}>

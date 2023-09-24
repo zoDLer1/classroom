@@ -66,7 +66,7 @@ const Question = ({ form, data, remove, index, add, copy, viewMode }) => {
 
 
     return (
-        <div className={'group flex flex-col gap-9 py-12 px-20 bg-white shadow-70_20 rounded-[55px] relative min-h-[285px] w-[53rem]'}>
+        <div className={'group flex-vertical gap-9 py-12 px-20 box rounded-xl relative min-h-[285px] w-[53rem]'}>
             <div>
                 <FormNestedFastInput readOnly={viewMode} name={`questions.${index}.name`} placeholder="Название" icon={faPen} />
             </div>
@@ -84,7 +84,7 @@ const Question = ({ form, data, remove, index, add, copy, viewMode }) => {
                     <div className='flex flex-col gap-5 w-80'>
                         <FormNestedFastSelect readOnly={viewMode} onSelect={changeAnswerType} name={`questions.${index}.type`} options={typeOptions} placeholder="Тип" icon={faListOl} />
                         {viewMode ?
-                            data.time && <div className='flex items-center gap-1'>
+                            data.time && <div className='flex-ic gap-1'>
                                 <h5 className='font-semibold text-sm'>Время:</h5>
                                 {data.passed_time && <p>{data.passed_time}s /</p>}
                                 <p>{data.time}s</p>
@@ -96,15 +96,15 @@ const Question = ({ form, data, remove, index, add, copy, viewMode }) => {
                 </div>
             </div>
 
-            <div className='border-t-2 border-gray-450 pt-4 flex justify-end gap-5 items-center'>
+            <div className='border-t-2 border-gray-450 pt-4 flex-ic-je gap-5'>
                 {!viewMode &&
                     <>
                         <div className='flex gap-5'>
-                            <FontAwesomeIcon onClick={copy} icon={faCopy} className='text-gray-450 text-[22px] cursor-pointer hover:text-[#1AD92C]' />
-                            <FontAwesomeIcon onClick={remove} icon={faTrash} className='text-gray-450 text-[22px] cursor-pointer hover:text-[#D61414]' />
+                            <FontAwesomeIcon onClick={copy} icon={faCopy} className='text-gray-450 text-1.5xl cursor-pointer hover:text-status-correct' />
+                            <FontAwesomeIcon onClick={remove} icon={faTrash} className='text-gray-450 text-1.5xl cursor-pointer hover:text-status-error' />
                         </div>
                         <div className={'w-0.5 h-6 bg-gray-450'}></div>
-                        <FontAwesomeIcon icon={faEllipsisVertical} className='text-gray-450 text-[22px]' />
+                        <FontAwesomeIcon icon={faEllipsisVertical} className='text-gray-450 text-1.5xl' />
                     </>
                 }
             </div>

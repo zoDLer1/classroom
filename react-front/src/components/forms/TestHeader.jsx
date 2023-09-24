@@ -6,9 +6,8 @@ import cx from 'classnames'
 
 
 const TestHeader = ({ viewMode, children }) => {
-
     return (
-        <div className={cx('bg-white shadow-70_20 rounded-[55px] py-11 px-20 flex flex-col gap-10 w-[53rem]', { '!gap-5': viewMode })} >
+        <div className={cx('box rounded-xl py-11 px-20 flex flex-col gap-10 w-200', { '!gap-5': viewMode })} >
             <div className='col-span-full'>
                 <FormFastInput readOnly={viewMode} name='name' placeholder="Название" icon={faPen} />
             </div>

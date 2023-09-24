@@ -78,7 +78,7 @@ const TemplateCreationForm = ({ values, handleSubmit, setValues, validateForm, i
 
     return (
         <>
-            <Form className='flex flex-col my-[70px] gap-10'>
+            <Form className='flex flex-col my-18 gap-10'>
                 <FormHeader viewMode={viewMode} />
                 <QuestionList viewMode={viewMode} values={values} />
             </Form>

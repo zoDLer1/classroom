@@ -7,7 +7,7 @@ const QuestionList = ({ values, viewMode }) => {
 
     return (
         <FieldArray validateOnChange={false} name='questions' render={({ insert, remove, form }) =>
-            <div className='flex flex-col gap-10'>
+            <div className='flex-vertical gap-10'>
                 {
                     values.questions.map((question, index) => <Question
                         data={question}

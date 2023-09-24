@@ -107,14 +107,15 @@ export const QuestionPassingForm = ({ setValues, values, params, waitForResponse
         3: <FewFromListAnswer viewMode={true} passingMode={true} data={values?.answers} name={`answers`} />
     }
 
+
     return values && <ContentUpper>
         <Form>
-            <div className='group flex flex-col gap-9 py-12 px-20 bg-white shadow-70_20 rounded-[55px] relative min-h-[285px] w-[53rem] overflow-hidden'>
+            <div className='group flex-vertical gap-9 py-12 px-20 box rounded-xl relative min-h-57 w-200 overflow-hidden'>
                 <div className='w-0 h-2 bg-primary absolute top-0 left-0' style={{ width: time / values.deadline * 100 + '%' }}></div>
                 <FormLoader condition={loading || waitForResponse}>
                     <FormInput name='name' readOnly={true} />
                     {answers[values.type]}
-                    <div className='border-t-2 border-gray-450 pt-4 flex justify-end gap-5 items-center'>
+                    <div className='border-t-2 border-gray-450 pt-4 flex-ic-je gap-5 '>
                         <div className='flex gap-5'>
                             <Button size={2} text={'Пропустить'} />
                             <Button size={2} onClick={submit} text={'Далeе'} />

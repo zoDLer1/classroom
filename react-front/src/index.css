@@ -8,14 +8,12 @@
     h1, h2, h3, h4, h5, h6 {
         font-family: 'Ubuntu';
     }
-
     * {
         
         @apply m-0 p-0;
         font-family: 'Roboto';
     }
     *::before{
-        /* box-sizing: content-box; */
         @apply m-0 p-0;
     }
 
@@ -28,12 +26,46 @@
     .page-root {
         @apply min-h-screen;
     }
+    
 }
 
 @layer components{
-    .container{
-        @apply shadow-2xl bg-white w-fit;
+    .box{
+        @apply shadow-70_20 bg-white;
     }
+
+    .flex-ic{
+        @apply flex items-center
+    }
+    .flex-ic-jc{
+        @apply flex-ic justify-center
+    }
+    .flex-ic-jb{
+        @apply flex-ic justify-between
+    }
+
+    .flex-ic-je{
+        @apply flex-ic justify-end
+    }
+
+    .flex-vertical{
+        @apply flex flex-col
+    }
+    
+    .flex-vertical-ic{
+        @apply flex-ic flex-col
+    }
+    .flex-vertical-ic-jc{
+        @apply flex-vertical-ic justify-center
+    }
+    
+    .text-sizing{
+        @apply overflow-hidden text-ellipsis whitespace-nowrap
+    }
+    .p-10-20{
+        @apply py-10 px-20
+    }
+    
 }
 
 

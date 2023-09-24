@@ -42,10 +42,9 @@ function AddToClassForm({ current, close }) {
         >
             {({ isSubmitting }) => {
 
-
-                return <Form className='w-[475px] flex items-center justify-center flex-col px-20 py-10 bg-white rounded-[55px] shadow-70_20'>
+                return <Form className='w-120 flex-vertical-ic-jc p-10-20 rounded-xl box'>
                     <h2 className='text-primary text-2xl font-semibold mb-10'>
-                        <span className='overflow-hidden text-ellipsis max-w-[285px] whitespace-nowrap block'>{current.name}</span>
+                        <span className='text-sizing max-w-[285px] block'>{current.name}</span>
                     </h2>
                     <div className='w-11/12 mb-8'>
                         <FormSelect options={classes} name='_class' placeholder="Класс" icon={faFile} />

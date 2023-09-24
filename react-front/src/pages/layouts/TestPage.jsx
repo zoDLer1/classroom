@@ -21,10 +21,9 @@ export default function TestPage() {
             setData({ results: { passed_tests, template_info, _class }, settings, statistic })
         }
     })
-
     return (
         <ContentUpper>
-            <div className='p-5 flex-col gap-[10px] w-[800px] rounded-[20px] shadow-70_20 bg-white min-h-[300px]'>
+            <div className='p-5 gap-2.5 w-192 rounded-2xs box min-h-58'>
                 <FormLoader condition={isLoading}>
                     <TestForm id={id} testData={testData} />
                 </FormLoader>
