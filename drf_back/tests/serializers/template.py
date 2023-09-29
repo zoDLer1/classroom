@@ -4,24 +4,24 @@ from ..types.question import TEXT_FIELD, MANY_TO_MANY
 from ..validators import ValidateQuestion
 
 
-class CorrectAnswersSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(required=False)
-
-    class Meta:
-        model = Answer
-        fields = ['id', 'value']
-
-
 class AnswersSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
 
     class Meta:
         model = Answer
         fields = ['id', 'name', 'isCorrect', 'value']
-        extra_kwargs = {
-            'isCorrect': {'write_only': True},
-            'value': {'write_only': True},
-        }
+
+    def to_representation(self, instance):
+        fields = super().to_representation(instance)
+        viewAnswers = self.context.get('viewAnswers', True)
+        
+        if not viewAnswers:
+            fields.pop('isCorrect')
+            fields.pop('value')
+        elif not fields.get('value', None):
+            fields.pop('value')
+
+        return fields
 
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -46,11 +46,8 @@ class AnswersSerializer(serializers.ModelSerializer):
 
         return data
 
-
 class QuestionSerializer(serializers.ModelSerializer):
     answers = AnswersSerializer(many=True)
-    correct_answers = CorrectAnswersSerializer(many=True, read_only=True)
-    time = serializers.IntegerField(required=False)
     id = serializers.IntegerField(required=False)
     name = serializers.CharField(required=True)
 
@@ -83,27 +80,18 @@ class QuestionSerializer(serializers.ModelSerializer):
 
         return data
 
-    def to_representation(self, instance):
-        fields = super().to_representation(instance)
-        if not self.context.get('viewAnswers', True):
-            fields.pop('correct_answers')
-        return fields
-
     class Meta:
         model = Question
         fields = ['id', 'name', 'type', 'answers',
-                  'time', 'correct_answers', 'required']
-
-
+                  'time', 'required']
 
 class QuestionStatisticSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
     name = serializers.CharField(required=True)
     correct = serializers.SerializerMethodField()
 
-
     def get_correct(self, obj):
-        passed_questions = PassedQuestion.objects.filter(question=obj)
+        passed_questions = obj.passed_questions.all()
         correct_count = 0
         for passed_question in passed_questions:
             if (passed_question.is_correct):
@@ -113,15 +101,6 @@ class QuestionStatisticSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ['id', 'name', 'correct']
-
-class TemplateStatisticSerializer(serializers.ModelSerializer):
-    questions = QuestionStatisticSerializer(many=True)
-
-    class Meta:
-        model = Template
-        fields = ['id', 'name', 'description', 'questions']
-    
-
 
 class TemplatesSerializer(serializers.ModelSerializer):
     creator = serializers.HiddenField(default=serializers.CurrentUserDefault())
@@ -215,7 +194,6 @@ class TemplatesSerializer(serializers.ModelSerializer):
         else:
             instance = Answer.objects.create(**answer, question=question)
         return instance
-
 
 class TemplatesSerializerList(serializers.ModelSerializer):
     class Meta:

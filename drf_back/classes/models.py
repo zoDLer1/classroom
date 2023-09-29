@@ -1,9 +1,8 @@
 from django.db import models
 import uuid
+from django.utils.translation import gettext_lazy as _
 
 # создание таблицы типов классов
-
-
 class ClassType(models.Model):
     name = models.CharField(max_length=25)
 
@@ -11,13 +10,11 @@ class ClassType(models.Model):
         return self.name
 
 # создание таблицы классов
-
 class Subject(models.Model):
     name = models.CharField(max_length=75)
 
     def __str__(self):
         return self.name
-
 
 class Class(models.Model):
     # Определение пользователя как внешнего ключа
@@ -32,6 +29,11 @@ class Class(models.Model):
     subject = models.ForeignKey('Subject', on_delete=models.SET_NULL, null=True)
     code = models.UUIDField(default=uuid.uuid4, unique=True)
 
+
+    class Meta:
+        verbose_name = _("class")
+        verbose_name_plural = _("classes")
+
     def __str__(self):
         return self.name
 
@@ -39,6 +41,9 @@ class ClassSettings(models.Model):
     _class = models.OneToOneField(Class, on_delete = models.CASCADE, primary_key = True, related_name='settings')
     allow_view_members_list = models.BooleanField(default=True)
 
+    class Meta:
+        verbose_name = _("class settings")
+        verbose_name_plural = _("class settings")
 
 # создание таблицы участников
 class Member(models.Model):
@@ -49,8 +54,6 @@ class Member(models.Model):
         'Class', on_delete=models.CASCADE, related_name='members')
 
 # создание таблицы ожидающих
-
-
 class WaitingMember(models.Model):
     # Определение пользователя как внешнего ключа
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)

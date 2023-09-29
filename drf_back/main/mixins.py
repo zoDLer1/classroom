@@ -19,6 +19,8 @@ class IsMemberPermissionMixin:
 
 class IsWaiterPermissionMixin:
     def check_waiter(self, request, obj):
+        print(request.user)
+        print(obj.waiters.all())
         return obj.waiters.filter(user=request.user).exists()
 
 

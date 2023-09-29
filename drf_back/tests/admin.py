@@ -27,9 +27,13 @@ class TestSettingsAdmin(admin.ModelAdmin):
     list_display = ('test', 'allow_view_answers_after_passing')
 
 
+@admin.register(TestStatus)
+class TestStatusAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+
 @admin.register(PassedTest)
 class PassedTestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'test', 'member')
+    list_display = ('id', 'test', 'member', 'status')
 
 @admin.register(PassedQuestion)
 class PassedQuestionAdmin(admin.ModelAdmin):

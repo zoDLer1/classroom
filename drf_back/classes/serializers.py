@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Class, Member, WaitingMember, ClassSettings, Subject, ClassType
 from main.models import Color
 from accounts.serializers import UserSerializer
-from rest_framework.views import exception_handler
 
 class ColorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,7 +12,6 @@ class ClassTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassType
         fields = '__all__'
-
 
 # * serializer for view list of classes if user.role == TEACHER and create class
 class CLassesListSerializer(serializers.ModelSerializer):
@@ -32,12 +30,8 @@ class CLassesListSerializer(serializers.ModelSerializer):
         instance = super().create(validated_data)
         ClassSettings.objects.create(_class=instance)
         return instance
-    
-
 
 # * serializer for list classes if user.role == STUDENT
-
-
 class MembersListSerializer(serializers.ModelSerializer):
     _class = CLassesListSerializer(read_only=True)
 
@@ -46,8 +40,6 @@ class MembersListSerializer(serializers.ModelSerializer):
         fields = ['_class']
 
 # * serializer for view member in other serializers and CRUD operations
-
-
 class MemberSerializer(serializers.ModelSerializer):
     info = UserSerializer(read_only=True, source='user')
 
@@ -60,8 +52,6 @@ class MemberSerializer(serializers.ModelSerializer):
         }
 
 # * serializer for list waiters and CRUD operations
-
-
 class WaitingMemberSerializer(serializers.ModelSerializer):
     info = UserSerializer(read_only=True, source='user')
 
@@ -74,8 +64,6 @@ class WaitingMemberSerializer(serializers.ModelSerializer):
         }
 
 # * serializer for view settings in other serializers
-
-
 class ClassSettinsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassSettings
@@ -85,25 +73,27 @@ class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
         fields = '__all__'
-        
-
-
 
 # * serializer for view class in other serializers and CRUD operations
-
-
 class CLassSerializer(serializers.ModelSerializer):
     from tests.serializers import TestsSerializer
     from accounts.serializers import UserSerializer
 
     creator = UserSerializer(read_only=True)
     tests = TestsSerializer(many=True, read_only=True)
-    settings = ClassSettinsSerializer(read_only=True)
+    settings = ClassSettinsSerializer()
     color_info = ColorSerializer(source='color', read_only=True)
     members = MemberSerializer(many=True, read_only=True)
     waiters = MemberSerializer(many=True, read_only=True)
     subject_info = SubjectSerializer(source='subject', read_only=True)
 
+
+    def update(self, instance, validated_data):
+        settings = validated_data.pop('settings', {})
+        instance.settings.allow_view_members_list = settings.get('allow_view_members_list', instance.settings.allow_view_members_list)
+        instance.settings.save()
+        return super().update(instance, validated_data)
+    
     def to_representation(self, instance):
         fields = super(CLassSerializer, self).to_representation(instance)
         is_creator = instance.creator.id == self.context['request'].user.id
@@ -116,8 +106,7 @@ class CLassSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Class
-        fields = ['id', 'name', 'description', 'color', 'type', 'subject',
-                  'code', 'color_info', 'tests', 'members', 'waiters', 'settings', 'subject_info', 'creator']
+        fields = ['id', 'name', 'description', 'color', 'type', 'subject', 'code', 'color_info', 'tests', 'members', 'waiters', 'settings', 'subject_info', 'creator']
         extra_kwargs = {
             'color': {'write_only': True},
             'subject':  {'write_only': True},

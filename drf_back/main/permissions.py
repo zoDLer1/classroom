@@ -67,9 +67,10 @@ class IsCreatorOrMember(BasePermission, IsCreatorPermissionMixin, IsMemberPermis
     def has_object_permission(self, request, view, obj):
         return self.check_creator(request, obj) or (request.method == 'GET' and self.check_member(request, obj))
 
-# * passed
+
 class IsTeacherOrReadOnly(BasePermission, ReadOnlyPermissionMixin, IsTeacherPermissionMixin):
     message = 'Эта функция доступна только преподавателям'
+
     def has_permission(self, request, view):
         return self.check_teacher(request) or self.check_read_only(request)
 
@@ -91,11 +92,11 @@ class InClassIsMember(IsMember):
         return super().has_object_permission(request, view, obj._class)
 
 
-class InTestInClassIsMemberOrCreator(BasePermission,IsMemberPermissionMixin, IsCreatorPermissionMixin):
+class InTestInClassIsMemberOrClassCreator(BasePermission, IsMemberPermissionMixin, IsCreatorPermissionMixin):
     def has_object_permission(self, request, view, obj):
         return self.check_creator(request, obj.test._class) or self.check_member(request, obj.test._class)
 
-# * passed
+
 class IsCreatorOrMemberReadOnly(BasePermission, IsCreatorPermissionMixin, IsMemberPermissionMixin, ReadOnlyPermissionMixin):
     def has_object_permission(self, request, view, obj):
         return self.check_creator(request, obj) or (self.check_read_only(request) and self.check_member(request, obj))
@@ -110,4 +111,24 @@ class TestNotPassed(BasePermission):
     message = 'Тест уже пройден'
 
     def has_object_permission(self, request, view, obj):
-        return not obj.passed_tests.filter(member__user=request.user).exists()
+        return not obj.passed_tests.filter(member__user=request.user, status__id=2).exists()
+
+class IsPassedTestOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj.member.user.id == request.user.id
+    
+
+class TestIsPassing(BasePermission):
+
+    message = 'Тест уже пройден'
+
+    def has_object_permission(self, request, view, obj):
+        return obj.status.id == 1 # and obj.test._class.id == obj.member._class.id
+    
+
+class QuestionNotPassed(BasePermission):
+
+    message = 'Вопрос уже пройден'
+
+    def has_object_permission(self, request, passed_test, question):
+        return not question.passed_questions.filter(passed_test__id=passed_test.id, passed_test__member__id=passed_test.member.id).exists()

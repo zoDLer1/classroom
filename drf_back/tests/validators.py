@@ -4,9 +4,6 @@ from rest_framework import serializers
 class AnswersNotFound(BaseException):
     pass
 
-
-
-
 class ValidatePassedQuestion:
 
     @classmethod
@@ -52,18 +49,11 @@ class ValidatePassedQuestion:
         except: 
             return False
 
- 
-
-
-
-
-
 class QuestionData:
     def  __init__(self, answers, corrected_answers, type):
         self.answers = answers
         self.count_corrected_answers = corrected_answers
         self.question_type = type
-
 
 class ValidateQuestion:
     @classmethod
@@ -71,7 +61,6 @@ class ValidateQuestion:
         data = QuestionData(answers, corrected_answers, type)
         validator = cls.get_validator(type.id)
         validator(data)
-
 
     @classmethod
     def get_validator(cls, type):

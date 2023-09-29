@@ -14,20 +14,6 @@ from pathlib import Path
 from datetime import timedelta
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x&#4&(c4(2ja(9+m9s=_7ijq#cz89dh=q3yo(*r-wdfmq&qz&u'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -131,6 +117,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -180,38 +167,24 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 
     "TOKEN_OBTAIN_SERIALIZER": "accounts.serializers.UserLoginSerializer",
-    "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
+    "TOKEN_REFRESH_SERIALIZER": "accounts.serializers.RefreshTokenSerializer",
     "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = False
 
-# LOGGING = {
-#     'version': 1,
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler',
-#         },
-#     },
-#     'loggers': {
-#         'django.db.backends': {
-#             'level': 'DEBUG',
-#         },
-#     },
-#     'root': {
-#         'handlers': ['console'],
-#     }
-# }
+
+CORS_ALLOW_CREDENTIALS = True
+
 
 CORS_ALLOWED_ORIGINS = [
-    "http://26.238.98.162"
-]
-
-ALLOWED_HOSTS = [
-    "26.238.98.162"
+    "https://front--lucky-liger-22373e.netlify.app",
+    "http://localhost"
 ]
 
 
+try: 
+    from .local_settings import *
+except ImportError:
+    from .prod_settings import *

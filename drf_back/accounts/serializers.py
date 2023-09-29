@@ -1,9 +1,11 @@
 from .models import User
 from rest_framework import serializers
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 from django.utils.translation import gettext_lazy as _
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+from rest_framework_simplejwt.state import token_backend
+from .models import User
 
 
 class UserLoginSerializer(TokenObtainPairSerializer):
@@ -16,7 +18,18 @@ class UserLoginSerializer(TokenObtainPairSerializer):
         tokens = super().validate(attrs)
         user_data = LoginSerializer(self.user).data
         return {
-            "tokens": tokens,
+            **tokens,
+            "user": user_data
+        }
+
+class RefreshTokenSerializer(TokenRefreshSerializer):
+    
+    def validate(self, attrs):
+        tokens = super().validate(attrs)
+        decoded_payload = token_backend.decode(tokens['access'], verify=True)
+        user_data = LoginSerializer(User.objects.get(id=decoded_payload['user_id'])).data
+        return {
+            **tokens,
             "user": user_data
         }
 
@@ -24,9 +37,6 @@ class LoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'email', 'first_name', 'last_name', 'avatar', 'role']
-
-
-
 
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -61,10 +71,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         
         user.set_password(validated_data['password'])
         user.save()
-
         return user
-
-
 
 # * serializer for view user in other serializers
 class UserSerializer(serializers.ModelSerializer):
