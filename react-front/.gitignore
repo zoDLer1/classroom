@@ -1,0 +1,43 @@
+# Node.js
+node_modules/
+
+# Build files
+build/
+dist/
+
+# Dependency directories
+bower_components/
+
+# Logs
+*.log
+
+# Environment files
+.env*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+*.iml
+
+# npm-debug.log
+npm-debug.log*
+
+# Yarn
+yarn-error.log
+.pnp.*
+.pnp.js
+
+# Jest coverage
+coverage/
+
+# Next.js build output
+.next/
+out/
+
+# Gatsby files
+.cache/
+public/
+
+

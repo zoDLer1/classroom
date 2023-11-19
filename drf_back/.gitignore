@@ -1,3 +1,41 @@
-/venv
-/__pycache__
-/media/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local development settings
+*.env
+
+# Database
+*.sqlite3
+
+# Log files
+*.log
+
+# Media files
+media/
+
+# Static files
+staticfiles/
+
+# Virtual environment
+venv/
+.env
+
+# Secret key
+*.secret
+
+# Compiled Python files
+*.pyc
+
+# Compiled Java classes
+*.class
+
+# Compiled C++ binary files
+*.out
+
+# Dependency folders
+bin/
+lib/
+include/
