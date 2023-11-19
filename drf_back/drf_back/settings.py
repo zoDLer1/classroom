@@ -14,6 +14,23 @@ from pathlib import Path
 from datetime import timedelta
 import os
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = 'django-insecure-x&#4&(c4(2ja(9+m9s=_7ijq#cz89dh=q3yo(*r-wdfmq&qz&u'
+
+DEBUG = True
+
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost"
+]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -33,7 +50,7 @@ INSTALLED_APPS = [
     'tests.apps.TestsConfig',
     'accounts.apps.AccountsConfig',
     'main.apps.MainConfig'
-    
+
 ]
 
 
@@ -184,7 +201,3 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-try: 
-    from .local_settings import *
-except ImportError:
-    from .prod_settings import *
