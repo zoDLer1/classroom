@@ -40,7 +40,7 @@ const TemplateCreationForm = ({ values, handleSubmit, setValues, validateForm, i
 
     useHeaderActions(viewActions ? actions : [])
 
-  
+
 
 
     useEffect(() => {
