@@ -1,17 +1,44 @@
 <p align="center">
 <h1 align="center">Classroom</h1>
 <div align="center">Приложение для объединения учеников в группы, создания/прохождения тестов.</div>
-<div align="center" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
-    <img style='grid-column: 1/-1' src="https://github.com/zoDLer1/classroom/assets/88045849/625506de-2b06-41ab-ba1d-75e25ebdf6ce" />
-    <img src="https://github.com/zoDLer1/classroom/assets/88045849/a150d04d-9313-4246-99dc-5f3f2ba48cfd" />
-    <img src="https://github.com/zoDLer1/classroom/assets/88045849/5f4b0e8b-5986-47bc-919e-77faf5c77849" />
-    <img src="https://github.com/zoDLer1/classroom/assets/88045849/b09436b8-5568-4a78-95b2-59dd57c7b22e" />
-    <img src="https://github.com/zoDLer1/classroom/assets/88045849/08210172-ffc7-436c-9c4d-65d4ac17922e" />
-    <img src="https://github.com/zoDLer1/classroom/assets/88045849/47cbcc85-d26b-48aa-84c1-2f173597c202" />
-    <img src="https://github.com/zoDLer1/classroom/assets/88045849/313d3f86-ac6b-4f02-94e4-28a8bd2551fb" />
-</div>
-</div>
+<br/>
+
+<table>
+  <tbody>
+  <tr>
+    <td colspan="2">
+        <img src="https://github.com/zoDLer1/classroom/assets/88045849/625506de-2b06-41ab-ba1d-75e25ebdf6ce" />
+    </td>
+  </tr>
+    <tr>
+        <td>
+            <img src="https://github.com/zoDLer1/classroom/assets/88045849/a150d04d-9313-4246-99dc-5f3f2ba48cfd">
+        </td>
+        <td>
+            <img src="https://github.com/zoDLer1/classroom/assets/88045849/5f4b0e8b-5986-47bc-919e-77faf5c77849">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://github.com/zoDLer1/classroom/assets/88045849/b09436b8-5568-4a78-95b2-59dd57c7b22e">
+        </td>
+        <td>
+            <img src="https://github.com/zoDLer1/classroom/assets/88045849/08210172-ffc7-436c-9c4d-65d4ac17922e">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://github.com/zoDLer1/classroom/assets/88045849/47cbcc85-d26b-48aa-84c1-2f173597c202">
+        </td>
+        <td>
+            <img src="https://github.com/zoDLer1/classroom/assets/88045849/313d3f86-ac6b-4f02-94e4-28a8bd2551fb">
+        </td>
+    </tr>
+
+  </tbody>
+</table>
 </p>
+
 
 
 
