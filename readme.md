@@ -7,7 +7,7 @@
   <tbody>
   <tr>
     <td colspan="2">
-        <img src="https://github.com/zoDLer1/classroom/assets/88045849/625506de-2b06-41ab-ba1d-75e25ebdf6ce" />
+        <img src="https://github.com/zoDLer1/classroom/assets/88045849/08210172-ffc7-436c-9c4d-65d4ac17922e" />
     </td>
   </tr>
     <tr>
