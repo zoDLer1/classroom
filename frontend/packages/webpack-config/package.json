@@ -2,7 +2,7 @@
     "name": "@packages/webpack-config",
     "version": "1.0.0",
     "main": "index.ts",
-    "dependencies": {
+    "devDependencies": {
         "webpack": "^5.92.1",
         "@types/node": "^20.14.9",
         "@types/webpack": "^5.28.5",
