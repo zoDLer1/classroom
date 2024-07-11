@@ -17,7 +17,7 @@
             "@features/*": ["features/*"],
             "@widgets/*": ["widgets/*"],
             "@pages/*": ["pages/*"],
-            "@app/*": ["app/*"],
+            "@app": ["app"],
         }
     },
     "ts-node": {
