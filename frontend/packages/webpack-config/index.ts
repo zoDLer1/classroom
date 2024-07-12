@@ -1,28 +1,28 @@
-import { type Configuration } from "webpack";
-import type { ConfigProps, EnvVariables, ConfigurationPaths } from "./types";
-import LoadersConfig from "./configuration/loaders";
-import ConfigResolvers from "./configuration/resolvers";
-import ConfigPlugins from "./configuration/plugins";
-import ConfigDevServer from "./configuration/devServer";
+import { type Configuration } from 'webpack';
+import type { ConfigProps, EnvVariables, ConfigurationPaths } from './types';
+import LoadersConfig from './configuration/loaders';
+import ConfigResolvers from './configuration/resolvers';
+import ConfigPlugins from './configuration/plugins';
+import ConfigDevServer from './configuration/devServer';
 
 const WebpackConfig = (
     { mode, port }: EnvVariables,
-    paths: ConfigurationPaths
+    paths: ConfigurationPaths,
 ): Configuration => {
     const props: ConfigProps = {
-        isDev: mode === "development",
-        isProd: mode === "production",
+        isDev: mode === 'development',
+        isProd: mode === 'production',
         port: port ?? 3000,
         paths,
     };
 
     return {
-        mode: mode ?? "development",
+        mode: mode ?? 'development',
         entry: paths.entry,
-        devtool: props.isDev ? "inline-source-map" : false,
+        devtool: props.isDev ? 'inline-source-map' : false,
         output: {
             path: paths.output,
-            filename: "[name].[contenthash].js",
+            filename: '[name].[contenthash].js',
             clean: true,
         },
         module: {

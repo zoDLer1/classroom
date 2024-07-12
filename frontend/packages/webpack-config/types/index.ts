@@ -1,5 +1,4 @@
-import type { ModuleOptions } from 'webpack';
-import type { Configuration } from 'webpack';
+import type { ModuleOptions, Configuration } from 'webpack';
 import { Configuration as DevServerConfigType } from 'webpack-dev-server';
 
 export interface ConfigProps {
