@@ -8,13 +8,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
-
+import time
 
 class LoginView(TokenObtainPairView):
     
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-        refresh_token = response.data.pop('refresh')
+        refresh_token = response.data['tokens'].pop('refresh')
         response.set_cookie('refresh', refresh_token)
         return response
 
@@ -26,7 +26,7 @@ class CustomTokenRefreshView(TokenRefreshView):
             serializer.is_valid(raise_exception=True)
         except TokenError as e:
             raise InvalidToken(e.args[0])
-
+        time.sleep(2)
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
 class RegisterView(GenericAPIView):

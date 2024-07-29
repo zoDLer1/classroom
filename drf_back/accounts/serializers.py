@@ -1,6 +1,6 @@
 from .models import User
 from rest_framework import serializers
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer, api_settings, authenticate, exceptions, update_last_login, get_user_model
 from django.utils.translation import gettext_lazy as _
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
@@ -11,14 +11,14 @@ from .models import User
 class UserLoginSerializer(TokenObtainPairSerializer):
 
     default_error_messages = {
-        "no_active_account": _("Пользователь не найден")
+        "no_active_account": {get_user_model().USERNAME_FIELD: _("Пользователь не найден")}
     }
 
     def validate(self, attrs):
         tokens = super().validate(attrs)
         user_data = LoginSerializer(self.user).data
         return {
-            **tokens,
+            "tokens": tokens,
             "user": user_data
         }
 
@@ -29,7 +29,7 @@ class RefreshTokenSerializer(TokenRefreshSerializer):
         decoded_payload = token_backend.decode(tokens['access'], verify=True)
         user_data = LoginSerializer(User.objects.get(id=decoded_payload['user_id'])).data
         return {
-            **tokens,
+            "tokens": tokens,
             "user": user_data
         }
 

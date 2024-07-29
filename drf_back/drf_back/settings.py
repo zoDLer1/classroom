@@ -196,8 +196,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 CORS_ALLOWED_ORIGINS = [
-    "https://front--lucky-liger-22373e.netlify.app",
-    "http://localhost"
+    "http://localhost:3000"
 ]
 
 
