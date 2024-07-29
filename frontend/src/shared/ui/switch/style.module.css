@@ -1,0 +1,25 @@
+.block {
+    @apply flex-ic-jc shadow w-fit rounded-2xl;
+}
+.link {
+    @apply text-light-300 text-xl py-1 px-4 border-light-300 border-2;
+
+    &:first-child {
+        @apply rounded-l-2xl;
+    }
+
+    &:last-child {
+        @apply rounded-r-2xl;
+    }
+
+    & + .link{
+        @apply border-l-0;
+    }
+
+    &:has(+ .selected) {
+        @apply border-r-0;
+    }
+}
+.selected {
+    @apply bg-primary-300 border-primary-300 text-light-100;
+}

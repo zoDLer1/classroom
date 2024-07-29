@@ -1,12 +1,11 @@
 export default [
     {
         rules: {
-            'react/button-has-type': 'warn',
             'react/checked-requires-onchange-or-readonly': 'warn',
             'react/default-props-match-prop-types': 'warn',
             'react/destructuring-assignment': ['warn', 'always'],
             'react/display-name': 'warn',
-            'react/forbid-component-props': 'warn',
+            // 'react/forbid-component-props': ['warn', { forbid: { disallowedFor: ['Form', 'Icon'] } }],
             'react/forbid-foreign-prop-types': 'warn',
             'react/function-component-definition': ['warn', { namedComponents: 'arrow-function', unnamedComponents: 'arrow-function' }],
             'react/hook-use-state': 'warn',
@@ -27,7 +26,6 @@ export default [
             'react/jsx-max-depth': ['warn', { max: 6 }],
             'react/jsx-max-props-per-line': ['warn', { maximum: { single: 4, multi: 1 } }],
             'react/jsx-newline': ['warn', { prevent: true, allowMultilines: true }],
-            'react/jsx-no-bind': 'error',
             'react/jsx-no-comment-textnodes': 'error',
             'react/jsx-no-constructed-context-values': 'warn',
             'react/jsx-no-duplicate-props': 'warn',

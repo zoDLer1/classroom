@@ -24,6 +24,7 @@ const WebpackConfig = (
             path: paths.output,
             filename: '[name].[contenthash].js',
             clean: true,
+            assetModuleFilename: 'assets/[hash][ext][query]',
         },
         module: {
             rules: LoadersConfig(props),

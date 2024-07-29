@@ -1,7 +1,7 @@
 export default [
     {
         rules: {
-            'arrow-body-style': ['warn', 'always'],
+            // 'arrow-body-style': ['warn', 'as-needed', { requireReturnForObjectLiteral: true }],
             'block-scoped-var': 'error',
             camelcase: ['warn', {
                 properties: 'never',
@@ -39,7 +39,6 @@ export default [
             'no-script-url': 'error',
             'no-self-compare': 'warn',
             'no-sequences': 'error',
-            'no-shadow': 'error',
             'no-template-curly-in-string': 'error',
             'no-throw-literal': 'error',
             'no-undef-init': 'error',

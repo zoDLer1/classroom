@@ -1,4 +1,6 @@
 import { type FC } from 'react';
+import { Providers } from '../providers';
+import '../styles/index.css';
 
 interface IAppProps {
 
@@ -6,8 +8,6 @@ interface IAppProps {
 
 export const App: FC<IAppProps> = () => {
     return (
-        <div>
-            App
-        </div>
+        <Providers />
     );
 };

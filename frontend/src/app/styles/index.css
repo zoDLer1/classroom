@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Inter';
+    }
+    * {
+        
+        @apply m-0 p-0;
+        font-family: 'Roboto';
+    }
+    *::before{
+        @apply m-0 p-0;
+    }
+
+    a{
+        @apply no-underline text-white;
+    }
+
+    html,
+    body,
+    #root {
+        @apply min-h-screen;
+    }
+    
+}
+
+@layer components{
+
+    .flex-ic{
+        @apply flex items-center
+    }
+    .flex-ic-jc{
+        @apply flex-ic justify-center
+    }
+    .flex-ic-jb{
+        @apply flex-ic justify-between
+    }
+
+    .flex-ic-je{
+        @apply flex-ic justify-end
+    }
+
+    .flex-vertical{
+        @apply flex flex-col
+    }
+    
+    .flex-vertical-ic{
+        @apply flex-ic flex-col
+    }
+    .flex-vertical-ic-jc{
+        @apply flex-vertical-ic justify-center
+    }
+    
+    .text-sizing{
+        @apply overflow-hidden text-ellipsis whitespace-nowrap
+    }
+    .p-10-20{
+        @apply py-10 px-20
+    }
+    
+}
+
+:root {
+    --primary-color-100: #81d1ff;
+    --primary-color-200: #4dbeff;
+    --primary-color-300: #0388D4;
+    --primary-color-400: #0069a5;
+    --primary-color-500: #00517f;
+    
+    --red-color-100: #ff9d9d; 
+    --red-color-200: #fb6868; 
+    --red-color-300: #ff4949; 
+    --red-color-400: #D61414; 
+    --red-color-500: #ad0000; 
+
+    --green-color-100: #8aff95;
+    --green-color-200: #53ef62;
+    --green-color-300: #33f946;
+    --green-color-400: #1AD92C;
+    --green-color-500: #00c513;
+
+    --yellow-color-100: #ffe98f;
+    --yellow-color-200: #ffde5a;
+    --yellow-color-300: #ffcc00;
+    --yellow-color-400: #e3b600;
+    --yellow-color-500: #c7a000;
+
+    --dark-color-10: rgba(0, 0, 0, 10%);
+    --dark-color-15: rgba(0, 0, 0, 15%);
+    --dark-color-20: rgba(0, 0, 0, 20%);
+    --dark-color-25: rgba(0, 0, 0, 25%);
+    --dark-color-30: rgba(0, 0, 0, 30%);
+
+    --light-color-100: #ffffff;
+    --light-color-200: #dfdfdf;
+    --light-color-300: #b3b3b3;
+    --light-color-400: #878787;
+    --light-color-500: #4d4d4d;
+    
+
+    /* --alt-color: #B6B2B1;
+    --warning-color: #ffcc00;
+    --error-color: #D61414;
+    --faded-primary: #75B8DF;
+    --success-color: #1AD92C;
+    --light-color: #fff;
+    --dark-op15-color: rgba(0, 0, 0, 15%);
+    --dark-op20-color: rgb(0 0 0 / 20%);
+    --gray-color: #B6B2B1; */
+}

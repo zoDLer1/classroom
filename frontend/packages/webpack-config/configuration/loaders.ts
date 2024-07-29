@@ -8,7 +8,16 @@ const LoadersConfig = ({ isDev }: ConfigProps): LoadersConfigType => {
         use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             'css-loader',
+            'postcss-loader',
         ],
+    };
+
+    const assetsLoader = {
+        test: /\.(jpg|png|svg|gif)$/,
+        type: 'asset/resource',
+        generator: {
+            filename: `assets/images/${isDev ? '[name][ext]' : '[hash][ext][query]'}`,
+        },
     };
 
     const tsLoader = {
@@ -27,12 +36,7 @@ const LoadersConfig = ({ isDev }: ConfigProps): LoadersConfigType => {
         exclude: /node_modules/,
     };
 
-    const svgLoader = {
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-    };
-
-    return [tsLoader, cssLoaders, svgLoader];
+    return [tsLoader, cssLoaders, assetsLoader];
     // cssLoaders, svgLoader, imageLoader
 };
 

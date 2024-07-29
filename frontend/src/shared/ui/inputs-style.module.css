@@ -1,0 +1,86 @@
+.default {
+    --self-color: var(--primary-color-300);
+}
+
+.hasError {
+    --self-color: var(--red-color-400);
+
+    &:has(.input:focus) .errorPopup {
+        @apply w-48;
+    }
+
+    & .errorPopup {
+        transition: all var(--transition-speed) linear;
+    }
+}
+.correct{
+    --self-color: var(--success-color);
+}
+
+.options {
+    @apply z-10 absolute bg-light-100 shadow-md w-full left-0 -bottom-24 rounded-b-lg;
+}
+.option {
+    @apply text-lg border-b-2 border-light-200 px-6 py-1 cursor-pointer hover:bg-dark-10 last:border-none;
+}
+
+.block {
+    --transition-speed: 0.2s;
+    @apply relative border-b-2 flex-ic gap-2 px-1 py-2 w-full border-light-300;
+    
+    &::before {
+        content: '';
+        transition: width var(--transition-speed) linear;
+        @apply absolute w-0 h-[2px] bg-[var(--self-color)] left-1/2 -bottom-[2px] -translate-x-1/2;
+    }
+    &:has(.input:focus)::before {
+        @apply w-full;
+    }
+
+    &:has(.input:disabled) {
+        @apply cursor-not-allowed border-light-200 select-none;
+
+
+        & .icon > *,
+        & .placeholder {
+            @apply cursor-not-allowed text-light-200;
+        }
+        & .input {
+            @apply cursor-not-allowed text-light-400;
+        }
+    }
+    
+    &:has(.input:focus) .icon > *{
+        @apply text-[var(--self-color)];
+    }
+    
+    &:has(.input:focus) .placeholder{
+        @apply top-0 text-sm text-[var(--self-color)];
+    }
+    
+    &:not(:has(.input[value=''])) .placeholder {
+        @apply top-0 text-sm;
+    }
+
+}
+.icon{
+    & > * {
+        transition: color var(--transition-speed) linear;
+        @apply text-light-300 text-xl;
+    }
+}
+.input {
+    @apply outline-none w-full text-xl bg-transparent;
+    &:-webkit-autofill,
+    &:-webkit-autofill:focus {
+        transition: background-color 600000s 0s, color 600000s 0s;
+    }
+}
+.placeholder {
+    transition: all var(--transition-speed) linear;
+    @apply text-light-300 text-xl left-8 top-1/2 cursor-text -translate-y-1/2 absolute; 
+}
+
+.errorPopup {
+    @apply absolute -right-60 bg-light-100 shadow rounded w-0 overflow-hidden text-custom-red-500 text-pretty
+}

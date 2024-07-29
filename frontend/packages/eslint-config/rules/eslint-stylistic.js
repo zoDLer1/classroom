@@ -4,6 +4,9 @@ export default [
     {
         rules: {
             ...stylistic.configs['recommended-flat'].rules,
+            'no-shadow': 'off',
+            '@typescript-eslint/no-shadow': 'warn',
+            '@stylistic/jsx-quotes': ['warn', 'prefer-single'],
             '@stylistic/jsx-indent-props': 'off',
             '@stylistic/array-bracket-newline': ['error', 'consistent'],
             '@stylistic/array-element-newline': ['error', 'consistent'],

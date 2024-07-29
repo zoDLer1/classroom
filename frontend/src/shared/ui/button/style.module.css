@@ -1,0 +1,7 @@
+.block {
+    @apply w-full bg-primary-300 text-light-100 rounded-2xl h-11 flex-ic-jc gap-2 py-2 text-lg tracking-wide transition-colors delay-100 hover:bg-primary-400 ease-in;
+}
+
+.block:disabled {
+    @apply bg-light-300 cursor-not-allowed;
+}

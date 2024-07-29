@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "plugins": [{ "name": "typescript-plugin-css-modules" }],
         "outDir": "./dist/",
         "noImplicitAny": true,
         "module": "ESNext",
@@ -11,7 +12,7 @@
         "esModuleInterop": true,
         "baseUrl": "./src",
         "paths": {
-            "@shared/*": ["shared/*"],
+            "@shared": ["shared"],
             "@processes/*": ["processes/*"],
             "@entities/*": ["entities/*"],
             "@features/*": ["features/*"],
